@@ -18,7 +18,7 @@ namespace Group29_BlitzCafe
         }
 
 
-        public string connString;
+        public string connString ="";
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -93,5 +93,7 @@ namespace Group29_BlitzCafe
             f1.BringToFront();
             f1.Show();
         }
+
+
     }
 }

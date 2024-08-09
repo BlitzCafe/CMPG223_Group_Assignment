@@ -103,5 +103,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void txtSearchItemID_TextChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
