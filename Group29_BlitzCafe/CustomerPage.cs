@@ -92,7 +92,6 @@ namespace Group29_BlitzCafe
         private void btnConfirmUpdate_Click(object sender, EventArgs e)
         {
             string fName = txtFName.Text, lName = txtLName.Text, cellNo = txtCellNo.Text;
-            bool isLoylMem = cbxLoyaltyMem.Checked;
 
             if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
             {
