@@ -23,10 +23,6 @@ namespace Group29_BlitzCafe
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -93,6 +89,12 @@ namespace Group29_BlitzCafe
             f1.Show();
         }
 
+
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
+        }
 
     }
 }
