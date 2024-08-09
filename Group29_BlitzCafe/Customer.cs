@@ -11,15 +11,17 @@ namespace Group29_BlitzCafe
         private readonly int customerID;
         private string lastName, firstName;
         private string cellNo;
+        private bool isLoyatyMem;
         private DateTime date_Joined;
 
         //Constructor
-        public Customer(int customerID, string lastName, string firstName, string cellNo, DateTime date_Joined)
+        public Customer(int customerID, string lastName, string firstName, string cellNo, bool isLoyatyMem, DateTime date_Joined)
         {
             this.customerID = customerID;
             setLastName(lastName);
             setFirstName(firstName);
             setCellNo(cellNo);
+            setIsLoyaltyMem(isLoyatyMem);
             setDateJoined(date_Joined);
         }
 
@@ -38,6 +40,11 @@ namespace Group29_BlitzCafe
         public void setCellNo(string cellNo)
         {
             this.cellNo = cellNo;
+        }
+
+        public void setIsLoyaltyMem(bool isLoyatyMem)
+        {
+            this.isLoyatyMem = isLoyatyMem;
         }
 
         public void setDateJoined(DateTime date_Joined)
@@ -66,6 +73,11 @@ namespace Group29_BlitzCafe
             return cellNo;
         }
 
+        public bool getIsLoyaltyMem()
+        {
+            return isLoyatyMem;
+        }
+
         public DateTime getDateJoined()
         {
             return date_Joined;
@@ -74,7 +86,7 @@ namespace Group29_BlitzCafe
         //ToString method
         public string toString()
         {
-            return "Customer ID: " + getCustomerID() + "\tFirst Name: " + getFirstName() + "\tLast Name: " + getLastName() + "\tCellphone Number: " + getCellNo() + "\tDate Joined: " + getDateJoined();
+            return "Customer ID: " + getCustomerID() + "\tFirst Name: " + getFirstName() + "\tLast Name: " + getLastName() + "\tCellphone Number: " + getCellNo() + "\tIs Loyalty member?: " + getIsLoyaltyMem() + "\tDate Joined: " + getDateJoined();
         }
     }
 }

@@ -17,8 +17,6 @@ namespace Group29_BlitzCafe
             InitializeComponent();
         }
 
-        public string connString = "";
-
         private void Form1_Load(object sender, EventArgs e)
         {
 
