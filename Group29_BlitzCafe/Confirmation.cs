@@ -21,5 +21,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void cbxUseLoyaltyPoints_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

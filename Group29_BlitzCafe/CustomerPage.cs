@@ -6,8 +6,6 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace Group29_BlitzCafe
@@ -18,56 +16,11 @@ namespace Group29_BlitzCafe
         {
             InitializeComponent();
         }
-        private Default defaultFrm = new Default();
-        private List<Customer> customerList = new List<Customer>();
-
-        private int customerID;
-        private string fName, lName, cellNo;
-        private DateTime dateJoined = new DateTime();
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))          
-            {
-                try
-                {
-                    conn.Open();
-                    string query = " ";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-
-                    dbgCustomerInfo.DataSource = dataTable;
-
-                    //Reading data into List
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        customerID = Convert.ToInt32(row["CustomerID"]);
-                        lName = Convert.ToString(row["Last_Name"]);
-                        fName = Convert.ToString(row["Fisrt_Name"]);
-                        cellNo = Convert.ToString(row["CellNo"]);
-                        dateJoined = Convert.ToDateTime(row["Date_Joined"]);
-
-                        // Create a new Customer object using the data
-                        Customer customerObj = new Customer(customerID, lName, fName, cellNo, dateJoined);
-
-                        // Add the Customer object to the list
-                        customerList.Add(customerObj);
-                    }
-
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
-                }
-            }
-
-            //Make changing ID and Date Joined impossible for user
             txtCustID.ReadOnly = true;
             txtDate.ReadOnly = true;
-
-            //Max length for any cellphone number
             txtCellNo.MaxLength = 10;
         }
 
