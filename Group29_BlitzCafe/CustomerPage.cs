@@ -6,6 +6,8 @@ using System.Drawing;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using System.Data.SqlClient;
+using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace Group29_BlitzCafe
