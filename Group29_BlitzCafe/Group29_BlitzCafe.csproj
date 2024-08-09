@@ -77,7 +77,8 @@
     <Compile Include="ItemPage.Designer.cs">
       <DependentUpon>ItemPage.cs</DependentUpon>
     </Compile>
-    <Compile Include="MenuItems.cs" />
+    <Compile Include="MenuItem.cs" />
+    <Compile Include="Order.cs" />
     <Compile Include="OrderPage.cs">
       <SubType>Form</SubType>
     </Compile>
