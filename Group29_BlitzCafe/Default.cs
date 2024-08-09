@@ -22,10 +22,6 @@ namespace Group29_BlitzCafe
 
         }
 
-        private void label4_Click(object sender, EventArgs e)
-        {
-
-        }
 
         private void customersToolStripMenuItem_Click(object sender, EventArgs e)
         {
@@ -90,6 +86,11 @@ namespace Group29_BlitzCafe
             panel1.Controls.Add(f1);
             f1.BringToFront();
             f1.Show();
+        }
+
+        private void exitToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Application.Exit();
         }
     }
 }
