@@ -9,7 +9,7 @@ namespace Group29_BlitzCafe
     class MenuItem
     {
         //create attributes
-        private int itemID;
+        private readonly int itemID;
         private string descr;
         private decimal price;
 
@@ -17,15 +17,11 @@ namespace Group29_BlitzCafe
         public MenuItem(int itemID, string descr, decimal price)
         {
             //call setters to initialize attributes
-            setItemID(itemID);
+            this.itemID = itemID;
             setDescr(descr);
             setPrice(price);
         }
-        //set item id only through the class, cant be changed again
-        private void setItemID(int itemID)
-        {
-            this.itemID = itemID;
-        }
+      
         //set description
         public void setDescr(string descr)
         {

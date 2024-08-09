@@ -29,47 +29,63 @@ namespace Group29_BlitzCafe
         /// </summary>
         private void InitializeComponent()
         {
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.button1 = new System.Windows.Forms.Button();
-            this.button2 = new System.Windows.Forms.Button();
+            this.cbxUseLoyaltyPoints = new System.Windows.Forms.CheckBox();
+            this.btnConfirmPayment = new System.Windows.Forms.Button();
+            this.btnPrintReceipt = new System.Windows.Forms.Button();
+            this.lbxReceipt = new System.Windows.Forms.ListBox();
             this.SuspendLayout();
             // 
-            // checkBox1
+            // cbxUseLoyaltyPoints
             // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(317, 290);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(113, 24);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "checkBox1";
-            this.checkBox1.UseVisualStyleBackColor = true;
+            this.cbxUseLoyaltyPoints.AutoSize = true;
+            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(266, 94);
+            this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
+            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(139, 21);
+            this.cbxUseLoyaltyPoints.TabIndex = 0;
+            this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
+            this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
+            this.cbxUseLoyaltyPoints.CheckedChanged += new System.EventHandler(this.cbxUseLoyaltyPoints_CheckedChanged);
             // 
-            // button1
+            // btnConfirmPayment
             // 
-            this.button1.Location = new System.Drawing.Point(317, 76);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(200, 65);
-            this.button1.TabIndex = 1;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnConfirmPayment.Location = new System.Drawing.Point(266, 164);
+            this.btnConfirmPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirmPayment.Name = "btnConfirmPayment";
+            this.btnConfirmPayment.Size = new System.Drawing.Size(178, 52);
+            this.btnConfirmPayment.TabIndex = 1;
+            this.btnConfirmPayment.Text = "Confirm Payment";
+            this.btnConfirmPayment.UseVisualStyleBackColor = true;
             // 
-            // button2
+            // btnPrintReceipt
             // 
-            this.button2.Location = new System.Drawing.Point(317, 183);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(200, 65);
-            this.button2.TabIndex = 2;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnPrintReceipt.Location = new System.Drawing.Point(266, 235);
+            this.btnPrintReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnPrintReceipt.Name = "btnPrintReceipt";
+            this.btnPrintReceipt.Size = new System.Drawing.Size(178, 52);
+            this.btnPrintReceipt.TabIndex = 2;
+            this.btnPrintReceipt.Text = "Print Receipt";
+            this.btnPrintReceipt.UseVisualStyleBackColor = true;
+            // 
+            // lbxReceipt
+            // 
+            this.lbxReceipt.FormattingEnabled = true;
+            this.lbxReceipt.ItemHeight = 16;
+            this.lbxReceipt.Location = new System.Drawing.Point(14, 27);
+            this.lbxReceipt.Name = "lbxReceipt";
+            this.lbxReceipt.Size = new System.Drawing.Size(233, 260);
+            this.lbxReceipt.TabIndex = 3;
             // 
             // Confirmation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(560, 387);
-            this.Controls.Add(this.button2);
-            this.Controls.Add(this.button1);
-            this.Controls.Add(this.checkBox1);
+            this.ClientSize = new System.Drawing.Size(498, 310);
+            this.Controls.Add(this.lbxReceipt);
+            this.Controls.Add(this.btnPrintReceipt);
+            this.Controls.Add(this.btnConfirmPayment);
+            this.Controls.Add(this.cbxUseLoyaltyPoints);
+            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
             this.ResumeLayout(false);
@@ -79,8 +95,9 @@ namespace Group29_BlitzCafe
 
         #endregion
 
-        private System.Windows.Forms.CheckBox checkBox1;
-        private System.Windows.Forms.Button button1;
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.CheckBox cbxUseLoyaltyPoints;
+        private System.Windows.Forms.Button btnConfirmPayment;
+        private System.Windows.Forms.Button btnPrintReceipt;
+        private System.Windows.Forms.ListBox lbxReceipt;
     }
 }

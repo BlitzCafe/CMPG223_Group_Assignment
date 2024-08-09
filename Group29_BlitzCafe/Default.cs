@@ -17,6 +17,7 @@ namespace Group29_BlitzCafe
             InitializeComponent();
         }
 
+
         private void Form1_Load(object sender, EventArgs e)
         {
 
@@ -88,9 +89,12 @@ namespace Group29_BlitzCafe
             f1.Show();
         }
 
+
+
         private void exitToolStripMenuItem_Click(object sender, EventArgs e)
         {
             Application.Exit();
         }
+
     }
 }
