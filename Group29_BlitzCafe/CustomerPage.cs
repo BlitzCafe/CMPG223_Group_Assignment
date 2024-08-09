@@ -16,5 +16,12 @@ namespace Group29_BlitzCafe
         {
             InitializeComponent();
         }
+
+        private void CustomerPage_Load(object sender, EventArgs e)
+        {
+            txtCustID.ReadOnly = true;
+            txtDate.ReadOnly = true;
+            txtCellNo.MaxLength = 10;
+        }
     }
 }
