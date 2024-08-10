@@ -29,29 +29,29 @@ namespace Group29_BlitzCafe
         /// </summary>
         private void InitializeComponent()
         {
-            this.button2 = new System.Windows.Forms.Button();
+            this.btnEditItem = new System.Windows.Forms.Button();
             this.dbgMenuItems = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.txtItemID = new System.Windows.Forms.TextBox();
-            this.txtDesc = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
+            this.label2 = new System.Windows.Forms.Label();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtPrice = new System.Windows.Forms.TextBox();
+            this.txtDesc = new System.Windows.Forms.TextBox();
+            this.txtItemID = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button2
+            // btnEditItem
             // 
-            this.button2.Location = new System.Drawing.Point(542, 375);
-            this.button2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button2.Name = "button2";
-            this.button2.Size = new System.Drawing.Size(159, 49);
-            this.button2.TabIndex = 0;
-            this.button2.Text = "button2";
-            this.button2.UseVisualStyleBackColor = true;
+            this.btnEditItem.Location = new System.Drawing.Point(532, 377);
+            this.btnEditItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnEditItem.Name = "btnEditItem";
+            this.btnEditItem.Size = new System.Drawing.Size(159, 49);
+            this.btnEditItem.TabIndex = 0;
+            this.btnEditItem.Text = "Edit Menu Item";
+            this.btnEditItem.UseVisualStyleBackColor = true;
             // 
             // dbgMenuItems
             // 
@@ -64,15 +64,15 @@ namespace Group29_BlitzCafe
             this.dbgMenuItems.Size = new System.Drawing.Size(438, 346);
             this.dbgMenuItems.TabIndex = 4;
             // 
-            // button1
+            // btnAddItem
             // 
-            this.button1.Location = new System.Drawing.Point(33, 19);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(173, 51);
-            this.button1.TabIndex = 3;
-            this.button1.Text = "button1";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnAddItem.Location = new System.Drawing.Point(710, 375);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(173, 51);
+            this.btnAddItem.TabIndex = 3;
+            this.btnAddItem.Text = "Add new Item";
+            this.btnAddItem.UseVisualStyleBackColor = true;
             // 
             // groupBox1
             // 
@@ -82,26 +82,39 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.txtPrice);
             this.groupBox1.Controls.Add(this.txtDesc);
             this.groupBox1.Controls.Add(this.txtItemID);
-            this.groupBox1.Location = new System.Drawing.Point(532, 44);
+            this.groupBox1.Location = new System.Drawing.Point(532, 92);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Size = new System.Drawing.Size(325, 266);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Details";
             // 
-            // txtItemID
+            // label3
             // 
-            this.txtItemID.Location = new System.Drawing.Point(163, 48);
-            this.txtItemID.Name = "txtItemID";
-            this.txtItemID.Size = new System.Drawing.Size(137, 22);
-            this.txtItemID.TabIndex = 0;
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(19, 197);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(40, 17);
+            this.label3.TabIndex = 5;
+            this.label3.Text = "Price";
             // 
-            // txtDesc
+            // label2
             // 
-            this.txtDesc.Location = new System.Drawing.Point(163, 118);
-            this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(137, 22);
-            this.txtDesc.TabIndex = 1;
+            this.label2.AutoSize = true;
+            this.label2.Location = new System.Drawing.Point(19, 118);
+            this.label2.Name = "label2";
+            this.label2.Size = new System.Drawing.Size(79, 17);
+            this.label2.TabIndex = 4;
+            this.label2.Text = "Description";
+            // 
+            // label1
+            // 
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(19, 58);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(55, 17);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Item ID:";
             // 
             // txtPrice
             // 
@@ -110,32 +123,19 @@ namespace Group29_BlitzCafe
             this.txtPrice.Size = new System.Drawing.Size(137, 22);
             this.txtPrice.TabIndex = 2;
             // 
-            // label1
+            // txtDesc
             // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(19, 58);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(69, 21);
-            this.label1.TabIndex = 3;
-            this.label1.Text = "Item ID:";
+            this.txtDesc.Location = new System.Drawing.Point(163, 118);
+            this.txtDesc.Name = "txtDesc";
+            this.txtDesc.Size = new System.Drawing.Size(137, 22);
+            this.txtDesc.TabIndex = 1;
             // 
-            // label2
+            // txtItemID
             // 
-            this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(19, 118);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(99, 21);
-            this.label2.TabIndex = 4;
-            this.label2.Text = "Description";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(19, 197);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(50, 21);
-            this.label3.TabIndex = 5;
-            this.label3.Text = "Price";
+            this.txtItemID.Location = new System.Drawing.Point(163, 48);
+            this.txtItemID.Name = "txtItemID";
+            this.txtItemID.Size = new System.Drawing.Size(137, 22);
+            this.txtItemID.TabIndex = 0;
             // 
             // ItemPage
             // 
@@ -143,9 +143,9 @@ namespace Group29_BlitzCafe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(918, 458);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnEditItem);
             this.Controls.Add(this.dbgMenuItems);
-            this.Controls.Add(this.button1);
+            this.Controls.Add(this.btnAddItem);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ItemPage";
             this.Text = "ItemPage";
@@ -157,9 +157,9 @@ namespace Group29_BlitzCafe
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnEditItem;
         private System.Windows.Forms.DataGridView dbgMenuItems;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
