@@ -16,7 +16,7 @@ namespace Group29_BlitzCafe
         private Default defaultFrm = new Default();
 
 
-        private List<Order> orderList = new List<Order>;
+        private List<Order> orderList = new List<Order>();
 
         public OrderPage()
         {

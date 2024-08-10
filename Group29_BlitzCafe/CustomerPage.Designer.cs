@@ -30,21 +30,21 @@ namespace Group29_BlitzCafe
         private void InitializeComponent()
         {
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnConfirmUpdate = new System.Windows.Forms.Button();
-            this.lblCustomerID = new System.Windows.Forms.Label();
-            this.lblFirstName = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txtCustID = new System.Windows.Forms.TextBox();
-            this.txtFName = new System.Windows.Forms.TextBox();
-            this.txtLName = new System.Windows.Forms.TextBox();
-            this.txtCellNo = new System.Windows.Forms.TextBox();
-            this.label1 = new System.Windows.Forms.Label();
-            this.cbxLoyaltyMem = new System.Windows.Forms.CheckBox();
-            this.lblDateJoined = new System.Windows.Forms.Label();
             this.txtDate = new System.Windows.Forms.TextBox();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+            this.lblDateJoined = new System.Windows.Forms.Label();
+            this.cbxLoyaltyMem = new System.Windows.Forms.CheckBox();
+            this.label1 = new System.Windows.Forms.Label();
+            this.txtCellNo = new System.Windows.Forms.TextBox();
+            this.txtLName = new System.Windows.Forms.TextBox();
+            this.txtFName = new System.Windows.Forms.TextBox();
+            this.txtCustID = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
+            this.lblFirstName = new System.Windows.Forms.Label();
+            this.lblCustomerID = new System.Windows.Forms.Label();
+            this.btnConfirmUpdate = new System.Windows.Forms.Button();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -58,16 +58,16 @@ namespace Group29_BlitzCafe
             this.btnAddNew.Text = "Add New Customer";
             this.btnAddNew.UseVisualStyleBackColor = true;
             // 
-            // dataGridView1
+            // dbgCustomerInfo
             // 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(35, 106);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(438, 346);
-            this.dataGridView1.TabIndex = 1;
+            this.dbgCustomerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgCustomerInfo.Location = new System.Drawing.Point(35, 106);
+            this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dbgCustomerInfo.Name = "dbgCustomerInfo";
+            this.dbgCustomerInfo.RowHeadersWidth = 62;
+            this.dbgCustomerInfo.RowTemplate.Height = 28;
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(438, 346);
+            this.dbgCustomerInfo.TabIndex = 1;
             // 
             // groupBox1
             // 
@@ -92,79 +92,21 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
-            // btnConfirmUpdate
+            // txtDate
             // 
-            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 366);
-            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnConfirmUpdate.Name = "btnConfirmUpdate";
-            this.btnConfirmUpdate.Size = new System.Drawing.Size(159, 49);
-            this.btnConfirmUpdate.TabIndex = 0;
-            this.btnConfirmUpdate.Text = "Confirm Changes";
-            this.btnConfirmUpdate.UseVisualStyleBackColor = true;
+            this.txtDate.Location = new System.Drawing.Point(178, 221);
+            this.txtDate.Name = "txtDate";
+            this.txtDate.Size = new System.Drawing.Size(100, 22);
+            this.txtDate.TabIndex = 11;
             // 
-            // lblCustomerID
+            // lblDateJoined
             // 
-            this.lblCustomerID.AutoSize = true;
-            this.lblCustomerID.Location = new System.Drawing.Point(18, 36);
-            this.lblCustomerID.Name = "lblCustomerID";
-            this.lblCustomerID.Size = new System.Drawing.Size(89, 17);
-            this.lblCustomerID.TabIndex = 1;
-            this.lblCustomerID.Text = "Customer ID:";
-            // 
-            // lblFirstName
-            // 
-            this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(18, 76);
-            this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(80, 17);
-            this.lblFirstName.TabIndex = 2;
-            this.lblFirstName.Text = "First Name:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 121);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 17);
-            this.label3.TabIndex = 3;
-            this.label3.Text = "Last Name:";
-            // 
-            // txtCustID
-            // 
-            this.txtCustID.Location = new System.Drawing.Point(178, 33);
-            this.txtCustID.Name = "txtCustID";
-            this.txtCustID.Size = new System.Drawing.Size(100, 22);
-            this.txtCustID.TabIndex = 4;
-            // 
-            // txtFName
-            // 
-            this.txtFName.Location = new System.Drawing.Point(178, 73);
-            this.txtFName.Name = "txtFName";
-            this.txtFName.Size = new System.Drawing.Size(100, 22);
-            this.txtFName.TabIndex = 5;
-            // 
-            // txtLName
-            // 
-            this.txtLName.Location = new System.Drawing.Point(178, 118);
-            this.txtLName.Name = "txtLName";
-            this.txtLName.Size = new System.Drawing.Size(100, 22);
-            this.txtLName.TabIndex = 6;
-            // 
-            // txtCellNo
-            // 
-            this.txtCellNo.Location = new System.Drawing.Point(178, 167);
-            this.txtCellNo.Name = "txtCellNo";
-            this.txtCellNo.Size = new System.Drawing.Size(100, 22);
-            this.txtCellNo.TabIndex = 7;
-            // 
-            // label1
-            // 
-            this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 170);
-            this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 17);
-            this.label1.TabIndex = 8;
-            this.label1.Text = "Cellphone No.:";
+            this.lblDateJoined.AutoSize = true;
+            this.lblDateJoined.Location = new System.Drawing.Point(18, 224);
+            this.lblDateJoined.Name = "lblDateJoined";
+            this.lblDateJoined.Size = new System.Drawing.Size(92, 17);
+            this.lblDateJoined.TabIndex = 10;
+            this.lblDateJoined.Text = "Date Joined: ";
             // 
             // cbxLoyaltyMem
             // 
@@ -176,21 +118,79 @@ namespace Group29_BlitzCafe
             this.cbxLoyaltyMem.Text = "Is Loyalty Member?";
             this.cbxLoyaltyMem.UseVisualStyleBackColor = true;
             // 
-            // lblDateJoined
+            // label1
             // 
-            this.lblDateJoined.AutoSize = true;
-            this.lblDateJoined.Location = new System.Drawing.Point(18, 224);
-            this.lblDateJoined.Name = "lblDateJoined";
-            this.lblDateJoined.Size = new System.Drawing.Size(92, 17);
-            this.lblDateJoined.TabIndex = 10;
-            this.lblDateJoined.Text = "Date Joined: ";
+            this.label1.AutoSize = true;
+            this.label1.Location = new System.Drawing.Point(18, 170);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(101, 17);
+            this.label1.TabIndex = 8;
+            this.label1.Text = "Cellphone No.:";
             // 
-            // txtDate
+            // txtCellNo
             // 
-            this.txtDate.Location = new System.Drawing.Point(178, 221);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(100, 22);
-            this.txtDate.TabIndex = 11;
+            this.txtCellNo.Location = new System.Drawing.Point(178, 167);
+            this.txtCellNo.Name = "txtCellNo";
+            this.txtCellNo.Size = new System.Drawing.Size(100, 22);
+            this.txtCellNo.TabIndex = 7;
+            // 
+            // txtLName
+            // 
+            this.txtLName.Location = new System.Drawing.Point(178, 118);
+            this.txtLName.Name = "txtLName";
+            this.txtLName.Size = new System.Drawing.Size(100, 22);
+            this.txtLName.TabIndex = 6;
+            // 
+            // txtFName
+            // 
+            this.txtFName.Location = new System.Drawing.Point(178, 73);
+            this.txtFName.Name = "txtFName";
+            this.txtFName.Size = new System.Drawing.Size(100, 22);
+            this.txtFName.TabIndex = 5;
+            // 
+            // txtCustID
+            // 
+            this.txtCustID.Location = new System.Drawing.Point(178, 33);
+            this.txtCustID.Name = "txtCustID";
+            this.txtCustID.Size = new System.Drawing.Size(100, 22);
+            this.txtCustID.TabIndex = 4;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Location = new System.Drawing.Point(18, 121);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(80, 17);
+            this.label3.TabIndex = 3;
+            this.label3.Text = "Last Name:";
+            // 
+            // lblFirstName
+            // 
+            this.lblFirstName.AutoSize = true;
+            this.lblFirstName.Location = new System.Drawing.Point(18, 76);
+            this.lblFirstName.Name = "lblFirstName";
+            this.lblFirstName.Size = new System.Drawing.Size(80, 17);
+            this.lblFirstName.TabIndex = 2;
+            this.lblFirstName.Text = "First Name:";
+            // 
+            // lblCustomerID
+            // 
+            this.lblCustomerID.AutoSize = true;
+            this.lblCustomerID.Location = new System.Drawing.Point(18, 36);
+            this.lblCustomerID.Name = "lblCustomerID";
+            this.lblCustomerID.Size = new System.Drawing.Size(89, 17);
+            this.lblCustomerID.TabIndex = 1;
+            this.lblCustomerID.Text = "Customer ID:";
+            // 
+            // btnConfirmUpdate
+            // 
+            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 366);
+            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirmUpdate.Name = "btnConfirmUpdate";
+            this.btnConfirmUpdate.Size = new System.Drawing.Size(159, 49);
+            this.btnConfirmUpdate.TabIndex = 0;
+            this.btnConfirmUpdate.Text = "Confirm Changes";
+            this.btnConfirmUpdate.UseVisualStyleBackColor = true;
             // 
             // CustomerPage
             // 
@@ -198,13 +198,13 @@ namespace Group29_BlitzCafe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(942, 517);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
+            this.Controls.Add(this.dbgCustomerInfo);
             this.Controls.Add(this.btnAddNew);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
             this.Load += new System.EventHandler(this.CustomerPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -214,7 +214,7 @@ namespace Group29_BlitzCafe
         #endregion
 
         private System.Windows.Forms.Button btnAddNew;
-        private System.Windows.Forms.DataGridView dataGridView1;
+        private System.Windows.Forms.DataGridView dbgCustomerInfo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnConfirmUpdate;
         private System.Windows.Forms.TextBox txtDate;

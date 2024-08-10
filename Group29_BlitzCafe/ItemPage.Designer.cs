@@ -52,6 +52,7 @@ namespace Group29_BlitzCafe
             this.btnEditItem.TabIndex = 0;
             this.btnEditItem.Text = "Edit Menu Item";
             this.btnEditItem.UseVisualStyleBackColor = true;
+            this.btnEditItem.Click += new System.EventHandler(this.btnEditItem_Click);
             // 
             // dbgMenuItems
             // 
@@ -63,6 +64,7 @@ namespace Group29_BlitzCafe
             this.dbgMenuItems.RowTemplate.Height = 28;
             this.dbgMenuItems.Size = new System.Drawing.Size(438, 346);
             this.dbgMenuItems.TabIndex = 4;
+            this.dbgMenuItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgMenuItems_CellContentClick);
             // 
             // btnAddItem
             // 
@@ -73,6 +75,7 @@ namespace Group29_BlitzCafe
             this.btnAddItem.TabIndex = 3;
             this.btnAddItem.Text = "Add new Item";
             this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // groupBox1
             // 
@@ -134,6 +137,7 @@ namespace Group29_BlitzCafe
             // 
             this.txtItemID.Location = new System.Drawing.Point(163, 48);
             this.txtItemID.Name = "txtItemID";
+            this.txtItemID.ReadOnly = true;
             this.txtItemID.Size = new System.Drawing.Size(137, 22);
             this.txtItemID.TabIndex = 0;
             // 
