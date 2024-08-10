@@ -38,7 +38,7 @@ namespace Group29_BlitzCafe
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable)
+                    dataAdapter.Fill(dataTable);
                     dataAdapter.Fill(dataTable);
 
                     dbgCustomerInfo.DataSource = dataTable;

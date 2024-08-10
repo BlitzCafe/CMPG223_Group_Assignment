@@ -12,12 +12,14 @@ namespace Group29_BlitzCafe
 {
     public partial class Default : Form
     {
+
+        public string connString = "";
         public Default()
         {
             InitializeComponent();
         }
 
-
+       
         private void Form1_Load(object sender, EventArgs e)
         {
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group29_BlitzCafe
 {
-    class MenuItem
+    class MenuItem : IComparable<MenuItem>
     {
         //create attributes
         private readonly int itemID;
@@ -38,7 +38,7 @@ namespace Group29_BlitzCafe
             return this.descr;
         }
         //get item id
-        private int getItemID()
+        public int getItemID()
         {
             return this.itemID;
         }
@@ -47,6 +47,23 @@ namespace Group29_BlitzCafe
         {
             return this.price;
         }
+
+        //comparable method to compare by price
+        public int CompareTo(MenuItem other)
+        {
+            if (other == null) return 1;
+            return this.price.CompareTo(other.getPrice());
+        }
+
+        //check if other object is the same as the current one
+        public bool equals(MenuItem other)
+        {
+            if (other == null) return false;
+            return this.itemID == other.itemID &&
+                   this.descr == other.descr &&
+                   this.price == other.price;
+        }
+
         //override tostring method
         public string toString()
         {
