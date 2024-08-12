@@ -44,10 +44,8 @@ namespace Group29_BlitzCafe
             this.cbxLoyaltyPointsUsed = new System.Windows.Forms.CheckBox();
             this.cbxIsPayed = new System.Windows.Forms.CheckBox();
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.x = new System.Windows.Forms.TextBox();
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.btnEditOrder = new System.Windows.Forms.Button();
@@ -177,10 +175,8 @@ namespace Group29_BlitzCafe
             this.tabPage2.Controls.Add(this.cbxLoyaltyPointsUsed);
             this.tabPage2.Controls.Add(this.cbxIsPayed);
             this.tabPage2.Controls.Add(this.dtOrderDate);
-            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.x);
             this.tabPage2.Controls.Add(this.btnDeleteOrder);
             this.tabPage2.Controls.Add(this.btnEditOrder);
@@ -199,7 +195,7 @@ namespace Group29_BlitzCafe
             // cbxLoyaltyPointsUsed
             // 
             this.cbxLoyaltyPointsUsed.AutoSize = true;
-            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(691, 196);
+            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(687, 154);
             this.cbxLoyaltyPointsUsed.Name = "cbxLoyaltyPointsUsed";
             this.cbxLoyaltyPointsUsed.Size = new System.Drawing.Size(149, 21);
             this.cbxLoyaltyPointsUsed.TabIndex = 16;
@@ -209,7 +205,7 @@ namespace Group29_BlitzCafe
             // cbxIsPayed
             // 
             this.cbxIsPayed.AutoSize = true;
-            this.cbxIsPayed.Location = new System.Drawing.Point(689, 230);
+            this.cbxIsPayed.Location = new System.Drawing.Point(687, 198);
             this.cbxIsPayed.Name = "cbxIsPayed";
             this.cbxIsPayed.Size = new System.Drawing.Size(84, 21);
             this.cbxIsPayed.TabIndex = 15;
@@ -218,44 +214,28 @@ namespace Group29_BlitzCafe
             // 
             // dtOrderDate
             // 
-            this.dtOrderDate.Location = new System.Drawing.Point(636, 103);
+            this.dtOrderDate.Location = new System.Drawing.Point(672, 103);
             this.dtOrderDate.Name = "dtOrderDate";
             this.dtOrderDate.Size = new System.Drawing.Size(221, 22);
             this.dtOrderDate.TabIndex = 14;
             // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(584, 157);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 17);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "label7";
-            // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(584, 102);
+            this.label6.Location = new System.Drawing.Point(570, 103);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 17);
+            this.label6.Size = new System.Drawing.Size(77, 17);
             this.label6.TabIndex = 10;
-            this.label6.Text = "label6";
+            this.label6.Text = "Order date";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
             this.label5.Location = new System.Drawing.Point(584, 59);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 17);
+            this.label5.Size = new System.Drawing.Size(58, 17);
             this.label5.TabIndex = 9;
-            this.label5.Text = "label5";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(687, 152);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(144, 22);
-            this.textBox3.TabIndex = 7;
+            this.label5.Text = "OrderID";
             // 
             // x
             // 
@@ -348,10 +328,8 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.CheckBox cbxLoyaltyPointsUsed;
         private System.Windows.Forms.CheckBox cbxIsPayed;
         private System.Windows.Forms.DateTimePicker dtOrderDate;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox x;
     }
 }
