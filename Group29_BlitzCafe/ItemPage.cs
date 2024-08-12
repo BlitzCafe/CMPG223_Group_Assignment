@@ -140,6 +140,90 @@ namespace Group29_BlitzCafe
         //edit current items after selecting them fro the dbgrid
         private void btnEditItem_Click(object sender, EventArgs e)
         {
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnCancelEdit.Visible = true;
+            btnConfirmEdit.Visible = true;
+
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            
+        }
+
+        //delete an item from the database
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            MenuItem removeItem = menuItemList[selectedItemIndex];
+
+            //if the item to be removed is not zero, confirm deletion
+            if (removeItem != null)
+            {
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
+                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    //delete item 
+                    menuItemList.Remove(removeItem);
+                    MessageBox.Show("Menu Item Succesfully deleted.");
+                }
+                else
+                {
+                    //delete canceled, do nothing
+                    MessageBox.Show("Delete Aborted: No items were removed.");
+                }
+
+            }
+            else
+            {
+                MessageBox.Show("No Item matching the selected ID was found. No action was taken.");
+            }
+
+
+
+        }
+
+        private void lbSort_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            //sort se3lection
+            int sortType = lbSort.SelectedIndex;
+
+            //DYLAN AND SINO: add sql to sort database according to criteria
+            switch (sortType)
+            {
+                case 0:
+                    lblSortHeading.Text = "Sorted by: ItemID Ascending";
+
+                    break;
+
+                case 1:
+                    lblSortHeading.Text = "Sorted by: ItemID Descending";
+
+                    break;
+
+                case 2:
+                    lblSortHeading.Text = "Sorted by: Price Ascending";
+
+                    break;
+
+                case 3:
+                    lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    break;
+
+
+                default:
+                    lblSortHeading.Text = "Sorted by: None";
+                    break;
+
+            }
+        }
+
+        private void btnConfirmEdit_Click(object sender, EventArgs e)
+        {
             //test if item to be edited is within valid bounds
             if (selectedItemIndex >= 0 && selectedItemIndex < menuItemList.Count())
             {
@@ -148,7 +232,7 @@ namespace Group29_BlitzCafe
 
                 //create new object with the same ID andd the textbox variables 
                 MenuItem newItem = new MenuItem(originalItem.getItemID(), txtDesc.Text, Convert.ToDecimal(txtPrice.Text));
-                
+
                 //use class equals method to determine if the object was changed
                 if (!originalItem.equals(newItem))
                 {
@@ -165,16 +249,30 @@ namespace Group29_BlitzCafe
                 {
                     MessageBox.Show("No changes were made.");
                 }
-
             }
+
+            btnAddItem.Visible = true;
+            btnDelete.Visible = true;
+            btnEditItem.Visible = true;
+
+            btnCancelEdit.Visible = false;
+            btnConfirmEdit.Visible = false;
+
         }
 
-        private void btnAddItem_Click(object sender, EventArgs e)
+        private void btnConfirmAdd_Click(object sender, EventArgs e)
         {
             //create temp variables for item attributes
             int newItemId;
             decimal price;
             string desc;
+
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnConfirmAdd.Visible = false;
+            btnConfirmEdit.Visible = true;
 
             //calll validate method, if valid execute code
             if (validateInput())
@@ -188,7 +286,7 @@ namespace Group29_BlitzCafe
                 {
                     try
                     {
-                        
+
 
                         // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
                         //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
@@ -208,7 +306,26 @@ namespace Group29_BlitzCafe
                 }
 
             }
+
+            btnAddItem.Visible = true;
+            btnDelete.Visible = true;
+            btnEditItem.Visible = true;
+
+            btnConfirmAdd.Visible = false;
+            btnConfirmEdit.Visible = false;
+        }
+
+        private void btnCancelEdit_Click(object sender, EventArgs e)
+        {
+            btnAddItem.Visible = true;
+            btnDelete.Visible = true;
+            btnEditItem.Visible = true;
+
+            btnConfirmAdd.Visible = false;
+            btnConfirmEdit.Visible = false;
+            btnConfirmEdit.Visible = false;
         }
     }
 }
+
 
