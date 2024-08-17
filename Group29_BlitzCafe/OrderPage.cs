@@ -106,5 +106,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
