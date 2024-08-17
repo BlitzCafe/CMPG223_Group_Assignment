@@ -50,8 +50,8 @@ namespace Group29_BlitzCafe
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(26, 27);
-            this.btnAddNew.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnAddNew.Location = new System.Drawing.Point(11, 36);
+            this.btnAddNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(130, 41);
             this.btnAddNew.TabIndex = 0;
@@ -61,8 +61,8 @@ namespace Group29_BlitzCafe
             // dataGridView1
             // 
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(26, 86);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.dataGridView1.Location = new System.Drawing.Point(11, 92);
+            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
             this.dataGridView1.Name = "dataGridView1";
             this.dataGridView1.RowHeadersWidth = 62;
             this.dataGridView1.RowTemplate.Height = 28;
@@ -84,10 +84,10 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.lblFirstName);
             this.groupBox1.Controls.Add(this.lblCustomerID);
             this.groupBox1.Controls.Add(this.btnConfirmUpdate);
-            this.groupBox1.Location = new System.Drawing.Point(392, 27);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Location = new System.Drawing.Point(404, 36);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(273, 340);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
@@ -96,7 +96,7 @@ namespace Group29_BlitzCafe
             // txtDate
             // 
             this.txtDate.Location = new System.Drawing.Point(134, 180);
-            this.txtDate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtDate.Name = "txtDate";
             this.txtDate.Size = new System.Drawing.Size(76, 20);
             this.txtDate.TabIndex = 11;
@@ -115,7 +115,7 @@ namespace Group29_BlitzCafe
             // 
             this.cbxLoyaltyMem.AutoSize = true;
             this.cbxLoyaltyMem.Location = new System.Drawing.Point(94, 228);
-            this.cbxLoyaltyMem.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.cbxLoyaltyMem.Margin = new System.Windows.Forms.Padding(2);
             this.cbxLoyaltyMem.Name = "cbxLoyaltyMem";
             this.cbxLoyaltyMem.Size = new System.Drawing.Size(117, 17);
             this.cbxLoyaltyMem.TabIndex = 9;
@@ -135,7 +135,7 @@ namespace Group29_BlitzCafe
             // txtCellNo
             // 
             this.txtCellNo.Location = new System.Drawing.Point(134, 136);
-            this.txtCellNo.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCellNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCellNo.Name = "txtCellNo";
             this.txtCellNo.Size = new System.Drawing.Size(76, 20);
             this.txtCellNo.TabIndex = 7;
@@ -143,7 +143,7 @@ namespace Group29_BlitzCafe
             // txtLName
             // 
             this.txtLName.Location = new System.Drawing.Point(134, 96);
-            this.txtLName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtLName.Margin = new System.Windows.Forms.Padding(2);
             this.txtLName.Name = "txtLName";
             this.txtLName.Size = new System.Drawing.Size(76, 20);
             this.txtLName.TabIndex = 6;
@@ -151,7 +151,7 @@ namespace Group29_BlitzCafe
             // txtFName
             // 
             this.txtFName.Location = new System.Drawing.Point(134, 59);
-            this.txtFName.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtFName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFName.Name = "txtFName";
             this.txtFName.Size = new System.Drawing.Size(76, 20);
             this.txtFName.TabIndex = 5;
@@ -159,7 +159,7 @@ namespace Group29_BlitzCafe
             // txtCustID
             // 
             this.txtCustID.Location = new System.Drawing.Point(134, 27);
-            this.txtCustID.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.txtCustID.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustID.Name = "txtCustID";
             this.txtCustID.Size = new System.Drawing.Size(76, 20);
             this.txtCustID.TabIndex = 4;
@@ -197,7 +197,7 @@ namespace Group29_BlitzCafe
             // btnConfirmUpdate
             // 
             this.btnConfirmUpdate.Location = new System.Drawing.Point(149, 297);
-            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmUpdate.Name = "btnConfirmUpdate";
             this.btnConfirmUpdate.Size = new System.Drawing.Size(119, 40);
             this.btnConfirmUpdate.TabIndex = 0;
@@ -208,14 +208,14 @@ namespace Group29_BlitzCafe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Group29_BlitzCafe.Properties.Resources.Landing_Page;
+            this.BackgroundImage = global::Group29_BlitzCafe.Properties.Resources.WhatsApp_Image_2024_08_17_at_15_18_00_a33e3278;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(706, 420);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dataGridView1);
             this.Controls.Add(this.btnAddNew);
             this.DoubleBuffered = true;
-            this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
             this.Load += new System.EventHandler(this.CustomerPage_Load);

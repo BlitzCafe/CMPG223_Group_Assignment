@@ -79,5 +79,35 @@ namespace Group29_BlitzCafe.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhatsApp_Image_2024_08_17_at_15_03_14_2965de7f {
+            get {
+                object obj = ResourceManager.GetObject("WhatsApp Image 2024-08-17 at 15.03.14_2965de7f", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhatsApp_Image_2024_08_17_at_15_13_04_f589873d {
+            get {
+                object obj = ResourceManager.GetObject("WhatsApp Image 2024-08-17 at 15.13.04_f589873d", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhatsApp_Image_2024_08_17_at_15_18_00_a33e3278 {
+            get {
+                object obj = ResourceManager.GetObject("WhatsApp Image 2024-08-17 at 15.18.00_a33e3278", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
