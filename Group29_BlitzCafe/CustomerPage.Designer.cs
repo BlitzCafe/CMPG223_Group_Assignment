@@ -208,7 +208,7 @@ namespace Group29_BlitzCafe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackgroundImage = global::Group29_BlitzCafe.Properties.Resources.WhatsApp_Image_2024_08_17_at_15_18_00_a33e3278;
+            
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(706, 420);
             this.Controls.Add(this.groupBox1);
