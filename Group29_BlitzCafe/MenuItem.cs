@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group29_BlitzCafe
 {
-    class MenuItem : IComparable<MenuItem>
+    public class MenuItem : IComparable<MenuItem>
     {
         //create attributes
         private readonly int itemID;

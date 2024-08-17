@@ -15,7 +15,7 @@ namespace Group29_BlitzCafe
     {
         private Default defaultFrm = new Default();
 
-
+        private ItemPage itemPageFrm = new ItemPage();          //could use singleton
         private List<Order> orderList = new List<Order>();
 
         public OrderPage()
@@ -69,26 +69,6 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
@@ -105,6 +85,29 @@ namespace Group29_BlitzCafe
         }
 
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
+        {
+            string searchID = txtSearchItemID.Text;
+            lbxItemSelection.Items.Clear();
+
+            foreach(MenuItem item in itemPageFrm.menuItemList)
+            {
+                string itemID = item.getItemID().ToString();
+                if (itemID.Contains(searchID))
+                {
+                    lbxItemSelection.Items.Add(item);
+
+                }
+
+            }
+
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void button1_Click(object sender, EventArgs e)
         {
 
         }

@@ -14,7 +14,7 @@ namespace Group29_BlitzCafe
     public partial class ItemPage : Form
     {
         //create menuitem list, link to default form and create global index variable
-        private List<MenuItem> menuItemList = new List<MenuItem>();
+        public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
 
