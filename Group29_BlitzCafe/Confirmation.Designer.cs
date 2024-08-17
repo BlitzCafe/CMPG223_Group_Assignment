@@ -39,7 +39,7 @@ namespace Group29_BlitzCafe
             // cbxUseLoyaltyPoints
             // 
             this.cbxUseLoyaltyPoints.AutoSize = true;
-            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(200, 76);
+            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(200, 80);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(107, 17);
