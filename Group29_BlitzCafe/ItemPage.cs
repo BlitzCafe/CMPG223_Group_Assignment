@@ -62,7 +62,7 @@ namespace Group29_BlitzCafe
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT ItemID, Descr, Price FROM Item";
+                    string query = "SELECT ItemID, Descr, Price FROM tblItem";
                     MySqlCommand cmd = new MySqlCommand(query, conn);
                     MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -167,9 +167,33 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    //delete item 
-                    menuItemList.Remove(removeItem);
-                    MessageBox.Show("Menu Item Succesfully deleted.");
+                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    {
+                        try
+                        {
+                            conn.Open();
+                            string query = "DELETE FROM tblItem WHERE ItemID = @ItemID";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
+
+                            cmd.ExecuteNonQuery();
+
+                            // Remove item from the list
+                            menuItemList.Remove(removeItem);
+
+                            // Refresh the data grid
+                            loadMenuItems();
+                            MessageBox.Show("Menu Item successfully deleted.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted. " + ex.Message);
+                        }
+
+                        menuItemList.Remove(removeItem);
+                        //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
+                        MessageBox.Show("Menu Item Succesfully deleted.");
+                    }
                 }
                 else
                 {
@@ -191,32 +215,33 @@ namespace Group29_BlitzCafe
         {
             //sort se3lection
             int sortType = lbSort.SelectedIndex;
-
+            String query = "";
             //DYLAN AND SINO: add sql to sort database according to criteria
             switch (sortType)
             {
                 case 0:
                     lblSortHeading.Text = "Sorted by: ItemID Ascending";
-
+                    query = "SELECT * FROM tblItems SORT BY ItemID";
                     break;
 
                 case 1:
                     lblSortHeading.Text = "Sorted by: ItemID Descending";
-
+                    query = "SELECT * FROM tblItems SORY BY ItemID DESC";
                     break;
 
                 case 2:
                     lblSortHeading.Text = "Sorted by: Price Ascending";
-
+                    query = "SELECT * FROM tblItem ORDER BY Price ASC";
                     break;
 
                 case 3:
                     lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    query = "SELECT * FROM tblItem ORDER BY Price DESC";
                     break;
-
 
                 default:
                     lblSortHeading.Text = "Sorted by: None";
+                    query = "SELECT * FROM tblItem";
                     break;
 
             }
@@ -239,7 +264,25 @@ namespace Group29_BlitzCafe
 
                     using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
                     {
-                        //append new object to database DYLAN & SINO
+                        try
+                        {
+                            conn.Open();
+                            string query = "UPDATE tblItem SET Descr = @Descr, Price = @Price WHERE ItemID = @ItemID";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
+                            cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
+                            cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
+
+                            cmd.ExecuteNonQuery();
+
+                            // Refresh the data grid
+                            loadMenuItems();
+                            MessageBox.Show("Menu Item successfully updated.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be updated. " + ex.Message);
+                        }
                     }
 
                     //call load method to refresh dbgrid and reset objects to be the same as the database
