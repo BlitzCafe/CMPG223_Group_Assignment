@@ -13,7 +13,7 @@ namespace Group29_BlitzCafe
     public partial class Default : Form
     {
 
-        public string connString = "";
+        public string connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;User Id=admin;Password=12345678;TrustServerCertificate=True";
         public Default()
         {
             InitializeComponent();

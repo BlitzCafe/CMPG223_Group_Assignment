@@ -38,6 +38,7 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
+
                     sqlQuery = " ";//SQL Goes here
                     MySqlCommand cmd = new MySqlCommand(sqlQuery, conn);
                     MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
