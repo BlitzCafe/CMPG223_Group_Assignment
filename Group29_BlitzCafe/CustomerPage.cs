@@ -29,14 +29,14 @@ namespace Group29_BlitzCafe
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
                     conn.Open();
-                    string query = " ";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    string query = "SELECT First_Name FROM tblCustomer";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataAdapter.Fill(dataTable);
