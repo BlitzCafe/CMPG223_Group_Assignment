@@ -1,0 +1,8 @@
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.csproj.AssemblyReference.cache
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.Confirmation.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.CustomerPage.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.Default.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.ItemPage.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.OrderPage.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.Reports.resources
+C:\Users\Kearabetswe\source\repos\BlitzCafe\CMPG223_Group_Assignment\Group29_BlitzCafe\obj\Debug\Group29_BlitzCafe.csproj.GenerateResource.cache
