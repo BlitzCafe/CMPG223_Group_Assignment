@@ -106,10 +106,10 @@ namespace Group29_BlitzCafe
             this.radioButton6.AutoSize = true;
             this.radioButton6.Location = new System.Drawing.Point(27, 177);
             this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(135, 17);
+            this.radioButton6.Size = new System.Drawing.Size(158, 17);
             this.radioButton6.TabIndex = 3;
             this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Menu Item Descending";
+            this.radioButton6.Text = "Menu Item Descending(Z-A)";
             this.radioButton6.UseVisualStyleBackColor = true;
             // 
             // radioButton5
@@ -117,10 +117,10 @@ namespace Group29_BlitzCafe
             this.radioButton5.AutoSize = true;
             this.radioButton5.Location = new System.Drawing.Point(27, 133);
             this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(128, 17);
+            this.radioButton5.Size = new System.Drawing.Size(151, 17);
             this.radioButton5.TabIndex = 2;
             this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Menu Item Ascending";
+            this.radioButton5.Text = "Menu Item Ascending(A-Z)";
             this.radioButton5.UseVisualStyleBackColor = true;
             // 
             // radioButton4
