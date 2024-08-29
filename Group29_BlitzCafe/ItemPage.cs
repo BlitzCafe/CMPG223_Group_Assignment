@@ -64,8 +64,12 @@ namespace Group29_BlitzCafe
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT ItemID, Descr, Price FROM tblItems";
-                    SqlCommand cmd = new SqlCommand(query, conn);
+
+
+                    string query = "SELECT ItemsID, Description, Price FROM Items";
+                    cmd = new SqlCommand(query, conn);
+
+
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
@@ -217,6 +221,7 @@ namespace Group29_BlitzCafe
         {
             //sort se3lection
             int sortType = lbSort.SelectedIndex;
+
             String query = "";
             //DYLAN AND SINO: add sql to sort database according to criteria
             switch (sortType)
@@ -247,6 +252,7 @@ namespace Group29_BlitzCafe
                     break;
 
             }
+
         }
 
         private void btnConfirmEdit_Click(object sender, EventArgs e)

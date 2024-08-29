@@ -43,7 +43,7 @@ namespace Group29_BlitzCafe
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.lblDateJoined = new System.Windows.Forms.Label();
-            this.cbxLoyaltyMem = new System.Windows.Forms.CheckBox();
+            
             this.label1 = new System.Windows.Forms.Label();
             this.txtCellNo = new System.Windows.Forms.TextBox();
             this.txtLName = new System.Windows.Forms.TextBox();
@@ -53,7 +53,7 @@ namespace Group29_BlitzCafe
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblCustomerID = new System.Windows.Forms.Label();
             this.btnConfirmUpdate = new System.Windows.Forms.Button();
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).BeginInit();
+           
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -115,14 +115,7 @@ namespace Group29_BlitzCafe
             // dateJoinedDataGridViewTextBoxColumn
             // 
 
-            this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dataGridView1.Location = new System.Drawing.Point(11, 92);
-            this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
-            this.dataGridView1.Name = "dataGridView1";
-            this.dataGridView1.RowHeadersWidth = 62;
-            this.dataGridView1.RowTemplate.Height = 28;
-            this.dataGridView1.Size = new System.Drawing.Size(328, 281);
-            this.dataGridView1.TabIndex = 1;
+        
             // 
             // groupBox1
             // 
@@ -171,14 +164,8 @@ namespace Group29_BlitzCafe
             // 
             // cbxLoyaltyMem
             // 
-            this.cbxLoyaltyMem.AutoSize = true;
-            this.cbxLoyaltyMem.Location = new System.Drawing.Point(94, 228);
-            this.cbxLoyaltyMem.Margin = new System.Windows.Forms.Padding(2);
-            this.cbxLoyaltyMem.Name = "cbxLoyaltyMem";
-            this.cbxLoyaltyMem.Size = new System.Drawing.Size(117, 17);
-            this.cbxLoyaltyMem.TabIndex = 9;
-            this.cbxLoyaltyMem.Text = "Is Loyalty Member?";
-            this.cbxLoyaltyMem.UseVisualStyleBackColor = true;
+           
+           
             // 
             // label1
             // 
@@ -272,7 +259,7 @@ namespace Group29_BlitzCafe
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(706, 420);
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.dataGridView1);
+      
             this.Controls.Add(this.btnAddNew);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);

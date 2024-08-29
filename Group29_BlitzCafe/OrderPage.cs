@@ -180,10 +180,7 @@ namespace Group29_BlitzCafe
 
         }
 
-        private void tabPage1_Click(object sender, EventArgs e)
-        {
 
-        }
     }
 }
             
