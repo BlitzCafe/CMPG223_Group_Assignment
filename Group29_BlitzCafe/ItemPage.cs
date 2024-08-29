@@ -18,7 +18,9 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
-
+        SqlConnection conn;
+        SqlCommand cmd;
+        SqlDataAdapter adap;
         private int choice = 0;
 
 

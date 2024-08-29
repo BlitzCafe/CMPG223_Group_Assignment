@@ -151,13 +151,14 @@ namespace Group29_BlitzCafe
 
                         choice = 0;
 
-                            using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
-                            {
+                        using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
+                        {
 
-                        btnUpdate.Visible = true;
-                        btnDelete.Visible = true;
-                        btnAddNew.Visible = true;
-                        break;
+                            btnUpdate.Visible = true;
+                            btnDelete.Visible = true;
+                            btnAddNew.Visible = true;
+                            break;
+                        }
                     }
                 case 3:
                     {
