@@ -22,7 +22,7 @@ namespace Group29_BlitzCafe
         //Variables
         private Default defaultFrm = new Default();
 
-        private MySqlConnection conn; 
+        private SqlConnection conn; 
 
         private List<Customer> customerList = new List<Customer>();
 
@@ -39,9 +39,9 @@ namespace Group29_BlitzCafe
                 {
                     conn.Open();
 
-                    sqlQuery = " ";//SQL Goes here
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    sqlQuery = "SELECT * FROM Customer";//SQL Goes here
+                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataAdapter.Fill(dataTable);
@@ -79,9 +79,9 @@ namespace Group29_BlitzCafe
                
                 conn.Open();
 
-                sqlQuery = " ";//SQL Goes here
+                sqlQuery = "UPDATE Customer SET Last_Name = @LastName, First_Name = @FirstName, CellNo = @CellNo, Date_Joined = @Date_Joined WHERE CustomerID = @CustomerID";//SQL Goes here
 
-                using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@CustomerID", customer.getCustomerID());
                     cmd.Parameters.AddWithValue("@LastName",customer.getLastName());
