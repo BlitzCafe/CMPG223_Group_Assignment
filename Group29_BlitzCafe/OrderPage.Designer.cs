@@ -31,6 +31,10 @@ namespace Group29_BlitzCafe
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txtCellNumber = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
+            this.txtTotalAmount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
             this.txtSearchDescr = new System.Windows.Forms.TextBox();
             this.btnAddItem = new System.Windows.Forms.Button();
@@ -48,19 +52,17 @@ namespace Group29_BlitzCafe
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.x = new System.Windows.Forms.TextBox();
+            this.txtOrderIDSearch = new System.Windows.Forms.TextBox();
             this.btnDeleteOrder = new System.Windows.Forms.Button();
-            this.btnEditOrder = new System.Windows.Forms.Button();
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.txtTotalAmount = new System.Windows.Forms.TextBox();
-            this.label8 = new System.Windows.Forms.Label();
-            this.txtCellNumber = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
+            this.dbgOrderDetails = new System.Windows.Forms.DataGridView();
+            this.label10 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -71,7 +73,7 @@ namespace Group29_BlitzCafe
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1215, 502);
+            this.tabControl1.Size = new System.Drawing.Size(1215, 545);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
@@ -99,6 +101,38 @@ namespace Group29_BlitzCafe
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Order";
             this.tabPage1.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(958, 55);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(103, 17);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Phone Number";
+            // 
+            // txtCellNumber
+            // 
+            this.txtCellNumber.Location = new System.Drawing.Point(1080, 52);
+            this.txtCellNumber.Name = "txtCellNumber";
+            this.txtCellNumber.Size = new System.Drawing.Size(91, 22);
+            this.txtCellNumber.TabIndex = 16;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(317, 400);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(46, 17);
+            this.label8.TabIndex = 15;
+            this.label8.Text = "label8";
+            // 
+            // txtTotalAmount
+            // 
+            this.txtTotalAmount.Location = new System.Drawing.Point(427, 392);
+            this.txtTotalAmount.Name = "txtTotalAmount";
+            this.txtTotalAmount.Size = new System.Drawing.Size(92, 22);
+            this.txtTotalAmount.TabIndex = 14;
             // 
             // label7
             // 
@@ -204,25 +238,25 @@ namespace Group29_BlitzCafe
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.label10);
+            this.tabPage2.Controls.Add(this.dbgOrderDetails);
             this.tabPage2.Controls.Add(this.cbxLoyaltyPointsUsed);
             this.tabPage2.Controls.Add(this.cbxIsPayed);
             this.tabPage2.Controls.Add(this.dtOrderDate);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.x);
+            this.tabPage2.Controls.Add(this.txtOrderIDSearch);
             this.tabPage2.Controls.Add(this.btnDeleteOrder);
-            this.tabPage2.Controls.Add(this.btnEditOrder);
             this.tabPage2.Controls.Add(this.dbgOrderHistory);
             this.tabPage2.Controls.Add(this.label2);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(1207, 473);
+            this.tabPage2.Size = new System.Drawing.Size(1207, 516);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
-            this.tabPage2.Click += new System.EventHandler(this.tabPage2_Click);
             // 
             // cbxLoyaltyPointsUsed
             // 
@@ -269,12 +303,13 @@ namespace Group29_BlitzCafe
             this.label5.TabIndex = 20;
             this.label5.Text = "OrderID";
             // 
-            // x
+            // txtOrderIDSearch
             // 
-            this.x.Location = new System.Drawing.Point(719, 35);
-            this.x.Name = "x";
-            this.x.Size = new System.Drawing.Size(144, 22);
-            this.x.TabIndex = 19;
+            this.txtOrderIDSearch.Location = new System.Drawing.Point(719, 35);
+            this.txtOrderIDSearch.Name = "txtOrderIDSearch";
+            this.txtOrderIDSearch.Size = new System.Drawing.Size(144, 22);
+            this.txtOrderIDSearch.TabIndex = 19;
+            this.txtOrderIDSearch.TextChanged += new System.EventHandler(this.txtOrderIDSearch_TextChanged);
             // 
             // btnDeleteOrder
             // 
@@ -285,26 +320,17 @@ namespace Group29_BlitzCafe
             this.btnDeleteOrder.TabIndex = 18;
             this.btnDeleteOrder.Text = "Delete";
             this.btnDeleteOrder.UseVisualStyleBackColor = true;
-            // 
-            // btnEditOrder
-            // 
-            this.btnEditOrder.Location = new System.Drawing.Point(704, 304);
-            this.btnEditOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnEditOrder.Name = "btnEditOrder";
-            this.btnEditOrder.Size = new System.Drawing.Size(116, 38);
-            this.btnEditOrder.TabIndex = 17;
-            this.btnEditOrder.Text = "Edit";
-            this.btnEditOrder.UseVisualStyleBackColor = true;
+            this.btnDeleteOrder.Click += new System.EventHandler(this.btnDeleteOrder_Click);
             // 
             // dbgOrderHistory
             // 
             this.dbgOrderHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgOrderHistory.Location = new System.Drawing.Point(57, 99);
+            this.dbgOrderHistory.Location = new System.Drawing.Point(56, 50);
             this.dbgOrderHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dbgOrderHistory.Name = "dbgOrderHistory";
             this.dbgOrderHistory.RowHeadersWidth = 62;
             this.dbgOrderHistory.RowTemplate.Height = 28;
-            this.dbgOrderHistory.Size = new System.Drawing.Size(507, 261);
+            this.dbgOrderHistory.Size = new System.Drawing.Size(507, 183);
             this.dbgOrderHistory.TabIndex = 1;
             this.dbgOrderHistory.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgOrderHistory_CellContentClick);
             // 
@@ -317,43 +343,31 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 0;
             this.label2.Text = "Order History";
             // 
-            // txtTotalAmount
+            // dbgOrderDetails
             // 
-            this.txtTotalAmount.Location = new System.Drawing.Point(427, 392);
-            this.txtTotalAmount.Name = "txtTotalAmount";
-            this.txtTotalAmount.Size = new System.Drawing.Size(92, 22);
-            this.txtTotalAmount.TabIndex = 14;
+            this.dbgOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgOrderDetails.Location = new System.Drawing.Point(56, 295);
+            this.dbgOrderDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dbgOrderDetails.Name = "dbgOrderDetails";
+            this.dbgOrderDetails.RowHeadersWidth = 62;
+            this.dbgOrderDetails.RowTemplate.Height = 28;
+            this.dbgOrderDetails.Size = new System.Drawing.Size(507, 183);
+            this.dbgOrderDetails.TabIndex = 25;
             // 
-            // label8
+            // label10
             // 
-            this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(317, 400);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(46, 17);
-            this.label8.TabIndex = 15;
-            this.label8.Text = "label8";
-            // 
-            // txtCellNumber
-            // 
-            this.txtCellNumber.Location = new System.Drawing.Point(1080, 52);
-            this.txtCellNumber.Name = "txtCellNumber";
-            this.txtCellNumber.Size = new System.Drawing.Size(91, 22);
-            this.txtCellNumber.TabIndex = 16;
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(958, 55);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(103, 17);
-            this.label9.TabIndex = 17;
-            this.label9.Text = "Phone Number";
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(56, 260);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(92, 17);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Order Details";
             // 
             // OrderPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1227, 517);
+            this.ClientSize = new System.Drawing.Size(1227, 560);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OrderPage";
@@ -365,6 +379,7 @@ namespace Group29_BlitzCafe
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -392,12 +407,13 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.DateTimePicker dtOrderDate;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox x;
+        private System.Windows.Forms.TextBox txtOrderIDSearch;
         private System.Windows.Forms.Button btnDeleteOrder;
-        private System.Windows.Forms.Button btnEditOrder;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTotalAmount;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.TextBox txtCellNumber;
+        private System.Windows.Forms.DataGridView dbgOrderDetails;
+        private System.Windows.Forms.Label label10;
     }
 }
