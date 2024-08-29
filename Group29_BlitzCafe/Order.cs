@@ -11,15 +11,15 @@ namespace Group29_BlitzCafe
         //create attributes, orderID can only be set once
         private readonly int orderID;
         private DateTime orderDate;
-        private bool isPaid;
+        private bool isPayed;
         private bool loyaltyPointsUsed;
 
         //Create new order object
-        public Order(int orderID, DateTime orderDate, bool isPaid, bool loyaltyPointsUsed)
+        public Order(int orderID, DateTime orderDate, bool isPayed, bool loyaltyPointsUsed)
         {
             this.orderID = orderID;
             setOrderDate(orderDate);
-            setIsPayed(isPaid);
+            setIsPayed(isPayed);
             setLoyaltyPointsUsed(loyaltyPointsUsed);
         }
         //set order date
@@ -30,7 +30,7 @@ namespace Group29_BlitzCafe
         //set wether the order has been payed
         public void setIsPayed( bool isPayed)
         {
-            this.isPaid = isPaid;
+            this.isPayed = isPayed;
         }
         //set if loyalty points were used 
         public void setLoyaltyPointsUsed(bool loyaltyPointsUsed)
@@ -50,7 +50,7 @@ namespace Group29_BlitzCafe
         //get payment status
         public bool getIsPayed()
         {
-            return this.isPaid;
+            return this.isPayed;
         }
         //get if loyalty points were used
         public bool getLoyaltyPointsUsed()
