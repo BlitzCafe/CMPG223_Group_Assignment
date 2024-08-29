@@ -9,7 +9,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
-using System.Data.SqlClient;
+
 
 
 namespace Group29_BlitzCafe

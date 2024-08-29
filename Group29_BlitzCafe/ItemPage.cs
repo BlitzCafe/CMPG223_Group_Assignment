@@ -70,7 +70,7 @@ namespace Group29_BlitzCafe
                 {
                     //Dyaln and sino
                     conn.Open();
-r
+
                     string query = "SELECT ItemsID, Description, Price FROM Items";
                     cmd = new SqlCommand(query, conn);
 
@@ -233,127 +233,7 @@ r
 
 
 
-                    conn.Open();
-                    string query = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID";
-                    cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable;
-
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        itemID = Convert.ToInt32(row["ItemsID"]);
-                        descr = row["Description"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
-
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
-                    }
-                    conn.Close();
-
-                    break;
-
-                case 1:
-                    lblSortHeading.Text = "Sorted by: ItemID Descending";
-
-                    conn.Open();
-                    string query1 = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID DESC";
-                    cmd = new SqlCommand(query1, conn);
-                    SqlDataAdapter dataAdapter1 = new SqlDataAdapter(cmd);
-                    DataTable dataTable1 = new DataTable();
-                    dataAdapter1.Fill(dataTable1);
-
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable1;
-
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable1.Rows)
-                    {
-                        itemID = Convert.ToInt32(row["ItemsID"]);
-                        descr = row["Description"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
-
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
-                    }
-                    conn.Close();
-
-                    break;
-
-                case 2:
-                    lblSortHeading.Text = "Sorted by: Price Ascending";
-
-                    conn.Open();
-                    string query2 = "SELECT ItemsID, Description, Price FROM Items ORDER BY Price";
-                    cmd = new SqlCommand(query2, conn);
-                    SqlDataAdapter dataAdapter2 = new SqlDataAdapter(cmd);
-                    DataTable dataTable2 = new DataTable();
-                    dataAdapter2.Fill(dataTable2);
-
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable2;
-
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable2.Rows)
-                    {
-                        itemID = Convert.ToInt32(row["ItemsID"]);
-                        descr = row["Description"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
-
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
-                    }
-                    conn.Close();
-                    break;
-
-                case 3:
-                    lblSortHeading.Text = "Sorted by: Price Descending";
-                    conn.Open();
-                    string query3 = "SELECT ItemsID, Description, Price FROM Items ORDER BY Price DESC";
-                    cmd = new SqlCommand(query3, conn);
-                    SqlDataAdapter dataAdapter3 = new SqlDataAdapter(cmd);
-                    DataTable dataTable3 = new DataTable();
-                    dataAdapter3.Fill(dataTable3);
-                    
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable3;
-
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable3.Rows)
-                    {
-                        itemID = Convert.ToInt32(row["ItemsID"]);
-                        descr = row["Description"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
-
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
-                    }
-                    conn.Close();
-
-                    break;
-
-                default:
-                    lblSortHeading.Text = "Sorted by: None";
-                    query = "SELECT * FROM tblItem";
-                    break;
-
-            }
+                  
         }
 
         private void btnConfirmEdit_Click(object sender, EventArgs e)
