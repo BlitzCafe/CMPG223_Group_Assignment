@@ -64,19 +64,16 @@ namespace Group29_BlitzCafe
 
             using (conn = new SqlConnection(defaultFrm.connString))
 
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
-                    //Dyaln and sino
                     conn.Open();
                     string query = "SELECT ItemID, Description, Price FROM Items";
                     cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
-
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable;
 
                     //create objects for each line in the dbgrid
                     foreach (DataRow row in dataTable.Rows)
@@ -92,7 +89,7 @@ namespace Group29_BlitzCafe
                         menuItemList.Add(menuItem);
                     }
 
-                    conn.Close();
+                    ;
                 }
                 catch (Exception ex)
                 {
@@ -194,7 +191,8 @@ namespace Group29_BlitzCafe
                         try
                         {
                             conn.Open();
-
+                            string query = "";
+                            SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
 
                             cmd.ExecuteNonQuery();
@@ -329,11 +327,10 @@ namespace Group29_BlitzCafe
                     try
                     {
                         conn.Open();
-                        string sql = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
+                        string query = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
+                        SqlCommand cmd = new SqlCommand(query, conn);
 
-                        cmd = new SqlCommand(sql, conn);
-                        adap.InsertCommand = cmd;
-                        adap.InsertCommand.ExecuteNonQuery();
+                        cmd = new SqlCommand(query, conn);
 
                         // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
                         //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
