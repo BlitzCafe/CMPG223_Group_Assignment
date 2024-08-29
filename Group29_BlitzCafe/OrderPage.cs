@@ -7,8 +7,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
-using Group29_BlitzCafe;
+
+
+using System.Data.SqlClient;
+
 
 namespace Group29_BlitzCafe
 {
@@ -34,14 +36,17 @@ namespace Group29_BlitzCafe
             DateTime orderDate;
             bool loyaltyPointsUsed, isPayed;
 
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+
+
+           using (SqlConnection conn = new SqlConnection(defaultFrm.connString))          
+
             {
                 try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, IsPayed, loyaltypointsused FROM Orders";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 

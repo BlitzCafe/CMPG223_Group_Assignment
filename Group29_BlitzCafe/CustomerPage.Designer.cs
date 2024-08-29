@@ -32,9 +32,9 @@ namespace Group29_BlitzCafe
             this.btnAddNew = new System.Windows.Forms.Button();
             this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.btnDelete = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.lblDateJoined = new System.Windows.Forms.Label();
-            this.cbxLoyaltyMem = new System.Windows.Forms.CheckBox();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCellNo = new System.Windows.Forms.TextBox();
             this.txtLName = new System.Windows.Forms.TextBox();
@@ -50,30 +50,33 @@ namespace Group29_BlitzCafe
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(35, 33);
+            this.btnAddNew.Location = new System.Drawing.Point(6, 270);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddNew.Name = "btnAddNew";
             this.btnAddNew.Size = new System.Drawing.Size(173, 51);
             this.btnAddNew.TabIndex = 0;
             this.btnAddNew.Text = "Add New Customer";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
             // dbgCustomerInfo
             // 
             this.dbgCustomerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgCustomerInfo.Location = new System.Drawing.Point(35, 106);
+            this.dbgCustomerInfo.Location = new System.Drawing.Point(35, 33);
             this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dbgCustomerInfo.Name = "dbgCustomerInfo";
             this.dbgCustomerInfo.RowHeadersWidth = 62;
             this.dbgCustomerInfo.RowTemplate.Height = 28;
-            this.dbgCustomerInfo.Size = new System.Drawing.Size(438, 346);
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(438, 419);
             this.dbgCustomerInfo.TabIndex = 1;
+            this.dbgCustomerInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgCustomerInfo_CellClick);
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.btnDelete);
             this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.lblDateJoined);
-            this.groupBox1.Controls.Add(this.cbxLoyaltyMem);
+            this.groupBox1.Controls.Add(this.btnAddNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCellNo);
             this.groupBox1.Controls.Add(this.txtLName);
@@ -92,6 +95,16 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(78, 326);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(217, 63);
+            this.btnDelete.TabIndex = 12;
+            this.btnDelete.Text = "Delete Selected Customer";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
             // txtDate
             // 
             this.txtDate.Location = new System.Drawing.Point(178, 221);
@@ -107,16 +120,6 @@ namespace Group29_BlitzCafe
             this.lblDateJoined.Size = new System.Drawing.Size(92, 17);
             this.lblDateJoined.TabIndex = 10;
             this.lblDateJoined.Text = "Date Joined: ";
-            // 
-            // cbxLoyaltyMem
-            // 
-            this.cbxLoyaltyMem.AutoSize = true;
-            this.cbxLoyaltyMem.Location = new System.Drawing.Point(126, 280);
-            this.cbxLoyaltyMem.Name = "cbxLoyaltyMem";
-            this.cbxLoyaltyMem.Size = new System.Drawing.Size(152, 21);
-            this.cbxLoyaltyMem.TabIndex = 9;
-            this.cbxLoyaltyMem.Text = "Is Loyalty Member?";
-            this.cbxLoyaltyMem.UseVisualStyleBackColor = true;
             // 
             // label1
             // 
@@ -184,13 +187,14 @@ namespace Group29_BlitzCafe
             // 
             // btnConfirmUpdate
             // 
-            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 366);
+            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 268);
             this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfirmUpdate.Name = "btnConfirmUpdate";
             this.btnConfirmUpdate.Size = new System.Drawing.Size(159, 49);
             this.btnConfirmUpdate.TabIndex = 0;
             this.btnConfirmUpdate.Text = "Confirm Changes";
             this.btnConfirmUpdate.UseVisualStyleBackColor = true;
+            this.btnConfirmUpdate.Click += new System.EventHandler(this.btnConfirmUpdate_Click);
             // 
             // CustomerPage
             // 
@@ -199,7 +203,6 @@ namespace Group29_BlitzCafe
             this.ClientSize = new System.Drawing.Size(942, 517);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dbgCustomerInfo);
-            this.Controls.Add(this.btnAddNew);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
@@ -219,7 +222,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnConfirmUpdate;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Label lblDateJoined;
-        private System.Windows.Forms.CheckBox cbxLoyaltyMem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCellNo;
         private System.Windows.Forms.TextBox txtLName;
@@ -228,5 +230,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblCustomerID;
+        private System.Windows.Forms.Button btnDelete;
     }
 }
