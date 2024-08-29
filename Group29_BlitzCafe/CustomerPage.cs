@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 
 namespace Group29_BlitzCafe
@@ -34,13 +35,17 @@ namespace Group29_BlitzCafe
         //Load from info from database
         private void Load_Customer_Info()
         {
-            using (SqlConnection conn = new SqlConnection(connString))
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+
             {
                 try
                 {
                     conn.Open();
-                    sqlQuery = "SELECT * FROM tblCustomer";//SQL Goes here
-                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+
+                    string query = " ";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable); // Fill the DataTable once

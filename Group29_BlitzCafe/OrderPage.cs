@@ -8,7 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-
+using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 
 
@@ -34,8 +34,7 @@ namespace Group29_BlitzCafe
 
             int orderId;
             DateTime orderDate;
-            bool loyaltyPointsUsed, isPayed;
-
+            bool loyaltyPointsUsed, isPaid;
 
 
            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))          
@@ -44,7 +43,9 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+
+                    string query = "SELECT OrderID, Order_Date, IsPaid, LoyaltyPoints_Used FROM Order";
+
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -56,13 +57,13 @@ namespace Group29_BlitzCafe
 
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        orderId = Convert.ToInt32(row["OrderId"]);
-                        orderDate = Convert.ToDateTime(row["OrderDate"]);
-                        isPayed = Convert.ToBoolean(row["IsPayed"]);
-                        loyaltyPointsUsed = Convert.ToBoolean(row["loyaltypointsused"]);
+                        orderId = Convert.ToInt32(row["OrderID"]);
+                        orderDate = Convert.ToDateTime(row["Order_Date"]);
+                        isPaid = Convert.ToBoolean(row["IsPaid"]);
+                        loyaltyPointsUsed = Convert.ToBoolean(row["LoyaltyPoints_Used"]);
 
                         // Create a new Order object using the data
-                        Order order = new Order(orderId, orderDate, isPayed, loyaltyPointsUsed);
+                        Order order = new Order(orderId, orderDate, isPaid, loyaltyPointsUsed);
 
                         // Add the Order object to the list
                         orderList.Add(order);
@@ -177,6 +178,11 @@ namespace Group29_BlitzCafe
         {
             Confirmation confirmationForm = new Confirmation(receipt, txtCustomerID.Text);
             confirmationForm.ShowDialog();
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
 
         }
 
