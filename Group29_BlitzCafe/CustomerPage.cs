@@ -21,7 +21,10 @@ namespace Group29_BlitzCafe
         //Variables
         private Default defaultFrm = new Default();
 
-        private SqlConnection conn; 
+
+        private SqlConnection conn;
+        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
+
 
         private List<Customer> customerList = new List<Customer>();
 
@@ -39,7 +42,6 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-
 
                     sqlQuery = "SELECT * FROM Customer";//SQL Goes here
                     SqlCommand cmd = new SqlCommand(sqlQuery, conn);
@@ -100,11 +102,13 @@ namespace Group29_BlitzCafe
 
         }
 
+
         private void confirm_Update()
         {
             if (dbgCustomerInfo.SelectedRows.Count > 0)
             {
                 if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
+
                 {
 
                 }
@@ -117,7 +121,9 @@ namespace Group29_BlitzCafe
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
+
             conn = new SqlConnection(defaultFrm.connString);
+
 
             load_Customer_Info();
 
@@ -149,7 +155,9 @@ namespace Group29_BlitzCafe
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
+
                         choice = 0;
+
 
                         btnUpdate.Visible = true;
                         btnDelete.Visible = true;
