@@ -143,7 +143,14 @@ namespace Group29_BlitzCafe
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            //Code here
 
+            DialogResult result = MessageBox.Show("Do you want to delete the selected record?", "Delete confirmation", MessageBoxButtons.YesNo);
+
+            if (result == DialogResult.Yes)
+            {
+                //If they want to delete
+            }
         }
 
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
