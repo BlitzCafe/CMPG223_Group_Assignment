@@ -32,7 +32,7 @@ namespace Group29_BlitzCafe
             this.btnAddNew = new System.Windows.Forms.Button();
             this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.lblDateJoined = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -43,17 +43,19 @@ namespace Group29_BlitzCafe
             this.label3 = new System.Windows.Forms.Label();
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblCustomerID = new System.Windows.Forms.Label();
-            this.btnConfirmUpdate = new System.Windows.Forms.Button();
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnDelete = new System.Windows.Forms.Button();
+            this.btnUpdate = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(6, 270);
+            this.btnAddNew.Location = new System.Drawing.Point(489, 22);
             this.btnAddNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(173, 51);
+            this.btnAddNew.Size = new System.Drawing.Size(150, 51);
             this.btnAddNew.TabIndex = 0;
             this.btnAddNew.Text = "Add New Customer";
             this.btnAddNew.UseVisualStyleBackColor = true;
@@ -73,10 +75,9 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.btnDelete);
+            this.groupBox1.Controls.Add(this.btnCancel);
             this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.lblDateJoined);
-            this.groupBox1.Controls.Add(this.btnAddNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCellNo);
             this.groupBox1.Controls.Add(this.txtLName);
@@ -85,25 +86,25 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.lblFirstName);
             this.groupBox1.Controls.Add(this.lblCustomerID);
-            this.groupBox1.Controls.Add(this.btnConfirmUpdate);
-            this.groupBox1.Location = new System.Drawing.Point(523, 33);
+            this.groupBox1.Controls.Add(this.btnConfirm);
+            this.groupBox1.Location = new System.Drawing.Point(531, 78);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(364, 419);
+            this.groupBox1.Size = new System.Drawing.Size(364, 332);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
-            // btnDelete
+            // btnCancel
             // 
-            this.btnDelete.Location = new System.Drawing.Point(78, 326);
-            this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(217, 63);
-            this.btnDelete.TabIndex = 12;
-            this.btnDelete.Text = "Delete Selected Customer";
-            this.btnDelete.UseVisualStyleBackColor = true;
-            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            this.btnCancel.Location = new System.Drawing.Point(194, 267);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(150, 49);
+            this.btnCancel.TabIndex = 12;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
             // txtDate
             // 
@@ -185,24 +186,47 @@ namespace Group29_BlitzCafe
             this.lblCustomerID.TabIndex = 1;
             this.lblCustomerID.Text = "Customer ID:";
             // 
-            // btnConfirmUpdate
+            // btnConfirm
             // 
-            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 268);
-            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnConfirmUpdate.Name = "btnConfirmUpdate";
-            this.btnConfirmUpdate.Size = new System.Drawing.Size(159, 49);
-            this.btnConfirmUpdate.TabIndex = 0;
-            this.btnConfirmUpdate.Text = "Confirm Changes";
-            this.btnConfirmUpdate.UseVisualStyleBackColor = true;
-            this.btnConfirmUpdate.Click += new System.EventHandler(this.btnConfirmUpdate_Click);
+            this.btnConfirm.Location = new System.Drawing.Point(6, 267);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(159, 49);
+            this.btnConfirm.TabIndex = 0;
+            this.btnConfirm.Text = "Confirm Changes";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
+            // 
+            // btnDelete
+            // 
+            this.btnDelete.Location = new System.Drawing.Point(650, 22);
+            this.btnDelete.Name = "btnDelete";
+            this.btnDelete.Size = new System.Drawing.Size(137, 51);
+            this.btnDelete.TabIndex = 12;
+            this.btnDelete.Text = "Delete Customer";
+            this.btnDelete.UseVisualStyleBackColor = true;
+            this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
+            // 
+            // btnUpdate
+            // 
+            this.btnUpdate.Location = new System.Drawing.Point(801, 22);
+            this.btnUpdate.Name = "btnUpdate";
+            this.btnUpdate.Size = new System.Drawing.Size(129, 51);
+            this.btnUpdate.TabIndex = 13;
+            this.btnUpdate.Text = "Update Customer";
+            this.btnUpdate.UseVisualStyleBackColor = true;
+            this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
             // CustomerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 517);
+            this.ClientSize = new System.Drawing.Size(942, 475);
+            this.Controls.Add(this.btnUpdate);
+            this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dbgCustomerInfo);
+            this.Controls.Add(this.btnAddNew);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
@@ -219,7 +243,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnAddNew;
         private System.Windows.Forms.DataGridView dbgCustomerInfo;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.Button btnConfirmUpdate;
+        private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Label lblDateJoined;
         private System.Windows.Forms.Label label1;
@@ -231,5 +255,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblCustomerID;
         private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Button btnCancel;
+        private System.Windows.Forms.Button btnUpdate;
     }
 }

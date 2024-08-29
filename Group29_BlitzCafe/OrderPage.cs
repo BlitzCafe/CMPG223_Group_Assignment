@@ -15,8 +15,9 @@ namespace Group29_BlitzCafe
     public partial class OrderPage : Form
     {
         private Default defaultFrm = new Default();
-
         private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+
+        private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
 
         public OrderPage()
@@ -88,29 +89,61 @@ namespace Group29_BlitzCafe
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
         {
             string searchID = txtSearchItemID.Text;
-            lbxItemSelection.Items.Clear();
-
-            foreach(MenuItem item in itemPageFrm.menuItemList)
+            if (searchID != "")
             {
-                string itemID = item.getItemID().ToString();
-                if (itemID.Contains(searchID))
+                lbxItemSelection.Items.Clear();
+
+                foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    lbxItemSelection.Items.Add(item);
+                    string itemID = item.getItemID().ToString();
+                    if (itemID.Contains(searchID))
+                    {
+                        lbxItemSelection.Items.Add(item);
+
+                    }
 
                 }
-
             }
+            else lbxItemSelection.Items.Clear();
 
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
+            decimal totalAmount = 0.0m;
+            string itemId = txtSearchItemID.Text;
+            foreach (MenuItem item in itemPageFrm.menuItemList)
+            {
+                string itemID = item.getItemID().ToString();
+                if (itemID.Contains(itemId))
+                {
+                    receipt.Add(item);
+                    lbxReceipt.Items.Add(item.toString());
+                    totalAmount += item.getPrice();
+                }
+            }
+            txtTotalAmount.Text = totalAmount.ToString();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
+            int index = lbxItemSelection.SelectedIndex;
 
+            if (index >= 0 && index <= itemPageFrm.menuItemList.Count)
+            {
+                MenuItem selectedItem = itemPageFrm.menuItemList[index];
+
+                txtSearchDescr.Text = selectedItem.getDescr();
+                txtSearchItemID.Text = selectedItem.getItemID().ToString();
+            }
+
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
+            confirmationForm.ShowDialog();
         }
     }
 }
