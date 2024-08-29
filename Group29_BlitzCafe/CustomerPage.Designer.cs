@@ -68,7 +68,25 @@ namespace Group29_BlitzCafe
             this.btnAddNew.UseVisualStyleBackColor = true;
             this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
-         
+            // dbgCustomerInfo
+            // 
+            this.dbgCustomerInfo.AutoGenerateColumns = false;
+            this.dbgCustomerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgCustomerInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.customerIDDataGridViewTextBoxColumn,
+            this.lastNameDataGridViewTextBoxColumn,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.cellNoDataGridViewTextBoxColumn,
+            this.dateJoinedDataGridViewTextBoxColumn});
+            this.dbgCustomerInfo.DataSource = this.tblCustomerBindingSource;
+            this.dbgCustomerInfo.Location = new System.Drawing.Point(26, 27);
+            this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.dbgCustomerInfo.Name = "dbgCustomerInfo";
+            this.dbgCustomerInfo.RowHeadersWidth = 62;
+            this.dbgCustomerInfo.RowTemplate.Height = 28;
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(328, 340);
+            this.dbgCustomerInfo.TabIndex = 1;
+            this.dbgCustomerInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgCustomerInfo_CellClick);
             // 
             // customerIDDataGridViewTextBoxColumn
             // 
