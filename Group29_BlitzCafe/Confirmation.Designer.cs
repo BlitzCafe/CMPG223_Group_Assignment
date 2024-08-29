@@ -88,6 +88,7 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
+            this.Load += new System.EventHandler(this.Confirmation_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 

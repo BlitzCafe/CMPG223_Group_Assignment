@@ -18,13 +18,13 @@ namespace Group29_BlitzCafe
 
         private decimal totalAmount = 0m;
         private decimal loyaltyUsed = 0m;
-        private string customerId = "";
+        private string customerCell = "";
 
         public Confirmation(List<MenuItem> receipt, string customerId)
         {
             InitializeComponent();
             this.receipt = receipt;
-            this.customerId = customerId;
+            this.customerCell = customerId;
             loadReceipt();
         }
 
@@ -57,9 +57,9 @@ namespace Group29_BlitzCafe
                     conn.Open();
 
                     // Retrieve the current loyalty points balance
-                    string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CustomerID = @CustomerID";
+                    string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
                     SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@CustomerID", customerId);
+                    cmd.Parameters.AddWithValue("@CustomerID", customerCell);
 
                     object result = cmd.ExecuteScalar();
                     decimal currentPoints = 0;
@@ -90,10 +90,10 @@ namespace Group29_BlitzCafe
                         currentPoints = 0;
 
                         // Update loyalty points in the database to 0
-                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CustomerID = @CustomerID";
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
                         SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
                         updateCmd.Parameters.AddWithValue("@NewBalance", currentPoints);
-                        updateCmd.Parameters.AddWithValue("@CustomerID", customerId);
+                        updateCmd.Parameters.AddWithValue("@CellNo", customerCell);
                         updateCmd.ExecuteNonQuery();
                     }
                     else
@@ -105,10 +105,10 @@ namespace Group29_BlitzCafe
 
                         // Update loyalty points in the database
                         decimal newPointsBalance = currentPoints + pointsEarned;
-                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CustomerID = @CustomerID";
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
                         SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
                         updateCmd.Parameters.AddWithValue("@NewBalance", newPointsBalance);
-                        updateCmd.Parameters.AddWithValue("@CustomerID", customerId);
+                        updateCmd.Parameters.AddWithValue("@CellNo", customerCell);
                         updateCmd.ExecuteNonQuery();
                     }
                 }
@@ -129,6 +129,11 @@ namespace Group29_BlitzCafe
         private void Confirmation_Load(object sender, EventArgs e)
         {
             // laod loyalty point table
+
+        }
+
+        private void Confirmation_Load_1(object sender, EventArgs e)
+        {
 
         }
     }
