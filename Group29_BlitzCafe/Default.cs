@@ -14,7 +14,9 @@ namespace Group29_BlitzCafe
     public partial class Default : Form
     {
 
+
         public string connString = @"Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
+
         public Default()
         {
             InitializeComponent();

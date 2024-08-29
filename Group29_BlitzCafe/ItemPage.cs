@@ -10,6 +10,7 @@ using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
 
+
 namespace Group29_BlitzCafe
 {
     public partial class ItemPage : Form
@@ -61,14 +62,18 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
+
             using (conn = new SqlConnection(connString))
+
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
+r
                     string query = "SELECT ItemsID, Description, Price FROM Items";
                     cmd = new SqlCommand(query, conn);
+
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
@@ -173,9 +178,33 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    //delete item 
-                    menuItemList.Remove(removeItem);
-                    MessageBox.Show("Menu Item Succesfully deleted.");
+                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    {
+                        try
+                        {
+                            conn.Open();
+                            string query = "DELETE FROM tblItems WHERE ItemID = @ItemID";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
+
+                            cmd.ExecuteNonQuery();
+
+                            // Remove item from the list
+                            menuItemList.Remove(removeItem);
+
+                            // Refresh the data grid
+                            loadMenuItems();
+                            MessageBox.Show("Menu Item successfully deleted.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted. " + ex.Message);
+                        }
+
+                        menuItemList.Remove(removeItem);
+                        //string query = "DELETE * FROM tblItems WHERE ItemID = " + selectedItemIndex;
+                        MessageBox.Show("Menu Item Succesfully deleted.");
+                    }
                 }
                 else
                 {
@@ -197,14 +226,13 @@ namespace Group29_BlitzCafe
         {
             //sort se3lection
             int sortType = lbSort.SelectedIndex;
+
             int itemID;
             string descr;
             decimal price;
-            //DYLAN AND SINO: add sql to sort database according to criteria
-            switch (sortType)
-            {
-                case 0:
-                    lblSortHeading.Text = "Sorted by: ItemID Ascending";
+
+
+
                     conn.Open();
                     string query = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID";
                     cmd = new SqlCommand(query, conn);
@@ -229,10 +257,12 @@ namespace Group29_BlitzCafe
                         menuItemList.Add(menuItem);
                     }
                     conn.Close();
+
                     break;
 
                 case 1:
                     lblSortHeading.Text = "Sorted by: ItemID Descending";
+
                     conn.Open();
                     string query1 = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID DESC";
                     cmd = new SqlCommand(query1, conn);
@@ -257,10 +287,12 @@ namespace Group29_BlitzCafe
                         menuItemList.Add(menuItem);
                     }
                     conn.Close();
+
                     break;
 
                 case 2:
                     lblSortHeading.Text = "Sorted by: Price Ascending";
+
                     conn.Open();
                     string query2 = "SELECT ItemsID, Description, Price FROM Items ORDER BY Price";
                     cmd = new SqlCommand(query2, conn);
@@ -313,11 +345,12 @@ namespace Group29_BlitzCafe
                         menuItemList.Add(menuItem);
                     }
                     conn.Close();
-                    break;
 
+                    break;
 
                 default:
                     lblSortHeading.Text = "Sorted by: None";
+                    query = "SELECT * FROM tblItem";
                     break;
 
             }
@@ -340,6 +373,7 @@ namespace Group29_BlitzCafe
 
                     using (conn = new SqlConnection(connString))
                     {
+
                         //append new object to database DYLAN & SINO
                         conn.Open();
                         string query = "UPDATE Items SET Description = "+txtDesc.Text+", Price = "+Convert.ToDecimal(txtPrice.Text)+" WHERE ItemsID = "+Convert.ToInt32(txtItemID.Text)+"";
@@ -349,6 +383,7 @@ namespace Group29_BlitzCafe
 
                         MessageBox.Show("Item has been appended.");
                         conn.Close();
+
                     }
 
                     //call load method to refresh dbgrid and reset objects to be the same as the database
