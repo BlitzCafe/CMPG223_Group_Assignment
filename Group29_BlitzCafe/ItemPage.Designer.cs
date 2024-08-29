@@ -40,8 +40,10 @@ namespace Group29_BlitzCafe
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
-            this.btnConfirmEdit = new System.Windows.Forms.Button();
-            this.btnCancelEdit = new System.Windows.Forms.Button();
+
+            this.btnConfirm = new System.Windows.Forms.Button();
+            this.btnCancel = new System.Windows.Forms.Button();
+
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -160,37 +162,41 @@ namespace Group29_BlitzCafe
             this.btnDelete.UseVisualStyleBackColor = true;
             this.btnDelete.Click += new System.EventHandler(this.btnDelete_Click);
             // 
-            // btnConfirmEdit
+
+            // btnConfirm
             // 
-            this.btnConfirmEdit.Location = new System.Drawing.Point(598, 505);
-            this.btnConfirmEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnConfirmEdit.Name = "btnConfirmEdit";
-            this.btnConfirmEdit.Size = new System.Drawing.Size(140, 42);
-            this.btnConfirmEdit.TabIndex = 10;
-            this.btnConfirmEdit.Text = "Confirm edit";
-            this.btnConfirmEdit.UseVisualStyleBackColor = true;
-            this.btnConfirmEdit.Visible = false;
-            this.btnConfirmEdit.Click += new System.EventHandler(this.btnConfirmEdit_Click);
+            this.btnConfirm.Location = new System.Drawing.Point(510, 404);
+            this.btnConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirm.Name = "btnConfirm";
+            this.btnConfirm.Size = new System.Drawing.Size(124, 34);
+            this.btnConfirm.TabIndex = 10;
+            this.btnConfirm.Text = "Confirm";
+            this.btnConfirm.UseVisualStyleBackColor = true;
+            this.btnConfirm.Visible = false;
+            this.btnConfirm.Click += new System.EventHandler(this.btnConfirm_Click);
             // 
-            // btnCancelEdit
+            // btnCancel
             // 
-            this.btnCancelEdit.Location = new System.Drawing.Point(824, 505);
-            this.btnCancelEdit.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.btnCancelEdit.Name = "btnCancelEdit";
-            this.btnCancelEdit.Size = new System.Drawing.Size(140, 42);
-            this.btnCancelEdit.TabIndex = 11;
-            this.btnCancelEdit.Text = "Cancel edit";
-            this.btnCancelEdit.UseVisualStyleBackColor = true;
-            this.btnCancelEdit.Visible = false;
-            this.btnCancelEdit.Click += new System.EventHandler(this.btnCancelEdit_Click);
+            this.btnCancel.Location = new System.Drawing.Point(695, 404);
+            this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCancel.Name = "btnCancel";
+            this.btnCancel.Size = new System.Drawing.Size(124, 34);
+            this.btnCancel.TabIndex = 11;
+            this.btnCancel.Text = "Cancel";
+            this.btnCancel.UseVisualStyleBackColor = true;
+            this.btnCancel.Visible = false;
+            this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
+
             // 
             // ItemPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1033, 580);
-            this.Controls.Add(this.btnCancelEdit);
-            this.Controls.Add(this.btnConfirmEdit);
+
+            this.ClientSize = new System.Drawing.Size(918, 595);
+            this.Controls.Add(this.btnCancel);
+            this.Controls.Add(this.btnConfirm);
+
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnEditItem);
@@ -219,7 +225,9 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnDelete;
-        private System.Windows.Forms.Button btnConfirmEdit;
-        private System.Windows.Forms.Button btnCancelEdit;
+
+        private System.Windows.Forms.Button btnConfirm;
+        private System.Windows.Forms.Button btnCancel;
+
     }
 }

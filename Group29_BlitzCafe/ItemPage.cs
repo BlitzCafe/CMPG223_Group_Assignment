@@ -18,10 +18,9 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
-        SqlConnection conn;
-        SqlCommand cmd;
-        SqlDataAdapter adap;
-        DataSet ds;
+
+        private int choice = 0;
+
 
         public ItemPage()
         {
@@ -149,20 +148,33 @@ namespace Group29_BlitzCafe
             btnAddItem.Visible = false;
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
+            choice = 1;
 
-            btnCancelEdit.Visible = true;
-            btnConfirmEdit.Visible = true;
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
 
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
         }
 
         //delete an item from the database
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
+
             MenuItem removeItem = menuItemList[selectedItemIndex];
 
             //if the item to be removed is not zero, confirm deletion
@@ -217,67 +229,74 @@ namespace Group29_BlitzCafe
         }
 
 
+       
 
-        private void btnConfirmEdit_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            //test if item to be edited is within valid bounds
-            if (selectedItemIndex >= 0 && selectedItemIndex < menuItemList.Count())
+            switch (choice)
             {
-                //create object to represent old object
-                MenuItem originalItem = menuItemList[selectedItemIndex];
-
-                //create new object with the same ID andd the textbox variables 
-                MenuItem newItem = new MenuItem(originalItem.getItemID(), txtDesc.Text, Convert.ToDecimal(txtPrice.Text));
-
-                //use class equals method to determine if the object was changed
-                if (!originalItem.equals(newItem))
-                {
-
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                case 1:
                     {
-                        try
-                        {
-                            conn.Open();
+                        //confirm_Add();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
-                            cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
-                            cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
+                        choice = 1;
+                        addItem();
 
-                            cmd.ExecuteNonQuery();
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        //confirm_Delete();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully updated.");
+                        choice = 2;
 
-                            conn.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be updated. " + ex.Message);
-                        }
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        //confirm_Update();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        choice = 0;
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+
+                        //call load method to refresh dbgrid and reset objects to be the same as the database
+                        loadMenuItems();
+                        break;
+                    }
+                default:
+                    {
+                        break;
 
                     }
-
-                    //call load method to refresh dbgrid and reset objects to be the same as the database
-                    loadMenuItems();
-                }
-                else  //if the values are the same, display that no changes were made
-                {
-                    MessageBox.Show("No changes were made.");
-                }
+               
             }
 
             btnAddItem.Visible = true;
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnCancelEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
 
         }
 
-        private void btnConfirmAdd_Click(object sender, EventArgs e)
+        private void addItem()
         {
             //create temp variables for item attributes
             int newItemId;
@@ -288,7 +307,10 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
-            btnConfirmEdit.Visible = true;
+
+            btnConfirm.Visible = false;
+            btnConfirm.Visible = true;
+
 
             //calll validate method, if valid execute code
             if (validateInput())
@@ -333,22 +355,23 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmEdit.Visible = false;
+
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+
         }
 
-        private void btnCancelEdit_Click(object sender, EventArgs e)
+        private void btnConfirmAdd_Click(object sender, EventArgs e)
         {
-            btnAddItem.Visible = true;
-            btnDelete.Visible = true;
-            btnEditItem.Visible = true;
-
-            btnConfirmEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
-            btnCancelEdit.Visible = false;
+           
         }
 
-        private void lblSortHeading_Click(object sender, EventArgs e)
+       
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
         {
+
 
         }
     }
