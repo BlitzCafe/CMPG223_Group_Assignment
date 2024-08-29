@@ -7,7 +7,8 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
+using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
 {
@@ -17,7 +18,9 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
+
         private int choice = 0;
+
 
         public ItemPage()
         {
@@ -57,15 +60,14 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT ItemID, Descr, Price FROM tblItem";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
@@ -85,6 +87,8 @@ namespace Group29_BlitzCafe
                         // Add the MenuItem object to the list
                         menuItemList.Add(menuItem);
                     }
+
+                    conn.Close();
                 }
                 catch (Exception ex)
                 {
@@ -181,13 +185,12 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
                         try
                         {
                             conn.Open();
-                            string query = "DELETE FROM tblItem WHERE ItemID = @ItemID";
-                            MySqlCommand cmd = new MySqlCommand(query, conn);
+
                             cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
 
                             cmd.ExecuteNonQuery();
@@ -225,6 +228,7 @@ namespace Group29_BlitzCafe
 
         }
 
+
        
 
         private void btnConfirm_Click(object sender, EventArgs e)
@@ -253,6 +257,7 @@ namespace Group29_BlitzCafe
 
                         choice = 2;
 
+
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
                         btnEditItem.Visible = true;
@@ -277,6 +282,7 @@ namespace Group29_BlitzCafe
                 default:
                     {
                         break;
+
                     }
                
             }
@@ -295,28 +301,35 @@ namespace Group29_BlitzCafe
             //create temp variables for item attributes
             int newItemId;
             decimal price;
-            string desc;
+            string descr;
 
             btnAddItem.Visible = false;
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
+
             btnConfirm.Visible = false;
             btnConfirm.Visible = true;
+
 
             //calll validate method, if valid execute code
             if (validateInput())
             {
                 //assign temp values with valid user inputs
-                desc = txtDesc.Text;
+                descr = txtDesc.Text;
                 price = Convert.ToDecimal(txtPrice.Text);
 
                 //insert new item into database  DYLAN AND SINO
-                using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
                     try
                     {
+                        conn.Open();
+                        string sql = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
 
+                        cmd = new SqlCommand(sql, conn);
+                        adap.InsertCommand = cmd;
+                        adap.InsertCommand.ExecuteNonQuery();
 
                         // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
                         //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
@@ -327,6 +340,7 @@ namespace Group29_BlitzCafe
                         menuItemList.Add(newItem);
 
                         */
+                        conn.Close();
                         loadMenuItems();
                     }
                     catch (Exception ex)
@@ -341,8 +355,10 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
+
             btnConfirm.Visible = false;
             btnCancel.Visible = false;
+
         }
 
         private void btnConfirmAdd_Click(object sender, EventArgs e)
@@ -355,6 +371,7 @@ namespace Group29_BlitzCafe
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+
 
         }
     }

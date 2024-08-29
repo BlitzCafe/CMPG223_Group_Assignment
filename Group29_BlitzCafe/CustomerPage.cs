@@ -7,7 +7,6 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
-using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
 namespace Group29_BlitzCafe
@@ -22,16 +21,18 @@ namespace Group29_BlitzCafe
         //Variables
         private Default defaultFrm = new Default();
 
-        private MySqlConnection conn; 
+        private SqlConnection conn; 
 
         private List<Customer> customerList = new List<Customer>();
+
+        private int choice = 0;
 
         private int customerID;
         private string fName, lName, cellNo, sqlQuery;
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
-        private void Load_Customer_Info()
+        private void load_Customer_Info()
         {
             using (conn)
             {
@@ -39,9 +40,10 @@ namespace Group29_BlitzCafe
                 {
                     conn.Open();
 
-                    sqlQuery = " ";//SQL Goes here
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+
+                    sqlQuery = "SELECT * FROM Customer";//SQL Goes here
+                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataAdapter.Fill(dataTable);
@@ -72,100 +74,7 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void UpdateCustomerInDatabase(Customer customer)
-        {
-            using (conn)
-            {
-               
-                conn.Open();
-
-                sqlQuery = " ";//SQL Goes here
-
-                using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
-                {
-                    cmd.Parameters.AddWithValue("@CustomerID", customer.getCustomerID());
-                    cmd.Parameters.AddWithValue("@LastName",customer.getLastName());
-                    cmd.Parameters.AddWithValue("@FirstName", customer.getFirstName());
-                    cmd.Parameters.AddWithValue("@CellNo", customer.getCellNo());
-                    cmd.Parameters.AddWithValue("@Date_Joined", customer.getDateJoined());
-
-                    cmd.ExecuteNonQuery();
-                }
-
-
-            }
-        }
-
-        private void CustomerPage_Load(object sender, EventArgs e)
-        {
-            conn = new MySqlConnection(defaultFrm.connString);
-
-            Load_Customer_Info();
-
-            //Make changing ID and Date Joined impossible for user
-            txtCustID.ReadOnly = true;
-            txtDate.ReadOnly = true;
-            //Max length for any cellphone number
-            txtCellNo.MaxLength = 10;
-        }
-
-        private void dbgCustomerInfo_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-            if (e.RowIndex > 0)
-            {
-                DataGridViewRow selectedRow = dbgCustomerInfo.Rows[e.RowIndex];
-
-                txtCustID.Text = selectedRow.Cells["CustomerID"].Value.ToString();
-                txtFName.Text = selectedRow.Cells["First_Name"].Value.ToString();
-                txtLName.Text = selectedRow.Cells["Last_Name"].Value.ToString();
-                txtCellNo.Text = selectedRow.Cells["CellNo"].Value.ToString();
-                txtDate.Text = selectedRow.Cells["Date_Joined"].Value.ToString();
-            }
-        }
-
-        private void btnDelete_Click(object sender, EventArgs e)
-        {
-            if (dbgCustomerInfo.SelectedRows.Count > 0)
-            {
-                //Get the primary key of the selected row
-                int selectedID = Convert.ToInt32(dbgCustomerInfo.SelectedRows[0].Cells["CustomerID"].Value);
-
-                //Confirm deletion
-                var confirmResult = MessageBox.Show("Are you sure you want to delete this row?", "Confirm Delete", MessageBoxButtons.YesNo);
-
-                if (confirmResult == DialogResult.Yes)
-                {
-                    using (conn)
-                    {
-                        try
-                        {
-                            conn.Open();
-
-                            //Double check SQL
-                            sqlQuery = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
-
-                            using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
-                            {
-
-                            }
-
-                            conn.Close();
-
-                            Load_Customer_Info();
-
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("No row selected to delete: " + ex.Message);
-                        }
-                    }
-
-                }
-
-            }
-        }
-
-        private void btnAddNew_Click(object sender, EventArgs e)
+        private void confirm_Add()
         {
             //Add new customer to database
 
@@ -178,8 +87,7 @@ namespace Group29_BlitzCafe
             {
                 //Save info in database
                 sqlQuery = "";
-
-                Load_Customer_Info();
+                load_Customer_Info();
             }
             else
             {
@@ -187,34 +95,146 @@ namespace Group29_BlitzCafe
             }
         }
 
+        private void confirm_Delete()
+        {
 
-        private void btnConfirmUpdate_Click(object sender, EventArgs e)
+        }
+
+        private void confirm_Update()
         {
             if (dbgCustomerInfo.SelectedRows.Count > 0)
             {
                 if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
                 {
-                    //Get the primary key of the selected row
-                    int selectedID = Convert.ToInt32(dbgCustomerInfo.SelectedRows[0].Cells["CustomerID"].Value);
 
-                    string fName = txtFName.Text, lName = txtLName.Text, cellNo = txtCellNo.Text;
-
-                    if (DateTime.TryParse(txtDate.Text, out DateTime parsedDate))
-                    {
-                        Customer customer = new Customer(selectedID, lName, fName, cellNo, parsedDate);
-
-                        UpdateCustomerInDatabase(customer);
-
-                        Load_Customer_Info();
-
-                        MessageBox.Show("Customer Updated successfully");
-                    }
                 }
                 else
                 {
                     MessageBox.Show("Please make sure all info is entered and correct.");
                 }
             }
+        }
+
+        private void CustomerPage_Load(object sender, EventArgs e)
+        {
+            conn = new SqlConnection(defaultFrm.connString);
+
+            load_Customer_Info();
+
+            //Make changing ID and Date Joined impossible for user
+            txtCustID.ReadOnly = true;
+            txtDate.ReadOnly = true;
+
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+
+            //Max length for any cellphone number
+            txtCellNo.MaxLength = 10;
+        }
+
+        private void dbgCustomerInfo_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+        }
+
+        
+
+        private void btnConfirm_Click(object sender, EventArgs e)
+        {
+            switch (choice)
+            {
+                case 1:
+                    {
+                        //confirm_Add();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        choice = 0;
+
+                        btnUpdate.Visible = true;
+                        btnDelete.Visible = true;
+                        btnAddNew.Visible = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        //confirm_Delete();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        choice = 0;
+
+                        btnUpdate.Visible = true;
+                        btnDelete.Visible = true;
+                        btnAddNew.Visible = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        //confirm_Update();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        choice = 0;
+
+                        btnUpdate.Visible = true;
+                        btnDelete.Visible = true;
+                        btnAddNew.Visible = true;
+                        break;
+                    }
+                default:
+                    {
+                        break;
+                    }
+            }
+        }
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+
+            choice = 0;
+
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+            btnAddNew.Visible = true;
+        }
+
+        private void btnUpdate_Click(object sender, EventArgs e)
+        {
+                btnConfirm.Visible = true;
+                btnCancel.Visible = true;
+
+                choice = 3;
+
+                btnUpdate.Visible = false;
+                btnDelete.Visible = false;
+                btnAddNew.Visible = false;
+        }
+
+        private void btnDelete_Click(object sender, EventArgs e)
+        {
+            btnConfirm.Visible = true;
+            btnCancel.Visible = true;
+
+            choice = 2;
+
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            btnAddNew.Visible = false;
+        }
+
+        private void btnAddNew_Click(object sender, EventArgs e)
+        {
+            btnConfirm.Visible = true;
+            btnCancel.Visible = true;
+
+            choice = 1;
+
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            btnAddNew.Visible = false;
         }
     }
 }
