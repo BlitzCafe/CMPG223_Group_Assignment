@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
 using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
@@ -61,14 +61,13 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (conn = new SqlConnection(defaultFrm.connString))
+
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT * FROM Items";
-                    cmd = new SqlCommand(query, conn);
+
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
@@ -179,8 +178,7 @@ namespace Group29_BlitzCafe
                         try
                         {
                             conn.Open();
-                            string query = "DELETE FROM Items WHERE ItemsID = @ItemID";
-                            cmd = new SqlCommand(query, conn);
+
                             cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
 
                             cmd.ExecuteNonQuery();
@@ -219,6 +217,7 @@ namespace Group29_BlitzCafe
         }
 
 
+
         private void btnConfirmEdit_Click(object sender, EventArgs e)
         {
             //test if item to be edited is within valid bounds
@@ -239,7 +238,7 @@ namespace Group29_BlitzCafe
                         try
                         {
                             conn.Open();
-                            string query = "UPDATE Items SET Description = @Descr, Price = @Price WHERE ItemsID = @ItemID";
+
                             SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
                             cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
@@ -289,7 +288,6 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = true;
 
             //calll validate method, if valid execute code
@@ -335,7 +333,6 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = false;
         }
 
@@ -345,9 +342,14 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = false;
             btnConfirmEdit.Visible = false;
+            btnCancelEdit.Visible = false;
+        }
+
+        private void lblSortHeading_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
