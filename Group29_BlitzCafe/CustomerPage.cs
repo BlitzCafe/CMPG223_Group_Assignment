@@ -10,6 +10,7 @@ using System.Data.SqlClient;
 using MySql.Data.MySqlClient;
 using System.Windows.Forms;
 
+
 namespace Group29_BlitzCafe
 {
     public partial class CustomerPage : Form
@@ -22,7 +23,7 @@ namespace Group29_BlitzCafe
         //Variables
         private Default defaultFrm = new Default();
 
-        private MySqlConnection conn; 
+        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzCafeDatabase;User ID=admin;Password=12345678";
 
         private List<Customer> customerList = new List<Customer>();
 
@@ -33,20 +34,18 @@ namespace Group29_BlitzCafe
         //Load from info from database
         private void Load_Customer_Info()
         {
-            using (conn)
+            using (SqlConnection conn = new SqlConnection(connString))
             {
                 try
                 {
                     conn.Open();
-
-                    sqlQuery = " ";//SQL Goes here
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    sqlQuery = "SELECT * FROM tblCustomer";//SQL Goes here
+                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-                    dataAdapter.Fill(dataTable);
+                    dataAdapter.Fill(dataTable); // Fill the DataTable once
 
-                    dbgCustomerInfo.DataSource = dataTable;
+                    dbgCustomerInfo.DataSource = dataTable; // Bind the DataTable to the DataGridView
 
                     //Reading data into List
                     foreach (DataRow row in dataTable.Rows)
@@ -74,14 +73,14 @@ namespace Group29_BlitzCafe
 
         private void UpdateCustomerInDatabase(Customer customer)
         {
-            using (conn)
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                
                 conn.Open();
 
                 sqlQuery = " ";//SQL Goes here
 
-                using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery,conn))
                 {
                     cmd.Parameters.AddWithValue("@CustomerID", customer.getCustomerID());
                     cmd.Parameters.AddWithValue("@LastName",customer.getLastName());
@@ -98,15 +97,19 @@ namespace Group29_BlitzCafe
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
-            conn = new MySqlConnection(defaultFrm.connString);
+            // TODO: This line of code loads data into the '_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.tblCustomer' table. You can move, or remove it, as needed.
+            //this.tblCustomerTableAdapter.Fill(this.BLITZCAFEDATA.tblCustomer);
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
 
-            Load_Customer_Info();
+                Load_Customer_Info();
 
-            //Make changing ID and Date Joined impossible for user
-            txtCustID.ReadOnly = true;
-            txtDate.ReadOnly = true;
-            //Max length for any cellphone number
-            txtCellNo.MaxLength = 10;
+                //Make changing ID and Date Joined impossible for user
+                txtCustID.ReadOnly = true;
+                txtDate.ReadOnly = true;
+                //Max length for any cellphone number
+                txtCellNo.MaxLength = 10;
+            }
         }
 
         private void dbgCustomerInfo_CellClick(object sender, DataGridViewCellEventArgs e)
@@ -135,7 +138,7 @@ namespace Group29_BlitzCafe
 
                 if (confirmResult == DialogResult.Yes)
                 {
-                    using (conn)
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
                         try
                         {
@@ -144,7 +147,7 @@ namespace Group29_BlitzCafe
                             //Double check SQL
                             sqlQuery = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
 
-                            using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                            using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                             {
 
                             }
