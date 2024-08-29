@@ -98,7 +98,7 @@ namespace Group29_BlitzCafe
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
-            conn = new MySqlConnection(defaultFrm.connString);
+            conn = new SqlConnection(defaultFrm.connString);
 
             Load_Customer_Info();
 
@@ -144,7 +144,7 @@ namespace Group29_BlitzCafe
                             //Double check SQL
                             sqlQuery = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
 
-                            using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                            using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                             {
 
                             }
