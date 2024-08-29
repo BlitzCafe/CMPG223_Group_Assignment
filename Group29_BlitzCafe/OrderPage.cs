@@ -71,11 +71,6 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void OrderPage_Load(object sender, EventArgs e)
         {
             
@@ -144,6 +139,16 @@ namespace Group29_BlitzCafe
         {
             Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
             confirmationForm.ShowDialog();
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
