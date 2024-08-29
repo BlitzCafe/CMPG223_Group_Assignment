@@ -40,7 +40,8 @@ namespace Group29_BlitzCafe
                 {
                     conn.Open();
 
-                    sqlQuery = " ";//SQL Goes here
+
+                    sqlQuery = "SELECT * FROM Customer";//SQL Goes here
                     SqlCommand cmd = new SqlCommand(sqlQuery, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -86,7 +87,6 @@ namespace Group29_BlitzCafe
             {
                 //Save info in database
                 sqlQuery = "";
-
                 load_Customer_Info();
             }
             else
