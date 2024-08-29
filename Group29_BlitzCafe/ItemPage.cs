@@ -19,10 +19,6 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
-        public string connString = @"Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
-        SqlDataAdapter adap;
-        SqlConnection conn;
-        SqlCommand cmd;
 
         public ItemPage()
         {
@@ -62,17 +58,17 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-
-            using (conn = new SqlConnection(connString))
-
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
 
+
                     string query = "SELECT ItemsID, Description, Price FROM Items";
                     cmd = new SqlCommand(query, conn);
+
 
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -84,8 +80,8 @@ namespace Group29_BlitzCafe
                     //create objects for each line in the dbgrid
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        itemID = Convert.ToInt32(row["ItemsID"]);
-                        descr = row["Description"].ToString();
+                        itemID = Convert.ToInt32(row["ItemID"]);
+                        descr = row["Descr"].ToString();
                         price = Convert.ToDecimal(row["Price"]);
 
                         // Create a new MenuItem object using the data
@@ -94,11 +90,10 @@ namespace Group29_BlitzCafe
                         // Add the MenuItem object to the list
                         menuItemList.Add(menuItem);
                     }
-                    conn.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED " + ex.Message);
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
                 }
             }
 
@@ -113,7 +108,7 @@ namespace Group29_BlitzCafe
                 int selectedID;
                 DataGridViewRow currentRow = dbgMenuItems.Rows[e.RowIndex];
                 //determine selected items ID
-                selectedID = Convert.ToInt32(currentRow.Cells["ItemsID"].Value);
+                selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
 
                 //initialize the index variable
                 selectedItemIndex = 0;
@@ -227,13 +222,37 @@ namespace Group29_BlitzCafe
             //sort se3lection
             int sortType = lbSort.SelectedIndex;
 
-            int itemID;
-            string descr;
-            decimal price;
+            String query = "";
+            //DYLAN AND SINO: add sql to sort database according to criteria
+            switch (sortType)
+            {
+                case 0:
+                    lblSortHeading.Text = "Sorted by: ItemID Ascending";
+                    query = "SELECT * FROM tblItems SORT BY ItemID";
+                    break;
 
+                case 1:
+                    lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    query = "SELECT * FROM tblItems SORY BY ItemID DESC";
+                    break;
 
+                case 2:
+                    lblSortHeading.Text = "Sorted by: Price Ascending";
+                    query = "SELECT * FROM tblItems ORDER BY Price ASC";
+                    break;
 
-                  
+                case 3:
+                    lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    query = "SELECT * FROM tblItems ORDER BY Price DESC";
+                    break;
+
+                default:
+                    lblSortHeading.Text = "Sorted by: None";
+                    query = "SELECT * FROM tblItem";
+                    break;
+
+            }
+
         }
 
         private void btnConfirmEdit_Click(object sender, EventArgs e)
@@ -251,19 +270,27 @@ namespace Group29_BlitzCafe
                 if (!originalItem.equals(newItem))
                 {
 
-                    using (conn = new SqlConnection(connString))
+                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
                     {
+                        try
+                        {
+                            conn.Open();
+                            string query = "UPDATE tblItems SET Descr = @Descr, Price = @Price WHERE ItemID = @ItemID";
+                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
+                            cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
+                            cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
 
-                        //append new object to database DYLAN & SINO
-                        conn.Open();
-                        string query = "UPDATE Items SET Description = "+txtDesc.Text+", Price = "+Convert.ToDecimal(txtPrice.Text)+" WHERE ItemsID = "+Convert.ToInt32(txtItemID.Text)+"";
-                        cmd = new SqlCommand(query, conn);
-                        adap.UpdateCommand = cmd;
-                        adap.UpdateCommand.ExecuteNonQuery();
+                            cmd.ExecuteNonQuery();
 
-                        MessageBox.Show("Item has been appended.");
-                        conn.Close();
-
+                            // Refresh the data grid
+                            loadMenuItems();
+                            MessageBox.Show("Menu Item successfully updated.");
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be updated. " + ex.Message);
+                        }
                     }
 
                     //call load method to refresh dbgrid and reset objects to be the same as the database
@@ -306,18 +333,11 @@ namespace Group29_BlitzCafe
                 price = Convert.ToDecimal(txtPrice.Text);
 
                 //insert new item into database  DYLAN AND SINO
-                using (SqlConnection conn = new SqlConnection(connString))
+                using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
                 {
                     try
                     {
-                        conn.Open();
-                        string query = "INSERT INTO Items VALUES ("+desc+", '"+price+"')";
-                        cmd = new SqlCommand(query, conn);
-                        adap.InsertCommand = cmd;
-                        adap.InsertCommand.ExecuteNonQuery();
 
-                        MessageBox.Show("Item has been added.");
-                        conn.Close();
 
                         // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
                         //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
