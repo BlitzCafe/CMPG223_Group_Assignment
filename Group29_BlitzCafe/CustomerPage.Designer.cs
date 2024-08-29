@@ -29,8 +29,16 @@ namespace Group29_BlitzCafe
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.btnAddNew = new System.Windows.Forms.Button();
             this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
+            this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cellNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateJoinedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tblCustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.BLITZCAFEDATA = new Group29_BlitzCafe._C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnDelete = new System.Windows.Forms.Button();
             this.txtDate = new System.Windows.Forms.TextBox();
@@ -44,16 +52,19 @@ namespace Group29_BlitzCafe
             this.lblFirstName = new System.Windows.Forms.Label();
             this.lblCustomerID = new System.Windows.Forms.Label();
             this.btnConfirmUpdate = new System.Windows.Forms.Button();
+            this.tblCustomerTableAdapter = new Group29_BlitzCafe._C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSetTableAdapters.tblCustomerTableAdapter();
             ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblCustomerBindingSource)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BLITZCAFEDATA)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
             // btnAddNew
             // 
-            this.btnAddNew.Location = new System.Drawing.Point(6, 270);
-            this.btnAddNew.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnAddNew.Location = new System.Drawing.Point(4, 219);
+            this.btnAddNew.Margin = new System.Windows.Forms.Padding(2);
             this.btnAddNew.Name = "btnAddNew";
-            this.btnAddNew.Size = new System.Drawing.Size(173, 51);
+            this.btnAddNew.Size = new System.Drawing.Size(130, 41);
             this.btnAddNew.TabIndex = 0;
             this.btnAddNew.Text = "Add New Customer";
             this.btnAddNew.UseVisualStyleBackColor = true;
@@ -61,15 +72,63 @@ namespace Group29_BlitzCafe
             // 
             // dbgCustomerInfo
             // 
+            this.dbgCustomerInfo.AutoGenerateColumns = false;
             this.dbgCustomerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgCustomerInfo.Location = new System.Drawing.Point(35, 33);
-            this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dbgCustomerInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.customerIDDataGridViewTextBoxColumn,
+            this.lastNameDataGridViewTextBoxColumn,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.cellNoDataGridViewTextBoxColumn,
+            this.dateJoinedDataGridViewTextBoxColumn});
+            this.dbgCustomerInfo.DataSource = this.tblCustomerBindingSource;
+            this.dbgCustomerInfo.Location = new System.Drawing.Point(26, 27);
+            this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(2);
             this.dbgCustomerInfo.Name = "dbgCustomerInfo";
             this.dbgCustomerInfo.RowHeadersWidth = 62;
             this.dbgCustomerInfo.RowTemplate.Height = 28;
-            this.dbgCustomerInfo.Size = new System.Drawing.Size(438, 419);
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(328, 340);
             this.dbgCustomerInfo.TabIndex = 1;
             this.dbgCustomerInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgCustomerInfo_CellClick);
+            // 
+            // customerIDDataGridViewTextBoxColumn
+            // 
+            this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "CustomerID";
+            this.customerIDDataGridViewTextBoxColumn.HeaderText = "CustomerID";
+            this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
+            // 
+            // lastNameDataGridViewTextBoxColumn
+            // 
+            this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "Last_Name";
+            this.lastNameDataGridViewTextBoxColumn.HeaderText = "Last_Name";
+            this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "First_Name";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "First_Name";
+            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            // 
+            // cellNoDataGridViewTextBoxColumn
+            // 
+            this.cellNoDataGridViewTextBoxColumn.DataPropertyName = "CellNo";
+            this.cellNoDataGridViewTextBoxColumn.HeaderText = "CellNo";
+            this.cellNoDataGridViewTextBoxColumn.Name = "cellNoDataGridViewTextBoxColumn";
+            // 
+            // dateJoinedDataGridViewTextBoxColumn
+            // 
+            this.dateJoinedDataGridViewTextBoxColumn.DataPropertyName = "Date_Joined";
+            this.dateJoinedDataGridViewTextBoxColumn.HeaderText = "Date_Joined";
+            this.dateJoinedDataGridViewTextBoxColumn.Name = "dateJoinedDataGridViewTextBoxColumn";
+            // 
+            // tblCustomerBindingSource
+            // 
+            this.tblCustomerBindingSource.DataMember = "tblCustomer";
+            this.tblCustomerBindingSource.DataSource = this.BLITZCAFEDATA;
+            // 
+            // BLITZCAFEDATA
+            // 
+            this.BLITZCAFEDATA.DataSetName = "BLITZACAFEDATA";
+            this.BLITZCAFEDATA.SchemaSerializationMode = System.Data.SchemaSerializationMode.IncludeSchema;
             // 
             // groupBox1
             // 
@@ -86,20 +145,21 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.lblFirstName);
             this.groupBox1.Controls.Add(this.lblCustomerID);
             this.groupBox1.Controls.Add(this.btnConfirmUpdate);
-            this.groupBox1.Location = new System.Drawing.Point(523, 33);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.groupBox1.Location = new System.Drawing.Point(392, 27);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(364, 419);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
+            this.groupBox1.Size = new System.Drawing.Size(273, 340);
             this.groupBox1.TabIndex = 2;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(78, 326);
+            this.btnDelete.Location = new System.Drawing.Point(58, 265);
+            this.btnDelete.Margin = new System.Windows.Forms.Padding(2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(217, 63);
+            this.btnDelete.Size = new System.Drawing.Size(163, 51);
             this.btnDelete.TabIndex = 12;
             this.btnDelete.Text = "Delete Selected Customer";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -107,107 +167,123 @@ namespace Group29_BlitzCafe
             // 
             // txtDate
             // 
-            this.txtDate.Location = new System.Drawing.Point(178, 221);
+            this.txtDate.Location = new System.Drawing.Point(134, 180);
+            this.txtDate.Margin = new System.Windows.Forms.Padding(2);
             this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(100, 22);
+            this.txtDate.Size = new System.Drawing.Size(76, 20);
             this.txtDate.TabIndex = 11;
             // 
             // lblDateJoined
             // 
             this.lblDateJoined.AutoSize = true;
-            this.lblDateJoined.Location = new System.Drawing.Point(18, 224);
+            this.lblDateJoined.Location = new System.Drawing.Point(14, 182);
+            this.lblDateJoined.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblDateJoined.Name = "lblDateJoined";
-            this.lblDateJoined.Size = new System.Drawing.Size(92, 17);
+            this.lblDateJoined.Size = new System.Drawing.Size(70, 13);
             this.lblDateJoined.TabIndex = 10;
             this.lblDateJoined.Text = "Date Joined: ";
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(18, 170);
+            this.label1.Location = new System.Drawing.Point(14, 138);
+            this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(101, 17);
+            this.label1.Size = new System.Drawing.Size(77, 13);
             this.label1.TabIndex = 8;
             this.label1.Text = "Cellphone No.:";
             // 
             // txtCellNo
             // 
-            this.txtCellNo.Location = new System.Drawing.Point(178, 167);
+            this.txtCellNo.Location = new System.Drawing.Point(134, 136);
+            this.txtCellNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCellNo.Name = "txtCellNo";
-            this.txtCellNo.Size = new System.Drawing.Size(100, 22);
+            this.txtCellNo.Size = new System.Drawing.Size(76, 20);
             this.txtCellNo.TabIndex = 7;
             // 
             // txtLName
             // 
-            this.txtLName.Location = new System.Drawing.Point(178, 118);
+            this.txtLName.Location = new System.Drawing.Point(134, 96);
+            this.txtLName.Margin = new System.Windows.Forms.Padding(2);
             this.txtLName.Name = "txtLName";
-            this.txtLName.Size = new System.Drawing.Size(100, 22);
+            this.txtLName.Size = new System.Drawing.Size(76, 20);
             this.txtLName.TabIndex = 6;
             // 
             // txtFName
             // 
-            this.txtFName.Location = new System.Drawing.Point(178, 73);
+            this.txtFName.Location = new System.Drawing.Point(134, 59);
+            this.txtFName.Margin = new System.Windows.Forms.Padding(2);
             this.txtFName.Name = "txtFName";
-            this.txtFName.Size = new System.Drawing.Size(100, 22);
+            this.txtFName.Size = new System.Drawing.Size(76, 20);
             this.txtFName.TabIndex = 5;
             // 
             // txtCustID
             // 
-            this.txtCustID.Location = new System.Drawing.Point(178, 33);
+            this.txtCustID.Location = new System.Drawing.Point(134, 27);
+            this.txtCustID.Margin = new System.Windows.Forms.Padding(2);
             this.txtCustID.Name = "txtCustID";
-            this.txtCustID.Size = new System.Drawing.Size(100, 22);
+            this.txtCustID.Size = new System.Drawing.Size(76, 20);
             this.txtCustID.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(18, 121);
+            this.label3.Location = new System.Drawing.Point(14, 98);
+            this.label3.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(80, 17);
+            this.label3.Size = new System.Drawing.Size(61, 13);
             this.label3.TabIndex = 3;
             this.label3.Text = "Last Name:";
             // 
             // lblFirstName
             // 
             this.lblFirstName.AutoSize = true;
-            this.lblFirstName.Location = new System.Drawing.Point(18, 76);
+            this.lblFirstName.Location = new System.Drawing.Point(14, 62);
+            this.lblFirstName.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblFirstName.Name = "lblFirstName";
-            this.lblFirstName.Size = new System.Drawing.Size(80, 17);
+            this.lblFirstName.Size = new System.Drawing.Size(60, 13);
             this.lblFirstName.TabIndex = 2;
             this.lblFirstName.Text = "First Name:";
             // 
             // lblCustomerID
             // 
             this.lblCustomerID.AutoSize = true;
-            this.lblCustomerID.Location = new System.Drawing.Point(18, 36);
+            this.lblCustomerID.Location = new System.Drawing.Point(14, 29);
+            this.lblCustomerID.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblCustomerID.Name = "lblCustomerID";
-            this.lblCustomerID.Size = new System.Drawing.Size(89, 17);
+            this.lblCustomerID.Size = new System.Drawing.Size(68, 13);
             this.lblCustomerID.TabIndex = 1;
             this.lblCustomerID.Text = "Customer ID:";
             // 
             // btnConfirmUpdate
             // 
-            this.btnConfirmUpdate.Location = new System.Drawing.Point(199, 268);
-            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnConfirmUpdate.Location = new System.Drawing.Point(149, 218);
+            this.btnConfirmUpdate.Margin = new System.Windows.Forms.Padding(2);
             this.btnConfirmUpdate.Name = "btnConfirmUpdate";
-            this.btnConfirmUpdate.Size = new System.Drawing.Size(159, 49);
+            this.btnConfirmUpdate.Size = new System.Drawing.Size(119, 40);
             this.btnConfirmUpdate.TabIndex = 0;
             this.btnConfirmUpdate.Text = "Confirm Changes";
             this.btnConfirmUpdate.UseVisualStyleBackColor = true;
             this.btnConfirmUpdate.Click += new System.EventHandler(this.btnConfirmUpdate_Click);
             // 
+            // tblCustomerTableAdapter
+            // 
+            this.tblCustomerTableAdapter.ClearBeforeFill = true;
+            // 
             // CustomerPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(942, 517);
+            this.ClientSize = new System.Drawing.Size(706, 420);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dbgCustomerInfo);
-            this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.Margin = new System.Windows.Forms.Padding(2);
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
             this.Load += new System.EventHandler(this.CustomerPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblCustomerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BLITZCAFEDATA)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -217,7 +293,6 @@ namespace Group29_BlitzCafe
         #endregion
 
         private System.Windows.Forms.Button btnAddNew;
-        private System.Windows.Forms.DataGridView dbgCustomerInfo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnConfirmUpdate;
         private System.Windows.Forms.TextBox txtDate;
@@ -231,5 +306,14 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblCustomerID;
         private System.Windows.Forms.Button btnDelete;
+        private _C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet BLITZCAFEDATA;
+        private System.Windows.Forms.BindingSource tblCustomerBindingSource;
+        private _C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSetTableAdapters.tblCustomerTableAdapter tblCustomerTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cellNoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateJoinedDataGridViewTextBoxColumn;
+        public System.Windows.Forms.DataGridView dbgCustomerInfo;
     }
 }

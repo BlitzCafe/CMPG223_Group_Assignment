@@ -145,6 +145,21 @@
     <Compile Include="Reports.Designer.cs">
       <DependentUpon>Reports.cs</DependentUpon>
     </Compile>
+    <Compile Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xsd</DependentUpon>
+    </Compile>
+    <Compile Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xsd</DependentUpon>
+    </Compile>
     <EmbeddedResource Include="Confirmation.resx">
       <DependentUpon>Confirmation.cs</DependentUpon>
     </EmbeddedResource>
@@ -179,6 +194,39 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xsc">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xss">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet.xsd</DependentUpon>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xsc">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xss">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet1.xsd</DependentUpon>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xsc">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xsd</DependentUpon>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xsd">
+      <Generator>MSDataSetGenerator</Generator>
+      <LastGenOutput>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.Designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xss">
+      <DependentUpon>_C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet2.xsd</DependentUpon>
+    </None>
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

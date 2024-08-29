@@ -8,6 +8,8 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
+
 
 namespace Group29_BlitzCafe
 {
@@ -56,15 +58,15 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT ItemID, Descr, Price FROM tblItem";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    string query = "SELECT ItemID, Descr, Price FROM tblItems";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
@@ -172,7 +174,7 @@ namespace Group29_BlitzCafe
                         try
                         {
                             conn.Open();
-                            string query = "DELETE FROM tblItem WHERE ItemID = @ItemID";
+                            string query = "DELETE FROM tblItems WHERE ItemID = @ItemID";
                             MySqlCommand cmd = new MySqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
 
@@ -191,7 +193,7 @@ namespace Group29_BlitzCafe
                         }
 
                         menuItemList.Remove(removeItem);
-                        //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
+                        //string query = "DELETE * FROM tblItems WHERE ItemID = " + selectedItemIndex;
                         MessageBox.Show("Menu Item Succesfully deleted.");
                     }
                 }
@@ -231,12 +233,12 @@ namespace Group29_BlitzCafe
 
                 case 2:
                     lblSortHeading.Text = "Sorted by: Price Ascending";
-                    query = "SELECT * FROM tblItem ORDER BY Price ASC";
+                    query = "SELECT * FROM tblItems ORDER BY Price ASC";
                     break;
 
                 case 3:
                     lblSortHeading.Text = "Sorted by: ItemID Descending";
-                    query = "SELECT * FROM tblItem ORDER BY Price DESC";
+                    query = "SELECT * FROM tblItems ORDER BY Price DESC";
                     break;
 
                 default:
@@ -267,7 +269,7 @@ namespace Group29_BlitzCafe
                         try
                         {
                             conn.Open();
-                            string query = "UPDATE tblItem SET Descr = @Descr, Price = @Price WHERE ItemID = @ItemID";
+                            string query = "UPDATE tblItems SET Descr = @Descr, Price = @Price WHERE ItemID = @ItemID";
                             MySqlCommand cmd = new MySqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
                             cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
