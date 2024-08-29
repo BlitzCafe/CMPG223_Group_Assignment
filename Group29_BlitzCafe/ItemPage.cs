@@ -62,13 +62,15 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
+            using (conn = new SqlConnection(defaultFrm.connString))
 
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
-
+                    string query = "SELECT ItemID, Description, Price FROM Items";
+                    cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
