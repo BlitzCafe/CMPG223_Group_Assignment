@@ -176,7 +176,7 @@ namespace Group29_BlitzCafe
                             btnDelete.Visible = true;
                             btnAddNew.Visible = true;
                             break;
-                        }
+                        
                     }
                 case 3:
                     {
