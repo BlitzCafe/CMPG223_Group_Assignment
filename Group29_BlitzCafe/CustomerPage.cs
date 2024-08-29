@@ -22,7 +22,8 @@ namespace Group29_BlitzCafe
         //Variables
         private Default defaultFrm = new Default();
 
-        private MySqlConnection conn; 
+        private SqlConnection conn;
+        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
 
         private List<Customer> customerList = new List<Customer>();
 
@@ -38,10 +39,9 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-
-                    sqlQuery = " ";//SQL Goes here
-                    MySqlCommand cmd = new MySqlCommand(sqlQuery, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    sqlQuery = "SELECT * FROM Customer";//SQL Goes here
+                    SqlCommand cmd = new SqlCommand(sqlQuery, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
                     dataAdapter.Fill(dataTable);
@@ -81,7 +81,7 @@ namespace Group29_BlitzCafe
 
                 sqlQuery = " ";//SQL Goes here
 
-                using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                 {
                     cmd.Parameters.AddWithValue("@CustomerID", customer.getCustomerID());
                     cmd.Parameters.AddWithValue("@LastName",customer.getLastName());
@@ -98,7 +98,7 @@ namespace Group29_BlitzCafe
 
         private void CustomerPage_Load(object sender, EventArgs e)
         {
-            conn = new MySqlConnection(defaultFrm.connString);
+            conn = new SqlConnection(connString);
 
             Load_Customer_Info();
 
@@ -144,7 +144,7 @@ namespace Group29_BlitzCafe
                             //Double check SQL
                             sqlQuery = "DELETE FROM Customer WHERE CustomerID = @CustomerID";
 
-                            using (MySqlCommand cmd = new MySqlCommand(sqlQuery, conn))
+                            using (SqlCommand cmd = new SqlCommand(sqlQuery, conn))
                             {
 
                             }
