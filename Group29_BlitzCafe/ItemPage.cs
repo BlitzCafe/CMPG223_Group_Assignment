@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
 {
@@ -17,6 +18,10 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
+        public string connString = @"Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
+        SqlDataAdapter adap;
+        SqlConnection conn;
+        SqlCommand cmd;
 
         public ItemPage()
         {
@@ -56,15 +61,15 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+            using (conn = new SqlConnection(connString))
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT ItemID, Descr, Price FROM Item";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    string query = "SELECT ItemsID, Description, Price FROM Items";
+                    cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
@@ -74,8 +79,8 @@ namespace Group29_BlitzCafe
                     //create objects for each line in the dbgrid
                     foreach (DataRow row in dataTable.Rows)
                     {
-                        itemID = Convert.ToInt32(row["ItemID"]);
-                        descr = row["Descr"].ToString();
+                        itemID = Convert.ToInt32(row["ItemsID"]);
+                        descr = row["Description"].ToString();
                         price = Convert.ToDecimal(row["Price"]);
 
                         // Create a new MenuItem object using the data
@@ -84,10 +89,11 @@ namespace Group29_BlitzCafe
                         // Add the MenuItem object to the list
                         menuItemList.Add(menuItem);
                     }
+                    conn.Close();
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED " + ex.Message);
                 }
             }
 
@@ -102,7 +108,7 @@ namespace Group29_BlitzCafe
                 int selectedID;
                 DataGridViewRow currentRow = dbgMenuItems.Rows[e.RowIndex];
                 //determine selected items ID
-                selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
+                selectedID = Convert.ToInt32(currentRow.Cells["ItemsID"].Value);
 
                 //initialize the index variable
                 selectedItemIndex = 0;
@@ -191,27 +197,122 @@ namespace Group29_BlitzCafe
         {
             //sort se3lection
             int sortType = lbSort.SelectedIndex;
-
+            int itemID;
+            string descr;
+            decimal price;
             //DYLAN AND SINO: add sql to sort database according to criteria
             switch (sortType)
             {
                 case 0:
                     lblSortHeading.Text = "Sorted by: ItemID Ascending";
+                    conn.Open();
+                    string query = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID";
+                    cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
 
+                    // Bind the DataGridView to the DataTable
+                    dbgMenuItems.DataSource = dataTable;
+
+                    //create objects for each line in the dbgrid
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        itemID = Convert.ToInt32(row["ItemsID"]);
+                        descr = row["Description"].ToString();
+                        price = Convert.ToDecimal(row["Price"]);
+
+                        // Create a new MenuItem object using the data
+                        MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                        // Add the MenuItem object to the list
+                        menuItemList.Add(menuItem);
+                    }
+                    conn.Close();
                     break;
 
                 case 1:
                     lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    conn.Open();
+                    string query1 = "SELECT ItemsID, Description, Price FROM Items ORDER BY ItemsID DESC";
+                    cmd = new SqlCommand(query1, conn);
+                    SqlDataAdapter dataAdapter1 = new SqlDataAdapter(cmd);
+                    DataTable dataTable1 = new DataTable();
+                    dataAdapter1.Fill(dataTable1);
 
+                    // Bind the DataGridView to the DataTable
+                    dbgMenuItems.DataSource = dataTable1;
+
+                    //create objects for each line in the dbgrid
+                    foreach (DataRow row in dataTable1.Rows)
+                    {
+                        itemID = Convert.ToInt32(row["ItemsID"]);
+                        descr = row["Description"].ToString();
+                        price = Convert.ToDecimal(row["Price"]);
+
+                        // Create a new MenuItem object using the data
+                        MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                        // Add the MenuItem object to the list
+                        menuItemList.Add(menuItem);
+                    }
+                    conn.Close();
                     break;
 
                 case 2:
                     lblSortHeading.Text = "Sorted by: Price Ascending";
+                    conn.Open();
+                    string query2 = "SELECT ItemsID, Description, Price FROM Items ORDER BY Price";
+                    cmd = new SqlCommand(query2, conn);
+                    SqlDataAdapter dataAdapter2 = new SqlDataAdapter(cmd);
+                    DataTable dataTable2 = new DataTable();
+                    dataAdapter2.Fill(dataTable2);
 
+                    // Bind the DataGridView to the DataTable
+                    dbgMenuItems.DataSource = dataTable2;
+
+                    //create objects for each line in the dbgrid
+                    foreach (DataRow row in dataTable2.Rows)
+                    {
+                        itemID = Convert.ToInt32(row["ItemsID"]);
+                        descr = row["Description"].ToString();
+                        price = Convert.ToDecimal(row["Price"]);
+
+                        // Create a new MenuItem object using the data
+                        MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                        // Add the MenuItem object to the list
+                        menuItemList.Add(menuItem);
+                    }
+                    conn.Close();
                     break;
 
                 case 3:
-                    lblSortHeading.Text = "Sorted by: ItemID Descending";
+                    lblSortHeading.Text = "Sorted by: Price Descending";
+                    conn.Open();
+                    string query3 = "SELECT ItemsID, Description, Price FROM Items ORDER BY Price DESC";
+                    cmd = new SqlCommand(query3, conn);
+                    SqlDataAdapter dataAdapter3 = new SqlDataAdapter(cmd);
+                    DataTable dataTable3 = new DataTable();
+                    dataAdapter3.Fill(dataTable3);
+                    
+                    // Bind the DataGridView to the DataTable
+                    dbgMenuItems.DataSource = dataTable3;
+
+                    //create objects for each line in the dbgrid
+                    foreach (DataRow row in dataTable3.Rows)
+                    {
+                        itemID = Convert.ToInt32(row["ItemsID"]);
+                        descr = row["Description"].ToString();
+                        price = Convert.ToDecimal(row["Price"]);
+
+                        // Create a new MenuItem object using the data
+                        MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                        // Add the MenuItem object to the list
+                        menuItemList.Add(menuItem);
+                    }
+                    conn.Close();
                     break;
 
 
@@ -237,9 +338,17 @@ namespace Group29_BlitzCafe
                 if (!originalItem.equals(newItem))
                 {
 
-                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    using (conn = new SqlConnection(connString))
                     {
                         //append new object to database DYLAN & SINO
+                        conn.Open();
+                        string query = "UPDATE Items SET Description = "+txtDesc.Text+", Price = "+Convert.ToDecimal(txtPrice.Text)+" WHERE ItemsID = "+Convert.ToInt32(txtItemID.Text)+"";
+                        cmd = new SqlCommand(query, conn);
+                        adap.UpdateCommand = cmd;
+                        adap.UpdateCommand.ExecuteNonQuery();
+
+                        MessageBox.Show("Item has been appended.");
+                        conn.Close();
                     }
 
                     //call load method to refresh dbgrid and reset objects to be the same as the database
@@ -282,11 +391,18 @@ namespace Group29_BlitzCafe
                 price = Convert.ToDecimal(txtPrice.Text);
 
                 //insert new item into database  DYLAN AND SINO
-                using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                using (SqlConnection conn = new SqlConnection(connString))
                 {
                     try
                     {
+                        conn.Open();
+                        string query = "INSERT INTO Items VALUES ("+desc+", '"+price+"')";
+                        cmd = new SqlCommand(query, conn);
+                        adap.InsertCommand = cmd;
+                        adap.InsertCommand.ExecuteNonQuery();
 
+                        MessageBox.Show("Item has been added.");
+                        conn.Close();
 
                         // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
                         //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  

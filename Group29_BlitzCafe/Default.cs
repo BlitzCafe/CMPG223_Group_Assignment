@@ -7,13 +7,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
 {
     public partial class Default : Form
     {
 
-        public string connString = "";
+        public string connString = @"Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
         public Default()
         {
             InitializeComponent();
