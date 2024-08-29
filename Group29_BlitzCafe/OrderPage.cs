@@ -34,7 +34,7 @@ namespace Group29_BlitzCafe
 
             int orderId;
             DateTime orderDate;
-            bool loyaltyPointsUsed, isPayed;
+            bool loyaltyPointsUsed, isPaid;
 
 
 
@@ -44,7 +44,7 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+                    string query = "SELECT OrderID, Order_Date, Is_Paid, LoyaltyPoints_Used FROM Order";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -58,11 +58,11 @@ namespace Group29_BlitzCafe
                     {
                         orderId = Convert.ToInt32(row["OrderId"]);
                         orderDate = Convert.ToDateTime(row["OrderDate"]);
-                        isPayed = Convert.ToBoolean(row["IsPayed"]);
+                        isPaid = Convert.ToBoolean(row["IsPaid"]);
                         loyaltyPointsUsed = Convert.ToBoolean(row["loyaltypointsused"]);
 
                         // Create a new Order object using the data
-                        Order order = new Order(orderId, orderDate, isPayed, loyaltyPointsUsed);
+                        Order order = new Order(orderId, orderDate, isPaid, loyaltyPointsUsed);
 
                         // Add the Order object to the list
                         orderList.Add(order);
