@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
 {
@@ -56,15 +56,15 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
                     //Dyaln and sino
                     conn.Open();
                     string query = "SELECT ItemID, Descr, Price FROM tblItem";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
@@ -167,13 +167,13 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
                         try
                         {
                             conn.Open();
                             string query = "DELETE FROM tblItem WHERE ItemID = @ItemID";
-                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
 
                             cmd.ExecuteNonQuery();
@@ -213,38 +213,7 @@ namespace Group29_BlitzCafe
 
         private void lbSort_SelectedIndexChanged(object sender, EventArgs e)
         {
-            //sort se3lection
-            int sortType = lbSort.SelectedIndex;
-            String query = "";
-            //DYLAN AND SINO: add sql to sort database according to criteria
-            switch (sortType)
-            {
-                case 0:
-                    lblSortHeading.Text = "Sorted by: ItemID Ascending";
-                    query = "SELECT * FROM tblItems SORT BY ItemID";
-                    break;
-
-                case 1:
-                    lblSortHeading.Text = "Sorted by: ItemID Descending";
-                    query = "SELECT * FROM tblItems SORY BY ItemID DESC";
-                    break;
-
-                case 2:
-                    lblSortHeading.Text = "Sorted by: Price Ascending";
-                    query = "SELECT * FROM tblItem ORDER BY Price ASC";
-                    break;
-
-                case 3:
-                    lblSortHeading.Text = "Sorted by: ItemID Descending";
-                    query = "SELECT * FROM tblItem ORDER BY Price DESC";
-                    break;
-
-                default:
-                    lblSortHeading.Text = "Sorted by: None";
-                    query = "SELECT * FROM tblItem";
-                    break;
-
-            }
+        
         }
 
         private void btnConfirmEdit_Click(object sender, EventArgs e)
@@ -262,13 +231,13 @@ namespace Group29_BlitzCafe
                 if (!originalItem.equals(newItem))
                 {
 
-                    using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
                         try
                         {
                             conn.Open();
                             string query = "UPDATE tblItem SET Descr = @Descr, Price = @Price WHERE ItemID = @ItemID";
-                            MySqlCommand cmd = new MySqlCommand(query, conn);
+                            SqlCommand cmd = new SqlCommand(query, conn);
                             cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
                             cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
                             cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
@@ -314,7 +283,6 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = true;
 
             //calll validate method, if valid execute code
@@ -325,7 +293,7 @@ namespace Group29_BlitzCafe
                 price = Convert.ToDecimal(txtPrice.Text);
 
                 //insert new item into database  DYLAN AND SINO
-                using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
                     try
                     {
@@ -354,7 +322,6 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = false;
         }
 
@@ -364,9 +331,14 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmAdd.Visible = false;
             btnConfirmEdit.Visible = false;
             btnConfirmEdit.Visible = false;
+            btnCancelEdit.Visible = false;
+        }
+
+        private void lblSortHeading_Click(object sender, EventArgs e)
+        {
+
         }
     }
 }
