@@ -31,8 +31,9 @@ namespace Group29_BlitzCafe
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(ItemPage));
             this.button2 = new System.Windows.Forms.Button();
+
             this.dbgMenuItems = new System.Windows.Forms.DataGridView();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
@@ -40,11 +41,12 @@ namespace Group29_BlitzCafe
             this.txtPrice = new System.Windows.Forms.TextBox();
             this.txtDesc = new System.Windows.Forms.TextBox();
             this.txtItemID = new System.Windows.Forms.TextBox();
+
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // button2
+            // btnEditItem
             // 
             this.button2.Location = new System.Drawing.Point(11, 321);
             this.button2.Margin = new System.Windows.Forms.Padding(2);
@@ -53,6 +55,7 @@ namespace Group29_BlitzCafe
             this.button2.TabIndex = 0;
             this.button2.Text = "Close button";
             this.button2.UseVisualStyleBackColor = true;
+
             // 
             // dbgMenuItems
             // 
@@ -64,8 +67,9 @@ namespace Group29_BlitzCafe
             this.dbgMenuItems.RowTemplate.Height = 28;
             this.dbgMenuItems.Size = new System.Drawing.Size(328, 281);
             this.dbgMenuItems.TabIndex = 4;
+            this.dbgMenuItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgMenuItems_CellContentClick);
             // 
-            // button1
+            // btnAddItem
             // 
             this.button1.Location = new System.Drawing.Point(399, 277);
             this.button1.Margin = new System.Windows.Forms.Padding(2);
@@ -85,6 +89,7 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.txtItemID);
             this.groupBox1.Location = new System.Drawing.Point(399, 36);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
+
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
             this.groupBox1.Size = new System.Drawing.Size(244, 216);
@@ -93,6 +98,7 @@ namespace Group29_BlitzCafe
             this.groupBox1.Text = "Item Details";
             // 
             // label3
+
             // 
             this.label3.AutoSize = true;
             this.label3.Location = new System.Drawing.Point(14, 160);
@@ -101,6 +107,7 @@ namespace Group29_BlitzCafe
             this.label3.Size = new System.Drawing.Size(31, 13);
             this.label3.TabIndex = 5;
             this.label3.Text = "Price";
+
             // 
             // label2
             // 
@@ -112,8 +119,9 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 4;
             this.label2.Text = "Description";
             // 
-            // label1
+            // txtDesc
             // 
+
             this.label1.AutoSize = true;
             this.label1.Location = new System.Drawing.Point(14, 47);
             this.label1.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
@@ -145,33 +153,39 @@ namespace Group29_BlitzCafe
             this.txtItemID.Name = "txtItemID";
             this.txtItemID.Size = new System.Drawing.Size(104, 20);
             this.txtItemID.TabIndex = 0;
+
             // 
             // ItemPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(688, 372);
+
             this.Controls.Add(this.groupBox1);
-            this.Controls.Add(this.button2);
+            this.Controls.Add(this.btnEditItem);
             this.Controls.Add(this.dbgMenuItems);
+
             this.Controls.Add(this.button1);
             this.DoubleBuffered = true;
             this.Margin = new System.Windows.Forms.Padding(2);
+
             this.Name = "ItemPage";
             this.Text = "ItemPage";
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
         #endregion
-        private System.Windows.Forms.Button button2;
+        private System.Windows.Forms.Button btnEditItem;
         private System.Windows.Forms.DataGridView dbgMenuItems;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnAddItem;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
@@ -179,5 +193,12 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.TextBox txtDesc;
         private System.Windows.Forms.TextBox txtItemID;
+        private System.Windows.Forms.Button btnDelete;
+        private System.Windows.Forms.Label label4;
+        private System.Windows.Forms.ListBox lbSort;
+        private System.Windows.Forms.Label lblSortHeading;
+        private System.Windows.Forms.Button btnConfirmEdit;
+        private System.Windows.Forms.Button btnCancelEdit;
+        private System.Windows.Forms.Button btnConfirmAdd;
     }
 }

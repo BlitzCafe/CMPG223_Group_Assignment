@@ -7,16 +7,21 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
+
+using System.Data.SqlClient;
+
 
 namespace Group29_BlitzCafe
 {
     public partial class OrderPage : Form
     {
         private Default defaultFrm = new Default();
+        private ItemPage itemPageFrm = new ItemPage();          //could use singleton
 
+        private List<Order> orderList = new List<Order>();
+        private List<MenuItem> receipt = new List<MenuItem>();
 
-        private List<Order> orderList = new List<Order>;
 
         public OrderPage()
         {
@@ -31,14 +36,17 @@ namespace Group29_BlitzCafe
             DateTime orderDate;
             bool loyaltyPointsUsed, isPayed;
 
-           using (MySqlConnection conn = new MySqlConnection(defaultFrm.connString))          
+
+
+           using (SqlConnection conn = new SqlConnection(defaultFrm.connString))          
+
             {
-                try 
+                try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, IsPayed, loyaltypointsused FROM Orders";
-                    MySqlCommand cmd = new MySqlCommand(query, conn);
-                    MySqlDataAdapter dataAdapter = new MySqlDataAdapter(cmd);
+                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
@@ -58,6 +66,7 @@ namespace Group29_BlitzCafe
 
                         // Add the Order object to the list
                         orderList.Add(order);
+
                     }
 
 
@@ -69,26 +78,6 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void textBox3_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void textBox5_TextChanged(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button4_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void button5_Click(object sender, EventArgs e)
-        {
-
-        }
-
         private void tabPage2_Click(object sender, EventArgs e)
         {
 
@@ -96,7 +85,7 @@ namespace Group29_BlitzCafe
 
         private void OrderPage_Load(object sender, EventArgs e)
         {
-            
+
         }
 
         private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -106,7 +95,97 @@ namespace Group29_BlitzCafe
 
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
         {
+            string searchID = txtSearchItemID.Text;
+            if (searchID != "")
+            {
+                lbxItemSelection.Items.Clear();
+
+                foreach (MenuItem item in itemPageFrm.menuItemList)
+                {
+                    string itemID = item.getItemID().ToString();
+                    if (itemID.Contains(searchID))
+                    {
+                        lbxItemSelection.Items.Add(item);
+
+                    }
+
+                }
+            }
+            else lbxItemSelection.Items.Clear();
+
+
+        }
+
+        private void btnAddItem_Click(object sender, EventArgs e)
+        {
+            decimal totalAmount = 0.0m;
+            string itemId = txtSearchItemID.Text;
+            foreach (MenuItem item in itemPageFrm.menuItemList)
+            {
+                string itemID = item.getItemID().ToString();
+                if (itemID.Contains(itemId))
+                {
+                    receipt.Add(item);
+                    lbxReceipt.Items.Add(item.toString());
+                    totalAmount += item.getPrice();
+                }
+            }
+            txtTotalAmount.Text = totalAmount.ToString();
+        }
+
+
+
+        private void txtSearchDescr_TextChanged(object sender, EventArgs e)
+        {
+            string searchDescr = txtSearchDescr.Text;
+            if (searchDescr != "")
+            {
+                lbxItemSelection.Items.Clear();
+
+                foreach (MenuItem item in itemPageFrm.menuItemList)
+                {
+                    string itemDescr = item.getDescr().ToString();
+                    if (itemDescr.Contains(searchDescr))
+                    {
+                        lbxItemSelection.Items.Add(item);
+
+                    }
+
+                }
+
+            }
+            else lbxItemSelection.Items.Clear();
+
+
+
+        }
+
+        private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = lbxItemSelection.SelectedIndex;
+
+            if (index >= 0 && index <= itemPageFrm.menuItemList.Count)
+            {
+                MenuItem selectedItem = itemPageFrm.menuItemList[index];
+
+                txtSearchDescr.Text = selectedItem.getDescr();
+                txtSearchItemID.Text = selectedItem.getItemID().ToString();
+            }
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            Confirmation confirmationForm = new Confirmation(receipt, txtCustomerID.Text);
+            confirmationForm.ShowDialog();
+
+        }
+
+        private void tabPage1_Click(object sender, EventArgs e)
+        {
 
         }
     }
 }
+            
+            
+       

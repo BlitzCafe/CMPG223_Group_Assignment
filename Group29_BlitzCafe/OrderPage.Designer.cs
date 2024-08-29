@@ -31,12 +31,15 @@ namespace Group29_BlitzCafe
         {
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
+            this.txtTotalAmount = new System.Windows.Forms.TextBox();
+            this.label7 = new System.Windows.Forms.Label();
+            this.txtSearchDescr = new System.Windows.Forms.TextBox();
             this.btnAddItem = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.txtQtyIItemOrdered = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.lbxItemSelection = new System.Windows.Forms.ListBox();
-            this.button1 = new System.Windows.Forms.Button();
+            this.btnCheckout = new System.Windows.Forms.Button();
             this.txtSearchItemID = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.lbxReceipt = new System.Windows.Forms.ListBox();
@@ -44,15 +47,15 @@ namespace Group29_BlitzCafe
             this.cbxLoyaltyPointsUsed = new System.Windows.Forms.CheckBox();
             this.cbxIsPayed = new System.Windows.Forms.CheckBox();
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
-            this.label7 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
             this.x = new System.Windows.Forms.TextBox();
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.btnEditOrder = new System.Windows.Forms.Button();
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
+            this.txtCustomerID = new System.Windows.Forms.TextBox();
+            this.label8 = new System.Windows.Forms.Label();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -67,17 +70,22 @@ namespace Group29_BlitzCafe
             this.tabControl1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(887, 464);
+            this.tabControl1.Size = new System.Drawing.Size(1215, 502);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.label8);
+            this.tabPage1.Controls.Add(this.txtCustomerID);
+            this.tabPage1.Controls.Add(this.txtTotalAmount);
+            this.tabPage1.Controls.Add(this.label7);
+            this.tabPage1.Controls.Add(this.txtSearchDescr);
             this.tabPage1.Controls.Add(this.btnAddItem);
             this.tabPage1.Controls.Add(this.label4);
             this.tabPage1.Controls.Add(this.txtQtyIItemOrdered);
             this.tabPage1.Controls.Add(this.label3);
             this.tabPage1.Controls.Add(this.lbxItemSelection);
-            this.tabPage1.Controls.Add(this.button1);
+            this.tabPage1.Controls.Add(this.btnCheckout);
             this.tabPage1.Controls.Add(this.txtSearchItemID);
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.lbxReceipt);
@@ -85,19 +93,48 @@ namespace Group29_BlitzCafe
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(879, 435);
+            this.tabPage1.Size = new System.Drawing.Size(1207, 473);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Order";
             this.tabPage1.UseVisualStyleBackColor = true;
+            this.tabPage1.Click += new System.EventHandler(this.tabPage1_Click);
+            // 
+            // txtTotalAmount
+            // 
+            this.txtTotalAmount.Location = new System.Drawing.Point(425, 392);
+            this.txtTotalAmount.Name = "txtTotalAmount";
+            this.txtTotalAmount.Size = new System.Drawing.Size(74, 22);
+            this.txtTotalAmount.TabIndex = 14;
+            this.txtTotalAmount.Text = "Total amount";
+            // 
+            // label7
+            // 
+            this.label7.AutoSize = true;
+            this.label7.Location = new System.Drawing.Point(556, 91);
+            this.label7.Name = "label7";
+            this.label7.Size = new System.Drawing.Size(195, 17);
+            this.label7.TabIndex = 13;
+            this.label7.Text = "Search Description (Optional)";
+            // 
+            // txtSearchDescr
+            // 
+            this.txtSearchDescr.Location = new System.Drawing.Point(760, 86);
+            this.txtSearchDescr.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtSearchDescr.Name = "txtSearchDescr";
+            this.txtSearchDescr.Size = new System.Drawing.Size(143, 22);
+            this.txtSearchDescr.TabIndex = 12;
+            this.txtSearchDescr.TextChanged += new System.EventHandler(this.txtSearchDescr_TextChanged);
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(592, 304);
+            this.btnAddItem.Location = new System.Drawing.Point(756, 288);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(147, 40);
+            this.btnAddItem.Size = new System.Drawing.Size(147, 39);
             this.btnAddItem.TabIndex = 11;
             this.btnAddItem.Text = "Add item to order";
             this.btnAddItem.UseVisualStyleBackColor = true;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // label4
             // 
@@ -129,34 +166,37 @@ namespace Group29_BlitzCafe
             // 
             this.lbxItemSelection.FormattingEnabled = true;
             this.lbxItemSelection.ItemHeight = 16;
-            this.lbxItemSelection.Location = new System.Drawing.Point(566, 96);
+            this.lbxItemSelection.Location = new System.Drawing.Point(559, 128);
+            this.lbxItemSelection.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxItemSelection.Name = "lbxItemSelection";
-            this.lbxItemSelection.Size = new System.Drawing.Size(252, 100);
+            this.lbxItemSelection.Size = new System.Drawing.Size(347, 100);
             this.lbxItemSelection.TabIndex = 7;
+            this.lbxItemSelection.SelectedIndexChanged += new System.EventHandler(this.lbxItemSelection_SelectedIndexChanged);
             // 
-            // button1
+            // btnCheckout
             // 
-            this.button1.Location = new System.Drawing.Point(648, 376);
-            this.button1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(217, 46);
-            this.button1.TabIndex = 6;
-            this.button1.Text = "Confirm";
-            this.button1.UseVisualStyleBackColor = true;
+            this.btnCheckout.Location = new System.Drawing.Point(689, 368);
+            this.btnCheckout.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.btnCheckout.Name = "btnCheckout";
+            this.btnCheckout.Size = new System.Drawing.Size(217, 46);
+            this.btnCheckout.TabIndex = 6;
+            this.btnCheckout.Text = "Checkout";
+            this.btnCheckout.UseVisualStyleBackColor = true;
+            this.btnCheckout.Click += new System.EventHandler(this.btnCheckout_Click);
             // 
             // txtSearchItemID
             // 
-            this.txtSearchItemID.Location = new System.Drawing.Point(676, 48);
+            this.txtSearchItemID.Location = new System.Drawing.Point(760, 47);
             this.txtSearchItemID.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.txtSearchItemID.Name = "txtSearchItemID";
-            this.txtSearchItemID.Size = new System.Drawing.Size(142, 22);
+            this.txtSearchItemID.Size = new System.Drawing.Size(143, 22);
             this.txtSearchItemID.TabIndex = 2;
             this.txtSearchItemID.TextChanged += new System.EventHandler(this.txtSearchItemID_TextChanged);
             // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(38, 18);
+            this.label1.Location = new System.Drawing.Point(37, 18);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(74, 17);
             this.label1.TabIndex = 1;
@@ -166,7 +206,7 @@ namespace Group29_BlitzCafe
             // 
             this.lbxReceipt.FormattingEnabled = true;
             this.lbxReceipt.ItemHeight = 16;
-            this.lbxReceipt.Location = new System.Drawing.Point(41, 77);
+            this.lbxReceipt.Location = new System.Drawing.Point(41, 78);
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxReceipt.Name = "lbxReceipt";
             this.lbxReceipt.Size = new System.Drawing.Size(488, 292);
@@ -177,10 +217,8 @@ namespace Group29_BlitzCafe
             this.tabPage2.Controls.Add(this.cbxLoyaltyPointsUsed);
             this.tabPage2.Controls.Add(this.cbxIsPayed);
             this.tabPage2.Controls.Add(this.dtOrderDate);
-            this.tabPage2.Controls.Add(this.label7);
             this.tabPage2.Controls.Add(this.label6);
             this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.textBox3);
             this.tabPage2.Controls.Add(this.x);
             this.tabPage2.Controls.Add(this.btnDeleteOrder);
             this.tabPage2.Controls.Add(this.btnEditOrder);
@@ -190,7 +228,7 @@ namespace Group29_BlitzCafe
             this.tabPage2.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage2.Size = new System.Drawing.Size(879, 435);
+            this.tabPage2.Size = new System.Drawing.Size(1207, 473);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -199,97 +237,83 @@ namespace Group29_BlitzCafe
             // cbxLoyaltyPointsUsed
             // 
             this.cbxLoyaltyPointsUsed.AutoSize = true;
-            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(691, 196);
+            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(719, 135);
+            this.cbxLoyaltyPointsUsed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxLoyaltyPointsUsed.Name = "cbxLoyaltyPointsUsed";
             this.cbxLoyaltyPointsUsed.Size = new System.Drawing.Size(149, 21);
-            this.cbxLoyaltyPointsUsed.TabIndex = 16;
+            this.cbxLoyaltyPointsUsed.TabIndex = 24;
             this.cbxLoyaltyPointsUsed.Text = "Loyalty Poins used";
             this.cbxLoyaltyPointsUsed.UseVisualStyleBackColor = true;
             // 
             // cbxIsPayed
             // 
             this.cbxIsPayed.AutoSize = true;
-            this.cbxIsPayed.Location = new System.Drawing.Point(689, 230);
+            this.cbxIsPayed.Location = new System.Drawing.Point(719, 180);
+            this.cbxIsPayed.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxIsPayed.Name = "cbxIsPayed";
             this.cbxIsPayed.Size = new System.Drawing.Size(84, 21);
-            this.cbxIsPayed.TabIndex = 15;
+            this.cbxIsPayed.TabIndex = 23;
             this.cbxIsPayed.Text = "Is Payed";
             this.cbxIsPayed.UseVisualStyleBackColor = true;
             // 
             // dtOrderDate
             // 
-            this.dtOrderDate.Location = new System.Drawing.Point(636, 103);
+            this.dtOrderDate.Location = new System.Drawing.Point(704, 85);
+            this.dtOrderDate.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dtOrderDate.Name = "dtOrderDate";
             this.dtOrderDate.Size = new System.Drawing.Size(221, 22);
-            this.dtOrderDate.TabIndex = 14;
-            // 
-            // label7
-            // 
-            this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(584, 157);
-            this.label7.Name = "label7";
-            this.label7.Size = new System.Drawing.Size(46, 17);
-            this.label7.TabIndex = 12;
-            this.label7.Text = "label7";
+            this.dtOrderDate.TabIndex = 22;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(584, 102);
+            this.label6.Location = new System.Drawing.Point(603, 85);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(46, 17);
-            this.label6.TabIndex = 10;
-            this.label6.Text = "label6";
+            this.label6.Size = new System.Drawing.Size(77, 17);
+            this.label6.TabIndex = 21;
+            this.label6.Text = "Order date";
             // 
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(584, 59);
+            this.label5.Location = new System.Drawing.Point(616, 41);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(46, 17);
-            this.label5.TabIndex = 9;
-            this.label5.Text = "label5";
-            // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(687, 152);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(144, 22);
-            this.textBox3.TabIndex = 7;
+            this.label5.Size = new System.Drawing.Size(58, 17);
+            this.label5.TabIndex = 20;
+            this.label5.Text = "OrderID";
             // 
             // x
             // 
-            this.x.Location = new System.Drawing.Point(687, 53);
+            this.x.Location = new System.Drawing.Point(719, 34);
+            this.x.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.x.Name = "x";
             this.x.Size = new System.Drawing.Size(144, 22);
-            this.x.TabIndex = 4;
+            this.x.TabIndex = 19;
             // 
             // btnDeleteOrder
             // 
-            this.btnDeleteOrder.Location = new System.Drawing.Point(672, 386);
+            this.btnDeleteOrder.Location = new System.Drawing.Point(704, 368);
             this.btnDeleteOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDeleteOrder.Name = "btnDeleteOrder";
             this.btnDeleteOrder.Size = new System.Drawing.Size(116, 38);
-            this.btnDeleteOrder.TabIndex = 3;
+            this.btnDeleteOrder.TabIndex = 18;
             this.btnDeleteOrder.Text = "Delete";
             this.btnDeleteOrder.UseVisualStyleBackColor = true;
-            this.btnDeleteOrder.Click += new System.EventHandler(this.button5_Click);
             // 
             // btnEditOrder
             // 
-            this.btnEditOrder.Location = new System.Drawing.Point(672, 322);
+            this.btnEditOrder.Location = new System.Drawing.Point(704, 304);
             this.btnEditOrder.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditOrder.Name = "btnEditOrder";
             this.btnEditOrder.Size = new System.Drawing.Size(116, 38);
-            this.btnEditOrder.TabIndex = 2;
+            this.btnEditOrder.TabIndex = 17;
             this.btnEditOrder.Text = "Edit";
             this.btnEditOrder.UseVisualStyleBackColor = true;
-            this.btnEditOrder.Click += new System.EventHandler(this.button4_Click);
             // 
             // dbgOrderHistory
             // 
             this.dbgOrderHistory.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgOrderHistory.Location = new System.Drawing.Point(57, 99);
+            this.dbgOrderHistory.Location = new System.Drawing.Point(57, 98);
             this.dbgOrderHistory.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dbgOrderHistory.Name = "dbgOrderHistory";
             this.dbgOrderHistory.RowHeadersWidth = 62;
@@ -307,11 +331,27 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 0;
             this.label2.Text = "Order History";
             // 
+            // txtCustomerID
+            // 
+            this.txtCustomerID.Location = new System.Drawing.Point(1083, 52);
+            this.txtCustomerID.Name = "txtCustomerID";
+            this.txtCustomerID.Size = new System.Drawing.Size(94, 22);
+            this.txtCustomerID.TabIndex = 15;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.Location = new System.Drawing.Point(978, 59);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(81, 17);
+            this.label8.TabIndex = 16;
+            this.label8.Text = "CustomerID";
+            // 
             // OrderPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(887, 506);
+            this.ClientSize = new System.Drawing.Size(1226, 516);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "OrderPage";
@@ -339,19 +379,22 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.TextBox txtQtyIItemOrdered;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.ListBox lbxItemSelection;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button btnCheckout;
         private System.Windows.Forms.TextBox txtSearchItemID;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.ListBox lbxReceipt;
-        private System.Windows.Forms.Button btnDeleteOrder;
-        private System.Windows.Forms.Button btnEditOrder;
+        private System.Windows.Forms.Label label7;
+        private System.Windows.Forms.TextBox txtSearchDescr;
         private System.Windows.Forms.CheckBox cbxLoyaltyPointsUsed;
         private System.Windows.Forms.CheckBox cbxIsPayed;
         private System.Windows.Forms.DateTimePicker dtOrderDate;
-        private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label5;
-        private System.Windows.Forms.TextBox textBox3;
         private System.Windows.Forms.TextBox x;
+        private System.Windows.Forms.Button btnDeleteOrder;
+        private System.Windows.Forms.Button btnEditOrder;
+        private System.Windows.Forms.TextBox txtTotalAmount;
+        private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txtCustomerID;
     }
 }

@@ -41,6 +41,7 @@ namespace Group29_BlitzCafe
             this.cbxUseLoyaltyPoints.AutoSize = true;
             this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(200, 80);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
+
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(107, 17);
             this.cbxUseLoyaltyPoints.TabIndex = 0;
@@ -57,6 +58,7 @@ namespace Group29_BlitzCafe
             this.btnConfirmPayment.TabIndex = 1;
             this.btnConfirmPayment.Text = "Confirm Payment";
             this.btnConfirmPayment.UseVisualStyleBackColor = true;
+            this.btnConfirmPayment.Click += new System.EventHandler(this.btnConfirmPayment_Click);
             // 
             // btnPrintReceipt
             // 
@@ -71,6 +73,7 @@ namespace Group29_BlitzCafe
             // lbxReceipt
             // 
             this.lbxReceipt.FormattingEnabled = true;
+
             this.lbxReceipt.Location = new System.Drawing.Point(10, 22);
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.lbxReceipt.Name = "lbxReceipt";
@@ -84,6 +87,7 @@ namespace Group29_BlitzCafe
             this.BackgroundImage = ((System.Drawing.Image)(resources.GetObject("$this.BackgroundImage")));
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(374, 252);
+
             this.Controls.Add(this.lbxReceipt);
             this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.btnConfirmPayment);
@@ -91,6 +95,7 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(2, 2, 2, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
+            this.Load += new System.EventHandler(this.Confirmation_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

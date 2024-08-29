@@ -30,8 +30,16 @@ namespace Group29_BlitzCafe
         private void InitializeComponent()
         {
             System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(CustomerPage));
+
             this.btnAddNew = new System.Windows.Forms.Button();
-            this.dataGridView1 = new System.Windows.Forms.DataGridView();
+            this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
+            this.customerIDDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.lastNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.firstNameDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cellNoDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.dateJoinedDataGridViewTextBoxColumn = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.tblCustomerBindingSource = new System.Windows.Forms.BindingSource(this.components);
+            this.BLITZCAFEDATA = new Group29_BlitzCafe._C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.txtDate = new System.Windows.Forms.TextBox();
             this.lblDateJoined = new System.Windows.Forms.Label();
@@ -58,9 +66,55 @@ namespace Group29_BlitzCafe
             this.btnAddNew.TabIndex = 0;
             this.btnAddNew.Text = "Add New Customer";
             this.btnAddNew.UseVisualStyleBackColor = true;
+            this.btnAddNew.Click += new System.EventHandler(this.btnAddNew_Click);
             // 
-            // dataGridView1
+            // dbgCustomerInfo
             // 
+            this.dbgCustomerInfo.AutoGenerateColumns = false;
+            this.dbgCustomerInfo.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgCustomerInfo.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.customerIDDataGridViewTextBoxColumn,
+            this.lastNameDataGridViewTextBoxColumn,
+            this.firstNameDataGridViewTextBoxColumn,
+            this.cellNoDataGridViewTextBoxColumn,
+            this.dateJoinedDataGridViewTextBoxColumn});
+            this.dbgCustomerInfo.DataSource = this.tblCustomerBindingSource;
+            this.dbgCustomerInfo.Location = new System.Drawing.Point(26, 27);
+            this.dbgCustomerInfo.Margin = new System.Windows.Forms.Padding(2);
+            this.dbgCustomerInfo.Name = "dbgCustomerInfo";
+            this.dbgCustomerInfo.RowHeadersWidth = 62;
+            this.dbgCustomerInfo.RowTemplate.Height = 28;
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(328, 340);
+            this.dbgCustomerInfo.TabIndex = 1;
+            this.dbgCustomerInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgCustomerInfo_CellClick);
+            // 
+            // customerIDDataGridViewTextBoxColumn
+            // 
+            this.customerIDDataGridViewTextBoxColumn.DataPropertyName = "CustomerID";
+            this.customerIDDataGridViewTextBoxColumn.HeaderText = "CustomerID";
+            this.customerIDDataGridViewTextBoxColumn.Name = "customerIDDataGridViewTextBoxColumn";
+            // 
+            // lastNameDataGridViewTextBoxColumn
+            // 
+            this.lastNameDataGridViewTextBoxColumn.DataPropertyName = "Last_Name";
+            this.lastNameDataGridViewTextBoxColumn.HeaderText = "Last_Name";
+            this.lastNameDataGridViewTextBoxColumn.Name = "lastNameDataGridViewTextBoxColumn";
+            // 
+            // firstNameDataGridViewTextBoxColumn
+            // 
+            this.firstNameDataGridViewTextBoxColumn.DataPropertyName = "First_Name";
+            this.firstNameDataGridViewTextBoxColumn.HeaderText = "First_Name";
+            this.firstNameDataGridViewTextBoxColumn.Name = "firstNameDataGridViewTextBoxColumn";
+            // 
+            // cellNoDataGridViewTextBoxColumn
+            // 
+            this.cellNoDataGridViewTextBoxColumn.DataPropertyName = "CellNo";
+            this.cellNoDataGridViewTextBoxColumn.HeaderText = "CellNo";
+            this.cellNoDataGridViewTextBoxColumn.Name = "cellNoDataGridViewTextBoxColumn";
+            // 
+            // dateJoinedDataGridViewTextBoxColumn
+            // 
+
             this.dataGridView1.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
             this.dataGridView1.Location = new System.Drawing.Point(11, 92);
             this.dataGridView1.Margin = new System.Windows.Forms.Padding(2);
@@ -73,9 +127,10 @@ namespace Group29_BlitzCafe
             // groupBox1
             // 
             this.groupBox1.BackColor = System.Drawing.Color.White;
+
             this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.lblDateJoined);
-            this.groupBox1.Controls.Add(this.cbxLoyaltyMem);
+            this.groupBox1.Controls.Add(this.btnAddNew);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCellNo);
             this.groupBox1.Controls.Add(this.txtLName);
@@ -86,6 +141,7 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.lblCustomerID);
             this.groupBox1.Controls.Add(this.btnConfirmUpdate);
             this.groupBox1.Location = new System.Drawing.Point(404, 36);
+
             this.groupBox1.Margin = new System.Windows.Forms.Padding(2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(2);
@@ -94,6 +150,7 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
+
             // txtDate
             // 
             this.txtDate.Location = new System.Drawing.Point(134, 180);
@@ -135,13 +192,14 @@ namespace Group29_BlitzCafe
             // 
             // txtCellNo
             // 
+
             this.txtCellNo.Location = new System.Drawing.Point(134, 136);
             this.txtCellNo.Margin = new System.Windows.Forms.Padding(2);
             this.txtCellNo.Name = "txtCellNo";
             this.txtCellNo.Size = new System.Drawing.Size(76, 20);
             this.txtCellNo.TabIndex = 7;
             // 
-            // txtLName
+            // txtCustID
             // 
             this.txtLName.Location = new System.Drawing.Point(134, 96);
             this.txtLName.Margin = new System.Windows.Forms.Padding(2);
@@ -204,6 +262,7 @@ namespace Group29_BlitzCafe
             this.btnConfirmUpdate.TabIndex = 0;
             this.btnConfirmUpdate.Text = "Confirm Changes";
             this.btnConfirmUpdate.UseVisualStyleBackColor = true;
+
             // 
             // CustomerPage
             // 
@@ -220,7 +279,9 @@ namespace Group29_BlitzCafe
             this.Name = "CustomerPage";
             this.Text = "CustomerPage";
             this.Load += new System.EventHandler(this.CustomerPage_Load);
-            ((System.ComponentModel.ISupportInitialize)(this.dataGridView1)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.tblCustomerBindingSource)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.BLITZCAFEDATA)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
             this.ResumeLayout(false);
@@ -230,12 +291,10 @@ namespace Group29_BlitzCafe
         #endregion
 
         private System.Windows.Forms.Button btnAddNew;
-        private System.Windows.Forms.DataGridView dataGridView1;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnConfirmUpdate;
         private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Label lblDateJoined;
-        private System.Windows.Forms.CheckBox cbxLoyaltyMem;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCellNo;
         private System.Windows.Forms.TextBox txtLName;
@@ -244,5 +303,15 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label lblFirstName;
         private System.Windows.Forms.Label lblCustomerID;
+        private System.Windows.Forms.Button btnDelete;
+        private _C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSet BLITZCAFEDATA;
+        private System.Windows.Forms.BindingSource tblCustomerBindingSource;
+        private _C__USERS_USER_DOCUMENTS_BLITZCAFEDATABASE_MDFDataSetTableAdapters.tblCustomerTableAdapter tblCustomerTableAdapter;
+        private System.Windows.Forms.DataGridViewTextBoxColumn customerIDDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn lastNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn firstNameDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn cellNoDataGridViewTextBoxColumn;
+        private System.Windows.Forms.DataGridViewTextBoxColumn dateJoinedDataGridViewTextBoxColumn;
+        public System.Windows.Forms.DataGridView dbgCustomerInfo;
     }
 }

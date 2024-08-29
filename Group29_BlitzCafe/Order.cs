@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group29_BlitzCafe
 {
-    class Order
+    public class Order
     {
         //create attributes, orderID can only be set once
         private readonly int orderID;
