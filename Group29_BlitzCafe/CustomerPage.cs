@@ -143,10 +143,47 @@ namespace Group29_BlitzCafe
 
         private void confirm_Delete()
         {
+            if (selectedItemIndex != -1)
+            {
 
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
+                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    string query = @"DELETE FROM Customer WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        //Delete customer from databse
+                        try
+                        {
+                            conn.Open();
+
+                            //Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the insert was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Item Deleted successfully.");
+                                load_Customer_Info(); // Refresh or reload customer info as needed
+                            }
+                            else
+                            {
+                                MessageBox.Show("Delete failed. No rows affected.");
+                            }
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
+                        }
+                    }
+                }
+            }
         }
-
-
         private void confirm_Update()
         {
             string newFName = txtFName.Text;
