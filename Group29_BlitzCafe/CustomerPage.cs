@@ -31,7 +31,7 @@ namespace Group29_BlitzCafe
         private int choice = 0;
 
         private int customerID;
-        private string fName, lName, cellNo, sqlQuery;
+        private string fName, lName, sqlQuery, cellNo;
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
@@ -82,12 +82,12 @@ namespace Group29_BlitzCafe
             fName = txtFName.Text;
             lName = txtLName.Text;
             cellNo = txtCellNo.Text;
-            dateJoined = DateTime.Today;
+            dateJoined = dtpDate.Value;
 
             if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
             { 
                 // Define the SQL query with parameters
-                string query = @"INSERT INTO Customer (FirstName, LastName, CellNo, DateJoined) 
+                string query = @"INSERT INTO Customer (First_Name, Last_Name, CellNo, Date_Joined) 
                          VALUES (@fName, @lName, @cellNo, @dateJoined)";
 
                 // Use 'using' statements to ensure proper disposal of resources
@@ -139,7 +139,6 @@ namespace Group29_BlitzCafe
             }
             load_Customer_Info();
             
-             MessageBox.Show("Please make sure all info is entered and correct.");
         }
 
         private void confirm_Delete()
@@ -174,7 +173,7 @@ namespace Group29_BlitzCafe
 
             //Make changing ID and Date Joined impossible for user
             txtCustID.ReadOnly = true;
-            txtDate.ReadOnly = true;
+            dtpDate.Enabled = false;
 
             btnConfirm.Visible = false;
             btnCancel.Visible = false;
@@ -196,7 +195,7 @@ namespace Group29_BlitzCafe
             {
                 case 1:
                     {
-                        //confirm_Add();
+                        confirm_Add();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -211,7 +210,7 @@ namespace Group29_BlitzCafe
                     }
                 case 2:
                     {
-                        //confirm_Delete();
+                        confirm_Delete();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -230,7 +229,7 @@ namespace Group29_BlitzCafe
                     }
                 case 3:
                     {
-                        //confirm_Update();
+                        confirm_Update();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -292,6 +291,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = true;
 
             choice = 1;
 
