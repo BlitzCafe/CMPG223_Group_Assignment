@@ -119,6 +119,7 @@ namespace Group29_BlitzCafe
                         {
                             MessageBox.Show("Insert failed. No rows affected.");
                         }
+                        conn.Close();
                     }
                     catch (SqlException sqlEx)
                     {
@@ -183,13 +184,12 @@ namespace Group29_BlitzCafe
             string newLName = txtLName.Text;
             string newCellNo = txtCellNo.Text;
 
-            if (dbgCustomerInfo.SelectedRows.Count > 0)
-            {
+           
                 if (newCellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
 
                 {
                     // Define the SQL query with parameters
-                    string query = @"UPDATE Customer SET First_Name = @newFName, Last_Name = @newLName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                    string query = @"UPDATE Customer SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
 
                     // Use 'using' statements to ensure proper disposal of resources
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
@@ -213,12 +213,13 @@ namespace Group29_BlitzCafe
                             {
                                 MessageBox.Show("Customer edited successfully.");
                                 load_Customer_Info(); // Refresh or reload customer info as needed
-                                conn.Close();
+                                
                             }
                             else
                             {
                                 MessageBox.Show("Insert failed. No rows affected.");
                             }
+                            conn.Close();
                         }
                         catch (SqlException sqlEx)
                         {
@@ -236,7 +237,6 @@ namespace Group29_BlitzCafe
                 {
                     MessageBox.Show("Please make sure all info is entered and correct.");
                 }
-            }
         }
 
         private void CustomerPage_Load(object sender, EventArgs e)
@@ -371,6 +371,10 @@ namespace Group29_BlitzCafe
             btnCancel.Visible = false;
 
             choice = 0;
+
+            txtFName.ReadOnly = false;
+            txtLName.ReadOnly = false;
+            txtCellNo.ReadOnly = false;
 
             btnUpdate.Visible = true;
             btnDelete.Visible = true;
