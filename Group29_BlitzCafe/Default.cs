@@ -25,7 +25,7 @@ namespace Group29_BlitzCafe
        
         private void Form1_Load(object sender, EventArgs e)
         {
-
+            
         }
 
 
@@ -34,12 +34,26 @@ namespace Group29_BlitzCafe
             CustomerPage f1 = new CustomerPage();
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
-            f1.Dock = DockStyle.Fill;
+
+            // Add the form to the panel first
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
-            f1.BringToFront();
+
+            // Show the form to calculate its actual size
             f1.Show();
+
+            // Ensure the form's width and height are within the panel's bounds
+            if (f1.Width > panel1.Width)
+                f1.Width = panel1.Width;
+            if (f1.Height > panel1.Height)
+                f1.Height = panel1.Height;
+
+            // Center the form within the panel
+            f1.Left = (panel1.Width - f1.Width) / 2;
+            f1.Top = (panel1.Height - f1.Height) / 2;
+
+            f1.BringToFront();
         }
 
         private void ordersToolStripMenuItem_Click(object sender, EventArgs e)
@@ -47,12 +61,29 @@ namespace Group29_BlitzCafe
             OrderPage f1 = new OrderPage();
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
-            f1.Dock = DockStyle.Fill;
+
+            // Set the fixed size for the form
+            f1.Size = new Size(1402, 698);
+
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
-            f1.BringToFront();
+
+            // Show the form to ensure it's added to the panel
             f1.Show();
+
+            // Set the panel size to match the form size
+            panel1.Size = f1.Size;
+
+            // Adjust the main form's ClientSize to fit the panel
+            this.ClientSize = new Size(panel1.Width, panel1.Height);
+
+            // Center the form within the panel
+            f1.Left = (panel1.Width - f1.Width) / 2;
+            f1.Top = (panel1.Height - f1.Height) / 2;
+
+            f1.BringToFront();
+
         }
 
         private void itemsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -60,12 +91,28 @@ namespace Group29_BlitzCafe
             ItemPage f1 = new ItemPage();
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
-            f1.Dock = DockStyle.Fill;
+
+            // Add the form to the panel first
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
-            f1.BringToFront();
+
+            // Show the form to calculate its actual size
             f1.Show();
+
+            // Ensure the form's width and height are within the panel's bounds
+            if (f1.Width > panel1.Width)
+                f1.Width = panel1.Width;
+            if (f1.Height > panel1.Height)
+                f1.Height = panel1.Height;
+
+            // Center the form within the panel
+            f1.Left = (panel1.Width - f1.Width) / 2;
+            f1.Top = (panel1.Height - f1.Height) / 2;
+
+            f1.BringToFront();
+
+
         }
 
         private void reportsToolStripMenuItem_Click(object sender, EventArgs e)
@@ -73,12 +120,26 @@ namespace Group29_BlitzCafe
             Reports f1 = new Reports();
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
-            f1.Dock = DockStyle.Fill;
+
+            // Add the form to the panel first
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
-            f1.BringToFront();
+
+            // Show the form to calculate its actual size
             f1.Show();
+
+            // Ensure the form's width and height are within the panel's bounds
+            if (f1.Width > panel1.Width)
+                f1.Width = panel1.Width;
+            if (f1.Height > panel1.Height)
+                f1.Height = panel1.Height;
+
+            // Center the form within the panel
+            f1.Left = (panel1.Width - f1.Width) / 2;
+            f1.Top = (panel1.Height - f1.Height) / 2;
+
+            f1.BringToFront();
         }
 
         private void helpToolStripMenuItem_Click(object sender, EventArgs e)
@@ -86,12 +147,26 @@ namespace Group29_BlitzCafe
             Help f1 = new Help();
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
-            f1.Dock = DockStyle.Fill;
+
+            // Add the form to the panel first
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
-            f1.BringToFront();
+
+            // Show the form to calculate its actual size
             f1.Show();
+
+            // Ensure the form's width and height are within the panel's bounds
+            if (f1.Width > panel1.Width)
+                f1.Width = panel1.Width;
+            if (f1.Height > panel1.Height)
+                f1.Height = panel1.Height;
+
+            // Center the form within the panel
+            f1.Left = (panel1.Width - f1.Width) / 2;
+            f1.Top = (panel1.Height - f1.Height) / 2;
+
+            f1.BringToFront();
         }
 
 
@@ -102,6 +177,11 @@ namespace Group29_BlitzCafe
         }
 
         private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel5_Paint(object sender, PaintEventArgs e)
         {
 
         }
