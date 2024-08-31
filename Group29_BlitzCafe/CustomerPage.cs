@@ -28,10 +28,10 @@ namespace Group29_BlitzCafe
 
         public List<Customer> customerList = new List<Customer>();
 
-        private int choice = 0;
+        private int choice = 0, selectedItemIndex;
 
         private int customerID;
-        private string fName, lName, cellNo, sqlQuery;
+        private string fName, lName, sqlQuery, cellNo;
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
@@ -82,12 +82,12 @@ namespace Group29_BlitzCafe
             fName = txtFName.Text;
             lName = txtLName.Text;
             cellNo = txtCellNo.Text;
-            dateJoined = DateTime.Today;
+            dateJoined = dtpDate.Value;
 
             if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
             { 
                 // Define the SQL query with parameters
-                string query = @"INSERT INTO Customer (FirstName, LastName, CellNo, DateJoined) 
+                string query = @"INSERT INTO Customer (First_Name, Last_Name, CellNo, Date_Joined) 
                          VALUES (@fName, @lName, @cellNo, @dateJoined)";
 
                 // Use 'using' statements to ensure proper disposal of resources
@@ -139,7 +139,6 @@ namespace Group29_BlitzCafe
             }
             load_Customer_Info();
             
-             MessageBox.Show("Please make sure all info is entered and correct.");
         }
 
         private void confirm_Delete()
@@ -150,12 +149,58 @@ namespace Group29_BlitzCafe
 
         private void confirm_Update()
         {
+            string newFName = txtFName.Text;
+            string newLName = txtLName.Text;
+            string newCellNo = txtCellNo.Text;
+
             if (dbgCustomerInfo.SelectedRows.Count > 0)
             {
-                if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
+                if (newCellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
 
                 {
+                    // Define the SQL query with parameters
+                    string query = @"UPDATE Customer SET First_Name = @newFName, Last_Name = @newLName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
 
+                    // Use 'using' statements to ensure proper disposal of resources
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        try
+                        {
+                            // Define parameters and their values
+                            cmd.Parameters.AddWithValue("@newFName", newFName);
+                            cmd.Parameters.AddWithValue("@newLName", newLName);
+                            cmd.Parameters.AddWithValue("@newCellNo", newCellNo);
+
+                            // Open the connection
+                            conn.Open();
+
+                            // Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the insert was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Customer edited successfully.");
+                                load_Customer_Info(); // Refresh or reload customer info as needed
+                                conn.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Insert failed. No rows affected.");
+                            }
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            // Handle SQL-specific exceptions
+                            MessageBox.Show("Database error: " + sqlEx.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle all other exceptions
+                            MessageBox.Show("An error occurred: " + ex.Message);
+                        }
+                    }
                 }
                 else
                 {
@@ -185,7 +230,49 @@ namespace Group29_BlitzCafe
 
         private void dbgCustomerInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            //determine if a valid record is selected
+            if (e.RowIndex > -1)
+            {
+                //extract info of the selectedrow
+                int selectedID;
+                DataGridViewRow currentRow = dbgCustomerInfo.Rows[e.RowIndex];
+                //determine selected items ID
+                selectedID = Convert.ToInt32(currentRow.Cells["CustomerID"].Value);
+
+                //initialize the index variable
+                selectedItemIndex = 0;
+                bool itemFound = false;
+
+                //use a while loop to find the item with the matching ItemID
+                while (selectedItemIndex < customerList.Count)
+                {
+                    if (customerList[selectedItemIndex].getCustomerID() == selectedID)
+                    {
+                        itemFound = true;
+                        break; //exit the loop once the item is found
+                    }
+                    selectedItemIndex++;
+                }
+
+                //if the item is found, populate the textboxes using the index
+                if (itemFound)
+                {
+                    txtCustID.Text = customerList[selectedItemIndex].getCustomerID().ToString();
+                    txtLName.Text = customerList[selectedItemIndex].getLastName();
+                    txtFName.Text = customerList[selectedItemIndex].getFirstName();
+                    txtCellNo.Text = customerList[selectedItemIndex].getCellNo();
+                    dtpDate.Value = customerList[selectedItemIndex].getDateJoined();
+                }
+                else  //if the record is not found in the menuItemList, set index to -1 and return error message
+                {
+                    MessageBox.Show("Selected item not found in the list.");
+                    selectedItemIndex = -1;
+                }
+            }
+            else  //error message if row selected is out of bounds
+            {
+                MessageBox.Show("Error: Please select a valid item from the list.");
+            }
         }
 
         
@@ -196,7 +283,7 @@ namespace Group29_BlitzCafe
             {
                 case 1:
                     {
-                        //confirm_Add();
+                        confirm_Add();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -211,7 +298,7 @@ namespace Group29_BlitzCafe
                     }
                 case 2:
                     {
-                        //confirm_Delete();
+                        confirm_Delete();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -230,7 +317,7 @@ namespace Group29_BlitzCafe
                     }
                 case 3:
                     {
-                        //confirm_Update();
+                        confirm_Update();
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
@@ -264,6 +351,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = false;
 
             choice = 3;
 
@@ -276,6 +364,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = false;
 
             choice = 2;
 
@@ -292,6 +381,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = true;
 
             choice = 1;
 
