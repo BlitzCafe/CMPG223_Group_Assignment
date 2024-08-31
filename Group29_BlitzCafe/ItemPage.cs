@@ -21,6 +21,7 @@ namespace Group29_BlitzCafe
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
+        SqlDataReader reader;
         private int choice = 0;
        
 
@@ -62,32 +63,38 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            if (validateInput())
-            {
+           
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
                     try
                     {
                         conn.Open();
 
-                        string loadQry = "";
-                        SqlCommand cmd = new SqlCommand(loadQry, conn);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        string query = "SELECT ItemID, Description, Price FROM Items";
+                        cmd = new SqlCommand(query, conn);
 
 
-                        while (reader.Read())
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+
+                        // Bind the DataGridView to the DataTable
+                        dbgMenuItems.DataSource = dataTable;
+
+
+                        //create objects for each line in the dbgrid
+                        foreach (DataRow row in dataTable.Rows)
                         {
-                            itemID = reader.GetInt32(0);
-                            descr = reader.GetString(1);
-                            price = reader.GetDecimal(3);
+                            itemID = Convert.ToInt32(row["ItemID"]);
+                            descr = row["Description"].ToString();
+                            price = Convert.ToDecimal(row["Price"]);
 
-                            MenuItem item = new MenuItem(itemID, descr, price);
-                            menuItemList.Add(item);
+                            // Create a new MenuItem object using the data
+                            MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                            // Add the MenuItem object to the list
+                            menuItemList.Add(menuItem);
                         }
-                        reader.Close();
-
-                        dbgMenuItems.DataSource = menuItemList;
-
 
                         conn.Close();
                     }
@@ -95,7 +102,7 @@ namespace Group29_BlitzCafe
                     {
                         MessageBox.Show("Could not load menu items: " + e);
                     }
-                }
+                
             }
 
         }
