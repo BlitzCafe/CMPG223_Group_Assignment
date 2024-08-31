@@ -154,6 +154,9 @@
     <EmbeddedResource Include="Default.resx">
       <DependentUpon>Default.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="Help.resx">
+      <DependentUpon>Help.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="ItemPage.resx">
       <DependentUpon>ItemPage.cs</DependentUpon>
     </EmbeddedResource>
