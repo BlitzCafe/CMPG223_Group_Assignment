@@ -15,8 +15,9 @@ namespace Group29_BlitzCafe
     public partial class OrderPage : Form
     {
         private Default defaultFrm = new Default();
-
         private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+
+        private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
 
         public OrderPage()
@@ -27,57 +28,44 @@ namespace Group29_BlitzCafe
 
         private void loadOrderHistory()
         {
-
-            int orderId;
-            DateTime orderDate;
-            bool loyaltyPointsUsed, isPayed;
-
-           using (SqlConnection conn = new SqlConnection(defaultFrm.connString))          
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
-                try 
+                try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+                    string query = "SELECT * FROM [Order]"; // Ensure the table name is correct
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
-                    // Bind the DataGridView to the DataTable
-                    dbgOrderHistory.DataSource = dataTable;
+                    dbgOrderHistory.DataSource = dataTable; // Bind the DataGridView to the DataTable
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
+        }
 
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        orderId = Convert.ToInt32(row["OrderId"]);
-                        orderDate = Convert.ToDateTime(row["OrderDate"]);
-                        isPayed = Convert.ToBoolean(row["IsPayed"]);
-                        loyaltyPointsUsed = Convert.ToBoolean(row["loyaltypointsused"]);
-
-                        // Create a new Order object using the data
-                        Order order = new Order(orderId, orderDate, isPayed, loyaltyPointsUsed);
-
-                        // Add the Order object to the list
-                        orderList.Add(order);
-                    }
-
-
+        private void OrderPage_Load(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM [Order]";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
                 }
             }
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OrderPage_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -88,27 +76,69 @@ namespace Group29_BlitzCafe
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
         {
             string searchID = txtSearchItemID.Text;
-            lbxItemSelection.Items.Clear();
-
-            foreach(MenuItem item in itemPageFrm.menuItemList)
+            if (searchID != "")
             {
-                string itemID = item.getItemID().ToString();
-                if (itemID.Contains(searchID))
+                lbxItemSelection.Items.Clear();
+
+                foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    lbxItemSelection.Items.Add(item);
+                    string itemID = item.getItemID().ToString();
+                    if (itemID.Contains(searchID))
+                    {
+                        lbxItemSelection.Items.Add(item);
+
+                    }
 
                 }
-
             }
+            else lbxItemSelection.Items.Clear();
 
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
+            decimal totalAmount = 0.0m;
+            string itemId = txtSearchItemID.Text;
+            foreach (MenuItem item in itemPageFrm.menuItemList)
+            {
+                string itemID = item.getItemID().ToString();
+                if (itemID.Contains(itemId))
+                {
+                    receipt.Add(item);
+                    lbxReceipt.Items.Add(item.toString());
+                    totalAmount += item.getPrice();
+                }
+            }
+            txtTotalAmount.Text = totalAmount.ToString();
 
         }
 
-        private void button1_Click(object sender, EventArgs e)
+        private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            int index = lbxItemSelection.SelectedIndex;
+
+            if (index >= 0 && index <= itemPageFrm.menuItemList.Count)
+            {
+                MenuItem selectedItem = itemPageFrm.menuItemList[index];
+
+                txtSearchDescr.Text = selectedItem.getDescr();
+                txtSearchItemID.Text = selectedItem.getItemID().ToString();
+            }
+
+        }
+
+        private void btnCheckout_Click(object sender, EventArgs e)
+        {
+            Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
+            confirmationForm.ShowDialog();
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
         {
 
         }

@@ -7,7 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
-using MySql.Data.MySqlClient;
+
 using System.Data.SqlClient;
 
 namespace Group29_BlitzCafe
@@ -21,7 +21,8 @@ namespace Group29_BlitzCafe
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
-        DataSet ds;
+        private int choice = 0;
+       
 
         public ItemPage()
         {
@@ -61,40 +62,39 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            using (conn = new SqlConnection(defaultFrm.connString))
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString)) 
             {
                 try
                 {
-                    //Dyaln and sino
                     conn.Open();
-                    string query = "SELECT * FROM Items";
-                    cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
 
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable;
+                    string loadQry = "";
+                    SqlCommand cmd = new SqlCommand(loadQry, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable.Rows)
+
+                   
+
+                    while (reader.Read())
                     {
-                        itemID = Convert.ToInt32(row["ItemID"]);
-                        descr = row["Descr"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
+                        itemID = reader.GetInt32(0);
+                        descr = reader.GetString(1);
+                        price = reader.GetDecimal(3);
 
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
+                        MenuItem item = new MenuItem(itemID, descr, price);
+                        menuItemList.Add(item);
                     }
+                    reader.Close();
+
+                    dbgMenuItems.DataSource = menuItemList;
+
 
                     conn.Close();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
+                    MessageBox.Show("Could not load menu items: " + e);
                 }
             }
 
@@ -150,20 +150,33 @@ namespace Group29_BlitzCafe
             btnAddItem.Visible = false;
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
+            choice = 1;
 
-            btnCancelEdit.Visible = true;
-            btnConfirmEdit.Visible = true;
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
 
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
         }
 
         //delete an item from the database
         private void btnDelete_Click(object sender, EventArgs e)
         {
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
+
             MenuItem removeItem = menuItemList[selectedItemIndex];
 
             //if the item to be removed is not zero, confirm deletion
@@ -176,26 +189,7 @@ namespace Group29_BlitzCafe
                 {
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
-                        try
-                        {
-                            conn.Open();
-                            string query = "DELETE FROM Items WHERE ItemsID = @ItemID";
-                            cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
-
-                            cmd.ExecuteNonQuery();
-
-                            // Remove item from the list
-                            menuItemList.Remove(removeItem);
-
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully deleted.");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be deleted. " + ex.Message);
-                        }
+                       
 
                         menuItemList.Remove(removeItem);
                         //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
@@ -219,66 +213,74 @@ namespace Group29_BlitzCafe
         }
 
 
-        private void btnConfirmEdit_Click(object sender, EventArgs e)
+       
+
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            //test if item to be edited is within valid bounds
-            if (selectedItemIndex >= 0 && selectedItemIndex < menuItemList.Count())
+            switch (choice)
             {
-                //create object to represent old object
-                MenuItem originalItem = menuItemList[selectedItemIndex];
-
-                //create new object with the same ID andd the textbox variables 
-                MenuItem newItem = new MenuItem(originalItem.getItemID(), txtDesc.Text, Convert.ToDecimal(txtPrice.Text));
-
-                //use class equals method to determine if the object was changed
-                if (!originalItem.equals(newItem))
-                {
-
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                case 1:
                     {
-                        try
-                        {
-                            conn.Open();
-                            string query = "UPDATE Items SET Description = @Descr, Price = @Price WHERE ItemsID = @ItemID";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
-                            cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
-                            cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
+                        //confirm_Add();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            cmd.ExecuteNonQuery();
+                        choice = 1;
+                        addItem();
 
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully updated.");
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        //confirm_Delete();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            conn.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be updated. " + ex.Message);
-                        }
+                        choice = 2;
+
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        //confirm_Update();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        choice = 0;
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+
+                        //call load method to refresh dbgrid and reset objects to be the same as the database
+                        loadMenuItems();
+                        break;
+                    }
+                default:
+                    {
+                        break;
 
                     }
-
-                    //call load method to refresh dbgrid and reset objects to be the same as the database
-                    loadMenuItems();
-                }
-                else  //if the values are the same, display that no changes were made
-                {
-                    MessageBox.Show("No changes were made.");
-                }
+               
             }
 
             btnAddItem.Visible = true;
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnCancelEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
 
         }
 
-        private void btnConfirmAdd_Click(object sender, EventArgs e)
+        private void addItem()
         {
             //create temp variables for item attributes
             int newItemId;
@@ -289,8 +291,10 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
-            btnConfirmAdd.Visible = false;
-            btnConfirmEdit.Visible = true;
+
+            btnConfirm.Visible = false;
+            btnConfirm.Visible = true;
+
 
             //calll validate method, if valid execute code
             if (validateInput())
@@ -304,24 +308,7 @@ namespace Group29_BlitzCafe
                 {
                     try
                     {
-                        conn.Open();
-                        string sql = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
-
-                        cmd = new SqlCommand(sql, conn);
-                        adap.InsertCommand = cmd;
-                        adap.InsertCommand.ExecuteNonQuery();
-
-                        // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
-                        //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
-
-                        /*  !This code wont run thill the database works...
-                         
-                        MenuItem newItem = new MenuItem(newItemID, desc, price);
-                        menuItemList.Add(newItem);
-
-                        */
-                        conn.Close();
-                        loadMenuItems();
+                       
                     }
                     catch (Exception ex)
                     {
@@ -335,19 +322,24 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmAdd.Visible = false;
-            btnConfirmEdit.Visible = false;
+
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+
         }
 
-        private void btnCancelEdit_Click(object sender, EventArgs e)
+        private void btnConfirmAdd_Click(object sender, EventArgs e)
         {
-            btnAddItem.Visible = true;
-            btnDelete.Visible = true;
-            btnEditItem.Visible = true;
+           
+        }
 
-            btnConfirmAdd.Visible = false;
-            btnConfirmEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
+       
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
+        {
+
+
         }
     }
 }
