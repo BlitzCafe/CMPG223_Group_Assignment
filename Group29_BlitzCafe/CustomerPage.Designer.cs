@@ -33,7 +33,6 @@ namespace Group29_BlitzCafe
             this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.txtDate = new System.Windows.Forms.TextBox();
             this.lblDateJoined = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.txtCellNo = new System.Windows.Forms.TextBox();
@@ -46,6 +45,7 @@ namespace Group29_BlitzCafe
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -75,8 +75,8 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.dtpDate);
             this.groupBox1.Controls.Add(this.btnCancel);
-            this.groupBox1.Controls.Add(this.txtDate);
             this.groupBox1.Controls.Add(this.lblDateJoined);
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtCellNo);
@@ -105,13 +105,6 @@ namespace Group29_BlitzCafe
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // txtDate
-            // 
-            this.txtDate.Location = new System.Drawing.Point(178, 221);
-            this.txtDate.Name = "txtDate";
-            this.txtDate.Size = new System.Drawing.Size(100, 22);
-            this.txtDate.TabIndex = 11;
             // 
             // lblDateJoined
             // 
@@ -217,6 +210,13 @@ namespace Group29_BlitzCafe
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
             // 
+            // dtpDate
+            // 
+            this.dtpDate.Location = new System.Drawing.Point(178, 219);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(166, 22);
+            this.dtpDate.TabIndex = 13;
+            // 
             // CustomerPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -244,7 +244,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.DataGridView dbgCustomerInfo;
         private System.Windows.Forms.GroupBox groupBox1;
         private System.Windows.Forms.Button btnConfirm;
-        private System.Windows.Forms.TextBox txtDate;
         private System.Windows.Forms.Label lblDateJoined;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txtCellNo;
@@ -257,5 +256,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnDelete;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.Button btnUpdate;
+        private System.Windows.Forms.DateTimePicker dtpDate;
     }
 }
