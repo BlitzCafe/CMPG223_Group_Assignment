@@ -172,10 +172,11 @@ namespace Group29_BlitzCafe
 
                         choice = 0;
 
-                        btnUpdate.Visible = true;
-                        btnDelete.Visible = true;
-                        btnAddNew.Visible = true;
-                        break;
+                            btnUpdate.Visible = true;
+                            btnDelete.Visible = true;
+                            btnAddNew.Visible = true;
+                            break;
+                        
                     }
                 case 3:
                     {

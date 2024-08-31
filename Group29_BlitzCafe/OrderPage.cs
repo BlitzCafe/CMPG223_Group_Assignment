@@ -28,57 +28,44 @@ namespace Group29_BlitzCafe
 
         private void loadOrderHistory()
         {
-
-            int orderId;
-            DateTime orderDate;
-            bool loyaltyPointsUsed, isPayed;
-
-           using (SqlConnection conn = new SqlConnection(defaultFrm.connString))          
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
-                try 
+                try
                 {
                     conn.Open();
-                    string query = "SELECT OrderId, OrderDate, Is_Paid, loyaltyPoints_Used FROM tblOrder";
+                    string query = "SELECT * FROM [Order]"; // Ensure the table name is correct
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
 
-                    // Bind the DataGridView to the DataTable
-                    dbgOrderHistory.DataSource = dataTable;
+                    dbgOrderHistory.DataSource = dataTable; // Bind the DataGridView to the DataTable
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
+        }
 
-
-                    foreach (DataRow row in dataTable.Rows)
-                    {
-                        orderId = Convert.ToInt32(row["OrderId"]);
-                        orderDate = Convert.ToDateTime(row["OrderDate"]);
-                        isPayed = Convert.ToBoolean(row["IsPayed"]);
-                        loyaltyPointsUsed = Convert.ToBoolean(row["loyaltypointsused"]);
-
-                        // Create a new Order object using the data
-                        Order order = new Order(orderId, orderDate, isPayed, loyaltyPointsUsed);
-
-                        // Add the Order object to the list
-                        orderList.Add(order);
-                    }
-
-
+        private void OrderPage_Load(object sender, EventArgs e)
+        {
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT * FROM [Order]";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
                 }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
                 }
             }
-        }
-
-        private void tabPage2_Click(object sender, EventArgs e)
-        {
-
-        }
-
-        private void OrderPage_Load(object sender, EventArgs e)
-        {
-            
         }
 
         private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
@@ -144,6 +131,16 @@ namespace Group29_BlitzCafe
         {
             Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
             confirmationForm.ShowDialog();
+        }
+
+        private void btnDeleteOrder_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }

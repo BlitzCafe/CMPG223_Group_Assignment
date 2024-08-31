@@ -18,7 +18,9 @@ namespace Group29_BlitzCafe
         public List<MenuItem> menuItemList = new List<MenuItem>();
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
-
+        SqlConnection conn;
+        SqlCommand cmd;
+        SqlDataAdapter adap;
         private int choice = 0;
        
 
@@ -60,14 +62,17 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
+
             using (SqlConnection conn = new SqlConnection(defaultFrm.connString)) 
             {
                 try
                 {
                     conn.Open();
+
                     string loadQry = "";
                     SqlCommand cmd = new SqlCommand(loadQry, conn);
                     SqlDataReader reader = cmd.ExecuteReader();
+
 
                    
 
