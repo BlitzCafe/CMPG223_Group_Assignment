@@ -32,29 +32,18 @@ namespace Group29_BlitzCafe
             // Initialize the PictureBox
             movingPictureBox.SizeMode = PictureBoxSizeMode.AutoSize; // Adjust the PictureBox size to fit the image
 
-            // Initialize the Label
-            Label infoLabel = new Label();
-            infoLabel.Text = "Katelyn Joynt  | Juané Schoeman | Kearabetswe Thekiso\n" +
-                              "Dylan Rafferty | Sinovuyo Waqu | Schalk van Wyk";
-            infoLabel.Font = new Font("Arial", 12); // Use a common font for testing
-            infoLabel.ForeColor = Color.Black; // Ensure text color contrasts with background
-            infoLabel.AutoSize = true; // Automatically adjust the label size
-
             // Set the starting position outside the panel on the right
             int startPositionX = panel1.Width;
             movingPictureBox.Location = new Point(startPositionX, (panel1.Height - movingPictureBox.Height) / 2);
-            infoLabel.Location = new Point(startPositionX, (movingPictureBox.Height - infoLabel.Height) / 2); // Center label vertically in the PictureBox
 
             // Add the PictureBox and Label to the Panel
             panel1.Controls.Add(movingPictureBox);
-            panel1.Controls.Add(infoLabel);
 
             // Define the Tick event for the Timer
             timer.Tick += (s, ev) =>
             {
                 // Move the PictureBox and Label to the left
                 movingPictureBox.Left -= 5; // Adjust the speed by changing the value (pixels per tick)
-                infoLabel.Left -= 5; // Adjust the speed to match the PictureBox
 
                 // If the PictureBox has completely moved out of the panel, reset its position
                 if (movingPictureBox.Right < 0)
@@ -62,15 +51,7 @@ namespace Group29_BlitzCafe
                     movingPictureBox.Left = panel1.Width;
                 }
 
-                // If the Label has completely moved out of the panel, reset its position
-                if (infoLabel.Right < 0)
-                {
-                    infoLabel.Left = panel1.Width;
-                }
 
-                // Center the Label in the middle of the PictureBox
-                infoLabel.Location = new Point(movingPictureBox.Left + (movingPictureBox.Width - infoLabel.Width) / 2,
-                                               movingPictureBox.Top + (movingPictureBox.Height - infoLabel.Height) / 2);
             };
 
             // Start the Timer when the form loads
@@ -203,7 +184,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(1050, 495);
+            f1.Size = new Size(850, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
