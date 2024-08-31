@@ -129,7 +129,7 @@ namespace Group29_BlitzCafe
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
+            Confirmation confirmationForm = new Confirmation(receipt, cbxCustomerPhoneNum.Text);
             confirmationForm.ShowDialog();
         }
 
@@ -139,6 +139,12 @@ namespace Group29_BlitzCafe
         }
 
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
+        private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
         {
 
         }

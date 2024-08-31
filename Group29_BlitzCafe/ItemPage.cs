@@ -33,24 +33,20 @@ namespace Group29_BlitzCafe
         //validate text box inputs to be of the same type as the database
         private bool validateInput()
         {
-            if (!int.TryParse(txtItemID.Text, out int _))
-            {
-                MessageBox.Show("Item ID must be a valid integer.");
-                return false;
-            }
+           
+            
+                if (!decimal.TryParse(numPrice.Text, out decimal _))
+                {
+                    MessageBox.Show("Price must be a valid decimal number.");
+                    return false;
+                }
 
-            if (!decimal.TryParse(txtPrice.Text, out decimal _))
-            {
-                MessageBox.Show("Price must be a valid decimal number.");
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtDesc.Text))
-            {
-                MessageBox.Show("Description cannot be empty.");
-                return false;
-            }
-
+                if (string.IsNullOrWhiteSpace(txtDesc.Text))
+                {
+                    MessageBox.Show("Description cannot be empty.");
+                    return false;
+                }
+            
             return true;
         }
 
@@ -62,32 +58,38 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-            if (validateInput())
-            {
+           
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
                     try
                     {
                         conn.Open();
 
-                        string loadQry = "";
-                        SqlCommand cmd = new SqlCommand(loadQry, conn);
-                        SqlDataReader reader = cmd.ExecuteReader();
+                        string query = "SELECT ItemID, Description, Price FROM Items";
+                        cmd = new SqlCommand(query, conn);
 
 
-                        while (reader.Read())
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+
+                        // Bind the DataGridView to the DataTable
+                        dbgMenuItems.DataSource = dataTable;
+
+
+                        //create objects for each line in the dbgrid
+                        foreach (DataRow row in dataTable.Rows)
                         {
-                            itemID = reader.GetInt32(0);
-                            descr = reader.GetString(1);
-                            price = reader.GetDecimal(3);
+                            itemID = Convert.ToInt32(row["ItemID"]);
+                            descr = row["Description"].ToString();
+                            price = Convert.ToDecimal(row["Price"]);
 
-                            MenuItem item = new MenuItem(itemID, descr, price);
-                            menuItemList.Add(item);
+                            // Create a new MenuItem object using the data
+                            MenuItem menuItem = new MenuItem(itemID, descr, price);
+
+                            // Add the MenuItem object to the list
+                            menuItemList.Add(menuItem);
                         }
-                        reader.Close();
-
-                        dbgMenuItems.DataSource = menuItemList;
-
 
                         conn.Close();
                     }
@@ -95,7 +97,7 @@ namespace Group29_BlitzCafe
                     {
                         MessageBox.Show("Could not load menu items: " + e);
                     }
-                }
+                
             }
 
         }
@@ -131,7 +133,7 @@ namespace Group29_BlitzCafe
                 {
                     txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
                     txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    txtPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
                 }
                 else  //if the record is not found in the menuItemList, set index to -1 and return error message
                 {
@@ -179,7 +181,7 @@ namespace Group29_BlitzCafe
 
             txtDesc.ReadOnly = true;
             txtItemID.ReadOnly = true;
-            txtPrice.ReadOnly = true;
+            numPrice.ReadOnly = true;
 
             choice = 2;
 
@@ -222,7 +224,7 @@ namespace Group29_BlitzCafe
 
                         txtDesc.ReadOnly = false;
                         txtItemID.ReadOnly = false;
-                        txtPrice.ReadOnly = false;
+                        numPrice.ReadOnly = false;
 
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
@@ -266,22 +268,55 @@ namespace Group29_BlitzCafe
         {
             if (validateInput())
             {
-                string newDesc = txtDesc.Text;
-                decimal newPrice = Convert.ToDecimal(txtPrice.Text);
+                string newDescri = txtDesc.Text;
+                decimal newPrice = Convert.ToDecimal(numPrice.Text);
 
-                menuItemList[selectedItemIndex].setDescr(newDesc);
-                menuItemList[selectedItemIndex].setPrice(newPrice);
+                string query = @"UPDATE Items Description = @newDescri, Price = @newPrice WHERE ItemID = " + selectedItemIndex + "";
+                //insert new item into database  DYLAN AND SINO
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@descri", newDescri);
+                        cmd.Parameters.AddWithValue("@price", newPrice);
 
-                //update item in databse
+                        conn.Open();
 
-                btnConfirm.Visible = false;
-                btnCancel.Visible = false;
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
 
-                btnAddItem.Visible = true;
-                btnDelete.Visible = true;
-                btnEditItem.Visible = true;
-                loadMenuItems();
-            }      
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item edited successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Edit failed. No rows affected.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Item could not be edited to database. " + ex.Message);
+                    }
+
+                    menuItemList[selectedItemIndex].setDescr(newDescri);
+                    menuItemList[selectedItemIndex].setPrice(newPrice);
+
+                    //update item in databse
+
+                    btnConfirm.Visible = false;
+                    btnCancel.Visible = false;
+
+                    btnAddItem.Visible = true;
+                    btnDelete.Visible = true;
+                    btnEditItem.Visible = true;
+                    loadMenuItems();
+                }
+            }
         }
 
         private void addItem()
@@ -289,22 +324,41 @@ namespace Group29_BlitzCafe
             //create temp variables for item attributes
             int newItemId;
             decimal price;
-            string descr;
+            string descri;
 
 
             //calll validate method, if valid execute code
             if (validateInput())
             {
                 //assign temp values with valid user inputs
-                descr = txtDesc.Text;
-                price = Convert.ToDecimal(txtPrice.Text);
-
+                descri = txtDesc.Text;
+                price = Convert.ToDecimal(numPrice.Text);
+                string query = @"INSERT INTO Items (Description, Price) VALUES (@descri, @price)";
                 //insert new item into database  DYLAN AND SINO
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
                 {
                     try
                     {
-                       
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@descri", descri);
+                        cmd.Parameters.AddWithValue("@price", price);
+
+                        conn.Open();
+
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item added successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Insert failed. No rows affected.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -312,6 +366,11 @@ namespace Group29_BlitzCafe
                     }
                 }
 
+            }
+            else 
+            {
+                MessageBox.Show("Please ensure all fields are filled correctly. " +
+                        "Description and Price cannot be empty.");
             }
 
             btnAddItem.Visible = true;
@@ -367,6 +426,11 @@ namespace Group29_BlitzCafe
 
             btnCancel.Visible = false;
             btnConfirm.Visible = false;
+
+        }
+
+        private void ItemPage_Load(object sender, EventArgs e)
+        {
 
         }
     }

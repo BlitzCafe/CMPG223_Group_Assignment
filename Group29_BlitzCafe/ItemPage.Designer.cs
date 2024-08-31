@@ -34,7 +34,6 @@ namespace Group29_BlitzCafe
             this.btnEditItem = new System.Windows.Forms.Button();
             this.txtItemID = new System.Windows.Forms.TextBox();
             this.txtDesc = new System.Windows.Forms.TextBox();
-            this.txtPrice = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -42,8 +41,10 @@ namespace Group29_BlitzCafe
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+            this.numPrice = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
             this.SuspendLayout();
             // 
             // btnAddItem
@@ -95,13 +96,6 @@ namespace Group29_BlitzCafe
             this.txtDesc.Size = new System.Drawing.Size(137, 22);
             this.txtDesc.TabIndex = 1;
             // 
-            // txtPrice
-            // 
-            this.txtPrice.Location = new System.Drawing.Point(163, 192);
-            this.txtPrice.Name = "txtPrice";
-            this.txtPrice.Size = new System.Drawing.Size(137, 22);
-            this.txtPrice.TabIndex = 2;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -131,10 +125,10 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.numPrice);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
             this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.txtPrice);
             this.groupBox1.Controls.Add(this.txtDesc);
             this.groupBox1.Controls.Add(this.txtItemID);
             this.groupBox1.Location = new System.Drawing.Point(532, 92);
@@ -179,6 +173,14 @@ namespace Group29_BlitzCafe
             this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+            // numPrice
+            // 
+            this.numPrice.DecimalPlaces = 2;
+            this.numPrice.Location = new System.Drawing.Point(163, 192);
+            this.numPrice.Name = "numPrice";
+            this.numPrice.Size = new System.Drawing.Size(120, 22);
+            this.numPrice.TabIndex = 6;
+            // 
             // ItemPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
@@ -194,9 +196,11 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "ItemPage";
             this.Text = "ItemPage";
+            this.Load += new System.EventHandler(this.ItemPage_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).EndInit();
             this.groupBox1.ResumeLayout(false);
             this.groupBox1.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.numPrice)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -208,7 +212,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnEditItem;
         private System.Windows.Forms.TextBox txtItemID;
         private System.Windows.Forms.TextBox txtDesc;
-        private System.Windows.Forms.TextBox txtPrice;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
@@ -217,6 +220,6 @@ namespace Group29_BlitzCafe
 
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnCancel;
-
+        private System.Windows.Forms.NumericUpDown numPrice;
     }
 }

@@ -32,7 +32,6 @@ namespace Group29_BlitzCafe
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.label9 = new System.Windows.Forms.Label();
-            this.txtCellNumber = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTotalAmount = new System.Windows.Forms.TextBox();
             this.label7 = new System.Windows.Forms.Label();
@@ -47,6 +46,8 @@ namespace Group29_BlitzCafe
             this.label1 = new System.Windows.Forms.Label();
             this.lbxReceipt = new System.Windows.Forms.ListBox();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.label10 = new System.Windows.Forms.Label();
+            this.dbgOrderDetails = new System.Windows.Forms.DataGridView();
             this.cbxLoyaltyPointsUsed = new System.Windows.Forms.CheckBox();
             this.cbxIsPayed = new System.Windows.Forms.CheckBox();
             this.dtOrderDate = new System.Windows.Forms.DateTimePicker();
@@ -56,13 +57,13 @@ namespace Group29_BlitzCafe
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.dbgOrderDetails = new System.Windows.Forms.DataGridView();
-            this.label10 = new System.Windows.Forms.Label();
+            this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            this.cbxCustomerPhoneNum = new System.Windows.Forms.ComboBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).BeginInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).BeginInit();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -78,8 +79,8 @@ namespace Group29_BlitzCafe
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.cbxCustomerPhoneNum);
             this.tabPage1.Controls.Add(this.label9);
-            this.tabPage1.Controls.Add(this.txtCellNumber);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.txtTotalAmount);
             this.tabPage1.Controls.Add(this.label7);
@@ -97,7 +98,7 @@ namespace Group29_BlitzCafe
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.tabPage1.Size = new System.Drawing.Size(1207, 473);
+            this.tabPage1.Size = new System.Drawing.Size(1207, 516);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Order";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -110,13 +111,6 @@ namespace Group29_BlitzCafe
             this.label9.Size = new System.Drawing.Size(103, 17);
             this.label9.TabIndex = 17;
             this.label9.Text = "Phone Number";
-            // 
-            // txtCellNumber
-            // 
-            this.txtCellNumber.Location = new System.Drawing.Point(1080, 52);
-            this.txtCellNumber.Name = "txtCellNumber";
-            this.txtCellNumber.Size = new System.Drawing.Size(91, 22);
-            this.txtCellNumber.TabIndex = 16;
             // 
             // label8
             // 
@@ -258,6 +252,26 @@ namespace Group29_BlitzCafe
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
             // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.Location = new System.Drawing.Point(56, 260);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(92, 17);
+            this.label10.TabIndex = 26;
+            this.label10.Text = "Order Details";
+            // 
+            // dbgOrderDetails
+            // 
+            this.dbgOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dbgOrderDetails.Location = new System.Drawing.Point(56, 295);
+            this.dbgOrderDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.dbgOrderDetails.Name = "dbgOrderDetails";
+            this.dbgOrderDetails.RowHeadersWidth = 62;
+            this.dbgOrderDetails.RowTemplate.Height = 28;
+            this.dbgOrderDetails.Size = new System.Drawing.Size(507, 183);
+            this.dbgOrderDetails.TabIndex = 25;
+            // 
             // cbxLoyaltyPointsUsed
             // 
             this.cbxLoyaltyPointsUsed.AutoSize = true;
@@ -343,25 +357,23 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 0;
             this.label2.Text = "Order History";
             // 
-            // dbgOrderDetails
+            // mySqlCommand1
             // 
-            this.dbgOrderDetails.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgOrderDetails.Location = new System.Drawing.Point(56, 295);
-            this.dbgOrderDetails.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.dbgOrderDetails.Name = "dbgOrderDetails";
-            this.dbgOrderDetails.RowHeadersWidth = 62;
-            this.dbgOrderDetails.RowTemplate.Height = 28;
-            this.dbgOrderDetails.Size = new System.Drawing.Size(507, 183);
-            this.dbgOrderDetails.TabIndex = 25;
+            this.mySqlCommand1.CacheAge = 0;
+            this.mySqlCommand1.Connection = null;
+            this.mySqlCommand1.EnableCaching = false;
+            this.mySqlCommand1.Transaction = null;
             // 
-            // label10
+            // cbxCustomerPhoneNum
             // 
-            this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(56, 260);
-            this.label10.Name = "label10";
-            this.label10.Size = new System.Drawing.Size(92, 17);
-            this.label10.TabIndex = 26;
-            this.label10.Text = "Order Details";
+            this.cbxCustomerPhoneNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.cbxCustomerPhoneNum.FormattingEnabled = true;
+            this.cbxCustomerPhoneNum.Location = new System.Drawing.Point(1067, 49);
+            this.cbxCustomerPhoneNum.Name = "cbxCustomerPhoneNum";
+            this.cbxCustomerPhoneNum.Size = new System.Drawing.Size(121, 24);
+            this.cbxCustomerPhoneNum.TabIndex = 18;
+           
+            this.cbxCustomerPhoneNum.TextChanged += new System.EventHandler(this.cbxCustomerPhoneNum_TextChanged);
             // 
             // OrderPage
             // 
@@ -378,8 +390,8 @@ namespace Group29_BlitzCafe
             this.tabPage1.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).EndInit();
+            ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).EndInit();
             this.ResumeLayout(false);
 
         }
@@ -412,8 +424,9 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.TextBox txtTotalAmount;
         private System.Windows.Forms.Label label9;
-        private System.Windows.Forms.TextBox txtCellNumber;
         private System.Windows.Forms.DataGridView dbgOrderDetails;
         private System.Windows.Forms.Label label10;
+        private System.Windows.Forms.ComboBox cbxCustomerPhoneNum;
+        private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
     }
 }
