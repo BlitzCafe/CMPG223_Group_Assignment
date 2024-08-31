@@ -162,6 +162,10 @@ namespace Group29_BlitzCafe
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Item Deleted successfully.");
+                            txtCustID.Clear();
+                            txtFName.Clear();
+                            txtLName.Clear();
+                            txtCellNo.Clear();
                                 load_Customer_Info(); // Refresh or reload customer info as needed
                             }
                             else
