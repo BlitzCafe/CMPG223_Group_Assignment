@@ -33,24 +33,20 @@ namespace Group29_BlitzCafe
         //validate text box inputs to be of the same type as the database
         private bool validateInput()
         {
-            if (!int.TryParse(txtItemID.Text, out int _))
-            {
-                MessageBox.Show("Item ID must be a valid integer.");
-                return false;
-            }
+           
+            
+                if (!decimal.TryParse(numPrice.Text, out decimal _))
+                {
+                    MessageBox.Show("Price must be a valid decimal number.");
+                    return false;
+                }
 
-            if (!decimal.TryParse(txtPrice.Text, out decimal _))
-            {
-                MessageBox.Show("Price must be a valid decimal number.");
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtDesc.Text))
-            {
-                MessageBox.Show("Description cannot be empty.");
-                return false;
-            }
-
+                if (string.IsNullOrWhiteSpace(txtDesc.Text))
+                {
+                    MessageBox.Show("Description cannot be empty.");
+                    return false;
+                }
+            
             return true;
         }
 
@@ -137,7 +133,7 @@ namespace Group29_BlitzCafe
                 {
                     txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
                     txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    txtPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
                 }
                 else  //if the record is not found in the menuItemList, set index to -1 and return error message
                 {
@@ -185,7 +181,7 @@ namespace Group29_BlitzCafe
 
             txtDesc.ReadOnly = true;
             txtItemID.ReadOnly = true;
-            txtPrice.ReadOnly = true;
+            numPrice.ReadOnly = true;
 
             choice = 2;
 
@@ -228,7 +224,7 @@ namespace Group29_BlitzCafe
 
                         txtDesc.ReadOnly = false;
                         txtItemID.ReadOnly = false;
-                        txtPrice.ReadOnly = false;
+                        numPrice.ReadOnly = false;
 
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
@@ -273,7 +269,7 @@ namespace Group29_BlitzCafe
             if (validateInput())
             {
                 string newDesc = txtDesc.Text;
-                decimal newPrice = Convert.ToDecimal(txtPrice.Text);
+                decimal newPrice = Convert.ToDecimal(numPrice.Text);
 
                 menuItemList[selectedItemIndex].setDescr(newDesc);
                 menuItemList[selectedItemIndex].setPrice(newPrice);
@@ -303,7 +299,7 @@ namespace Group29_BlitzCafe
             {
                 //assign temp values with valid user inputs
                 descri = txtDesc.Text;
-                price = Convert.ToDecimal(txtPrice.Text);
+                price = Convert.ToDecimal(numPrice.Text);
                 string query = @"INSERT INTO Items (Description, Price) VALUES (@descri, @price)";
                 //insert new item into database  DYLAN AND SINO
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
@@ -397,6 +393,11 @@ namespace Group29_BlitzCafe
 
             btnCancel.Visible = false;
             btnConfirm.Visible = false;
+
+        }
+
+        private void ItemPage_Load(object sender, EventArgs e)
+        {
 
         }
     }
