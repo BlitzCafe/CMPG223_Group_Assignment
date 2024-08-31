@@ -119,6 +119,7 @@ namespace Group29_BlitzCafe
                         {
                             MessageBox.Show("Insert failed. No rows affected.");
                         }
+                        conn.Close();
                     }
                     catch (SqlException sqlEx)
                     {
@@ -143,6 +144,50 @@ namespace Group29_BlitzCafe
 
         private void confirm_Delete()
         {
+            if (selectedItemIndex != -1)
+            {
+
+               // DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
+                                     // MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+               // if (result == DialogResult.Yes)
+                //{
+                    string query = @"DELETE FROM Customer WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        //Delete customer from databse
+                        try
+                        {
+                            conn.Open();
+
+                            //Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the delete was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Item Deleted successfully.");
+                                txtCustID.Clear();
+                                txtFName.Clear();
+                                txtLName.Clear();
+                                txtCellNo.Clear();
+                                load_Customer_Info(); // Refresh or reload customer info as needed
+                            }
+                            else
+                            {
+                                MessageBox.Show("Delete failed. No rows affected.");
+                            }
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
+                        }
+                    }
+                //}
+            }
 
         }
 
@@ -153,13 +198,12 @@ namespace Group29_BlitzCafe
             string newLName = txtLName.Text;
             string newCellNo = txtCellNo.Text;
 
-            if (dbgCustomerInfo.SelectedRows.Count > 0)
-            {
+           
                 if (newCellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
 
                 {
                     // Define the SQL query with parameters
-                    string query = @"UPDATE Customer SET First_Name = @newFName, Last_Name = @newLName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                    string query = @"UPDATE Customer SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
 
                     // Use 'using' statements to ensure proper disposal of resources
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
@@ -183,12 +227,13 @@ namespace Group29_BlitzCafe
                             {
                                 MessageBox.Show("Customer edited successfully.");
                                 load_Customer_Info(); // Refresh or reload customer info as needed
-                                conn.Close();
+                                
                             }
                             else
                             {
                                 MessageBox.Show("Insert failed. No rows affected.");
                             }
+                            conn.Close();
                         }
                         catch (SqlException sqlEx)
                         {
@@ -206,7 +251,6 @@ namespace Group29_BlitzCafe
                 {
                     MessageBox.Show("Please make sure all info is entered and correct.");
                 }
-            }
         }
 
         private void CustomerPage_Load(object sender, EventArgs e)
