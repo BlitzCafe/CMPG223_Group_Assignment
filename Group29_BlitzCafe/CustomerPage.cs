@@ -158,14 +158,10 @@ namespace Group29_BlitzCafe
                             //Execute the command
                             int rowsAffected = cmd.ExecuteNonQuery();
 
-                            // Check if the delete was successful
+                            // Check if the insert was successful
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Item Deleted successfully.");
-                                txtCustID.Clear();
-                                txtFName.Clear();
-                                txtLName.Clear();
-                                txtCellNo.Clear();
                                 load_Customer_Info(); // Refresh or reload customer info as needed
                             }
                             else
@@ -180,12 +176,8 @@ namespace Group29_BlitzCafe
                             MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
                         }
                     }
-                
             }
-
         }
-
-
         private void confirm_Update()
         {
             string newFName = txtFName.Text;
