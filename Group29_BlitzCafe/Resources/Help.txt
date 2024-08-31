@@ -1,0 +1,34 @@
+Upon opening the application you will see a menu strip with the following words: customers, orders, help exit, and items.
+Clicking the Reports button will take you to the Reports form.
+Here you can:
+	Request reports such as income per time period.
+
+Clicking the Customer button will take you to the Customer Page form.
+Here you can:
+	Enter the details of a new customer and click on the "add new customer" button.
+	Enter the details of a previous customer and click on the "delete new customer" button.
+	Enter the new details of a customer and click on the "confirm changes" button.
+
+
+Clicking the Items button will take you to the Item Page form.
+Here you can: 
+	Enter the details of a new item and click on the "add new item" button.
+	Enter the details of a previous item and click on the "delete " button.
+	Enter the new details of an item and click on the "edit item" button.
+	To finalise the changes, select the "confirm" button.
+
+Upon reaching the Confirmation page:
+	Click on the "confirm payment" to actually confirm the payment.	
+	If you select the "print receipt" button you will be shown the details of the receipt.
+
+Clicking the Help button will take you to the Help form, which is the one that is currently open.
+
+Clicking the Orders button will take you to the Order Page form.
+Here you can: 
+	If you select the "Add Order" tab, add new items by filling in the required details such as the phone number slot and quantity then select the" add item to 	order" button.
+	If the  desired task is complete, proceed to the "check out" button.
+	If you select the "Order History" tab , you can trace an order after filling in the order ID and selecting a date and if the customer was a loyalty points and 	if it was paid for.				
+	To delete an order history, fill in the details then select the delete button.
+
+
+Clicking the exit button will close the entire application.
