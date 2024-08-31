@@ -146,12 +146,6 @@ namespace Group29_BlitzCafe
         {
             if (selectedItemIndex != -1)
             {
-
-               // DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
-                                     // MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-               // if (result == DialogResult.Yes)
-                //{
                     string query = @"DELETE FROM Customer WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -186,7 +180,7 @@ namespace Group29_BlitzCafe
                             MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
                         }
                     }
-                //}
+                
             }
 
         }
