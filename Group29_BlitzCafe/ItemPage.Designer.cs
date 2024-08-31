@@ -38,10 +38,10 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.numPrice = new System.Windows.Forms.NumericUpDown();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.numPrice = new System.Windows.Forms.NumericUpDown();
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
@@ -88,6 +88,7 @@ namespace Group29_BlitzCafe
             this.txtItemID.ReadOnly = true;
             this.txtItemID.Size = new System.Drawing.Size(137, 22);
             this.txtItemID.TabIndex = 0;
+            this.txtItemID.TextChanged += new System.EventHandler(this.txtItemID_TextChanged);
             // 
             // txtDesc
             // 
@@ -138,6 +139,14 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Details";
             // 
+            // numPrice
+            // 
+            this.numPrice.DecimalPlaces = 2;
+            this.numPrice.Location = new System.Drawing.Point(163, 192);
+            this.numPrice.Name = "numPrice";
+            this.numPrice.Size = new System.Drawing.Size(120, 22);
+            this.numPrice.TabIndex = 6;
+            // 
             // btnDelete
             // 
             this.btnDelete.Location = new System.Drawing.Point(629, 33);
@@ -172,14 +181,6 @@ namespace Group29_BlitzCafe
             this.btnCancel.UseVisualStyleBackColor = true;
             this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
-            // 
-            // numPrice
-            // 
-            this.numPrice.DecimalPlaces = 2;
-            this.numPrice.Location = new System.Drawing.Point(163, 192);
-            this.numPrice.Name = "numPrice";
-            this.numPrice.Size = new System.Drawing.Size(120, 22);
-            this.numPrice.TabIndex = 6;
             // 
             // ItemPage
             // 

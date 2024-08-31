@@ -271,16 +271,16 @@ namespace Group29_BlitzCafe
                 string newDescri = txtDesc.Text;
                 decimal newPrice = Convert.ToDecimal(numPrice.Text);
 
-                string query = @"UPDATE Items Description = @newDescri, Price = @newPrice WHERE ItemID = " + selectedItemIndex + "";
-                //insert new item into database  DYLAN AND SINO
+                string query = @"UPDATE Items SET Description = @newDescri, Price = @newPrice WHERE ItemID = '" + Convert.ToInt32(txtItemID.Text) + "'";
+                //Update new item into database  DYLAN AND SINO
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 using (cmd = new SqlCommand(query, conn))
                 {
                     try
                     {
                         // Define parameters and their values
-                        cmd.Parameters.AddWithValue("@descri", newDescri);
-                        cmd.Parameters.AddWithValue("@price", newPrice);
+                        cmd.Parameters.AddWithValue("@newDescri", newDescri);
+                        cmd.Parameters.AddWithValue("@newPrice", newPrice);
 
                         conn.Open();
 
@@ -297,6 +297,8 @@ namespace Group29_BlitzCafe
                         {
                             MessageBox.Show("Edit failed. No rows affected.");
                         }
+
+                        conn.Close();
                     }
                     catch (Exception ex)
                     {
@@ -305,8 +307,6 @@ namespace Group29_BlitzCafe
 
                     menuItemList[selectedItemIndex].setDescr(newDescri);
                     menuItemList[selectedItemIndex].setPrice(newPrice);
-
-                    //update item in databse
 
                     btnConfirm.Visible = false;
                     btnCancel.Visible = false;
@@ -359,6 +359,8 @@ namespace Group29_BlitzCafe
                         {
                             MessageBox.Show("Insert failed. No rows affected.");
                         }
+
+                        conn.Close();
                     }
                     catch (Exception ex)
                     {
@@ -385,7 +387,6 @@ namespace Group29_BlitzCafe
 
         private void deleteItem()
         {
-            
 
             if (selectedItemIndex != -1)
             {
@@ -395,11 +396,43 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    MenuItem deleteItem = menuItemList[selectedItemIndex];
-                    menuItemList.Remove(deleteItem);
+                    string query = @"DELETE FROM Items WHERE ItemID = '"+Convert.ToInt32(txtItemID.Text)+"'";
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (cmd = new SqlCommand(query, conn))
+                    {
+                        //Delete item from databse
+                        try
+                        {
+                            conn.Open();
+
+                            //Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the insert was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Item Deleted successfully.");
+                                txtDesc.Clear();
+                                txtItemID.Clear();
+                                numPrice.ResetText();
+                                loadMenuItems(); // Refresh or reload menu items info as needed
+                            }
+                            else
+                            {
+                                MessageBox.Show("Delete failed. No rows affected.");
+                            }
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
+                        }
+                    }
+                    
 
                     
-                    //Delete item from databse
+                    
 
                 }
                 else
@@ -430,6 +463,11 @@ namespace Group29_BlitzCafe
         }
 
         private void ItemPage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtItemID_TextChanged(object sender, EventArgs e)
         {
 
         }
