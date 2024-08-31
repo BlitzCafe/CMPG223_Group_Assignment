@@ -149,12 +149,58 @@ namespace Group29_BlitzCafe
 
         private void confirm_Update()
         {
+            string newFName = txtFName.Text;
+            string newLName = txtLName.Text;
+            string newCellNo = txtCellNo.Text;
+
             if (dbgCustomerInfo.SelectedRows.Count > 0)
             {
-                if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
+                if (newCellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
 
                 {
+                    // Define the SQL query with parameters
+                    string query = @"UPDATE Customer SET First_Name = @newFName, Last_Name = @newLName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
 
+                    // Use 'using' statements to ensure proper disposal of resources
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    {
+                        try
+                        {
+                            // Define parameters and their values
+                            cmd.Parameters.AddWithValue("@newFName", newFName);
+                            cmd.Parameters.AddWithValue("@newLName", newLName);
+                            cmd.Parameters.AddWithValue("@newCellNo", newCellNo);
+
+                            // Open the connection
+                            conn.Open();
+
+                            // Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the insert was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Customer edited successfully.");
+                                load_Customer_Info(); // Refresh or reload customer info as needed
+                                conn.Close();
+                            }
+                            else
+                            {
+                                MessageBox.Show("Insert failed. No rows affected.");
+                            }
+                        }
+                        catch (SqlException sqlEx)
+                        {
+                            // Handle SQL-specific exceptions
+                            MessageBox.Show("Database error: " + sqlEx.Message);
+                        }
+                        catch (Exception ex)
+                        {
+                            // Handle all other exceptions
+                            MessageBox.Show("An error occurred: " + ex.Message);
+                        }
+                    }
                 }
                 else
                 {
@@ -263,6 +309,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = false;
 
             choice = 3;
 
@@ -275,6 +322,7 @@ namespace Group29_BlitzCafe
         {
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
+            dtpDate.Enabled = false;
 
             choice = 2;
 
