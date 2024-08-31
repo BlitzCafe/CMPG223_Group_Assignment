@@ -22,6 +22,8 @@ namespace Group29_BlitzCafe
         private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
 
+        private decimal totalAmount = 0.0m;
+
         public OrderPage()
         {
             InitializeComponent();
@@ -91,16 +93,16 @@ namespace Group29_BlitzCafe
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
         {
             string searchID = txtSearchItemID.Text;
+            lbxItemSelection.Items.Clear();
             if (searchID != "")
             {
-                lbxItemSelection.Items.Clear();
-
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
                     string itemID = item.getItemID().ToString();
                     if (itemID.Contains(searchID))
                     {
-                        lbxItemSelection.Items.Add(item);
+                        lbxItemSelection.Items.Add(item.toString());
+                        break;
 
                     }
 
@@ -112,34 +114,53 @@ namespace Group29_BlitzCafe
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            decimal totalAmount = 0.0m;
+            decimal itemAmount = 0.0m; 
             string itemId = txtSearchItemID.Text;
+            int quantity = int.Parse(txtQtyIItemOrdered.Text);
             foreach (MenuItem item in itemPageFrm.menuItemList)
             {
                 string itemID = item.getItemID().ToString();
                 if (itemID.Contains(itemId))
                 {
+                    item.setQtySold(quantity);
                     receipt.Add(item);
-                    lbxReceipt.Items.Add(item.toString());
-                    totalAmount += item.getPrice();
+                    itemAmount = item.getPrice() * quantity;
+                    lbxReceipt.Items.Add(item.toString() + "Order Amount: "  +itemAmount.ToString());
+
+                    totalAmount += itemAmount;
+                    break;
                 }
             }
+
             txtTotalAmount.Text = totalAmount.ToString();
+            txtSearchItemID.Clear();
+            txtSearchDescr.Clear();
+            txtQtyIItemOrdered.Clear();
+            lbxItemSelection.Items.Clear();
 
         }
 
         private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int index = lbxItemSelection.SelectedIndex;
-
-            if (index >= 0 && index <= itemPageFrm.menuItemList.Count)
+            if (lbxItemSelection.SelectedItem != null)
             {
-                MenuItem selectedItem = itemPageFrm.menuItemList[index];
 
-                txtSearchDescr.Text = selectedItem.getDescr();
-                txtSearchItemID.Text = selectedItem.getItemID().ToString();
+                string selectedItemInfo = lbxItemSelection.SelectedItem.ToString();
+
+                // Loop through the menuItemList to find the matching item
+                foreach (MenuItem item in itemPageFrm.menuItemList)
+                {
+                    // Check for matching criteria (here we assume the `ToString` method returns a unique representation)
+                    if (item.toString() == selectedItemInfo)
+                    {
+                        // Set the description and item ID in the text boxes
+                        txtSearchDescr.Text = item.getDescr();
+                        txtSearchItemID.Text = item.getItemID().ToString();
+                        break; // Exit the loop once a match is found
+
+                    }
+                }
             }
-
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
@@ -163,8 +184,8 @@ namespace Group29_BlitzCafe
                 confirmationForm.ShowDialog();
             }
             else
-            {   
-                MessageBox.Show("Phone number does not exist. Please try again.")
+            {
+                MessageBox.Show("Phone number does not exist. Please try again.");
             }
             
         }

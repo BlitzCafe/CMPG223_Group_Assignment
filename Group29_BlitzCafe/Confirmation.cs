@@ -63,7 +63,6 @@ namespace Group29_BlitzCafe
 
                     if (cbxUseLoyaltyPoints.Checked)
                     {
-<
                         // Calculate discount
                         decimal discount = currentPoints * pointsToMoneyConversion;
                         decimal adjustedTotal = totalAmount - discount;
@@ -118,7 +117,7 @@ namespace Group29_BlitzCafe
             string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@CellNo", customerCell);
+                cmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
                 object result = cmd.ExecuteScalar();
                 return result != null ? Convert.ToDecimal(result) : 0;
             }
