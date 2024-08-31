@@ -48,7 +48,6 @@ namespace Group29_BlitzCafe
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
-                    dataAdapter.Fill(dataTable);
 
                     dbgCustomerInfo.DataSource = dataTable;
 
@@ -99,7 +98,7 @@ namespace Group29_BlitzCafe
 
         private void confirm_Delete()
         {
-
+            
         }
 
 
@@ -158,7 +157,6 @@ namespace Group29_BlitzCafe
 
                         choice = 0;
 
-
                         btnUpdate.Visible = true;
                         btnDelete.Visible = true;
                         btnAddNew.Visible = true;
@@ -172,11 +170,14 @@ namespace Group29_BlitzCafe
 
                         choice = 0;
 
-                            btnUpdate.Visible = true;
-                            btnDelete.Visible = true;
-                            btnAddNew.Visible = true;
-                            break;
-                        
+                        btnUpdate.Visible = true;
+                        btnDelete.Visible = true;
+                        btnAddNew.Visible = true;
+
+                        txtFName.ReadOnly = false;
+                        txtLName.ReadOnly = false;
+                        txtCellNo.ReadOnly = false;
+                        break;
                     }
                 case 3:
                     {
@@ -212,22 +213,28 @@ namespace Group29_BlitzCafe
 
         private void btnUpdate_Click(object sender, EventArgs e)
         {
-                btnConfirm.Visible = true;
-                btnCancel.Visible = true;
 
-                choice = 3;
+            btnConfirm.Visible = true;
+            btnCancel.Visible = true;
 
-                btnUpdate.Visible = false;
-                btnDelete.Visible = false;
-                btnAddNew.Visible = false;
+            choice = 3;
+
+            btnUpdate.Visible = false;
+            btnDelete.Visible = false;
+            btnAddNew.Visible = false;
         }
 
         private void btnDelete_Click(object sender, EventArgs e)
         {
+
             btnConfirm.Visible = true;
             btnCancel.Visible = true;
 
             choice = 2;
+
+            txtFName.ReadOnly = true;
+            txtLName.ReadOnly = true;
+            txtCellNo.ReadOnly = true;
 
             btnUpdate.Visible = false;
             btnDelete.Visible = false;
