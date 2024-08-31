@@ -26,7 +26,7 @@ namespace Group29_BlitzCafe
         private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
 
 
-        private List<Customer> customerList = new List<Customer>();
+        public List<Customer> customerList = new List<Customer>();
 
         private int choice = 0, selectedItemIndex;
 

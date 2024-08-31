@@ -25,7 +25,37 @@ namespace Group29_BlitzCafe
        
         private void Form1_Load(object sender, EventArgs e)
         {
-            
+            // Initialize the Timer
+            Timer timer = new Timer();
+            timer.Interval = 50; // Set the interval for the timer (milliseconds)
+
+            // Initialize the PictureBox
+            movingPictureBox.SizeMode = PictureBoxSizeMode.AutoSize; // Adjust the PictureBox size to fit the image
+
+            // Set the starting position outside the panel on the right
+            int startPositionX = panel1.Width;
+            movingPictureBox.Location = new Point(startPositionX, (panel1.Height - movingPictureBox.Height) / 2);
+
+            // Add the PictureBox and Label to the Panel
+            panel1.Controls.Add(movingPictureBox);
+
+            // Define the Tick event for the Timer
+            timer.Tick += (s, ev) =>
+            {
+                // Move the PictureBox and Label to the left
+                movingPictureBox.Left -= 5; // Adjust the speed by changing the value (pixels per tick)
+
+                // If the PictureBox has completely moved out of the panel, reset its position
+                if (movingPictureBox.Right < 0)
+                {
+                    movingPictureBox.Left = panel1.Width;
+                }
+
+
+            };
+
+            // Start the Timer when the form loads
+            timer.Start();
         }
 
 
@@ -154,7 +184,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(1050, 495);
+            f1.Size = new Size(850, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
@@ -189,6 +219,11 @@ namespace Group29_BlitzCafe
         }
 
         private void panel5_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void panel4_Paint(object sender, PaintEventArgs e)
         {
 
         }
