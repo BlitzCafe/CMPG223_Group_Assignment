@@ -21,7 +21,6 @@ namespace Group29_BlitzCafe
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
-        SqlDataReader reader;
         private int choice = 0;
        
 
@@ -296,22 +295,41 @@ namespace Group29_BlitzCafe
             //create temp variables for item attributes
             int newItemId;
             decimal price;
-            string descr;
+            string descri;
 
 
             //calll validate method, if valid execute code
             if (validateInput())
             {
                 //assign temp values with valid user inputs
-                descr = txtDesc.Text;
+                descri = txtDesc.Text;
                 price = Convert.ToDecimal(txtPrice.Text);
-
+                string query = @"INSERT INTO Items (Description, Price) VALUES (@descri, @price)";
                 //insert new item into database  DYLAN AND SINO
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
                 {
                     try
                     {
-                       
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@descri", descri);
+                        cmd.Parameters.AddWithValue("@price", price);
+
+                        conn.Open();
+
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item added successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Insert failed. No rows affected.");
+                        }
                     }
                     catch (Exception ex)
                     {
@@ -319,6 +337,11 @@ namespace Group29_BlitzCafe
                     }
                 }
 
+            }
+            else 
+            {
+                MessageBox.Show("Please ensure all fields are filled correctly. " +
+                        "Description and Price cannot be empty.");
             }
 
             btnAddItem.Visible = true;
