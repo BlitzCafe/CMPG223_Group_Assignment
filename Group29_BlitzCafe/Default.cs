@@ -35,19 +35,21 @@ namespace Group29_BlitzCafe
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
 
-            // Add the form to the panel first
+            // Set the fixed size for the form
+            f1.Size = new Size(850, 495);
+
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
 
-            // Show the form to calculate its actual size
+            // Show the form to ensure it's added to the panel
             f1.Show();
 
-            // Ensure the form's width and height are within the panel's bounds
-            if (f1.Width > panel1.Width)
-                f1.Width = panel1.Width;
-            if (f1.Height > panel1.Height)
-                f1.Height = panel1.Height;
+            // Set the panel size to match the form size
+            panel1.Size = f1.Size;
+
+            // Adjust the main form's ClientSize to fit the panel
+            this.ClientSize = new Size(panel1.Width, panel1.Height);
 
             // Center the form within the panel
             f1.Left = (panel1.Width - f1.Width) / 2;
@@ -63,7 +65,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(1402, 698);
+            f1.Size = new Size(1050, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
@@ -92,26 +94,27 @@ namespace Group29_BlitzCafe
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
 
-            // Add the form to the panel first
+            // Set the fixed size for the form
+            f1.Size = new Size(850, 495);
+
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
 
-            // Show the form to calculate its actual size
+            // Show the form to ensure it's added to the panel
             f1.Show();
 
-            // Ensure the form's width and height are within the panel's bounds
-            if (f1.Width > panel1.Width)
-                f1.Width = panel1.Width;
-            if (f1.Height > panel1.Height)
-                f1.Height = panel1.Height;
+            // Set the panel size to match the form size
+            panel1.Size = f1.Size;
+
+            // Adjust the main form's ClientSize to fit the panel
+            this.ClientSize = new Size(panel1.Width, panel1.Height);
 
             // Center the form within the panel
             f1.Left = (panel1.Width - f1.Width) / 2;
             f1.Top = (panel1.Height - f1.Height) / 2;
 
             f1.BringToFront();
-
 
         }
 
@@ -121,19 +124,21 @@ namespace Group29_BlitzCafe
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
 
-            // Add the form to the panel first
+            // Set the fixed size for the form
+            f1.Size = new Size(1050, 495);
+
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
 
-            // Show the form to calculate its actual size
+            // Show the form to ensure it's added to the panel
             f1.Show();
 
-            // Ensure the form's width and height are within the panel's bounds
-            if (f1.Width > panel1.Width)
-                f1.Width = panel1.Width;
-            if (f1.Height > panel1.Height)
-                f1.Height = panel1.Height;
+            // Set the panel size to match the form size
+            panel1.Size = f1.Size;
+
+            // Adjust the main form's ClientSize to fit the panel
+            this.ClientSize = new Size(panel1.Width, panel1.Height);
 
             // Center the form within the panel
             f1.Left = (panel1.Width - f1.Width) / 2;
@@ -148,19 +153,21 @@ namespace Group29_BlitzCafe
             f1.TopLevel = false;
             f1.FormBorderStyle = FormBorderStyle.None;
 
-            // Add the form to the panel first
+            // Set the fixed size for the form
+            f1.Size = new Size(1050, 495);
+
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
             panel1.Controls.Add(f1);
 
-            // Show the form to calculate its actual size
+            // Show the form to ensure it's added to the panel
             f1.Show();
 
-            // Ensure the form's width and height are within the panel's bounds
-            if (f1.Width > panel1.Width)
-                f1.Width = panel1.Width;
-            if (f1.Height > panel1.Height)
-                f1.Height = panel1.Height;
+            // Set the panel size to match the form size
+            panel1.Size = f1.Size;
+
+            // Adjust the main form's ClientSize to fit the panel
+            this.ClientSize = new Size(panel1.Width, panel1.Height);
 
             // Center the form within the panel
             f1.Left = (panel1.Width - f1.Width) / 2;

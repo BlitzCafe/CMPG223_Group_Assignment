@@ -180,7 +180,7 @@ namespace Group29_BlitzCafe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1209, 851);
+            this.ClientSize = new System.Drawing.Size(1209, 757);
             this.Controls.Add(this.menuStrip1);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel4);
