@@ -16,6 +16,8 @@ namespace Group29_BlitzCafe
     {
         private Default defaultFrm = new Default();
         private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+        private CustomerPage customerPageFrm = new CustomerPage();
+        
 
         private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
@@ -23,7 +25,12 @@ namespace Group29_BlitzCafe
         public OrderPage()
         {
             InitializeComponent();
-            
+
+            loadOrderHistory();
+            customerPageFrm.load_Customer_Info();
+            itemPageFrm.loadMenuItems();
+
+
         }
 
         private void loadOrderHistory()
