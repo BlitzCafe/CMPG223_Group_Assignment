@@ -151,8 +151,8 @@ namespace Group29_BlitzCafe
 
         }
 
-       
-        private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
+
+        private void txtQtyIItemOrdered_TextChanged(object sender, EventArgs e)
         {
 
         }
