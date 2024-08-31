@@ -62,39 +62,39 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-
-            using (SqlConnection conn = new SqlConnection(defaultFrm.connString)) 
+            if (validateInput())
             {
-                try
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
-                    conn.Open();
-
-                    string loadQry = "";
-                    SqlCommand cmd = new SqlCommand(loadQry, conn);
-                    SqlDataReader reader = cmd.ExecuteReader();
-
-
-                   
-
-                    while (reader.Read())
+                    try
                     {
-                        itemID = reader.GetInt32(0);
-                        descr = reader.GetString(1);
-                        price = reader.GetDecimal(3);
+                        conn.Open();
 
-                        MenuItem item = new MenuItem(itemID, descr, price);
-                        menuItemList.Add(item);
+                        string loadQry = "";
+                        SqlCommand cmd = new SqlCommand(loadQry, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
+
+
+                        while (reader.Read())
+                        {
+                            itemID = reader.GetInt32(0);
+                            descr = reader.GetString(1);
+                            price = reader.GetDecimal(3);
+
+                            MenuItem item = new MenuItem(itemID, descr, price);
+                            menuItemList.Add(item);
+                        }
+                        reader.Close();
+
+                        dbgMenuItems.DataSource = menuItemList;
+
+
+                        conn.Close();
                     }
-                    reader.Close();
-
-                    dbgMenuItems.DataSource = menuItemList;
-
-
-                    conn.Close();
-                }
-                catch (Exception e)
-                {
-                    MessageBox.Show("Could not load menu items: " + e);
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Could not load menu items: " + e);
+                    }
                 }
             }
 
@@ -150,7 +150,8 @@ namespace Group29_BlitzCafe
             btnAddItem.Visible = false;
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
-            choice = 1;
+
+            choice = 3;
 
             btnCancel.Visible = true;
             btnConfirm.Visible = true;
@@ -163,6 +164,8 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
+            choice = 1;
+
             btnCancel.Visible = true;
             btnConfirm.Visible = true;
         }
@@ -174,40 +177,14 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
+            txtDesc.ReadOnly = true;
+            txtItemID.ReadOnly = true;
+            txtPrice.ReadOnly = true;
+
+            choice = 2;
+
             btnCancel.Visible = true;
             btnConfirm.Visible = true;
-
-            MenuItem removeItem = menuItemList[selectedItemIndex];
-
-            //if the item to be removed is not zero, confirm deletion
-            if (removeItem != null)
-            {
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
-                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-                if (result == DialogResult.Yes)
-                {
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
-                    {
-                       
-
-                        menuItemList.Remove(removeItem);
-                        //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
-                        MessageBox.Show("Menu Item Succesfully deleted.");
-                    }
-                }
-                else
-                {
-                    //delete canceled, do nothing
-                    MessageBox.Show("Delete Aborted: No items were removed.");
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("No Item matching the selected ID was found. No action was taken.");
-            }
-
 
 
         }
@@ -225,7 +202,7 @@ namespace Group29_BlitzCafe
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
-                        choice = 1;
+                        
                         addItem();
 
                         btnAddItem.Visible = true;
@@ -239,8 +216,11 @@ namespace Group29_BlitzCafe
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
-                        choice = 2;
+                        deleteItem();
 
+                        txtDesc.ReadOnly = false;
+                        txtItemID.ReadOnly = false;
+                        txtPrice.ReadOnly = false;
 
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
@@ -253,7 +233,7 @@ namespace Group29_BlitzCafe
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
-                        choice = 0;
+                        editItem();
 
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
@@ -280,20 +260,34 @@ namespace Group29_BlitzCafe
 
         }
 
+        private void editItem()
+        {
+            if (validateInput())
+            {
+                string newDesc = txtDesc.Text;
+                decimal newPrice = Convert.ToDecimal(txtPrice.Text);
+
+                menuItemList[selectedItemIndex].setDescr(newDesc);
+                menuItemList[selectedItemIndex].setPrice(newPrice);
+
+                //update item in databse
+
+                btnConfirm.Visible = false;
+                btnCancel.Visible = false;
+
+                btnAddItem.Visible = true;
+                btnDelete.Visible = true;
+                btnEditItem.Visible = true;
+                loadMenuItems();
+            }      
+        }
+
         private void addItem()
         {
             //create temp variables for item attributes
             int newItemId;
             decimal price;
             string descr;
-
-            btnAddItem.Visible = false;
-            btnDelete.Visible = false;
-            btnEditItem.Visible = false;
-
-
-            btnConfirm.Visible = false;
-            btnConfirm.Visible = true;
 
 
             //calll validate method, if valid execute code
@@ -325,20 +319,52 @@ namespace Group29_BlitzCafe
 
             btnConfirm.Visible = false;
             btnCancel.Visible = false;
-
+            loadMenuItems();
         }
 
-        private void btnConfirmAdd_Click(object sender, EventArgs e)
+        private void deleteItem()
         {
-           
+            
+
+            if (selectedItemIndex != -1)
+            {
+
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
+                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    MenuItem deleteItem = menuItemList[selectedItemIndex];
+                    menuItemList.Remove(deleteItem);
+
+                    
+                    //Delete item from databse
+
+                }
+                else
+                {
+                    //delete canceled, do nothing
+                    MessageBox.Show("Delete Aborted: No items were removed.");
+                }
+
+            }
+            
+
+            loadMenuItems();
         }
 
-       
 
 
         private void btnCancel_Click(object sender, EventArgs e)
         {
+            btnAddItem.Visible = true;
+            btnDelete.Visible = true;
+            btnEditItem.Visible = true;
 
+            
+
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
 
         }
     }
