@@ -163,8 +163,8 @@ namespace Group29_BlitzCafe
                 confirmationForm.ShowDialog();
             }
             else
-            {   
-                MessageBox.Show("Phone number does not exist. Please try again.")
+            {
+                MessageBox.Show("Phone number does not exist. Please try again.");
             }
             
         }
