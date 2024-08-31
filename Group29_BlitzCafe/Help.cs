@@ -22,8 +22,10 @@ namespace Group29_BlitzCafe
         {
             try
             {
+                string path = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources\Help.txt");
+
                 // Open the file and read it line by line
-                using (StreamReader reader = new StreamReader("Help.txt"))
+                using (StreamReader reader = new StreamReader(path))
                 {
                     string line;
                     while ((line = reader.ReadLine()) != null)
