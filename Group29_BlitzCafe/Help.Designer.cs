@@ -29,12 +29,32 @@ namespace Group29_BlitzCafe
         /// </summary>
         private void InitializeComponent()
         {
-            this.components = new System.ComponentModel.Container();
+            this.rtbDisplay = new System.Windows.Forms.RichTextBox();
+            this.SuspendLayout();
+            // 
+            // rtbDisplay
+            // 
+            this.rtbDisplay.Location = new System.Drawing.Point(12, 12);
+            this.rtbDisplay.Name = "rtbDisplay";
+            this.rtbDisplay.Size = new System.Drawing.Size(776, 426);
+            this.rtbDisplay.TabIndex = 0;
+            this.rtbDisplay.Text = "";
+            // 
+            // Help
+            // 
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
+            this.Controls.Add(this.rtbDisplay);
+            this.Name = "Help";
             this.Text = "Help";
+            this.Load += new System.EventHandler(this.Help_Load);
+            this.ResumeLayout(false);
+
         }
 
         #endregion
+
+        private System.Windows.Forms.RichTextBox rtbDisplay;
     }
 }
