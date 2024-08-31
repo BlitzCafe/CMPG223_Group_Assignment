@@ -8,24 +8,35 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 using System.Data.SqlClient;
+using Group29_BlitzCafe;
 
 namespace Group29_BlitzCafe
 {
     public partial class Default : Form
     {
+        
+        private ItemPage itemPageFrm = new ItemPage();
+        private CustomerPage customerPageFrm = new CustomerPage();
+        private OrderPage orderPageFrm = new OrderPage();
 
+        public List<Customer> customerList = new List<Customer>();
+        public List<MenuItem> menuItemList = new List<MenuItem>();
+        public List<Order> orderList = new List<Order>();
 
         public string connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
 
         public Default()
         {
             InitializeComponent();
+            orderPageFrm.loadOrderHistory();
+            customerPageFrm.load_Customer_Info();
+            itemPageFrm.loadMenuItems();
         }
 
        
         private void Form1_Load(object sender, EventArgs e)
         {
-
+          
         }
 
 

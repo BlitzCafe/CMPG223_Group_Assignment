@@ -8,6 +8,7 @@ using System.Text;
 using System.Threading.Tasks;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using Group29_BlitzCafe;
 
 namespace Group29_BlitzCafe
 {
@@ -23,11 +24,7 @@ namespace Group29_BlitzCafe
 
 
         private SqlConnection conn;
-        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
-
-
-        private List<Customer> customerList = new List<Customer>();
-
+             
         private int choice = 0;
 
         private int customerID;
@@ -35,7 +32,7 @@ namespace Group29_BlitzCafe
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
-        private void load_Customer_Info()
+        public void load_Customer_Info()
         {
             using (conn)
             {
@@ -65,7 +62,7 @@ namespace Group29_BlitzCafe
                         Customer customerObj = new Customer(customerID, lName, fName, cellNo, dateJoined);
 
                         // Add the Customer object to the list
-                        customerList.Add(customerObj);
+                        defaultFrm.customerList.Add(customerObj);
                     }
 
                 }

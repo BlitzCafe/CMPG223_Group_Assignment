@@ -15,7 +15,8 @@ namespace Group29_BlitzCafe
     public partial class ItemPage : Form
     {
         //create menuitem list, link to default form and create global index variable
-        public List<MenuItem> menuItemList = new List<MenuItem>();
+        
+
         private Default defaultFrm = new Default();
         private int selectedItemIndex;
         SqlConnection conn;
@@ -51,9 +52,9 @@ namespace Group29_BlitzCafe
         }
 
         //method to load items out of the database into the dbgrid and the menuItemList
-        private void loadMenuItems()
+        public void loadMenuItems()
         {
-            menuItemList.Clear();
+            defaultFrm.menuItemList.Clear();
             int itemID;
             string descr;
             decimal price;
@@ -87,8 +88,8 @@ namespace Group29_BlitzCafe
                             // Create a new MenuItem object using the data
                             MenuItem menuItem = new MenuItem(itemID, descr, price);
 
-                            // Add the MenuItem object to the list
-                            menuItemList.Add(menuItem);
+                        // Add the MenuItem object to the list
+                        defaultFrm.menuItemList.Add(menuItem);
                         }
 
                         conn.Close();
@@ -118,9 +119,9 @@ namespace Group29_BlitzCafe
                 bool itemFound = false;
 
                 //use a while loop to find the item with the matching ItemID
-                while (selectedItemIndex < menuItemList.Count)
+                while (selectedItemIndex < defaultFrm.menuItemList.Count)
                 {
-                    if (menuItemList[selectedItemIndex].getItemID() == selectedID)
+                    if (defaultFrm.menuItemList[selectedItemIndex].getItemID() == selectedID)
                     {
                         itemFound = true;
                         break; //exit the loop once the item is found
@@ -131,9 +132,9 @@ namespace Group29_BlitzCafe
                 //if the item is found, populate the textboxes using the index
                 if (itemFound)
                 {
-                    txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
-                    txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    txtItemID.Text = defaultFrm.menuItemList[selectedItemIndex].getItemID().ToString();
+                    txtDesc.Text = defaultFrm.menuItemList[selectedItemIndex].getDescr();
+                    numPrice.Text = defaultFrm.menuItemList[selectedItemIndex].getPrice().ToString();
                 }
                 else  //if the record is not found in the menuItemList, set index to -1 and return error message
                 {
@@ -303,8 +304,7 @@ namespace Group29_BlitzCafe
                         MessageBox.Show("Error: Item could not be edited to database. " + ex.Message);
                     }
 
-                    menuItemList[selectedItemIndex].setDescr(newDescri);
-                    menuItemList[selectedItemIndex].setPrice(newPrice);
+                    
 
                     //update item in databse
 
@@ -395,8 +395,7 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    MenuItem deleteItem = menuItemList[selectedItemIndex];
-                    menuItemList.Remove(deleteItem);
+                    
 
                     
                     //Delete item from databse

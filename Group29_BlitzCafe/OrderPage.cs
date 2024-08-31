@@ -16,9 +16,10 @@ namespace Group29_BlitzCafe
     {
         private Default defaultFrm = new Default();
         private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+        
 
         private List<MenuItem> receipt = new List<MenuItem>();
-        private List<Order> orderList = new List<Order>();
+        
 
         public OrderPage()
         {
@@ -26,7 +27,9 @@ namespace Group29_BlitzCafe
             loadOrderHistory();
         }
 
-        private void loadOrderHistory()
+         
+
+        public void loadOrderHistory()
         {
             using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
@@ -80,7 +83,7 @@ namespace Group29_BlitzCafe
             {
                 lbxItemSelection.Items.Clear();
 
-                foreach (MenuItem item in itemPageFrm.menuItemList)
+                foreach (MenuItem item in defaultFrm.menuItemList)
                 {
                     string itemID = item.getItemID().ToString();
                     if (itemID.Contains(searchID))
@@ -99,7 +102,7 @@ namespace Group29_BlitzCafe
         {
             decimal totalAmount = 0.0m;
             string itemId = txtSearchItemID.Text;
-            foreach (MenuItem item in itemPageFrm.menuItemList)
+            foreach (MenuItem item in defaultFrm.menuItemList)
             {
                 string itemID = item.getItemID().ToString();
                 if (itemID.Contains(itemId))
@@ -117,9 +120,9 @@ namespace Group29_BlitzCafe
         {
             int index = lbxItemSelection.SelectedIndex;
 
-            if (index >= 0 && index <= itemPageFrm.menuItemList.Count)
+            if (index >= 0 && index <= defaultFrm.menuItemList.Count)
             {
-                MenuItem selectedItem = itemPageFrm.menuItemList[index];
+                MenuItem selectedItem = defaultFrm.menuItemList[index];
 
                 txtSearchDescr.Text = selectedItem.getDescr();
                 txtSearchItemID.Text = selectedItem.getItemID().ToString();
@@ -146,7 +149,23 @@ namespace Group29_BlitzCafe
        
         private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
         {
+            string searchPhoneNum = cbxCustomerPhoneNum.Text;
+            if (searchPhoneNum != "")
+            {
+                lbxItemSelection.Items.Clear();
 
+                foreach (Customer customer in defaultFrm.customerList)
+                {
+                    string phoneNum = customer.getCustomerID().ToString();
+                    if (phoneNum.Contains(searchPhoneNum))
+                    {
+                        cbxCustomerPhoneNum.Items.Add(phoneNum);
+
+                    }
+
+                }
+            }
+            else lbxItemSelection.Items.Clear();
         }
     }
 }
