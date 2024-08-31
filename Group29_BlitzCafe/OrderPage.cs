@@ -150,5 +150,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void txtQtyIItemOrdered_TextChanged(object sender, EventArgs e)
+        {
+           
+        }
     }
 }
