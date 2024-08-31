@@ -21,7 +21,8 @@ namespace Group29_BlitzCafe
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
-        DataSet ds;
+        private int choice = 0;
+       
 
         public ItemPage()
         {
@@ -61,39 +62,39 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-
+            if (validateInput())
             {
-                try
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                 {
-                    //Dyaln and sino
-                    conn.Open();
-
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
-
-                    // Bind the DataGridView to the DataTable
-                    dbgMenuItems.DataSource = dataTable;
-
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable.Rows)
+                    try
                     {
-                        itemID = Convert.ToInt32(row["ItemID"]);
-                        descr = row["Descr"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
+                        conn.Open();
 
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
+                        string loadQry = "";
+                        SqlCommand cmd = new SqlCommand(loadQry, conn);
+                        SqlDataReader reader = cmd.ExecuteReader();
 
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
+
+                        while (reader.Read())
+                        {
+                            itemID = reader.GetInt32(0);
+                            descr = reader.GetString(1);
+                            price = reader.GetDecimal(3);
+
+                            MenuItem item = new MenuItem(itemID, descr, price);
+                            menuItemList.Add(item);
+                        }
+                        reader.Close();
+
+                        dbgMenuItems.DataSource = menuItemList;
+
+
+                        conn.Close();
                     }
-
-                    conn.Close();
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
+                    catch (Exception e)
+                    {
+                        MessageBox.Show("Could not load menu items: " + e);
+                    }
                 }
             }
 
@@ -150,145 +151,146 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = false;
             btnEditItem.Visible = false;
 
-            btnCancelEdit.Visible = true;
-            btnConfirmEdit.Visible = true;
+            choice = 3;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
 
         }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
+
+            choice = 1;
+
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
         }
 
         //delete an item from the database
         private void btnDelete_Click(object sender, EventArgs e)
         {
-            MenuItem removeItem = menuItemList[selectedItemIndex];
+            btnAddItem.Visible = false;
+            btnDelete.Visible = false;
+            btnEditItem.Visible = false;
 
-            //if the item to be removed is not zero, confirm deletion
-            if (removeItem != null)
-            {
-                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
-                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+            txtDesc.ReadOnly = true;
+            txtItemID.ReadOnly = true;
+            txtPrice.ReadOnly = true;
 
-                if (result == DialogResult.Yes)
-                {
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
-                    {
-                        try
-                        {
-                            conn.Open();
+            choice = 2;
 
-                            cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
-
-                            cmd.ExecuteNonQuery();
-
-                            // Remove item from the list
-                            menuItemList.Remove(removeItem);
-
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully deleted.");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be deleted. " + ex.Message);
-                        }
-
-                        menuItemList.Remove(removeItem);
-                        //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
-                        MessageBox.Show("Menu Item Succesfully deleted.");
-                    }
-                }
-                else
-                {
-                    //delete canceled, do nothing
-                    MessageBox.Show("Delete Aborted: No items were removed.");
-                }
-
-            }
-            else
-            {
-                MessageBox.Show("No Item matching the selected ID was found. No action was taken.");
-            }
-
+            btnCancel.Visible = true;
+            btnConfirm.Visible = true;
 
 
         }
 
 
+       
 
-        private void btnConfirmEdit_Click(object sender, EventArgs e)
+        private void btnConfirm_Click(object sender, EventArgs e)
         {
-            //test if item to be edited is within valid bounds
-            if (selectedItemIndex >= 0 && selectedItemIndex < menuItemList.Count())
+            switch (choice)
             {
-                //create object to represent old object
-                MenuItem originalItem = menuItemList[selectedItemIndex];
-
-                //create new object with the same ID andd the textbox variables 
-                MenuItem newItem = new MenuItem(originalItem.getItemID(), txtDesc.Text, Convert.ToDecimal(txtPrice.Text));
-
-                //use class equals method to determine if the object was changed
-                if (!originalItem.equals(newItem))
-                {
-
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                case 1:
                     {
-                        try
-                        {
-                            conn.Open();
+                        //confirm_Add();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            
-                            cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
-                            cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
-                            cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
+                        
+                        addItem();
 
-                            cmd.ExecuteNonQuery();
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 2:
+                    {
+                        //confirm_Delete();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
 
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully updated.");
 
-                            conn.Close();
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be updated. " + ex.Message);
-                        }
+                        deleteItem();
+
+
+                        txtDesc.ReadOnly = false;
+                        txtItemID.ReadOnly = false;
+                        txtPrice.ReadOnly = false;
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+                        break;
+                    }
+                case 3:
+                    {
+                        //confirm_Update();
+                        btnConfirm.Visible = false;
+                        btnCancel.Visible = false;
+
+                        editItem();
+
+                        btnAddItem.Visible = true;
+                        btnDelete.Visible = true;
+                        btnEditItem.Visible = true;
+
+                        //call load method to refresh dbgrid and reset objects to be the same as the database
+                        loadMenuItems();
+                        break;
+                    }
+                default:
+                    {
+                        break;
 
                     }
-
-                    //call load method to refresh dbgrid and reset objects to be the same as the database
-                    loadMenuItems();
-                }
-                else  //if the values are the same, display that no changes were made
-                {
-                    MessageBox.Show("No changes were made.");
-                }
+               
             }
 
             btnAddItem.Visible = true;
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnCancelEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
 
         }
 
-        private void btnConfirmAdd_Click(object sender, EventArgs e)
+        private void editItem()
+        {
+            if (validateInput())
+            {
+                string newDesc = txtDesc.Text;
+                decimal newPrice = Convert.ToDecimal(txtPrice.Text);
+
+                menuItemList[selectedItemIndex].setDescr(newDesc);
+                menuItemList[selectedItemIndex].setPrice(newPrice);
+
+                //update item in databse
+
+                btnConfirm.Visible = false;
+                btnCancel.Visible = false;
+
+                btnAddItem.Visible = true;
+                btnDelete.Visible = true;
+                btnEditItem.Visible = true;
+                loadMenuItems();
+            }      
+        }
+
+        private void addItem()
         {
             //create temp variables for item attributes
             int newItemId;
             decimal price;
             string descr;
 
-            btnAddItem.Visible = false;
-            btnDelete.Visible = false;
-            btnEditItem.Visible = false;
-
-            btnConfirmEdit.Visible = true;
 
             //calll validate method, if valid execute code
             if (validateInput())
@@ -302,24 +304,7 @@ namespace Group29_BlitzCafe
                 {
                     try
                     {
-                        conn.Open();
-                        string sql = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
-
-                        cmd = new SqlCommand(sql, conn);
-                        adap.InsertCommand = cmd;
-                        adap.InsertCommand.ExecuteNonQuery();
-
-                        // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
-                        //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
-
-                        /*  !This code wont run thill the database works...
-                         
-                        MenuItem newItem = new MenuItem(newItemID, desc, price);
-                        menuItemList.Add(newItem);
-
-                        */
-                        conn.Close();
-                        loadMenuItems();
+                       
                     }
                     catch (Exception ex)
                     {
@@ -333,22 +318,55 @@ namespace Group29_BlitzCafe
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmEdit.Visible = false;
+
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+            loadMenuItems();
         }
 
-        private void btnCancelEdit_Click(object sender, EventArgs e)
+        private void deleteItem()
+        {
+            
+
+            if (selectedItemIndex != -1)
+            {
+
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
+                                      MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
+
+                if (result == DialogResult.Yes)
+                {
+                    MenuItem deleteItem = menuItemList[selectedItemIndex];
+                    menuItemList.Remove(deleteItem);
+
+                    
+                    //Delete item from databse
+
+                }
+                else
+                {
+                    //delete canceled, do nothing
+                    MessageBox.Show("Delete Aborted: No items were removed.");
+                }
+
+            }
+            
+
+            loadMenuItems();
+        }
+
+
+
+        private void btnCancel_Click(object sender, EventArgs e)
         {
             btnAddItem.Visible = true;
             btnDelete.Visible = true;
             btnEditItem.Visible = true;
 
-            btnConfirmEdit.Visible = false;
-            btnConfirmEdit.Visible = false;
-            btnCancelEdit.Visible = false;
-        }
+            
 
-        private void lblSortHeading_Click(object sender, EventArgs e)
-        {
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
 
         }
     }

@@ -13,17 +13,126 @@ namespace Group29_BlitzCafe
 {
     public partial class Confirmation : Form
     {
-        public Confirmation()
+        private Default defaultFrm = new Default();
+        private List<MenuItem> receipt = new List<MenuItem>();
+
+        private decimal totalAmount = 0m;
+        private decimal loyaltyUsed = 0m;
+        private string customerCell = "";
+
+        public Confirmation(List<MenuItem> receipt, string customerId)
         {
             InitializeComponent();
+            this.receipt = receipt;
+            this.customerCell = customerId;
+            loadReceipt();
         }
 
-        private void button2_Click(object sender, EventArgs e)
+        private void loadReceipt()
+        {
+
+            foreach (MenuItem item in receipt)
+            {
+                lbxReceipt.Items.Add(item.toString());
+                totalAmount += item.getPrice();
+
+            }
+            lbxReceipt.Items.Add("Total amount owed: " + totalAmount);
+
+        }
+
+
+
+        private void cbxUseLoyaltyPoints_CheckedChanged(object sender, EventArgs e)
+        {
+
+            decimal pointsToMoneyConversion = 0.1m; // 100 points = R10, so 1 point = R0.10
+            int pointsEarnedPerR5 = 1;
+            decimal amountSpent = totalAmount; // Total amount before loyalty discount
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Retrieve the current loyalty points balance
+                    string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@CustomerID", customerCell);
+
+                    object result = cmd.ExecuteScalar();
+                    decimal currentPoints = 0;
+
+                    if (result != null)
+                    {
+                        currentPoints = Convert.ToDecimal(result);
+                    }
+
+                    // If checkbox is checked, apply loyalty points
+                    if (cbxUseLoyaltyPoints.Checked)
+                    {
+                        // Calculate discount
+                        decimal discount = currentPoints * pointsToMoneyConversion;
+                        decimal adjustedTotal = totalAmount - discount;
+
+                        // Ensure total is not less than zero
+                        if (adjustedTotal < 0)
+                        {
+                            adjustedTotal = 0;
+                        }
+
+                        // Display adjusted total
+                        lbxReceipt.Items.Add("Loyalty points used: -" + discount.ToString("C"));
+                        lbxReceipt.Items.Add("New total: " + adjustedTotal.ToString("C"));
+
+                        // Deduct used points
+                        currentPoints = 0;
+
+                        // Update loyalty points in the database to 0
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@NewBalance", currentPoints);
+                        updateCmd.Parameters.AddWithValue("@CellNo", customerCell);
+                        updateCmd.ExecuteNonQuery();
+                    }
+                    else
+                    {
+                        // If points are not used, calculate points earned
+                        decimal pointsEarned = Math.Floor(amountSpent / 5) * pointsEarnedPerR5;
+
+                        lbxReceipt.Items.Add("Points earned: " + pointsEarned.ToString());
+
+                        // Update loyalty points in the database
+                        decimal newPointsBalance = currentPoints + pointsEarned;
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@NewBalance", newPointsBalance);
+                        updateCmd.Parameters.AddWithValue("@CellNo", customerCell);
+                        updateCmd.ExecuteNonQuery();
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error retrieving or updating loyalty points: " + ex.Message);
+                }
+
+                conn.Close();
+            }
+        }
+
+        private void btnConfirmPayment_Click(object sender, EventArgs e)
         {
 
         }
 
-        private void cbxUseLoyaltyPoints_CheckedChanged(object sender, EventArgs e)
+        private void Confirmation_Load(object sender, EventArgs e)
+        {
+            // laod loyalty point table
+
+        }
+
+        private void Confirmation_Load_1(object sender, EventArgs e)
         {
 
         }
