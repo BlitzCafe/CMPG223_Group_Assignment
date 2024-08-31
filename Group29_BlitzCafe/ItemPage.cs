@@ -239,7 +239,7 @@ namespace Group29_BlitzCafe
                         {
                             conn.Open();
 
-                            SqlCommand cmd = new SqlCommand(query, conn);
+                            
                             cmd.Parameters.AddWithValue("@Descr", newItem.getDescr());
                             cmd.Parameters.AddWithValue("@Price", newItem.getPrice());
                             cmd.Parameters.AddWithValue("@ItemID", newItem.getItemID());
