@@ -26,7 +26,7 @@ namespace Group29_BlitzCafe
         private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
 
 
-        private List<Customer> customerList = new List<Customer>();
+        public List<Customer> customerList = new List<Customer>();
 
         private int choice = 0;
 
@@ -35,9 +35,9 @@ namespace Group29_BlitzCafe
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
-        private void load_Customer_Info()
+        public void load_Customer_Info()
         {
-            using (conn)
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
@@ -85,15 +85,61 @@ namespace Group29_BlitzCafe
             dateJoined = DateTime.Today;
 
             if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
-            {
-                //Save info in database
-                sqlQuery = "";
-                load_Customer_Info();
+            { 
+                // Define the SQL query with parameters
+                string query = @"INSERT INTO Customer (FirstName, LastName, CellNo, DateJoined) 
+                         VALUES (@fName, @lName, @cellNo, @dateJoined)";
+
+                // Use 'using' statements to ensure proper disposal of resources
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@fName", fName);
+                        cmd.Parameters.AddWithValue("@lName", lName);
+                        cmd.Parameters.AddWithValue("@cellNo", cellNo);
+                        cmd.Parameters.AddWithValue("@dateJoined", dateJoined);
+
+                        // Open the connection
+                        conn.Open();
+
+                        // Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Customer added successfully.");
+                            load_Customer_Info(); // Refresh or reload customer info as needed
+                            conn.Close();
+                        }
+                        else
+                        {
+                            MessageBox.Show("Insert failed. No rows affected.");
+                        }
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        // Handle SQL-specific exceptions
+                        MessageBox.Show("Database error: " + sqlEx.Message);
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle all other exceptions
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                    }
+                }
             }
             else
             {
-                MessageBox.Show("Please make sure all info is entered and correct.");
+                MessageBox.Show("Please ensure all fields are filled correctly. " +
+                                "First Name and Last Name cannot be empty, and Cell No must be 10 digits.");
             }
+            load_Customer_Info();
+            
+             MessageBox.Show("Please make sure all info is entered and correct.");
         }
 
         private void confirm_Delete()
@@ -128,7 +174,7 @@ namespace Group29_BlitzCafe
 
             //Make changing ID and Date Joined impossible for user
             txtCustID.ReadOnly = true;
-            txtDate.ReadOnly = true;
+            dtpDate.Enabled = false;
 
             btnConfirm.Visible = false;
             btnCancel.Visible = false;

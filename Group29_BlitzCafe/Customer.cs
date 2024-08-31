@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace Group29_BlitzCafe
 {
-    class Customer
+    public class Customer
     {
         private readonly int customerID;
         private string lastName, firstName;

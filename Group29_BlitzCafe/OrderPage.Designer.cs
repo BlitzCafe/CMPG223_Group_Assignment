@@ -58,7 +58,7 @@ namespace Group29_BlitzCafe
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
-            this.cbxCustomerPhoneNum = new System.Windows.Forms.ComboBox();
+            this.txtPhoneNum = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -79,7 +79,7 @@ namespace Group29_BlitzCafe
             // 
             // tabPage1
             // 
-            this.tabPage1.Controls.Add(this.cbxCustomerPhoneNum);
+            this.tabPage1.Controls.Add(this.txtPhoneNum);
             this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.txtTotalAmount);
@@ -381,16 +381,12 @@ namespace Group29_BlitzCafe
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // cbxCustomerPhoneNum
+            // txtPhoneNum
             // 
-            this.cbxCustomerPhoneNum.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.cbxCustomerPhoneNum.FormattingEnabled = true;
-            this.cbxCustomerPhoneNum.Location = new System.Drawing.Point(1067, 49);
-            this.cbxCustomerPhoneNum.Name = "cbxCustomerPhoneNum";
-            this.cbxCustomerPhoneNum.Size = new System.Drawing.Size(121, 24);
-            this.cbxCustomerPhoneNum.TabIndex = 18;
-           
-            this.cbxCustomerPhoneNum.TextChanged += new System.EventHandler(this.cbxCustomerPhoneNum_TextChanged);
+            this.txtPhoneNum.Location = new System.Drawing.Point(1089, 52);
+            this.txtPhoneNum.Name = "txtPhoneNum";
+            this.txtPhoneNum.Size = new System.Drawing.Size(91, 22);
+            this.txtPhoneNum.TabIndex = 18;
             // 
 
             // OrderPage
@@ -444,7 +440,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.DataGridView dbgOrderDetails;
         private System.Windows.Forms.Label label10;
-        private System.Windows.Forms.ComboBox cbxCustomerPhoneNum;
         private MySql.Data.MySqlClient.MySqlCommand mySqlCommand1;
+        private System.Windows.Forms.TextBox txtPhoneNum;
     }
 }

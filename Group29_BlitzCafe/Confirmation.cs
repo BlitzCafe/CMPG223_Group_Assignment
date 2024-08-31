@@ -11,14 +11,16 @@ namespace Group29_BlitzCafe
         private List<MenuItem> receipt = new List<MenuItem>();
 
         private decimal totalAmount = 0m;
-        private string customerCell = "";
-        OrderPage OrderDetails = new OrderPage();
 
-        public Confirmation(List<MenuItem> receipt, string customerId)
+        private decimal loyaltyUsed = 0m;
+        private Customer currentCustomer;
+
+
+        public Confirmation(List<MenuItem> receipt, Customer currentCustomer)
         {
             InitializeComponent();
             this.receipt = receipt;
-            this.customerCell = customerId;
+            this.currentCustomer = currentCustomer;
             loadReceipt();
         }
 
@@ -44,17 +46,64 @@ namespace Group29_BlitzCafe
                 {
                     conn.Open();
 
+                    // Retrieve the current loyalty points balance
+                    string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
+                    
+                    
+                    object result = cmd.ExecuteScalar();
+                    
                     decimal currentPoints = GetLoyaltyPoints(conn);
+                    if (result != null)
+                    {
+                        currentPoints = Convert.ToDecimal(result);
+                    }
+
 
                     if (cbxUseLoyaltyPoints.Checked)
                     {
-                        ApplyLoyaltyPoints(conn, currentPoints, pointsToMoneyConversion);
+<
+                        // Calculate discount
+                        decimal discount = currentPoints * pointsToMoneyConversion;
+                        decimal adjustedTotal = totalAmount - discount;
+
+                        // Ensure total is not less than zero
+                        if (adjustedTotal < 0)
+                        {
+                            adjustedTotal = 0;
+                        }
+
+                        // Display adjusted total
+                        lbxReceipt.Items.Add("Loyalty points used: -" + discount.ToString("C"));
+                        lbxReceipt.Items.Add("New total: " + adjustedTotal.ToString("C"));
+
+                        // Deduct used points
+                        currentPoints = 0;
+
+                        // Update loyalty points in the database to 0
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@NewBalance", currentPoints);
+                        updateCmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
+                        updateCmd.ExecuteNonQuery();
+
                     }
                     else
                     {
                         decimal pointsEarned = Math.Floor(amountSpent / 5) * pointsEarnedPerR5;
-                        lbxReceipt.Items.Add("Points earned: " + pointsEarned);
-                        UpdateLoyaltyPoints(conn, currentPoints + pointsEarned);
+
+
+                        lbxReceipt.Items.Add("Points earned: " + pointsEarned.ToString());
+
+                        // Update loyalty points in the database
+                        decimal newPointsBalance = currentPoints + pointsEarned;
+                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
+                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
+                        updateCmd.Parameters.AddWithValue("@NewBalance", newPointsBalance);
+                        updateCmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
+                        updateCmd.ExecuteNonQuery();
+
                     }
                 }
                 catch (Exception ex)
@@ -96,6 +145,7 @@ namespace Group29_BlitzCafe
             }
         }
 
+
         private void btnConfirmPayment_Click(object sender, EventArgs e)
         {
             using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
@@ -131,6 +181,7 @@ namespace Group29_BlitzCafe
 
             // Load loyalty point table or other initializations
         }
+
         private void Confirmation_Load_1(object sender, EventArgs e)
         {
 
