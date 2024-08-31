@@ -29,6 +29,8 @@ namespace Group29_BlitzCafe
         /// </summary>
         private void InitializeComponent()
         {
+            this.panel1 = new System.Windows.Forms.Panel();
+            this.pcbLogo = new System.Windows.Forms.PictureBox();
             this.menuStrip1 = new System.Windows.Forms.MenuStrip();
             this.ordersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.customersToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
@@ -36,15 +38,43 @@ namespace Group29_BlitzCafe
             this.reportsToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.helpToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.exitToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.panel1 = new System.Windows.Forms.Panel();
-            this.pcbLogo = new System.Windows.Forms.PictureBox();
-            this.menuStrip1.SuspendLayout();
+            this.panel2 = new System.Windows.Forms.Panel();
+            this.label1 = new System.Windows.Forms.Label();
+            this.panel3 = new System.Windows.Forms.Panel();
+            this.panel4 = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).BeginInit();
+            this.menuStrip1.SuspendLayout();
+            this.panel2.SuspendLayout();
             this.SuspendLayout();
+            // 
+            // panel1
+            // 
+            this.panel1.AutoSize = true;
+            this.panel1.Controls.Add(this.pcbLogo);
+            this.panel1.Location = new System.Drawing.Point(195, 65);
+            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.panel1.Name = "panel1";
+            this.panel1.Size = new System.Drawing.Size(911, 695);
+            this.panel1.TabIndex = 1;
+            // 
+            // pcbLogo
+            // 
+            this.pcbLogo.Location = new System.Drawing.Point(217, 94);
+            this.pcbLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.pcbLogo.Name = "pcbLogo";
+            this.pcbLogo.Size = new System.Drawing.Size(508, 316);
+            this.pcbLogo.TabIndex = 0;
+            this.pcbLogo.TabStop = false;
             // 
             // menuStrip1
             // 
+            this.menuStrip1.Anchor = System.Windows.Forms.AnchorStyles.Left;
+            this.menuStrip1.AutoSize = false;
+            this.menuStrip1.BackColor = System.Drawing.Color.White;
+            this.menuStrip1.BackgroundImage = global::Group29_BlitzCafe.Properties.Resources.Untitled_design;
+            this.menuStrip1.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
+            this.menuStrip1.Dock = System.Windows.Forms.DockStyle.None;
             this.menuStrip1.GripMargin = new System.Windows.Forms.Padding(2, 2, 0, 2);
             this.menuStrip1.ImageScalingSize = new System.Drawing.Size(24, 24);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
@@ -54,10 +84,11 @@ namespace Group29_BlitzCafe
             this.reportsToolStripMenuItem,
             this.helpToolStripMenuItem,
             this.exitToolStripMenuItem});
-            this.menuStrip1.Location = new System.Drawing.Point(0, 0);
+            this.menuStrip1.LayoutStyle = System.Windows.Forms.ToolStripLayoutStyle.Table;
+            this.menuStrip1.Location = new System.Drawing.Point(0, 72);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Padding = new System.Windows.Forms.Padding(6, 2, 0, 2);
-            this.menuStrip1.Size = new System.Drawing.Size(1106, 33);
+            this.menuStrip1.RenderMode = System.Windows.Forms.ToolStripRenderMode.System;
+            this.menuStrip1.Size = new System.Drawing.Size(192, 688);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -105,30 +136,51 @@ namespace Group29_BlitzCafe
             this.exitToolStripMenuItem.Text = "Exit";
             this.exitToolStripMenuItem.Click += new System.EventHandler(this.exitToolStripMenuItem_Click);
             // 
-            // panel1
+            // panel2
             // 
-            this.panel1.AutoSize = true;
-            this.panel1.Controls.Add(this.pcbLogo);
-            this.panel1.Location = new System.Drawing.Point(4, 39);
-            this.panel1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1102, 721);
-            this.panel1.TabIndex = 1;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.panel2.Controls.Add(this.label1);
+            this.panel2.Location = new System.Drawing.Point(0, -2);
+            this.panel2.Name = "panel2";
+            this.panel2.Size = new System.Drawing.Size(1115, 53);
+            this.panel2.TabIndex = 3;
             // 
-            // pcbLogo
+            // label1
             // 
-            this.pcbLogo.Location = new System.Drawing.Point(217, 94);
-            this.pcbLogo.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.pcbLogo.Name = "pcbLogo";
-            this.pcbLogo.Size = new System.Drawing.Size(508, 316);
-            this.pcbLogo.TabIndex = 0;
-            this.pcbLogo.TabStop = false;
+            this.label1.AutoSize = true;
+            this.label1.BackColor = System.Drawing.Color.Transparent;
+            this.label1.Font = new System.Drawing.Font("Bauhaus 93", 20F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label1.Location = new System.Drawing.Point(5, 6);
+            this.label1.Name = "label1";
+            this.label1.Size = new System.Drawing.Size(405, 45);
+            this.label1.TabIndex = 3;
+            this.label1.Text = "Welcome to BlitzBite!";
+            this.label1.TextAlign = System.Drawing.ContentAlignment.TopCenter;
+            // 
+            // panel3
+            // 
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
+            this.panel3.Location = new System.Drawing.Point(0, 52);
+            this.panel3.Name = "panel3";
+            this.panel3.Size = new System.Drawing.Size(1105, 5);
+            this.panel3.TabIndex = 4;
+            // 
+            // panel4
+            // 
+            this.panel4.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
+            this.panel4.Location = new System.Drawing.Point(0, 59);
+            this.panel4.Name = "panel4";
+            this.panel4.Size = new System.Drawing.Size(1105, 5);
+            this.panel4.TabIndex = 5;
             // 
             // Default
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1106, 761);
+            this.Controls.Add(this.panel4);
+            this.Controls.Add(this.panel3);
+            this.Controls.Add(this.panel2);
             this.Controls.Add(this.panel1);
             this.Controls.Add(this.menuStrip1);
             this.MainMenuStrip = this.menuStrip1;
@@ -137,10 +189,12 @@ namespace Group29_BlitzCafe
             this.Text = "Home";
             this.WindowState = System.Windows.Forms.FormWindowState.Maximized;
             this.Load += new System.EventHandler(this.Form1_Load);
-            this.menuStrip1.ResumeLayout(false);
-            this.menuStrip1.PerformLayout();
             this.panel1.ResumeLayout(false);
             ((System.ComponentModel.ISupportInitialize)(this.pcbLogo)).EndInit();
+            this.menuStrip1.ResumeLayout(false);
+            this.menuStrip1.PerformLayout();
+            this.panel2.ResumeLayout(false);
+            this.panel2.PerformLayout();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -155,8 +209,12 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.ToolStripMenuItem reportsToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem helpToolStripMenuItem;
         private System.Windows.Forms.Panel panel1;
-        private System.Windows.Forms.PictureBox pcbLogo;
         private System.Windows.Forms.ToolStripMenuItem exitToolStripMenuItem;
+        private System.Windows.Forms.PictureBox pcbLogo;
+        private System.Windows.Forms.Panel panel2;
+        private System.Windows.Forms.Label label1;
+        private System.Windows.Forms.Panel panel3;
+        private System.Windows.Forms.Panel panel4;
     }
 }
 
