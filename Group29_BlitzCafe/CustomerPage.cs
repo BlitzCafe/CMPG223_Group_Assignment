@@ -35,7 +35,7 @@ namespace Group29_BlitzCafe
         private DateTime dateJoined = new DateTime();
 
         //Load from info from database
-        private void load_Customer_Info()
+        public void load_Customer_Info()
         {
             using (conn)
             {

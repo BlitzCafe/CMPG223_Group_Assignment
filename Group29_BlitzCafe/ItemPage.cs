@@ -56,7 +56,7 @@ namespace Group29_BlitzCafe
         }
 
         //method to load items out of the database into the dbgrid and the menuItemList
-        private void loadMenuItems()
+        public void loadMenuItems()
         {
             menuItemList.Clear();
             int itemID;
