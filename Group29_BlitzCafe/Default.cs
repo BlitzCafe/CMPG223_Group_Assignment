@@ -101,5 +101,9 @@ namespace Group29_BlitzCafe
             Application.Exit();
         }
 
+        private void panel1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
     }
 }

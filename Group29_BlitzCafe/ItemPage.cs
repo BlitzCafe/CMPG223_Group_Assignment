@@ -216,7 +216,9 @@ namespace Group29_BlitzCafe
                         btnConfirm.Visible = false;
                         btnCancel.Visible = false;
 
+
                         deleteItem();
+
 
                         txtDesc.ReadOnly = false;
                         txtItemID.ReadOnly = false;
