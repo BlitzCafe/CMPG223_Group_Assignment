@@ -12,7 +12,7 @@ namespace Group29_BlitzCafe
         private readonly int itemID;
         private string descr;
         private decimal price;
-        private int qtySold;
+        private int qtySold = 0;
 
         //Constructor for menu item
         public MenuItem(int itemID, string descr, decimal price)

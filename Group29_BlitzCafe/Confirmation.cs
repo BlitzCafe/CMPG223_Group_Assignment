@@ -117,7 +117,8 @@ namespace Group29_BlitzCafe
             string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                //cmd.Parameters.AddWithValue("@CellNo");
+                cmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
+
                 object result = cmd.ExecuteScalar();
                 return result != null ? Convert.ToDecimal(result) : 0;
             }
