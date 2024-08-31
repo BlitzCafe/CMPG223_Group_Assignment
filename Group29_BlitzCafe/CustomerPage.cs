@@ -209,6 +209,10 @@ namespace Group29_BlitzCafe
 
             choice = 0;
 
+            txtFName.ReadOnly = false;
+            txtLName.ReadOnly = false;
+            txtCellNo.ReadOnly = false;
+
             btnUpdate.Visible = true;
             btnDelete.Visible = true;
             btnAddNew.Visible = true;
