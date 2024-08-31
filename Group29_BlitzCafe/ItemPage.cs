@@ -20,7 +20,7 @@ namespace Group29_BlitzCafe
         private int selectedItemIndex;
 
         private int choice = 0;
-
+       
 
         public ItemPage()
         {
@@ -60,37 +60,36 @@ namespace Group29_BlitzCafe
             string descr;
             decimal price;
 
-
-            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString)) 
             {
                 try
                 {
                     conn.Open();
-                    string query = "";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
+                    string loadQry = "";
+                    SqlCommand cmd = new SqlCommand(loadQry, conn);
+                    SqlDataReader reader = cmd.ExecuteReader();
 
-                    //create objects for each line in the dbgrid
-                    foreach (DataRow row in dataTable.Rows)
+                   
+
+                    while (reader.Read())
                     {
-                        itemID = Convert.ToInt32(row["ItemID"]);
-                        descr = row["Descr"].ToString();
-                        price = Convert.ToDecimal(row["Price"]);
+                        itemID = reader.GetInt32(0);
+                        descr = reader.GetString(1);
+                        price = reader.GetDecimal(3);
 
-                        // Create a new MenuItem object using the data
-                        MenuItem menuItem = new MenuItem(itemID, descr, price);
-
-                        // Add the MenuItem object to the list
-                        menuItemList.Add(menuItem);
+                        MenuItem item = new MenuItem(itemID, descr, price);
+                        menuItemList.Add(item);
                     }
+                    reader.Close();
 
-                    ;
+                    dbgMenuItems.DataSource = menuItemList;
+
+
+                    conn.Close();
                 }
-                catch (Exception ex)
+                catch (Exception e)
                 {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
+                    MessageBox.Show("Could not load menu items: " + e);
                 }
             }
 
@@ -185,26 +184,7 @@ namespace Group29_BlitzCafe
                 {
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     {
-                        try
-                        {
-                            conn.Open();
-                            string query = "";
-                            SqlCommand cmd = new SqlCommand(query, conn);
-                            cmd.Parameters.AddWithValue("@ItemID", removeItem.getItemID());
-
-                            cmd.ExecuteNonQuery();
-
-                            // Remove item from the list
-                            menuItemList.Remove(removeItem);
-
-                            // Refresh the data grid
-                            loadMenuItems();
-                            MessageBox.Show("Menu Item successfully deleted.");
-                        }
-                        catch (Exception ex)
-                        {
-                            MessageBox.Show("Error: Item could not be deleted. " + ex.Message);
-                        }
+                       
 
                         menuItemList.Remove(removeItem);
                         //string query = "DELETE * FROM tblITems WHERE ItemID = " + selectedItemIndex;
@@ -323,23 +303,7 @@ namespace Group29_BlitzCafe
                 {
                     try
                     {
-                        conn.Open();
-                        string query = "INSERT INTO Items VALUES (" + descr + ", '" + price + "')";
-                        SqlCommand cmd = new SqlCommand(query, conn);
-
-                        cmd = new SqlCommand(query, conn);
-
-                        // !use this line to excecute command, ExecuteScalar() returns the value in the first field aka ItemID
-                        //int newItemID = Convert.ToInt32(cmd.ExecuteScalar());  
-
-                        /*  !This code wont run thill the database works...
-                         
-                        MenuItem newItem = new MenuItem(newItemID, desc, price);
-                        menuItemList.Add(newItem);
-
-                        */
-                        conn.Close();
-                        loadMenuItems();
+                       
                     }
                     catch (Exception ex)
                     {
