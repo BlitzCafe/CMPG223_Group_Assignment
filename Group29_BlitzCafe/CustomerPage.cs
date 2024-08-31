@@ -369,6 +369,13 @@ namespace Group29_BlitzCafe
             }
         }
 
+        private void txtCellNo_TextChanged(object sender, EventArgs e)
+        {
+            //Dylan and Sino Please Add SQL for searching and displaying only people starting with the searchCell
+            string searchCell = txtCellNo.Text;
+
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             btnConfirm.Visible = false;
