@@ -268,22 +268,55 @@ namespace Group29_BlitzCafe
         {
             if (validateInput())
             {
-                string newDesc = txtDesc.Text;
+                string newDescri = txtDesc.Text;
                 decimal newPrice = Convert.ToDecimal(numPrice.Text);
 
-                menuItemList[selectedItemIndex].setDescr(newDesc);
-                menuItemList[selectedItemIndex].setPrice(newPrice);
+                string query = @"UPDATE Items Description = @newDescri, Price = @newPrice WHERE ItemID = " + selectedItemIndex + "";
+                //insert new item into database  DYLAN AND SINO
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@descri", newDescri);
+                        cmd.Parameters.AddWithValue("@price", newPrice);
 
-                //update item in databse
+                        conn.Open();
 
-                btnConfirm.Visible = false;
-                btnCancel.Visible = false;
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
 
-                btnAddItem.Visible = true;
-                btnDelete.Visible = true;
-                btnEditItem.Visible = true;
-                loadMenuItems();
-            }      
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item edited successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Edit failed. No rows affected.");
+                        }
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Item could not be edited to database. " + ex.Message);
+                    }
+
+                    menuItemList[selectedItemIndex].setDescr(newDescri);
+                    menuItemList[selectedItemIndex].setPrice(newPrice);
+
+                    //update item in databse
+
+                    btnConfirm.Visible = false;
+                    btnCancel.Visible = false;
+
+                    btnAddItem.Visible = true;
+                    btnDelete.Visible = true;
+                    btnEditItem.Visible = true;
+                    loadMenuItems();
+                }
+            }
         }
 
         private void addItem()
