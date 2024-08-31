@@ -80,9 +80,9 @@ namespace Group29_BlitzCafe
         {
             //Add new customer to database
 
-            fName = txtFName.Text;
-            lName = txtLName.Text;
-            cellNo = txtCellNo.Text;
+            fName = txtFName.Text.Trim();
+            lName = txtLName.Text.Trim();
+            cellNo = txtCellNo.Text.Trim();
             dateJoined = DateTime.Today;
 
             if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
