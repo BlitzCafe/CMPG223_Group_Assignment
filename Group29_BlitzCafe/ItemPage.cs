@@ -21,7 +21,6 @@ namespace Group29_BlitzCafe
         SqlConnection conn;
         SqlCommand cmd;
         SqlDataAdapter adap;
-        SqlDataReader reader;
         private int choice = 0;
        
 
@@ -34,24 +33,20 @@ namespace Group29_BlitzCafe
         //validate text box inputs to be of the same type as the database
         private bool validateInput()
         {
-            if (!int.TryParse(txtItemID.Text, out int _))
-            {
-                MessageBox.Show("Item ID must be a valid integer.");
-                return false;
-            }
+           
+            
+                if (!decimal.TryParse(numPrice.Text, out decimal _))
+                {
+                    MessageBox.Show("Price must be a valid decimal number.");
+                    return false;
+                }
 
-            if (!decimal.TryParse(txtPrice.Text, out decimal _))
-            {
-                MessageBox.Show("Price must be a valid decimal number.");
-                return false;
-            }
-
-            if (string.IsNullOrWhiteSpace(txtDesc.Text))
-            {
-                MessageBox.Show("Description cannot be empty.");
-                return false;
-            }
-
+                if (string.IsNullOrWhiteSpace(txtDesc.Text))
+                {
+                    MessageBox.Show("Description cannot be empty.");
+                    return false;
+                }
+            
             return true;
         }
 
@@ -138,7 +133,7 @@ namespace Group29_BlitzCafe
                 {
                     txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
                     txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    txtPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
                 }
                 else  //if the record is not found in the menuItemList, set index to -1 and return error message
                 {
@@ -186,7 +181,7 @@ namespace Group29_BlitzCafe
 
             txtDesc.ReadOnly = true;
             txtItemID.ReadOnly = true;
-            txtPrice.ReadOnly = true;
+            numPrice.ReadOnly = true;
 
             choice = 2;
 
@@ -229,7 +224,7 @@ namespace Group29_BlitzCafe
 
                         txtDesc.ReadOnly = false;
                         txtItemID.ReadOnly = false;
-                        txtPrice.ReadOnly = false;
+                        numPrice.ReadOnly = false;
 
                         btnAddItem.Visible = true;
                         btnDelete.Visible = true;
@@ -273,22 +268,55 @@ namespace Group29_BlitzCafe
         {
             if (validateInput())
             {
-                string newDesc = txtDesc.Text;
-                decimal newPrice = Convert.ToDecimal(txtPrice.Text);
+                string newDescri = txtDesc.Text;
+                decimal newPrice = Convert.ToDecimal(numPrice.Text);
 
-                menuItemList[selectedItemIndex].setDescr(newDesc);
-                menuItemList[selectedItemIndex].setPrice(newPrice);
+                string query = @"UPDATE Items SET Description = @newDescri, Price = @newPrice WHERE ItemID = '" + Convert.ToInt32(txtItemID.Text) + "'";
+                //Update new item into database  DYLAN AND SINO
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
+                {
+                    try
+                    {
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@newDescri", newDescri);
+                        cmd.Parameters.AddWithValue("@newPrice", newPrice);
 
-                //update item in databse
+                        conn.Open();
 
-                btnConfirm.Visible = false;
-                btnCancel.Visible = false;
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
 
-                btnAddItem.Visible = true;
-                btnDelete.Visible = true;
-                btnEditItem.Visible = true;
-                loadMenuItems();
-            }      
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item edited successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Edit failed. No rows affected.");
+                        }
+
+                        conn.Close();
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Item could not be edited to database. " + ex.Message);
+                    }
+
+                    menuItemList[selectedItemIndex].setDescr(newDescri);
+                    menuItemList[selectedItemIndex].setPrice(newPrice);
+
+                    btnConfirm.Visible = false;
+                    btnCancel.Visible = false;
+
+                    btnAddItem.Visible = true;
+                    btnDelete.Visible = true;
+                    btnEditItem.Visible = true;
+                    loadMenuItems();
+                }
+            }
         }
 
         private void addItem()
@@ -296,22 +324,43 @@ namespace Group29_BlitzCafe
             //create temp variables for item attributes
             int newItemId;
             decimal price;
-            string descr;
+            string descri;
 
 
             //calll validate method, if valid execute code
             if (validateInput())
             {
                 //assign temp values with valid user inputs
-                descr = txtDesc.Text;
-                price = Convert.ToDecimal(txtPrice.Text);
-
+                descri = txtDesc.Text;
+                price = Convert.ToDecimal(numPrice.Text);
+                string query = @"INSERT INTO Items (Description, Price) VALUES (@descri, @price)";
                 //insert new item into database  DYLAN AND SINO
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (cmd = new SqlCommand(query, conn))
                 {
                     try
                     {
-                       
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@descri", descri);
+                        cmd.Parameters.AddWithValue("@price", price);
+
+                        conn.Open();
+
+                        //Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
+
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Item added successfully.");
+                            loadMenuItems(); // Refresh or reload menu items info as needed
+                        }
+                        else
+                        {
+                            MessageBox.Show("Insert failed. No rows affected.");
+                        }
+
+                        conn.Close();
                     }
                     catch (Exception ex)
                     {
@@ -319,6 +368,11 @@ namespace Group29_BlitzCafe
                     }
                 }
 
+            }
+            else 
+            {
+                MessageBox.Show("Please ensure all fields are filled correctly. " +
+                        "Description and Price cannot be empty.");
             }
 
             btnAddItem.Visible = true;
@@ -333,7 +387,6 @@ namespace Group29_BlitzCafe
 
         private void deleteItem()
         {
-            
 
             if (selectedItemIndex != -1)
             {
@@ -343,11 +396,43 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    MenuItem deleteItem = menuItemList[selectedItemIndex];
-                    menuItemList.Remove(deleteItem);
+                    string query = @"DELETE FROM Items WHERE ItemID = '"+Convert.ToInt32(txtItemID.Text)+"'";
+                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    using (cmd = new SqlCommand(query, conn))
+                    {
+                        //Delete item from databse
+                        try
+                        {
+                            conn.Open();
+
+                            //Execute the command
+                            int rowsAffected = cmd.ExecuteNonQuery();
+
+                            // Check if the insert was successful
+                            if (rowsAffected > 0)
+                            {
+                                MessageBox.Show("Item Deleted successfully.");
+                                txtDesc.Clear();
+                                txtItemID.Clear();
+                                numPrice.ResetText();
+                                loadMenuItems(); // Refresh or reload menu items info as needed
+                            }
+                            else
+                            {
+                                MessageBox.Show("Delete failed. No rows affected.");
+                            }
+
+                            conn.Close();
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
+                        }
+                    }
+                    
 
                     
-                    //Delete item from databse
+                    
 
                 }
                 else
@@ -374,6 +459,16 @@ namespace Group29_BlitzCafe
 
             btnCancel.Visible = false;
             btnConfirm.Visible = false;
+
+        }
+
+        private void ItemPage_Load(object sender, EventArgs e)
+        {
+
+        }
+
+        private void txtItemID_TextChanged(object sender, EventArgs e)
+        {
 
         }
     }

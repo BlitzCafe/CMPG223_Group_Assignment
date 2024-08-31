@@ -25,9 +25,11 @@ namespace Group29_BlitzCafe
         public OrderPage()
         {
             InitializeComponent();
+
             loadOrderHistory();
             customerPageFrm.load_Customer_Info();
             itemPageFrm.loadMenuItems();
+
 
         }
 
@@ -38,7 +40,7 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM [Order]"; // Ensure the table name is correct
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used FROM [Order]"; // Ensure the table name is correct
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -53,29 +55,37 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void OrderPage_Load(object sender, EventArgs e)
+        private void LoadOrderDetails()
         {
             using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
                     conn.Open();
-                    string query = "SELECT * FROM [Order]";
+                    string query = "SELECT * FROM Order_Details"; // Ensure the table name is correct
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
                     dataAdapter.Fill(dataTable);
+
+                    dbgOrderDetails.DataSource = dataTable; // Bind the DataGridView to the DataTable
                 }
                 catch (Exception ex)
                 {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED" + ex.Message);
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
                 }
             }
         }
 
+        private void OrderPage_Load(object sender, EventArgs e)
+        {
+            loadOrderHistory();
+            LoadOrderDetails();
+        }
+
         private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-
+            
         }
 
         private void txtSearchItemID_TextChanged(object sender, EventArgs e)
@@ -134,7 +144,7 @@ namespace Group29_BlitzCafe
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            Confirmation confirmationForm = new Confirmation(receipt, txtCellNumber.Text);
+            Confirmation confirmationForm = new Confirmation(receipt, cbxCustomerPhoneNum.Text);
             confirmationForm.ShowDialog();
         }
 
@@ -144,6 +154,12 @@ namespace Group29_BlitzCafe
         }
 
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+        {
+
+        }
+
+       
+        private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
         {
 
         }

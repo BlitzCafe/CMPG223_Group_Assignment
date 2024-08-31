@@ -34,8 +34,11 @@ namespace Group29_BlitzCafe
             // 
             // rtbDisplay
             // 
+            this.rtbDisplay.Font = new System.Drawing.Font("Bahnschrift SemiBold", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.rtbDisplay.Location = new System.Drawing.Point(12, 12);
             this.rtbDisplay.Name = "rtbDisplay";
+            this.rtbDisplay.ReadOnly = true;
+            this.rtbDisplay.ScrollBars = System.Windows.Forms.RichTextBoxScrollBars.ForcedVertical;
             this.rtbDisplay.Size = new System.Drawing.Size(776, 426);
             this.rtbDisplay.TabIndex = 0;
             this.rtbDisplay.Text = "";
