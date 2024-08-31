@@ -70,9 +70,11 @@ namespace Group29_BlitzCafe
                     {
                         conn.Open();
 
+
                         string loadQry = "";
                         SqlCommand cmd = new SqlCommand(loadQry, conn);
                         SqlDataReader reader = cmd.ExecuteReader();
+
 
 
                         while (reader.Read())
@@ -88,6 +90,7 @@ namespace Group29_BlitzCafe
 
                         dbgMenuItems.DataSource = menuItemList;
 
+                    }
 
                         conn.Close();
                     }
