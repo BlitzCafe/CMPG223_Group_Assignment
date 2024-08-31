@@ -26,7 +26,7 @@ namespace Group29_BlitzCafe
         private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
 
 
-        private List<Customer> customerList = new List<Customer>();
+        public List<Customer> customerList = new List<Customer>();
 
         private int choice = 0;
 
@@ -174,7 +174,7 @@ namespace Group29_BlitzCafe
 
             //Make changing ID and Date Joined impossible for user
             txtCustID.ReadOnly = true;
-            txtDate.ReadOnly = true;
+            dtpDate.Enabled = false;
 
             btnConfirm.Visible = false;
             btnCancel.Visible = false;

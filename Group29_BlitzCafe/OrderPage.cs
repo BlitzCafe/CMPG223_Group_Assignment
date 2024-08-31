@@ -144,8 +144,29 @@ namespace Group29_BlitzCafe
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            Confirmation confirmationForm = new Confirmation(receipt, cbxCustomerPhoneNum.Text);
-            confirmationForm.ShowDialog();
+            string phoneNum = txtPhoneNum.Text;
+            Customer currentCustomer = null;
+           
+
+            foreach (Customer customer in customerPageFrm.customerList) 
+            {
+                if (customer.getCellNo() == phoneNum)
+                {
+                    currentCustomer = customer;
+                    break;
+                }
+
+            }
+            if (currentCustomer != null)
+            {
+                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
+                confirmationForm.ShowDialog();
+            }
+            else
+            {   
+                MessageBox.Show("Phone number does not exist. Please try again.")
+            }
+            
         }
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
@@ -159,9 +180,6 @@ namespace Group29_BlitzCafe
         }
 
        
-        private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
-        {
-
-        }
+      
     }
 }

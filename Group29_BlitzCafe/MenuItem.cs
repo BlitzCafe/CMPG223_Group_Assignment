@@ -12,6 +12,7 @@ namespace Group29_BlitzCafe
         private readonly int itemID;
         private string descr;
         private decimal price;
+        private int qtySold;
 
         //Constructor for menu item
         public MenuItem(int itemID, string descr, decimal price)
@@ -27,6 +28,12 @@ namespace Group29_BlitzCafe
         {
             this.descr = descr;
         }
+
+        public void setQtySold(int qtySold)
+        {
+            this.qtySold = qtySold;
+        }
+
         //set price
         public void setPrice(decimal price)
         {
@@ -46,6 +53,11 @@ namespace Group29_BlitzCafe
         public decimal getPrice()
         {
             return this.price;
+        }
+
+        public int getQtySold()
+        {
+            return this.qtySold;
         }
 
         //comparable method to compare by price
