@@ -60,6 +60,7 @@ namespace Group29_BlitzCafe
             this.lbxItemSelection = new System.Windows.Forms.ListBox();
             this.txtSearchItemID = new System.Windows.Forms.TextBox();
             this.lbxReceipt = new System.Windows.Forms.ListBox();
+
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.tabPage2.SuspendLayout();
@@ -86,11 +87,13 @@ namespace Group29_BlitzCafe
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.txtTotalAmount);
             this.tabPage1.Controls.Add(this.btnCheckout);
+
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Name = "tabPage1";
             this.tabPage1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage1.Size = new System.Drawing.Size(1359, 646);
+
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Add Order";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -144,6 +147,7 @@ namespace Group29_BlitzCafe
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.tabPage2.Size = new System.Drawing.Size(1359, 646);
+
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Order History";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -213,6 +217,7 @@ namespace Group29_BlitzCafe
             this.label5.Location = new System.Drawing.Point(913, 62);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 22);
+
             this.label5.TabIndex = 20;
             this.label5.Text = "OrderID";
             // 
@@ -222,11 +227,13 @@ namespace Group29_BlitzCafe
             this.txtOrderIDSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtOrderIDSearch.Name = "txtOrderIDSearch";
             this.txtOrderIDSearch.Size = new System.Drawing.Size(248, 29);
+
             this.txtOrderIDSearch.TabIndex = 19;
             this.txtOrderIDSearch.TextChanged += new System.EventHandler(this.txtOrderIDSearch_TextChanged);
             // 
             // btnDeleteOrder
             // 
+
             this.btnDeleteOrder.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
             this.btnDeleteOrder.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btnDeleteOrder.ForeColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
@@ -247,7 +254,9 @@ namespace Group29_BlitzCafe
             this.dbgOrderHistory.Name = "dbgOrderHistory";
             this.dbgOrderHistory.RowHeadersWidth = 62;
             this.dbgOrderHistory.RowTemplate.Height = 28;
+
             this.dbgOrderHistory.Size = new System.Drawing.Size(779, 229);
+
             this.dbgOrderHistory.TabIndex = 1;
             this.dbgOrderHistory.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgOrderHistory_CellContentClick);
             // 
@@ -257,9 +266,11 @@ namespace Group29_BlitzCafe
             this.label2.Location = new System.Drawing.Point(60, 28);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 22);
+
             this.label2.TabIndex = 0;
             this.label2.Text = "Order History";
             // 
+
             // mySqlCommand1
             // 
             this.mySqlCommand1.CacheAge = 0;
@@ -267,6 +278,7 @@ namespace Group29_BlitzCafe
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
+
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.cbxCustomerPhoneNum);
@@ -391,11 +403,14 @@ namespace Group29_BlitzCafe
             this.lbxReceipt.Size = new System.Drawing.Size(548, 334);
             this.lbxReceipt.TabIndex = 19;
             // 
+
             // OrderPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+
             this.ClientSize = new System.Drawing.Size(1380, 700);
             this.Controls.Add(this.tabControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -448,5 +463,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.ListBox lbxReceipt;
         private System.ComponentModel.BackgroundWorker backgroundWorker1;
         private System.Windows.Forms.Button btnCheckout;
+
     }
 }

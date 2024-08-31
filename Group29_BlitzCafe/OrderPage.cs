@@ -16,6 +16,8 @@ namespace Group29_BlitzCafe
     {
         private Default defaultFrm = new Default();
         private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+        private CustomerPage customerPageFrm = new CustomerPage();
+        
 
         private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
@@ -23,7 +25,12 @@ namespace Group29_BlitzCafe
         public OrderPage()
         {
             InitializeComponent();
-            
+
+            loadOrderHistory();
+            customerPageFrm.load_Customer_Info();
+            itemPageFrm.loadMenuItems();
+
+
         }
 
         private void loadOrderHistory()
@@ -137,8 +144,29 @@ namespace Group29_BlitzCafe
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            Confirmation confirmationForm = new Confirmation(receipt, cbxCustomerPhoneNum.Text);
-            confirmationForm.ShowDialog();
+            string phoneNum = txtPhoneNum.Text;
+            Customer currentCustomer = null;
+           
+
+            foreach (Customer customer in customerPageFrm.customerList) 
+            {
+                if (customer.getCellNo() == phoneNum)
+                {
+                    currentCustomer = customer;
+                    break;
+                }
+
+            }
+            if (currentCustomer != null)
+            {
+                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
+                confirmationForm.ShowDialog();
+            }
+            else
+            {
+                MessageBox.Show("Phone number does not exist. Please try again.");
+            }
+            
         }
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
@@ -151,10 +179,12 @@ namespace Group29_BlitzCafe
 
         }
 
-       
-        private void cbxCustomerPhoneNum_TextChanged(object sender, EventArgs e)
+
+
+        private void txtQtyIItemOrdered_TextChanged(object sender, EventArgs e)
         {
 
         }
+
     }
 }
