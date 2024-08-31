@@ -28,7 +28,7 @@ namespace Group29_BlitzCafe
 
         private List<Customer> customerList = new List<Customer>();
 
-        private int choice = 0;
+        private int choice = 0, selectedItemIndex;
 
         private int customerID;
         private string fName, lName, sqlQuery, cellNo;
@@ -230,7 +230,49 @@ namespace Group29_BlitzCafe
 
         private void dbgCustomerInfo_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            //determine if a valid record is selected
+            if (e.RowIndex > -1)
+            {
+                //extract info of the selectedrow
+                int selectedID;
+                DataGridViewRow currentRow = dbgCustomerInfo.Rows[e.RowIndex];
+                //determine selected items ID
+                selectedID = Convert.ToInt32(currentRow.Cells["CustomerID"].Value);
+
+                //initialize the index variable
+                selectedItemIndex = 0;
+                bool itemFound = false;
+
+                //use a while loop to find the item with the matching ItemID
+                while (selectedItemIndex < customerList.Count)
+                {
+                    if (customerList[selectedItemIndex].getCustomerID() == selectedID)
+                    {
+                        itemFound = true;
+                        break; //exit the loop once the item is found
+                    }
+                    selectedItemIndex++;
+                }
+
+                //if the item is found, populate the textboxes using the index
+                if (itemFound)
+                {
+                    txtCustID.Text = customerList[selectedItemIndex].getCustomerID().ToString();
+                    txtLName.Text = customerList[selectedItemIndex].getLastName();
+                    txtFName.Text = customerList[selectedItemIndex].getFirstName();
+                    txtCellNo.Text = customerList[selectedItemIndex].getCellNo();
+                    dtpDate.Value = customerList[selectedItemIndex].getDateJoined();
+                }
+                else  //if the record is not found in the menuItemList, set index to -1 and return error message
+                {
+                    MessageBox.Show("Selected item not found in the list.");
+                    selectedItemIndex = -1;
+                }
+            }
+            else  //error message if row selected is out of bounds
+            {
+                MessageBox.Show("Error: Please select a valid item from the list.");
+            }
         }
 
         
