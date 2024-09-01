@@ -53,5 +53,21 @@ namespace Group29_BlitzCafe
         {
             SaveListBoxItemsToCSV(lstDisplayIncomeReport, sfdSave);
         }
+
+        private void btnConfirmMenu_Click(object sender, EventArgs e)
+        {
+            DateTime beginDate = dtpBeginDateMenu.Value;
+            DateTime endDate = dtpEndDateMenu.Value;
+            
+            lblTopMenuReport.Text = "Report of Top 5 Menu Items Sold between " + beginDate.ToString("dd MMMM yyyy") + " and " + endDate.ToString("dd MMMM yyyy");
+        }
+
+        private void btnConfirmIncome_Click(object sender, EventArgs e)
+        {
+            DateTime beginDate = dtpBeginDateIncome.Value;
+            DateTime endDate = dtpEndDateIncome.Value;
+
+            lblTopMenuReport.Text = "Report of Revenue generate between " + beginDate.ToString("dd MMMM yyyy") + " and " + endDate.ToString("dd MMMM yyyy");
+        }
     }
 }
