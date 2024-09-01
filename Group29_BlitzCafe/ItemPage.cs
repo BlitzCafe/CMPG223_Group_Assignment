@@ -152,7 +152,7 @@ namespace Group29_BlitzCafe
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            if (txtDesc.Text != "")
+            if (txtDesc.Text == "")
             {
                 txtDesc.Focus();
                 lblDescriptionError.Text = "**";
