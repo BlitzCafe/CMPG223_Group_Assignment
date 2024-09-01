@@ -163,6 +163,16 @@ namespace Group29_BlitzCafe.Properties {
         /// <summary>
         ///   Looks up a localized resource of type System.Drawing.Bitmap.
         /// </summary>
+        internal static System.Drawing.Bitmap Untitled_design__9_ {
+            get {
+                object obj = ResourceManager.GetObject("Untitled design (9)", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
         internal static System.Drawing.Bitmap WhatsApp_Image_2024_08_08_at_16_41_37_4656d1e5 {
             get {
                 object obj = ResourceManager.GetObject("WhatsApp Image 2024-08-08 at 16.41.37_4656d1e5", resourceCulture);
