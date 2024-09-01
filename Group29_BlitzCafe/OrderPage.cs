@@ -270,5 +270,15 @@ namespace Group29_BlitzCafe
                 }
             }
         }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbxReceipt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }

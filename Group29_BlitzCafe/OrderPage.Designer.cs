@@ -32,20 +32,21 @@ namespace Group29_BlitzCafe
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.lblPhoneNumError = new System.Windows.Forms.Label();
+            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.lblQtyErrorMessage = new System.Windows.Forms.Label();
             this.lblDescriptionErrorMessage = new System.Windows.Forms.Label();
             this.lblItemIdErrorMessage = new System.Windows.Forms.Label();
             this.numQtyOrdered = new System.Windows.Forms.NumericUpDown();
-            this.txtPhoneNum = new System.Windows.Forms.TextBox();
-            this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtSearchDescr = new System.Windows.Forms.TextBox();
-            this.btnAddItem = new System.Windows.Forms.Button();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.lbxItemSelection = new System.Windows.Forms.ListBox();
             this.txtSearchItemID = new System.Windows.Forms.TextBox();
+            this.lblPhoneNumError = new System.Windows.Forms.Label();
+            this.txtPhoneNum = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.btnAddItem = new System.Windows.Forms.Button();
             this.lbxReceipt = new System.Windows.Forms.ListBox();
             this.label8 = new System.Windows.Forms.Label();
             this.txtTotalAmount = new System.Windows.Forms.TextBox();
@@ -64,15 +65,14 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
+            this.groupBox2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQtyOrdered)).BeginInit();
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).BeginInit();
-            this.groupBox2.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -91,8 +91,11 @@ namespace Group29_BlitzCafe
             // 
             this.tabPage1.BackColor = System.Drawing.Color.White;
             this.tabPage1.Controls.Add(this.groupBox1);
+            this.tabPage1.Controls.Add(this.lblPhoneNumError);
             this.tabPage1.Controls.Add(this.label8);
             this.tabPage1.Controls.Add(this.txtTotalAmount);
+            this.tabPage1.Controls.Add(this.txtPhoneNum);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.btnCheckout);
             this.tabPage1.Location = new System.Drawing.Point(4, 31);
             this.tabPage1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
@@ -105,28 +108,35 @@ namespace Group29_BlitzCafe
             // groupBox1
             // 
             this.groupBox1.Controls.Add(this.groupBox2);
-            this.groupBox1.Controls.Add(this.lblPhoneNumError);
-            this.groupBox1.Controls.Add(this.txtPhoneNum);
-            this.groupBox1.Controls.Add(this.label9);
             this.groupBox1.Controls.Add(this.btnAddItem);
             this.groupBox1.Controls.Add(this.lbxReceipt);
             this.groupBox1.Location = new System.Drawing.Point(8, 24);
             this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.groupBox1.Name = "groupBox1";
             this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.groupBox1.Size = new System.Drawing.Size(1330, 515);
+            this.groupBox1.Size = new System.Drawing.Size(1330, 420);
             this.groupBox1.TabIndex = 16;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add Order";
             // 
-            // lblPhoneNumError
+            // groupBox2
             // 
-            this.lblPhoneNumError.AutoSize = true;
-            this.lblPhoneNumError.Location = new System.Drawing.Point(1072, 375);
-            this.lblPhoneNumError.Name = "lblPhoneNumError";
-            this.lblPhoneNumError.Size = new System.Drawing.Size(55, 22);
-            this.lblPhoneNumError.TabIndex = 35;
-            this.lblPhoneNumError.Text = "Error";
+            this.groupBox2.Controls.Add(this.lblQtyErrorMessage);
+            this.groupBox2.Controls.Add(this.lblDescriptionErrorMessage);
+            this.groupBox2.Controls.Add(this.lblItemIdErrorMessage);
+            this.groupBox2.Controls.Add(this.numQtyOrdered);
+            this.groupBox2.Controls.Add(this.label7);
+            this.groupBox2.Controls.Add(this.txtSearchDescr);
+            this.groupBox2.Controls.Add(this.label4);
+            this.groupBox2.Controls.Add(this.label3);
+            this.groupBox2.Controls.Add(this.lbxItemSelection);
+            this.groupBox2.Controls.Add(this.txtSearchItemID);
+            this.groupBox2.Location = new System.Drawing.Point(778, 15);
+            this.groupBox2.Name = "groupBox2";
+            this.groupBox2.Size = new System.Drawing.Size(535, 294);
+            this.groupBox2.TabIndex = 36;
+            this.groupBox2.TabStop = false;
+            this.groupBox2.Text = "Order Properties";
             // 
             // lblQtyErrorMessage
             // 
@@ -163,24 +173,6 @@ namespace Group29_BlitzCafe
             this.numQtyOrdered.Size = new System.Drawing.Size(61, 29);
             this.numQtyOrdered.TabIndex = 30;
             // 
-            // txtPhoneNum
-            // 
-            this.txtPhoneNum.Location = new System.Drawing.Point(1076, 344);
-            this.txtPhoneNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
-            this.txtPhoneNum.Name = "txtPhoneNum";
-            this.txtPhoneNum.Size = new System.Drawing.Size(209, 29);
-            this.txtPhoneNum.TabIndex = 29;
-            this.txtPhoneNum.TextChanged += new System.EventHandler(this.txtPhoneNum_TextChanged);
-            // 
-            // label9
-            // 
-            this.label9.AutoSize = true;
-            this.label9.Location = new System.Drawing.Point(801, 351);
-            this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(132, 22);
-            this.label9.TabIndex = 28;
-            this.label9.Text = "Phone Number";
-            // 
             // label7
             // 
             this.label7.AutoSize = true;
@@ -198,21 +190,6 @@ namespace Group29_BlitzCafe
             this.txtSearchDescr.Size = new System.Drawing.Size(209, 29);
             this.txtSearchDescr.TabIndex = 26;
             this.txtSearchDescr.TextChanged += new System.EventHandler(this.txtSearchDescr_TextChanged);
-            // 
-            // btnAddItem
-            // 
-            this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
-            this.btnAddItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
-            this.btnAddItem.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btnAddItem.ForeColor = System.Drawing.Color.Black;
-            this.btnAddItem.Location = new System.Drawing.Point(1076, 447);
-            this.btnAddItem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(237, 49);
-            this.btnAddItem.TabIndex = 25;
-            this.btnAddItem.Text = "Add item to order";
-            this.btnAddItem.UseVisualStyleBackColor = false;
-            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // label4
             // 
@@ -252,11 +229,53 @@ namespace Group29_BlitzCafe
             this.txtSearchItemID.TabIndex = 20;
             this.txtSearchItemID.TextChanged += new System.EventHandler(this.txtSearchItemID_TextChanged);
             // 
+            // lblPhoneNumError
+            // 
+            this.lblPhoneNumError.AutoSize = true;
+            this.lblPhoneNumError.Location = new System.Drawing.Point(1080, 497);
+            this.lblPhoneNumError.Name = "lblPhoneNumError";
+            this.lblPhoneNumError.Size = new System.Drawing.Size(55, 22);
+            this.lblPhoneNumError.TabIndex = 35;
+            this.lblPhoneNumError.Text = "Error";
+            // 
+            // txtPhoneNum
+            // 
+            this.txtPhoneNum.Location = new System.Drawing.Point(1084, 466);
+            this.txtPhoneNum.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
+            this.txtPhoneNum.Name = "txtPhoneNum";
+            this.txtPhoneNum.Size = new System.Drawing.Size(237, 29);
+            this.txtPhoneNum.TabIndex = 29;
+            this.txtPhoneNum.TextChanged += new System.EventHandler(this.txtPhoneNum_TextChanged);
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(809, 473);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(132, 22);
+            this.label9.TabIndex = 28;
+            this.label9.Text = "Phone Number";
+            // 
+            // btnAddItem
+            // 
+            this.btnAddItem.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.btnAddItem.FlatAppearance.BorderColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.btnAddItem.Font = new System.Drawing.Font("Bahnschrift SemiBold", 10F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnAddItem.ForeColor = System.Drawing.Color.Black;
+            this.btnAddItem.Location = new System.Drawing.Point(1076, 355);
+            this.btnAddItem.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.btnAddItem.Name = "btnAddItem";
+            this.btnAddItem.Size = new System.Drawing.Size(237, 49);
+            this.btnAddItem.TabIndex = 25;
+            this.btnAddItem.Text = "Add item to order";
+            this.btnAddItem.UseVisualStyleBackColor = false;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
+            // 
             // lbxReceipt
             // 
             this.lbxReceipt.FormattingEnabled = true;
             this.lbxReceipt.ItemHeight = 22;
-            this.lbxReceipt.Location = new System.Drawing.Point(18, 50);
+            this.lbxReceipt.Location = new System.Drawing.Point(18, 26);
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.lbxReceipt.Name = "lbxReceipt";
             this.lbxReceipt.Size = new System.Drawing.Size(743, 378);
@@ -265,18 +284,19 @@ namespace Group29_BlitzCafe
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(22, 584);
+            this.label8.Location = new System.Drawing.Point(22, 473);
             this.label8.Name = "label8";
             this.label8.Size = new System.Drawing.Size(49, 22);
             this.label8.TabIndex = 15;
             this.label8.Text = "Total";
+            this.label8.Click += new System.EventHandler(this.label8_Click);
             // 
             // txtTotalAmount
             // 
-            this.txtTotalAmount.Location = new System.Drawing.Point(106, 577);
+            this.txtTotalAmount.Location = new System.Drawing.Point(179, 466);
             this.txtTotalAmount.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtTotalAmount.Name = "txtTotalAmount";
-            this.txtTotalAmount.Size = new System.Drawing.Size(103, 29);
+            this.txtTotalAmount.Size = new System.Drawing.Size(209, 29);
             this.txtTotalAmount.TabIndex = 14;
             // 
             // btnCheckout
@@ -434,25 +454,6 @@ namespace Group29_BlitzCafe
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
             // 
-            // groupBox2
-            // 
-            this.groupBox2.Controls.Add(this.lblQtyErrorMessage);
-            this.groupBox2.Controls.Add(this.lblDescriptionErrorMessage);
-            this.groupBox2.Controls.Add(this.lblItemIdErrorMessage);
-            this.groupBox2.Controls.Add(this.numQtyOrdered);
-            this.groupBox2.Controls.Add(this.label7);
-            this.groupBox2.Controls.Add(this.txtSearchDescr);
-            this.groupBox2.Controls.Add(this.label4);
-            this.groupBox2.Controls.Add(this.label3);
-            this.groupBox2.Controls.Add(this.lbxItemSelection);
-            this.groupBox2.Controls.Add(this.txtSearchItemID);
-            this.groupBox2.Location = new System.Drawing.Point(778, 39);
-            this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Size = new System.Drawing.Size(535, 294);
-            this.groupBox2.TabIndex = 36;
-            this.groupBox2.TabStop = false;
-            this.groupBox2.Text = "Order Properties";
-            // 
             // OrderPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -468,14 +469,13 @@ namespace Group29_BlitzCafe
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
             this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.groupBox2.ResumeLayout(false);
+            this.groupBox2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numQtyOrdered)).EndInit();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).EndInit();
-            this.groupBox2.ResumeLayout(false);
-            this.groupBox2.PerformLayout();
             this.ResumeLayout(false);
 
         }
