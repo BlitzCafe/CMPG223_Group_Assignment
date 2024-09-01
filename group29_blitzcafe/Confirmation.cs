@@ -112,7 +112,7 @@ namespace Group29_BlitzCafe
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
         {
-            ConfirmPayment();
+            
         }
 
         private void ConfirmPayment()
@@ -175,7 +175,7 @@ namespace Group29_BlitzCafe
 
         private void btnConfirmPayment_Click_1(object sender, EventArgs e)
         {
-
+            ConfirmPayment();
         }
     }
 
