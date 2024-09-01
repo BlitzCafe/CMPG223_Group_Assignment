@@ -186,5 +186,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void btnPrintReceipt_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
