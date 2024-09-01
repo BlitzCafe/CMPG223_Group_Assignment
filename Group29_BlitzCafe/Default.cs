@@ -66,7 +66,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(850, 495);
+            f1.Size = new Size(870, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
@@ -125,7 +125,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(850, 495);
+            f1.Size = new Size(870, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();
@@ -184,7 +184,7 @@ namespace Group29_BlitzCafe
             f1.FormBorderStyle = FormBorderStyle.None;
 
             // Set the fixed size for the form
-            f1.Size = new Size(850, 495);
+            f1.Size = new Size(870, 495);
 
             if (panel1.Controls.Count > 0)
                 panel1.Controls.Clear();

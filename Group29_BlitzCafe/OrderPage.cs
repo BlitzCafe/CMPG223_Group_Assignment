@@ -185,10 +185,6 @@ namespace Group29_BlitzCafe
                     }
                 }
             }
-       
-
-
-
 
         }
 
