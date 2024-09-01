@@ -92,7 +92,13 @@ namespace Group29_BlitzCafe
                     conn.Open();
                     adap = new SqlDataAdapter();
                     ds = new DataSet();
-                    string query = @"SELECT OD.ItemID, I.Description, SUM(OD.Quantity_Sold) AS TotalQuantity FROM Order_Details OD JOIN [Order] O ON OD.OrderID = O.OrderID JOIN Items I ON OD.ItemID = I.ItemID WHERE O.Order_Date BETWEEN @beginDate AND @endDate GROUP BY OD.ItemID, I.Description ORDER BY TotalQuantity DESC ";
+                    string query = @"SELECT TOP 5 I.Description, SUM(OD.Quantity_Sold) AS TotalQuantity 
+                    FROM Order_Details OD 
+                    JOIN [Order] O ON OD.OrderID = O.OrderID 
+                    JOIN Items I ON OD.ItemID = I.ItemID 
+                    WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+                    GROUP BY OD.ItemID, I.Description 
+                    ORDER BY TotalQuantity DESC";
                     cmd = new SqlCommand(query, conn);
 
                     // Add parameters for the date range
