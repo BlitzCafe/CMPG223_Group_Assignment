@@ -25,7 +25,7 @@ namespace Group29_BlitzCafe
        
         private void Form1_Load(object sender, EventArgs e)
         {
-            this.Size = new System.Drawing.Size(870, 530);
+            this.Size = new System.Drawing.Size(810, 530);
             // Initialize the Timer
             Timer timer = new Timer();
             timer.Interval = 50; // Set the interval for the timer (milliseconds)
