@@ -235,10 +235,8 @@ namespace Group29_BlitzCafe
 
         }
 
-        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
+
+        
 
 
 
@@ -246,7 +244,23 @@ namespace Group29_BlitzCafe
 
         private void txtSearchDescr_TextChanged(object sender, EventArgs e)
         {
-            
+            string searchDescr = txtSearchDescr.Text;
+            lbxItemSelection.Items.Clear();
+
+            if (!string.IsNullOrWhiteSpace(searchDescr))
+            {
+                foreach (MenuItem item in itemPageFrm.menuItemList)
+                {
+                    string itemDescr = item.getDescr();
+                    if (itemDescr.Contains(searchDescr)) // Search description case-insensitive
+                    {
+                        // Display itemID, description, and price
+                        string displayText = string.Format("{0,-10} {1,-20} {2,-10:C}", item.getItemID(), item.getDescr(), item.getPrice().ToString("C", new CultureInfo("en-ZA")));
+
+                        lbxItemSelection.Items.Add(displayText);
+                    }
+                }
+            }
         }
 
         private void txtPhoneNum_TextChanged(object sender, EventArgs e)
@@ -273,6 +287,24 @@ namespace Group29_BlitzCafe
                     }
                 }
             }
+        }
+
+        //ORDER HISTORY
+        private void dtOrderDate_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //ORDER HISTORY
+        private void cbxLoyaltyPointsUsed_CheckedChanged(object sender, EventArgs e)
+        {
+
+        }
+
+        //ORDER HISTORY
+        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
