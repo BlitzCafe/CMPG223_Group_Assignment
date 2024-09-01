@@ -318,7 +318,7 @@ namespace Group29_BlitzCafe
             // label10
             // 
             this.label10.AutoSize = true;
-            this.label10.Location = new System.Drawing.Point(63, 325);
+            this.label10.Location = new System.Drawing.Point(62, 345);
             this.label10.Name = "label10";
             this.label10.Size = new System.Drawing.Size(120, 22);
             this.label10.TabIndex = 26;
@@ -421,7 +421,7 @@ namespace Group29_BlitzCafe
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(60, 28);
+            this.label2.Location = new System.Drawing.Point(59, 38);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(122, 22);
             this.label2.TabIndex = 0;
