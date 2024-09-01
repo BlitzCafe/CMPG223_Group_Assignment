@@ -32,6 +32,7 @@ namespace Group29_BlitzCafe
             this.tabControl1 = new System.Windows.Forms.TabControl();
             this.tabPage1 = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.txtPhoneNum = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
             this.txtSearchDescr = new System.Windows.Forms.TextBox();
@@ -59,7 +60,6 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
-            this.txtPhoneNum = new System.Windows.Forms.TextBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -117,6 +117,14 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Add Order";
             // 
+            // txtPhoneNum
+            // 
+            this.txtPhoneNum.Location = new System.Drawing.Point(1037, 25);
+            this.txtPhoneNum.Name = "txtPhoneNum";
+            this.txtPhoneNum.Size = new System.Drawing.Size(100, 26);
+            this.txtPhoneNum.TabIndex = 29;
+            this.txtPhoneNum.TextChanged += new System.EventHandler(this.txtPhoneNum_TextChanged);
+            // 
             // label9
             // 
             this.label9.AutoSize = true;
@@ -142,6 +150,7 @@ namespace Group29_BlitzCafe
             this.txtSearchDescr.Name = "txtSearchDescr";
             this.txtSearchDescr.Size = new System.Drawing.Size(142, 26);
             this.txtSearchDescr.TabIndex = 26;
+            this.txtSearchDescr.TextChanged += new System.EventHandler(this.txtSearchDescr_TextChanged);
             // 
             // btnAddItem
             // 
@@ -155,6 +164,7 @@ namespace Group29_BlitzCafe
             this.btnAddItem.TabIndex = 25;
             this.btnAddItem.Text = "Add item to order";
             this.btnAddItem.UseVisualStyleBackColor = false;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // label4
             // 
@@ -190,6 +200,7 @@ namespace Group29_BlitzCafe
             this.lbxItemSelection.Name = "lbxItemSelection";
             this.lbxItemSelection.Size = new System.Drawing.Size(377, 76);
             this.lbxItemSelection.TabIndex = 21;
+            this.lbxItemSelection.SelectedIndexChanged += new System.EventHandler(this.lbxItemSelection_SelectedIndexChanged);
             // 
             // txtSearchItemID
             // 
@@ -198,6 +209,7 @@ namespace Group29_BlitzCafe
             this.txtSearchItemID.Name = "txtSearchItemID";
             this.txtSearchItemID.Size = new System.Drawing.Size(142, 26);
             this.txtSearchItemID.TabIndex = 20;
+            this.txtSearchItemID.TextChanged += new System.EventHandler(this.txtSearchItemID_TextChanged);
             // 
             // lbxReceipt
             // 
@@ -375,13 +387,6 @@ namespace Group29_BlitzCafe
             this.mySqlCommand1.Connection = null;
             this.mySqlCommand1.EnableCaching = false;
             this.mySqlCommand1.Transaction = null;
-            // 
-            // txtPhoneNum
-            // 
-            this.txtPhoneNum.Location = new System.Drawing.Point(1037, 25);
-            this.txtPhoneNum.Name = "txtPhoneNum";
-            this.txtPhoneNum.Size = new System.Drawing.Size(100, 26);
-            this.txtPhoneNum.TabIndex = 29;
             // 
             // OrderPage
             // 
