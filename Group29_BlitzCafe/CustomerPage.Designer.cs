@@ -32,6 +32,7 @@ namespace Group29_BlitzCafe
             this.btnAddNew = new System.Windows.Forms.Button();
             this.dbgCustomerInfo = new System.Windows.Forms.DataGridView();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             this.btnCancel = new System.Windows.Forms.Button();
             this.lblDateJoined = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
@@ -45,7 +46,6 @@ namespace Group29_BlitzCafe
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnUpdate = new System.Windows.Forms.Button();
-            this.dtpDate = new System.Windows.Forms.DateTimePicker();
             ((System.ComponentModel.ISupportInitialize)(this.dbgCustomerInfo)).BeginInit();
             this.groupBox1.SuspendLayout();
             this.SuspendLayout();
@@ -96,6 +96,13 @@ namespace Group29_BlitzCafe
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = " ";
             // 
+            // dtpDate
+            // 
+            this.dtpDate.Location = new System.Drawing.Point(178, 219);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(166, 22);
+            this.dtpDate.TabIndex = 13;
+            // 
             // btnCancel
             // 
             this.btnCancel.Location = new System.Drawing.Point(194, 267);
@@ -130,6 +137,7 @@ namespace Group29_BlitzCafe
             this.txtCellNo.Name = "txtCellNo";
             this.txtCellNo.Size = new System.Drawing.Size(100, 22);
             this.txtCellNo.TabIndex = 7;
+            this.txtCellNo.TextChanged += new System.EventHandler(this.txtCellNo_TextChanged);
             // 
             // txtLName
             // 
@@ -209,13 +217,6 @@ namespace Group29_BlitzCafe
             this.btnUpdate.Text = "Update Customer";
             this.btnUpdate.UseVisualStyleBackColor = true;
             this.btnUpdate.Click += new System.EventHandler(this.btnUpdate_Click);
-            // 
-            // dtpDate
-            // 
-            this.dtpDate.Location = new System.Drawing.Point(178, 219);
-            this.dtpDate.Name = "dtpDate";
-            this.dtpDate.Size = new System.Drawing.Size(166, 22);
-            this.dtpDate.TabIndex = 13;
             // 
             // CustomerPage
             // 

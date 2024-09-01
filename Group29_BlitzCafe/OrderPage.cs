@@ -91,9 +91,11 @@ namespace Group29_BlitzCafe
         }
 
 
+
         private void btnAddItem_Click(object sender, EventArgs e)
         {
             decimal itemAmount = 0.0m;
+
             string itemId = txtSearchItemID.Text;
             int quantity = int.Parse(txtQtyIItemOrdered.Text);
             foreach (MenuItem item in itemPageFrm.menuItemList)
@@ -104,7 +106,9 @@ namespace Group29_BlitzCafe
                     item.setQtySold(quantity);
                     receipt.Add(item);
                     itemAmount = item.getPrice() * quantity;
+
                     lbxReceipt.Items.Add(item.getDescr() + " " + item.getPrice() + "Order Amount: " + itemAmount.ToString());
+
 
                     totalAmount += itemAmount;
                     break;
@@ -127,6 +131,7 @@ namespace Group29_BlitzCafe
 
                 string selectedItemInfo = lbxItemSelection.SelectedItem.ToString();
 
+
                 // Loop through the menuItemList to find the matching item
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
@@ -144,6 +149,7 @@ namespace Group29_BlitzCafe
 
 
 
+]
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
