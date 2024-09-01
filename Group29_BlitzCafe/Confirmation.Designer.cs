@@ -33,15 +33,18 @@ namespace Group29_BlitzCafe
             this.btnConfirmPayment = new System.Windows.Forms.Button();
             this.btnPrintReceipt = new System.Windows.Forms.Button();
             this.lbxReceipt = new System.Windows.Forms.ListBox();
+            this.pictureBox1 = new System.Windows.Forms.PictureBox();
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // cbxUseLoyaltyPoints
             // 
             this.cbxUseLoyaltyPoints.AutoSize = true;
-            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(388, 247);
+            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(416, 369);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
-            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(140, 21);
+            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(176, 26);
+
             this.cbxUseLoyaltyPoints.TabIndex = 0;
             this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
@@ -49,20 +52,22 @@ namespace Group29_BlitzCafe
             // 
             // btnConfirmPayment
             // 
-            this.btnConfirmPayment.Location = new System.Drawing.Point(388, 120);
+            this.btnConfirmPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
+            this.btnConfirmPayment.Location = new System.Drawing.Point(416, 139);
             this.btnConfirmPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfirmPayment.Name = "btnConfirmPayment";
-            this.btnConfirmPayment.Size = new System.Drawing.Size(200, 65);
+            this.btnConfirmPayment.Size = new System.Drawing.Size(222, 75);
             this.btnConfirmPayment.TabIndex = 1;
             this.btnConfirmPayment.Text = "Confirm Payment";
             this.btnConfirmPayment.UseVisualStyleBackColor = false;
             // 
             // btnPrintReceipt
             // 
-            this.btnPrintReceipt.Location = new System.Drawing.Point(388, 34);
+            this.btnPrintReceipt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.btnPrintReceipt.Location = new System.Drawing.Point(416, 39);
             this.btnPrintReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrintReceipt.Name = "btnPrintReceipt";
-            this.btnPrintReceipt.Size = new System.Drawing.Size(200, 65);
+            this.btnPrintReceipt.Size = new System.Drawing.Size(222, 75);
             this.btnPrintReceipt.TabIndex = 2;
             this.btnPrintReceipt.Text = "Print Receipt";
             this.btnPrintReceipt.UseVisualStyleBackColor = false;
@@ -72,27 +77,40 @@ namespace Group29_BlitzCafe
             // 
             this.lbxReceipt.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxReceipt.FormattingEnabled = true;
-            this.lbxReceipt.ItemHeight = 18;
-            this.lbxReceipt.Location = new System.Drawing.Point(16, 34);
-            this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.lbxReceipt.ItemHeight = 22;
+            this.lbxReceipt.Location = new System.Drawing.Point(36, 39);
+            this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.lbxReceipt.Name = "lbxReceipt";
-            this.lbxReceipt.Size = new System.Drawing.Size(316, 310);
+            this.lbxReceipt.Size = new System.Drawing.Size(351, 356);
+
             this.lbxReceipt.TabIndex = 3;
+            // 
+            // pictureBox1
+            // 
+            this.pictureBox1.Image = global::Group29_BlitzCafe.Properties.Resources.Untitled_design__7_;
+            this.pictureBox1.Location = new System.Drawing.Point(-1, -2);
+            this.pictureBox1.Name = "pictureBox1";
+            this.pictureBox1.Size = new System.Drawing.Size(687, 168);
+            this.pictureBox1.TabIndex = 4;
+            this.pictureBox1.TabStop = false;
             // 
             // Confirmation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(729, 388);
+            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.ClientSize = new System.Drawing.Size(681, 449);
             this.Controls.Add(this.lbxReceipt);
             this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.btnConfirmPayment);
             this.Controls.Add(this.cbxUseLoyaltyPoints);
-            this.Font = new System.Drawing.Font("Bahnschrift SemiBold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.Controls.Add(this.pictureBox1);
+            this.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
             this.Load += new System.EventHandler(this.Confirmation_Load_1);
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -104,5 +122,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnConfirmPayment;
         private System.Windows.Forms.Button btnPrintReceipt;
         private System.Windows.Forms.ListBox lbxReceipt;
+        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }

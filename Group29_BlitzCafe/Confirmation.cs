@@ -190,6 +190,7 @@ namespace Group29_BlitzCafe
 
         private void btnPrintReceipt_Click(object sender, EventArgs e)
         {
+
             // Define the directory path
             string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Receipts");
 
