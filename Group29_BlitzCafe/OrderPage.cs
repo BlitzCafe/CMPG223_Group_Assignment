@@ -24,6 +24,7 @@ namespace Group29_BlitzCafe
         private List<Order> orderList = new List<Order>();
 
         private decimal totalAmount = 0.0m;
+        private int selectedOrderID = -1;
 
         public OrderPage()
         {
@@ -54,6 +55,21 @@ namespace Group29_BlitzCafe
                     dataAdapter.Fill(dataTable);
 
                     dbgOrderHistory.DataSource = dataTable; // Bind the DataGridView to the DataTable
+
+                    orderList.Clear();
+
+                    // Populate orderList from the DataTable
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        int orderID = Convert.ToInt32(row["OrderID"]);
+                        DateTime orderDate = Convert.ToDateTime(row["Order_Date"]);
+                        int isPayed = Convert.ToInt32(row["Is_Paid"]);
+                        int loyaltyPointsUsed = Convert.ToInt32(row["LoyaltyPoints_Used"]);
+
+                        // Create a new Order object and add it to the list
+                        Order order = new Order(orderID, orderDate, isPayed, loyaltyPointsUsed);
+                        orderList.Add(order);
+                    }   
                 }
                 catch (Exception ex)
                 {
@@ -84,16 +100,14 @@ namespace Group29_BlitzCafe
             }
         }
 
+
         private void OrderPage_Load(object sender, EventArgs e)
         {
             loadOrderHistory();
-            LoadOrderDetails();
-        }
-
-        private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
             
         }
+
+        
 
         private bool validateControls()
         {
@@ -205,6 +219,7 @@ namespace Group29_BlitzCafe
         {
             string phoneNum = txtPhoneNum.Text;
             Customer currentCustomer = null;
+
            
 
             foreach (Customer customer in customerPageFrm.customerList) 
@@ -305,6 +320,78 @@ namespace Group29_BlitzCafe
         //ORDER HISTORY
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
 
+        {
+
+        }
+
+        private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
+        {
+            
+           /** if (e.RowIndex > -1 && e.RowIndex < dbgOrderHistory.Rows.Count)
+            {
+                DataGridViewRow currentRow = dbgOrderHistory.Rows[e.RowIndex];
+
+                
+                if (currentRow.Cells["OrderID"].Value != DBNull.Value)
+                { 
+                    if (int.TryParse(currentRow.Cells["OrderID"].Value.ToString(), out selectedOrderID))
+                    {
+                        int selectedOrderIndex = 0;
+                        bool orderFound = false;
+
+                        // Search for the order
+                        while (selectedOrderIndex < orderList.Count)
+                        {
+                            if (orderList[selectedOrderIndex].getOrderID() == selectedOrderID)
+                            {
+                                orderFound = true;
+                                break;
+                            }
+                            selectedOrderIndex++;
+                        }
+
+                        if (orderFound)
+                        {
+                            selectedOrderID = orderList[selectedOrderIndex].getOrderID();
+                            LoadOrderDetails();
+                            txtOrderIDSearch.Text = selectedOrderID.ToString();
+
+                            // Ensure the date is valid
+                            if (DateTime.TryParse(orderList[selectedOrderIndex].getOrderDate().ToString(), out DateTime orderDate))
+                            {
+                                dtOrderDate.Value = orderDate;
+                            }
+                            else
+                            {
+                                MessageBox.Show("Error: Invalid Order Date.");
+                            }
+
+                            cbxLoyaltyPointsUsed.Checked = orderList[selectedOrderIndex].getLoyaltyPointsUsed() == 1;
+                        }
+                        else
+                        {
+                            MessageBox.Show("Selected order not found in the list.");
+                        }
+                    }
+                    else
+                    {
+                        MessageBox.Show("Error: Selected OrderID is not valid.");
+                    }
+            }
+            else
+            {
+                MessageBox.Show("Error: Selected cell has no valid OrderID.");
+            }
+        }
+    else
+    {
+        MessageBox.Show("Error: Please select a valid order from the list.");
+    }**/
+}
+
+       
+
+        private void dbgOrderDetails_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
 
         }
