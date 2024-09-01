@@ -54,6 +54,25 @@ namespace Group29_BlitzCafe
                     dataAdapter.Fill(dataTable);
 
                     dbgOrderHistory.DataSource = dataTable; // Bind the DataGridView to the DataTable
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        int orderID = Convert.ToInt32(row["OrderID"]);
+                        DateTime orderDate;
+                        if (row["Order_Date"] != DBNull.Value)
+                        {
+                            orderDate = Convert.ToDateTime(row["Order_Date"]);
+                            int isPayed = Convert.ToInt32(row["Is_Paid"]);
+                            int loyaltyPointsUsed = Convert.ToInt32(row["LoyaltyPoints_Used"]);
+
+                            // Create a new Order object using the data
+                            Order order = new Order(orderID, orderDate, isPayed, loyaltyPointsUsed);
+
+                            // Add the Order object to the list
+                            orderList.Add(order);
+
+                        }
+                    }
                 }
                 catch (Exception ex)
                 {
@@ -232,7 +251,7 @@ namespace Group29_BlitzCafe
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
-            int orderID = orderList.getOrderID(); // Implement this method to get the OrderID from the user interface
+            int orderID = 1;//orderList.getOrderID(); // Implement this method to get the OrderID from the user interface
 
             if (orderID <= 0)
             {
