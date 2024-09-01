@@ -173,6 +173,9 @@
       <DependentUpon>Resources.resx</DependentUpon>
       <DesignTime>True</DesignTime>
     </Compile>
+    <EmbeddedResource Include="Reports.resx">
+      <DependentUpon>Reports.cs</DependentUpon>
+    </EmbeddedResource>
     <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
@@ -207,6 +210,12 @@
   </ItemGroup>
   <ItemGroup>
     <None Include="Resources\Untitled design %284%29.png" />
+    <None Include="Resources\Untitled design %285%29.png" />
+    <None Include="Resources\Untitled design %286%29.png" />
+    <None Include="Resources\Untitled design %287%29.png" />
+    <None Include="Resources\Untitled design %288%29.png" />
+    <None Include="Resources\WhatsApp Image 2024-09-01 at 12.36.46_a21c2dcd.jpg" />
+    <None Include="Resources\Untitled design %289%29.png" />
     <Content Include="Untitled design %284%29.png" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
