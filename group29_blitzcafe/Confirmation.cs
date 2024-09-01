@@ -12,9 +12,9 @@ namespace Group29_BlitzCafe
         private List<MenuItem> receipt = new List<MenuItem>();
         private decimal totalAmount = 0m;
         private Customer currentCustomer;
-        private Order currentOrder;
+        
 
-        public Confirmation(List<MenuItem> receipt, Customer currentCustomer, Order currentOrder)
+        public Confirmation(List<MenuItem> receipt, Customer currentCustomer)
         {
             InitializeComponent();
             this.receipt = receipt;
@@ -96,7 +96,7 @@ namespace Group29_BlitzCafe
 
         private void InsertLoyaltyTransaction(decimal newBalance)
         {
-            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+          /**  using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 conn.Open();
                 string query = "INSERT INTO LoyaltyTransactions (LoyaltyTransactionID, OrderID, CustomerID, Running_Point_Balance) VALUES (@LoyaltyTransactionID, @OrderID, @CustomerID, @NewBalance)";
@@ -108,6 +108,7 @@ namespace Group29_BlitzCafe
                     cmd.ExecuteNonQuery();
                 }
             }
+          **/
         }
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
