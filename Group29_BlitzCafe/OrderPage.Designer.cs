@@ -229,7 +229,7 @@ namespace Group29_BlitzCafe
             this.lbxItemSelection.Location = new System.Drawing.Point(27, 148);
             this.lbxItemSelection.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbxItemSelection.Name = "lbxItemSelection";
-            this.lbxItemSelection.Size = new System.Drawing.Size(480, 26);
+            this.lbxItemSelection.Size = new System.Drawing.Size(480, 70);
             this.lbxItemSelection.TabIndex = 21;
             this.lbxItemSelection.SelectedIndexChanged += new System.EventHandler(this.lbxItemSelection_SelectedIndexChanged);
             // 
