@@ -199,7 +199,7 @@ namespace Group29_BlitzCafe
                 JOIN [Order] O ON OD.OrderID = O.OrderID 
                 JOIN Items I ON OD.ItemID = I.ItemID 
                 WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
-                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date)";
+                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date)";
             }
             using (SqlConnection conn = new SqlConnection(connString))
           
