@@ -102,8 +102,8 @@ namespace Group29_BlitzCafe
                     cmd = new SqlCommand(query, conn);
 
                     // Add parameters for the date range
-                    cmd.Parameters.AddWithValue("@beginDate", beginDate);
-                    cmd.Parameters.AddWithValue("@endDate", endDate);
+                    cmd.Parameters.Add("@beginDate", SqlDbType.Date).Value = beginDate.Date;
+                    cmd.Parameters.Add("@endDate", SqlDbType.Date).Value = endDate.Date.AddDays(1).AddTicks(-1);
 
                     // Execute the command and read the data
                     reader = cmd.ExecuteReader();
