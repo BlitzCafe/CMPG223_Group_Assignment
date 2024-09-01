@@ -191,7 +191,7 @@ namespace Group29_BlitzCafe
         private void btnPrintReceipt_Click(object sender, EventArgs e)
         {
             // Define the directory path
-            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Resources");
+            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Receipts");
 
             // Ensure the directory exists
             if (!Directory.Exists(directoryPath))
