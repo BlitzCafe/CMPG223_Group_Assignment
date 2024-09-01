@@ -287,7 +287,7 @@ namespace Group29_BlitzCafe
 
         private void btnCheckout_Click(object sender, EventArgs e)
         {
-            string phoneNum = txtPhoneNum.Text;
+            string phoneNum = txtPhoneNum.Text.Trim();
             Customer currentCustomer = null;
             
 
@@ -296,46 +296,16 @@ namespace Group29_BlitzCafe
                 if (customer.getCellNo() == phoneNum)
                 {
                     currentCustomer = customer;
+                    ;
                     break;
                 }
 
             }
             if (currentCustomer != null)
             {
-                if (currentOrderID > 0)
-                {
-                    bool orderFound = false;
-
-                    // Iterate through the orderList to find the matching order by currentOrderID
-                    foreach (Order order in orderList)
-                    {
-                        if (order.getOrderID() == currentOrderID)
-                        {
-                            // If the matching order is found, assign it to currentOrder
-                            currentOrder = order;
-                            orderFound = true;
-                            break; // Exit the loop as soon as the matching order is found
-                        }
-                    }
-
-                    if (orderFound)
-                    {
                         // Order is found, show confirmation form
-                        Confirmation confirmationForm = new Confirmation(receipt, currentCustomer, currentOrder);
-                        confirmationForm.ShowDialog();
-                    }
-                    else
-                    {
-                        // No matching order found in the list
-                        MessageBox.Show($"No order found with OrderID: {currentOrderID}. Please ensure you've selected a valid order.", "Order Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                    }
-                }
-                else
-                {
-                    txtPhoneNum.Focus();
-                    lblPhoneNumError.ForeColor = Color.Red;
-                    lblPhoneNumError.Text = "**";
-                }
+                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
+                confirmationForm.ShowDialog();
 
             }
         }
