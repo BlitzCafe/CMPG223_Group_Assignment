@@ -227,6 +227,11 @@ namespace Group29_BlitzCafe
                 InsertLoyaltyTransaction(GetLoyaltyPoints());
             }
         }
+
+        private void Confirmation_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 
 }
