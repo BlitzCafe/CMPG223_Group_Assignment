@@ -32,6 +32,10 @@ namespace Group29_BlitzCafe
             customerPageFrm.load_Customer_Info();
             itemPageFrm.loadMenuItems();
 
+            lblPhoneNumError.Text = "";
+            lblDescriptionErrorMessage.Text = "";
+            lblQtyErrorMessage.Text = "";
+            lblItemIdErrorMessage.Text = "";
 
         }
 
@@ -90,37 +94,72 @@ namespace Group29_BlitzCafe
             
         }
 
+        private bool validateControls()
+        {
+            lblPhoneNumError.Text = "";
+            lblDescriptionErrorMessage.Text = "";
+            lblQtyErrorMessage.Text = "";
+            lblItemIdErrorMessage.Text = "";
 
+            bool canAdd = true;
+
+            if (txtSearchItemID.Text == "")
+            {
+                txtSearchItemID.Focus();
+                lblItemIdErrorMessage.Text = "This field is required, please enter a valid Item ID";
+                canAdd = false;
+
+            }
+            else if (txtSearchDescr.Text == "")
+            {
+                txtSearchDescr.Focus();
+                lblDescriptionErrorMessage.Text = "This field is required, please enter a valid description";
+                canAdd = false;
+            }
+            else if (numQtyOrdered.Value <= 0)
+            {
+                numQtyOrdered.Focus();
+                lblQtyErrorMessage.Text = "This field is required, please enter a valid quantity";
+                canAdd = false;
+
+            }
+           
+            
+
+            return canAdd;
+        }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            decimal itemAmount = 0.0m;
-
-            string itemId = txtSearchItemID.Text;
-            int quantity = int.Parse(txtQtyIItemOrdered.Text);
-            foreach (MenuItem item in itemPageFrm.menuItemList)
+            if (validateControls())
             {
-                string itemID = item.getItemID().ToString();
-                if (itemID.Contains(itemId))
+                decimal itemAmount = 0.0m;
+
+                string itemId = txtSearchItemID.Text;
+                int quantity = (int)numQtyOrdered.Value;
+                foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    item.setQtySold(quantity);
-                    receipt.Add(item);
-                    itemAmount = item.getPrice() * quantity;
+                    string itemID = item.getItemID().ToString();
+                    if (itemID.Contains(itemId))
+                    {
+                        item.setQtySold(quantity);
+                        receipt.Add(item);
+                        itemAmount = item.getPrice() * quantity;
 
-                    lbxReceipt.Items.Add(item.getDescr() + " " + item.getPrice() + "Order Amount: " + itemAmount.ToString());
+                        lbxReceipt.Items.Add(item.getDescr() + " " + item.getPrice() + "Order Amount: " + itemAmount.ToString());
 
 
-                    totalAmount += itemAmount;
-                    break;
+                        totalAmount += itemAmount;
+                        break;
+                    }
                 }
+
+                txtTotalAmount.Text = totalAmount.ToString();
+                txtSearchItemID.Clear();
+                txtSearchDescr.Clear();
+                numQtyOrdered.ResetText();
+                lbxItemSelection.Items.Clear();
             }
-
-            txtTotalAmount.Text = totalAmount.ToString();
-            txtSearchItemID.Clear();
-            txtSearchDescr.Clear();
-            txtQtyIItemOrdered.Clear();
-            lbxItemSelection.Items.Clear();
-
         }
 
         private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
@@ -146,10 +185,11 @@ namespace Group29_BlitzCafe
                     }
                 }
             }
+       
 
 
 
-]
+
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
@@ -174,7 +214,8 @@ namespace Group29_BlitzCafe
             }
             else
             {
-                MessageBox.Show("Phone number does not exist. Please try again.");
+                txtPhoneNum.Focus();
+                lblPhoneNumError.Text = "This field is required, please enter a valid customers phone number";
             }
             
         }
