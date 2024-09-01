@@ -75,7 +75,7 @@ namespace Group29_BlitzCafe
             this.dbgCustomerInfo.Name = "dbgCustomerInfo";
             this.dbgCustomerInfo.RowHeadersWidth = 62;
             this.dbgCustomerInfo.RowTemplate.Height = 28;
-            this.dbgCustomerInfo.Size = new System.Drawing.Size(493, 524);
+            this.dbgCustomerInfo.Size = new System.Drawing.Size(493, 543);
             this.dbgCustomerInfo.TabIndex = 1;
             this.dbgCustomerInfo.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgCustomerInfo_CellClick);
             // 
@@ -256,7 +256,7 @@ namespace Group29_BlitzCafe
             // 
             // panel1
             // 
-            this.panel1.BackColor = System.Drawing.Color.White;
+            this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
             this.panel1.Controls.Add(this.btnUpdate);
             this.panel1.Controls.Add(this.btnDelete);
             this.panel1.Controls.Add(this.btnAddNew);
@@ -267,7 +267,7 @@ namespace Group29_BlitzCafe
             // 
             // panel2
             // 
-            this.panel2.BackColor = System.Drawing.Color.White;
+            this.panel2.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
             this.panel2.Location = new System.Drawing.Point(0, 118);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(1115, 10);
@@ -275,7 +275,7 @@ namespace Group29_BlitzCafe
             // 
             // panel3
             // 
-            this.panel3.BackColor = System.Drawing.Color.White;
+            this.panel3.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
             this.panel3.Location = new System.Drawing.Point(0, 134);
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1115, 10);
@@ -285,7 +285,7 @@ namespace Group29_BlitzCafe
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1106, 594);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.dbgCustomerInfo);
