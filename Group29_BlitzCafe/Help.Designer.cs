@@ -56,18 +56,19 @@ namespace Group29_BlitzCafe
             this.panel1.Controls.Add(this.movingPictureBox);
             this.panel1.Location = new System.Drawing.Point(0, 520);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(1103, 145);
+            this.panel1.Size = new System.Drawing.Size(1120, 145);
             this.panel1.TabIndex = 3;
             // 
             // movingPictureBox
             // 
             this.movingPictureBox.BackgroundImage = global::Group29_BlitzCafe.Properties.Resources.Untitled_design__9_;
             this.movingPictureBox.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Zoom;
-            this.movingPictureBox.Location = new System.Drawing.Point(-69, 0);
+            this.movingPictureBox.Location = new System.Drawing.Point(491, 0);
             this.movingPictureBox.Name = "movingPictureBox";
             this.movingPictureBox.Size = new System.Drawing.Size(683, 145);
             this.movingPictureBox.TabIndex = 2;
             this.movingPictureBox.TabStop = false;
+            this.movingPictureBox.Click += new System.EventHandler(this.movingPictureBox_Click);
             // 
             // Help
             // 

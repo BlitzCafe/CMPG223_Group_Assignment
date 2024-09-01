@@ -40,5 +40,10 @@ namespace Group29_BlitzCafe
                 MessageBox.Show("An error occurred: " + ex.Message);
             }
         }
+
+        private void movingPictureBox_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
