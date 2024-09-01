@@ -107,20 +107,23 @@ namespace Group29_BlitzCafe
             if (txtSearchItemID.Text == "")
             {
                 txtSearchItemID.Focus();
-                lblItemIdErrorMessage.Text = "This field is required, please enter a valid Item ID";
+                lblItemIdErrorMessage.ForeColor = Color.Red;
+                lblItemIdErrorMessage.Text = "**";
                 canAdd = false;
 
             }
             else if (txtSearchDescr.Text == "")
             {
                 txtSearchDescr.Focus();
-                lblDescriptionErrorMessage.Text = "This field is required, please enter a valid description";
+                lblDescriptionErrorMessage.ForeColor = Color.Red;
+                lblDescriptionErrorMessage.Text = "**";
                 canAdd = false;
             }
             else if (numQtyOrdered.Value <= 0)
             {
                 numQtyOrdered.Focus();
-                lblQtyErrorMessage.Text = "This field is required, please enter a valid quantity";
+                lblQtyErrorMessage.ForeColor = Color.Red;
+                lblQtyErrorMessage.Text = "**";
                 canAdd = false;
 
             }
@@ -221,7 +224,8 @@ namespace Group29_BlitzCafe
             else
             {
                 txtPhoneNum.Focus();
-                lblPhoneNumError.Text = "This field is required, please enter a valid customers phone number";
+                lblPhoneNumError.ForeColor = Color.Red;
+                lblPhoneNumError.Text = "**";
             }
             
         }
