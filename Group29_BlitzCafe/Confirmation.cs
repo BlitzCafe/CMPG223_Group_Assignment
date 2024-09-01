@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Data.SqlClient;
 using System.Windows.Forms;
+using System.IO;
 
 namespace Group29_BlitzCafe
 {
@@ -185,6 +186,32 @@ namespace Group29_BlitzCafe
         private void Confirmation_Load_1(object sender, EventArgs e)
         {
 
+        }
+
+        private void btnPrintReceipt_Click(object sender, EventArgs e)
+        {
+            // Define the directory path
+            string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Receipts");
+
+            // Ensure the directory exists
+            if (!Directory.Exists(directoryPath))
+            {
+                Directory.CreateDirectory(directoryPath);
+            }
+
+            // Define the full file path
+            string filePath = Path.Combine(directoryPath, "Receipt.txt");
+
+            // Write the ListBox items to the specified file
+            using (StreamWriter writer = new StreamWriter(filePath))
+            {
+                foreach (var item in lbxReceipt.Items)
+                {
+                    writer.WriteLine(item.ToString());
+                }
+            }
+
+            MessageBox.Show("Receipt has been printed successfully.");
         }
     }
 }
