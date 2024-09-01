@@ -64,9 +64,9 @@ namespace Group29_BlitzCafe
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
+            this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox1.SuspendLayout();
@@ -75,6 +75,7 @@ namespace Group29_BlitzCafe
             this.tabPage2.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).BeginInit();
+            this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -319,14 +320,10 @@ namespace Group29_BlitzCafe
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.btnReset);
             this.tabPage2.Controls.Add(this.label10);
             this.tabPage2.Controls.Add(this.dbgOrderDetails);
-            this.tabPage2.Controls.Add(this.cbxLoyaltyPointsUsed);
-            this.tabPage2.Controls.Add(this.dtOrderDate);
-            this.tabPage2.Controls.Add(this.label6);
-            this.tabPage2.Controls.Add(this.label5);
-            this.tabPage2.Controls.Add(this.txtOrderIDSearch);
             this.tabPage2.Controls.Add(this.btnDeleteOrder);
             this.tabPage2.Controls.Add(this.dbgOrderHistory);
             this.tabPage2.Controls.Add(this.label2);
@@ -341,7 +338,7 @@ namespace Group29_BlitzCafe
             // btnReset
             // 
             this.btnReset.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
-            this.btnReset.Location = new System.Drawing.Point(1029, 369);
+            this.btnReset.Location = new System.Drawing.Point(1054, 369);
             this.btnReset.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.btnReset.Name = "btnReset";
             this.btnReset.Size = new System.Drawing.Size(248, 39);
@@ -373,7 +370,7 @@ namespace Group29_BlitzCafe
             // cbxLoyaltyPointsUsed
             // 
             this.cbxLoyaltyPointsUsed.AutoSize = true;
-            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(1029, 230);
+            this.cbxLoyaltyPointsUsed.Location = new System.Drawing.Point(135, 165);
             this.cbxLoyaltyPointsUsed.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.cbxLoyaltyPointsUsed.Name = "cbxLoyaltyPointsUsed";
             this.cbxLoyaltyPointsUsed.Size = new System.Drawing.Size(188, 26);
@@ -384,7 +381,7 @@ namespace Group29_BlitzCafe
             // 
             // dtOrderDate
             // 
-            this.dtOrderDate.Location = new System.Drawing.Point(1029, 172);
+            this.dtOrderDate.Location = new System.Drawing.Point(135, 107);
             this.dtOrderDate.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.dtOrderDate.Name = "dtOrderDate";
             this.dtOrderDate.Size = new System.Drawing.Size(248, 29);
@@ -394,7 +391,7 @@ namespace Group29_BlitzCafe
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(915, 179);
+            this.label6.Location = new System.Drawing.Point(21, 114);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(99, 22);
             this.label6.TabIndex = 21;
@@ -403,7 +400,7 @@ namespace Group29_BlitzCafe
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(915, 124);
+            this.label5.Location = new System.Drawing.Point(21, 59);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(75, 22);
             this.label5.TabIndex = 20;
@@ -411,7 +408,7 @@ namespace Group29_BlitzCafe
             // 
             // txtOrderIDSearch
             // 
-            this.txtOrderIDSearch.Location = new System.Drawing.Point(1029, 116);
+            this.txtOrderIDSearch.Location = new System.Drawing.Point(135, 51);
             this.txtOrderIDSearch.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtOrderIDSearch.Name = "txtOrderIDSearch";
             this.txtOrderIDSearch.Size = new System.Drawing.Size(248, 29);
@@ -453,14 +450,25 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 0;
             this.label2.Text = "Order History";
             // 
-            // mySqlCommand1
-            // 
-            // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.contextMenuStrip1.Name = "contextMenuStrip1";
             this.contextMenuStrip1.Size = new System.Drawing.Size(61, 4);
+            // 
+            // groupBox3
+            // 
+            this.groupBox3.Controls.Add(this.cbxLoyaltyPointsUsed);
+            this.groupBox3.Controls.Add(this.dtOrderDate);
+            this.groupBox3.Controls.Add(this.label6);
+            this.groupBox3.Controls.Add(this.label5);
+            this.groupBox3.Controls.Add(this.txtOrderIDSearch);
+            this.groupBox3.Location = new System.Drawing.Point(894, 51);
+            this.groupBox3.Name = "groupBox3";
+            this.groupBox3.Size = new System.Drawing.Size(408, 240);
+            this.groupBox3.TabIndex = 28;
+            this.groupBox3.TabStop = false;
+            this.groupBox3.Text = "Search By";
             // 
             // OrderPage
             // 
@@ -484,6 +492,8 @@ namespace Group29_BlitzCafe
             this.tabPage2.PerformLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderDetails)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.dbgOrderHistory)).EndInit();
+            this.groupBox3.ResumeLayout(false);
+            this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -527,5 +537,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.Button btnReset;
+        private System.Windows.Forms.GroupBox groupBox3;
     }
 }
