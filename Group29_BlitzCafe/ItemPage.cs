@@ -473,6 +473,21 @@ namespace Group29_BlitzCafe
                 MessageBox.Show("Error: Please select a valid item from the list.");
             }
         }
+
+        private void lblQtyErrorMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblItemIdErrorMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numPrice_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
