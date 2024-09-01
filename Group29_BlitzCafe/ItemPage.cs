@@ -515,6 +515,21 @@ namespace Group29_BlitzCafe
             }
 
         }
+
+        private void lblQtyErrorMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lblItemIdErrorMessage_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void numPrice_ValueChanged(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 

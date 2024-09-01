@@ -44,6 +44,12 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cmbSortBy = new System.Windows.Forms.GroupBox();
+            this.rdoMonth = new System.Windows.Forms.RadioButton();
+            this.rdoIncome = new System.Windows.Forms.RadioButton();
+            this.cmbSortOrder = new System.Windows.Forms.GroupBox();
+            this.rdoAsc = new System.Windows.Forms.RadioButton();
+            this.rdoDesc = new System.Windows.Forms.RadioButton();
             this.lblIncomeReport = new System.Windows.Forms.Label();
             this.lstDisplayIncomeReport = new System.Windows.Forms.ListBox();
             this.btnConfirmIncome = new System.Windows.Forms.Button();
@@ -60,6 +66,8 @@ namespace Group29_BlitzCafe
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.cmbSortBy.SuspendLayout();
+            this.cmbSortOrder.SuspendLayout();
             this.groupBox3.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -97,17 +105,18 @@ namespace Group29_BlitzCafe
             // lblTopMenuReport
             // 
             this.lblTopMenuReport.AutoSize = true;
-            this.lblTopMenuReport.Location = new System.Drawing.Point(28, 452);
+            this.lblTopMenuReport.Location = new System.Drawing.Point(268, 278);
             this.lblTopMenuReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTopMenuReport.Name = "lblTopMenuReport";
-            this.lblTopMenuReport.Size = new System.Drawing.Size(0, 22);
+            this.lblTopMenuReport.Size = new System.Drawing.Size(42, 22);
             this.lblTopMenuReport.TabIndex = 8;
+            this.lblTopMenuReport.Text = "____";
             // 
             // label9
             // 
             this.label9.AutoSize = true;
             this.label9.Font = new System.Drawing.Font("Bauhaus 93", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label9.Location = new System.Drawing.Point(28, 17);
+            this.label9.Location = new System.Drawing.Point(26, 20);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
             this.label9.Size = new System.Drawing.Size(601, 32);
@@ -176,24 +185,22 @@ namespace Group29_BlitzCafe
             // 
             // dtpEndDateMenu
             // 
-            this.dtpEndDateMenu.Location = new System.Drawing.Point(232, 105);
-            this.dtpEndDateMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndDateMenu.Location = new System.Drawing.Point(240, 111);
             this.dtpEndDateMenu.Name = "dtpEndDateMenu";
-            this.dtpEndDateMenu.Size = new System.Drawing.Size(224, 29);
+            this.dtpEndDateMenu.Size = new System.Drawing.Size(292, 29);
             this.dtpEndDateMenu.TabIndex = 5;
             // 
             // dtpBeginDateMenu
             // 
-            this.dtpBeginDateMenu.Location = new System.Drawing.Point(232, 50);
-            this.dtpBeginDateMenu.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpBeginDateMenu.Location = new System.Drawing.Point(240, 49);
             this.dtpBeginDateMenu.Name = "dtpBeginDateMenu";
-            this.dtpBeginDateMenu.Size = new System.Drawing.Size(224, 29);
+            this.dtpBeginDateMenu.Size = new System.Drawing.Size(292, 29);
             this.dtpBeginDateMenu.TabIndex = 4;
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(70, 105);
+            this.label3.Location = new System.Drawing.Point(96, 111);
             this.label3.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(113, 22);
@@ -223,6 +230,8 @@ namespace Group29_BlitzCafe
             // tabPage2
             // 
             this.tabPage2.BackColor = System.Drawing.Color.White;
+            this.tabPage2.Controls.Add(this.cmbSortBy);
+            this.tabPage2.Controls.Add(this.cmbSortOrder);
             this.tabPage2.Controls.Add(this.lblIncomeReport);
             this.tabPage2.Controls.Add(this.lstDisplayIncomeReport);
             this.tabPage2.Controls.Add(this.btnConfirmIncome);
@@ -231,17 +240,89 @@ namespace Group29_BlitzCafe
             this.tabPage2.Controls.Add(this.groupBox3);
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Location = new System.Drawing.Point(4, 31);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
             this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.tabPage2.Size = new System.Drawing.Size(1173, 644);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Income Per Time Period";
             // 
+            // cmbSortBy
+            // 
+            this.cmbSortBy.Controls.Add(this.rdoMonth);
+            this.cmbSortBy.Controls.Add(this.rdoIncome);
+            this.cmbSortBy.Location = new System.Drawing.Point(509, 69);
+            this.cmbSortBy.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbSortBy.Name = "cmbSortBy";
+            this.cmbSortBy.Padding = new System.Windows.Forms.Padding(4);
+            this.cmbSortBy.Size = new System.Drawing.Size(178, 189);
+            this.cmbSortBy.TabIndex = 16;
+            this.cmbSortBy.TabStop = false;
+            this.cmbSortBy.Text = "Sort By";
+            // 
+            // rdoMonth
+            // 
+            this.rdoMonth.AutoSize = true;
+            this.rdoMonth.Location = new System.Drawing.Point(42, 108);
+            this.rdoMonth.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoMonth.Name = "rdoMonth";
+            this.rdoMonth.Size = new System.Drawing.Size(85, 26);
+            this.rdoMonth.TabIndex = 3;
+            this.rdoMonth.TabStop = true;
+            this.rdoMonth.Text = "Month";
+            this.rdoMonth.UseVisualStyleBackColor = true;
+            // 
+            // rdoIncome
+            // 
+            this.rdoIncome.AutoSize = true;
+            this.rdoIncome.Location = new System.Drawing.Point(42, 47);
+            this.rdoIncome.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoIncome.Name = "rdoIncome";
+            this.rdoIncome.Size = new System.Drawing.Size(94, 26);
+            this.rdoIncome.TabIndex = 2;
+            this.rdoIncome.TabStop = true;
+            this.rdoIncome.Text = "Income";
+            this.rdoIncome.UseVisualStyleBackColor = true;
+            // 
+            // cmbSortOrder
+            // 
+            this.cmbSortOrder.Controls.Add(this.rdoAsc);
+            this.cmbSortOrder.Controls.Add(this.rdoDesc);
+            this.cmbSortOrder.Location = new System.Drawing.Point(694, 69);
+            this.cmbSortOrder.Name = "cmbSortOrder";
+            this.cmbSortOrder.Size = new System.Drawing.Size(200, 189);
+            this.cmbSortOrder.TabIndex = 15;
+            this.cmbSortOrder.TabStop = false;
+            this.cmbSortOrder.Text = "Sort Order";
+            // 
+            // rdoAsc
+            // 
+            this.rdoAsc.AutoSize = true;
+            this.rdoAsc.Location = new System.Drawing.Point(40, 47);
+            this.rdoAsc.Name = "rdoAsc";
+            this.rdoAsc.Size = new System.Drawing.Size(120, 26);
+            this.rdoAsc.TabIndex = 5;
+            this.rdoAsc.TabStop = true;
+            this.rdoAsc.Text = "Ascending";
+            this.rdoAsc.UseVisualStyleBackColor = true;
+            this.rdoAsc.CheckedChanged += new System.EventHandler(this.rdbDateIncomeAsce_CheckedChanged);
+            // 
+            // rdoDesc
+            // 
+            this.rdoDesc.AutoSize = true;
+            this.rdoDesc.Location = new System.Drawing.Point(40, 108);
+            this.rdoDesc.Name = "rdoDesc";
+            this.rdoDesc.Size = new System.Drawing.Size(130, 26);
+            this.rdoDesc.TabIndex = 4;
+            this.rdoDesc.TabStop = true;
+            this.rdoDesc.Text = "Descending";
+            this.rdoDesc.UseVisualStyleBackColor = true;
+            this.rdoDesc.CheckedChanged += new System.EventHandler(this.rdbIncomeDesc_CheckedChanged);
+            // 
             // lblIncomeReport
             // 
             this.lblIncomeReport.AutoSize = true;
-            this.lblIncomeReport.Location = new System.Drawing.Point(27, 415);
+            this.lblIncomeReport.Location = new System.Drawing.Point(24, 332);
             this.lblIncomeReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblIncomeReport.Name = "lblIncomeReport";
             this.lblIncomeReport.Size = new System.Drawing.Size(0, 22);
@@ -302,31 +383,29 @@ namespace Group29_BlitzCafe
             this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.groupBox3.Name = "groupBox3";
             this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 5, 4, 5);
-            this.groupBox3.Size = new System.Drawing.Size(840, 189);
+            this.groupBox3.Size = new System.Drawing.Size(461, 189);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
             this.groupBox3.Text = "Dates";
             // 
             // dtpEndDateIncome
             // 
-            this.dtpEndDateIncome.Location = new System.Drawing.Point(220, 112);
-            this.dtpEndDateIncome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpEndDateIncome.Location = new System.Drawing.Point(218, 105);
             this.dtpEndDateIncome.Name = "dtpEndDateIncome";
-            this.dtpEndDateIncome.Size = new System.Drawing.Size(224, 29);
+            this.dtpEndDateIncome.Size = new System.Drawing.Size(200, 29);
             this.dtpEndDateIncome.TabIndex = 5;
             // 
             // dtpBeginDateIncome
             // 
-            this.dtpBeginDateIncome.Location = new System.Drawing.Point(220, 57);
-            this.dtpBeginDateIncome.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.dtpBeginDateIncome.Location = new System.Drawing.Point(218, 47);
             this.dtpBeginDateIncome.Name = "dtpBeginDateIncome";
-            this.dtpBeginDateIncome.Size = new System.Drawing.Size(224, 29);
+            this.dtpBeginDateIncome.Size = new System.Drawing.Size(200, 29);
             this.dtpBeginDateIncome.TabIndex = 4;
             // 
             // label6
             // 
             this.label6.AutoSize = true;
-            this.label6.Location = new System.Drawing.Point(62, 112);
+            this.label6.Location = new System.Drawing.Point(74, 105);
             this.label6.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label6.Name = "label6";
             this.label6.Size = new System.Drawing.Size(113, 22);
@@ -336,7 +415,7 @@ namespace Group29_BlitzCafe
             // label7
             // 
             this.label7.AutoSize = true;
-            this.label7.Location = new System.Drawing.Point(62, 64);
+            this.label7.Location = new System.Drawing.Point(48, 52);
             this.label7.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label7.Name = "label7";
             this.label7.Size = new System.Drawing.Size(139, 22);
@@ -364,6 +443,7 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Reports";
             this.Text = "Reports";
+            this.Load += new System.EventHandler(this.Reports_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -371,6 +451,10 @@ namespace Group29_BlitzCafe
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.cmbSortBy.ResumeLayout(false);
+            this.cmbSortBy.PerformLayout();
+            this.cmbSortOrder.ResumeLayout(false);
+            this.cmbSortOrder.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
             this.ResumeLayout(false);
@@ -398,6 +482,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Label label8;
+
         private System.Windows.Forms.SaveFileDialog sfdSave;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Label lblTopMenuReport;
@@ -406,5 +491,11 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.DateTimePicker dtpBeginDateMenu;
         private System.Windows.Forms.DateTimePicker dtpEndDateIncome;
         private System.Windows.Forms.DateTimePicker dtpBeginDateIncome;
+        private System.Windows.Forms.RadioButton rdoDesc;
+        private System.Windows.Forms.RadioButton rdoAsc;
+        private System.Windows.Forms.GroupBox cmbSortOrder;
+        private System.Windows.Forms.GroupBox cmbSortBy;
+        private System.Windows.Forms.RadioButton rdoMonth;
+        private System.Windows.Forms.RadioButton rdoIncome;
     }
 }
