@@ -21,20 +21,22 @@ namespace Group29_BlitzCafe
             InitializeComponent();
             this.receipt = receipt;
             this.currentCustomer = currentCustomer;
-            loadReceipt();
+            PopulateReciept();
+            
         }
 
         private void loadReceipt()
         {
             foreach (MenuItem item in receipt)
             {
-                lbxReceipt.Items.Add(item.toString());
+                lbxReceipt.Items.Add(item.getDescr() + " Quantity: " + item.getQtySold());
                 totalAmount += item.getPrice();
             }
-            lbxReceipt.Items.Add("Total amount owed: " + totalAmount);
+            lbxReceipt.Items.Add("************************************************************");
+            lbxReceipt.Items.Add("Total Amount: " + totalAmount);//loads the receipt
         }
 
-        private void cbxUseLoyaltyPoints_CheckedChanged(object sender, EventArgs e)
+        private void LoyaltyDiscount()
         {
             decimal pointsToMoneyConversion = 0.1m; // 100 points = R10, so 1 point = R0.10
             int pointsEarnedPerR5 = 1;
@@ -47,24 +49,13 @@ namespace Group29_BlitzCafe
                     conn.Open();
 
                     // Retrieve the current loyalty points balance
-                    string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    cmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
-                    
-                    
-                    object result = cmd.ExecuteScalar();
-                    
                     decimal currentPoints = GetLoyaltyPoints(conn);
-                    if (result != null)
-                    {
-                        currentPoints = Convert.ToDecimal(result);
-                    }
-
 
                     if (cbxUseLoyaltyPoints.Checked)
                     {
                         // Calculate discount
-                        decimal discount = currentPoints * pointsToMoneyConversion;
+                        decimal discountablePoints = currentPoints >= 100 ? currentPoints - 100 : 0; // Only use points above 100
+                        decimal discount = discountablePoints * pointsToMoneyConversion;
                         decimal adjustedTotal = totalAmount - discount;
 
                         // Ensure total is not less than zero
@@ -74,35 +65,22 @@ namespace Group29_BlitzCafe
                         }
 
                         // Display adjusted total
+                        lbxReceipt.Items.Add("************************************************************");
                         lbxReceipt.Items.Add("Loyalty points used: -" + discount.ToString("C"));
                         lbxReceipt.Items.Add("New total: " + adjustedTotal.ToString("C"));
 
-                        // Deduct used points
-                        currentPoints = 0;
+                        // Update remaining loyalty points
+                        decimal remainingPoints = currentPoints > 100 ? 100 : currentPoints - discountablePoints / pointsToMoneyConversion;
 
-                        // Update loyalty points in the database to 0
-                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
-                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
-                        updateCmd.Parameters.AddWithValue("@NewBalance", currentPoints);
-                        updateCmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
-                        updateCmd.ExecuteNonQuery();
-
+                        // Update loyalty points in the database
+                        UpdateLoyaltyPoints(conn, remainingPoints);
                     }
                     else
                     {
-                        decimal pointsEarned = Math.Floor(amountSpent / 5) * pointsEarnedPerR5;
-
-
-                        lbxReceipt.Items.Add("Points earned: " + pointsEarned.ToString());
-
+                        decimal pointsEarned = Math.Floor(amountSpent / 5) * pointsEarnedPerR5; // adds the points into the database
                         // Update loyalty points in the database
                         decimal newPointsBalance = currentPoints + pointsEarned;
-                        string updateQuery = "UPDATE tblLoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
-                        SqlCommand updateCmd = new SqlCommand(updateQuery, conn);
-                        updateCmd.Parameters.AddWithValue("@NewBalance", newPointsBalance);
-                        updateCmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
-                        updateCmd.ExecuteNonQuery();
-
+                        UpdateLoyaltyPoints(conn, newPointsBalance);
                     }
                 }
                 catch (Exception ex)
@@ -112,12 +90,17 @@ namespace Group29_BlitzCafe
             }
         }
 
+        private void cbxUseLoyaltyPoints_CheckedChanged(object sender, EventArgs e)
+        {
+            LoyaltyDiscount();
+        }
+
         private decimal GetLoyaltyPoints(SqlConnection conn)
         {
-            string query = "SELECT Running_Point_Balance FROM tblLoyaltyTransactions WHERE CellNo = @CellNo";
+            string query = "SELECT Running_Point_Balance FROM LoyaltyTransactions WHERE CustomerID = @CustomerID";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@CellNo", currentCustomer.getCellNo());
+                cmd.Parameters.AddWithValue("@CustomerID", currentCustomer.getCustomerID());
 
                 object result = cmd.ExecuteScalar();
                 return result != null ? Convert.ToDecimal(result) : 0;
@@ -137,43 +120,60 @@ namespace Group29_BlitzCafe
 
         private void UpdateLoyaltyPoints(SqlConnection conn, decimal newBalance)
         {
-            string updateQuery = "UPDATE LoyaltyTransactions SET Running_Point_Balance = @NewBalance WHERE CellNo = @CellNo";
-            using (SqlCommand updateCmd = new SqlCommand(updateQuery, conn))
+            /*
+            string insertQuery = "INSERT INTO LoyaltyTransactions (LoyaltyTransactionID, OrderID, CustomerID, Running_Point_Balance) " +
+                     "VALUES (@LoyaltyTransactionID, @OrderID, @CustomerID, @NewBalance)";
+            using (SqlCommand insertCmd = new SqlCommand(insertQuery, conn))
             {
-                updateCmd.Parameters.AddWithValue("@NewBalance", newBalance);
-                updateCmd.ExecuteNonQuery();
+                // Generate a new ID for the loyalty transaction (assuming it's an integer and auto-incremented in some cases)
+                insertCmd.Parameters.AddWithValue("@LoyaltyTransactionID", newBalance); // Replace this with your actual method to generate a new ID
+                insertCmd.Parameters.AddWithValue("@OrderID", orderID); // You should have the OrderID from the order process
+                insertCmd.Parameters.AddWithValue("@CustomerID", currentCustomer.getCustomerID());
+                insertCmd.Parameters.AddWithValue("@NewBalance", newBalance);
+
+                insertCmd.ExecuteNonQuery();
             }
+            */
         }
 
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
         {
+            
             using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 try
                 {
-                   /* conn.Open();
+                    conn.Open();
 
                     // Insert into Order_Details table
                     foreach (MenuItem item in receipt)
                     {
-                        string insertOrderDetailsQuery = "INSERT INTO Order_Details (OrderID, ProductID, Quantity, Price) VALUES (@OrderID, @ProductID, @Quantity, @Price)";
+                        string insertOrderDetailsQuery = "INSERT INTO Order_Details (OrderID, ProductID, Quantity_Sold) VALUES (@OrderID, @ProductID, @Quantity)";
                         SqlCommand insertOrderDetailsCmd = new SqlCommand(insertOrderDetailsQuery, conn);
-                        insertOrderDetailsCmd.Parameters.AddWithValue("@OrderID", orderId);
                         insertOrderDetailsCmd.Parameters.AddWithValue("@ProductID", item.getItemID());
-                        insertOrderDetailsCmd.Parameters.AddWithValue("@Quantity", item.getQuantity());
-                        insertOrderDetailsCmd.Parameters.AddWithValue("@Price", item.getPrice());
+                        insertOrderDetailsCmd.Parameters.AddWithValue("@Quantity", item.getQtySold());
 
                         insertOrderDetailsCmd.ExecuteNonQuery();
                     }
 
                     MessageBox.Show("Order confirmed and saved successfully.");
-                */}
+                }
                 catch (Exception ex)
                 {
                     MessageBox.Show("Error confirming the order: " + ex.Message);
                 }
             }
+        }
+
+        private void PopulateReciept()
+        {
+            lbxReceipt.Items.Add("\t\tBlitz Cafe");
+            lbxReceipt.Items.Add("************************************************************");
+            lbxReceipt.Items.Add("Receipt for: " + currentCustomer.getFirstName());
+            lbxReceipt.Items.Add("************************************************************");
+            loadReceipt();
+            
         }
 
         private void Confirmation_Load(object sender, EventArgs e)

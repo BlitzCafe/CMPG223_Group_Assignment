@@ -149,7 +149,7 @@ namespace Group29_BlitzCafe
 
 
 
-]
+
         }
 
         private void btnCheckout_Click(object sender, EventArgs e)
