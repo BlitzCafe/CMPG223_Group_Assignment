@@ -42,10 +42,8 @@ namespace Group29_BlitzCafe
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
-            this.lblQtyErrorMessage = new System.Windows.Forms.Label();
-            this.lblDescriptionErrorMessage = new System.Windows.Forms.Label();
-            this.lblItemIdErrorMessage = new System.Windows.Forms.Label();
-            this.lblPhoneNumError = new System.Windows.Forms.Label();
+            this.lblDescriptionError = new System.Windows.Forms.Label();
+            this.lblPriceError = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
@@ -130,10 +128,8 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.lblQtyErrorMessage);
-            this.groupBox1.Controls.Add(this.lblDescriptionErrorMessage);
-            this.groupBox1.Controls.Add(this.lblItemIdErrorMessage);
-            this.groupBox1.Controls.Add(this.lblPhoneNumError);
+            this.groupBox1.Controls.Add(this.lblPriceError);
+            this.groupBox1.Controls.Add(this.lblDescriptionError);
             this.groupBox1.Controls.Add(this.numPrice);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -191,47 +187,29 @@ namespace Group29_BlitzCafe
             this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
-            // lblQtyErrorMessage
+            // lblDescriptionError
             // 
-            this.lblQtyErrorMessage.AutoSize = true;
-            this.lblQtyErrorMessage.Location = new System.Drawing.Point(160, 216);
-            this.lblQtyErrorMessage.Name = "lblQtyErrorMessage";
-            this.lblQtyErrorMessage.Size = new System.Drawing.Size(40, 17);
-            this.lblQtyErrorMessage.TabIndex = 38;
-            this.lblQtyErrorMessage.Text = "Error";
+            this.lblDescriptionError.AutoSize = true;
+            this.lblDescriptionError.Location = new System.Drawing.Point(165, 153);
+            this.lblDescriptionError.Name = "lblDescriptionError";
+            this.lblDescriptionError.Size = new System.Drawing.Size(46, 17);
+            this.lblDescriptionError.TabIndex = 7;
+            this.lblDescriptionError.Text = "label4";
             // 
-            // lblDescriptionErrorMessage
+            // lblPriceError
             // 
-            this.lblDescriptionErrorMessage.AutoSize = true;
-            this.lblDescriptionErrorMessage.Location = new System.Drawing.Point(160, 73);
-            this.lblDescriptionErrorMessage.Name = "lblDescriptionErrorMessage";
-            this.lblDescriptionErrorMessage.Size = new System.Drawing.Size(40, 17);
-            this.lblDescriptionErrorMessage.TabIndex = 37;
-            this.lblDescriptionErrorMessage.Text = "Error";
-            // 
-            // lblItemIdErrorMessage
-            // 
-            this.lblItemIdErrorMessage.AutoSize = true;
-            this.lblItemIdErrorMessage.Location = new System.Drawing.Point(160, 143);
-            this.lblItemIdErrorMessage.Name = "lblItemIdErrorMessage";
-            this.lblItemIdErrorMessage.Size = new System.Drawing.Size(40, 17);
-            this.lblItemIdErrorMessage.TabIndex = 36;
-            this.lblItemIdErrorMessage.Text = "Error";
-            // 
-            // lblPhoneNumError
-            // 
-            this.lblPhoneNumError.AutoSize = true;
-            this.lblPhoneNumError.Location = new System.Drawing.Point(786, 263);
-            this.lblPhoneNumError.Name = "lblPhoneNumError";
-            this.lblPhoneNumError.Size = new System.Drawing.Size(40, 17);
-            this.lblPhoneNumError.TabIndex = 39;
-            this.lblPhoneNumError.Text = "Error";
+            this.lblPriceError.AutoSize = true;
+            this.lblPriceError.Location = new System.Drawing.Point(165, 222);
+            this.lblPriceError.Name = "lblPriceError";
+            this.lblPriceError.Size = new System.Drawing.Size(46, 17);
+            this.lblPriceError.TabIndex = 8;
+            this.lblPriceError.Text = "label5";
             // 
             // ItemPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(890, 455);
+            this.ClientSize = new System.Drawing.Size(892, 476);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnDelete);
@@ -267,9 +245,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown numPrice;
-        private System.Windows.Forms.Label lblQtyErrorMessage;
-        private System.Windows.Forms.Label lblDescriptionErrorMessage;
-        private System.Windows.Forms.Label lblItemIdErrorMessage;
-        private System.Windows.Forms.Label lblPhoneNumError;
+        private System.Windows.Forms.Label lblPriceError;
+        private System.Windows.Forms.Label lblDescriptionError;
     }
 }
