@@ -38,14 +38,12 @@ namespace Group29_BlitzCafe
             this.groupBox2 = new System.Windows.Forms.GroupBox();
             this.label3 = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.textBox2 = new System.Windows.Forms.TextBox();
-            this.textBox1 = new System.Windows.Forms.TextBox();
             this.label1 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.radioButton4 = new System.Windows.Forms.RadioButton();
-            this.radioButton3 = new System.Windows.Forms.RadioButton();
-            this.radioButton2 = new System.Windows.Forms.RadioButton();
-            this.radioButton1 = new System.Windows.Forms.RadioButton();
+            this.rdoDateDesc = new System.Windows.Forms.RadioButton();
+            this.rdoDateMenuAsc = new System.Windows.Forms.RadioButton();
+            this.rdoItemDesc = new System.Windows.Forms.RadioButton();
+            this.rdoMenuAsc = new System.Windows.Forms.RadioButton();
             this.tabPage2 = new System.Windows.Forms.TabPage();
             this.lstDisplayIncomeReport = new System.Windows.Forms.ListBox();
             this.btnConfirmIncome = new System.Windows.Forms.Button();
@@ -54,13 +52,18 @@ namespace Group29_BlitzCafe
             this.groupBox3 = new System.Windows.Forms.GroupBox();
             this.label6 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox3 = new System.Windows.Forms.TextBox();
-            this.textBox4 = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
             this.groupBox4 = new System.Windows.Forms.GroupBox();
-            this.radioButton5 = new System.Windows.Forms.RadioButton();
-            this.radioButton6 = new System.Windows.Forms.RadioButton();
+            this.rdoDateIncomeDesc = new System.Windows.Forms.RadioButton();
+            this.rdoDateIncomeAsc = new System.Windows.Forms.RadioButton();
             this.sfdSave = new System.Windows.Forms.SaveFileDialog();
+            this.label9 = new System.Windows.Forms.Label();
+            this.lblIncomeReport = new System.Windows.Forms.Label();
+            this.lblTopMenuReport = new System.Windows.Forms.Label();
+            this.dtpBeginDateMenu = new System.Windows.Forms.DateTimePicker();
+            this.dtpEndDateMenu = new System.Windows.Forms.DateTimePicker();
+            this.dtpBeginDateIncome = new System.Windows.Forms.DateTimePicker();
+            this.dtpEndDateIncome = new System.Windows.Forms.DateTimePicker();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
@@ -75,14 +78,16 @@ namespace Group29_BlitzCafe
             this.tabControl1.Controls.Add(this.tabPage1);
             this.tabControl1.Controls.Add(this.tabPage2);
             this.tabControl1.Location = new System.Drawing.Point(4, 15);
-            this.tabControl1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabControl1.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl1.Name = "tabControl1";
             this.tabControl1.SelectedIndex = 0;
-            this.tabControl1.Size = new System.Drawing.Size(1047, 667);
+            this.tabControl1.Size = new System.Drawing.Size(1047, 691);
             this.tabControl1.TabIndex = 0;
             // 
             // tabPage1
             // 
+            this.tabPage1.Controls.Add(this.lblTopMenuReport);
+            this.tabPage1.Controls.Add(this.label9);
             this.tabPage1.Controls.Add(this.lstDisplayMenuReport);
             this.tabPage1.Controls.Add(this.btnConfirmMenu);
             this.tabPage1.Controls.Add(this.btnPrintMenuItem);
@@ -91,10 +96,10 @@ namespace Group29_BlitzCafe
             this.tabPage1.Controls.Add(this.label1);
             this.tabPage1.Controls.Add(this.groupBox1);
             this.tabPage1.Location = new System.Drawing.Point(4, 25);
-            this.tabPage1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage1.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage1.Name = "tabPage1";
-            this.tabPage1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage1.Size = new System.Drawing.Size(1039, 638);
+            this.tabPage1.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage1.Size = new System.Drawing.Size(1039, 662);
             this.tabPage1.TabIndex = 0;
             this.tabPage1.Text = "Top 5 Menu Items Per Time Period";
             this.tabPage1.UseVisualStyleBackColor = true;
@@ -103,26 +108,27 @@ namespace Group29_BlitzCafe
             // 
             this.lstDisplayMenuReport.FormattingEnabled = true;
             this.lstDisplayMenuReport.ItemHeight = 16;
-            this.lstDisplayMenuReport.Location = new System.Drawing.Point(28, 359);
-            this.lstDisplayMenuReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstDisplayMenuReport.Location = new System.Drawing.Point(28, 394);
+            this.lstDisplayMenuReport.Margin = new System.Windows.Forms.Padding(4);
             this.lstDisplayMenuReport.Name = "lstDisplayMenuReport";
             this.lstDisplayMenuReport.Size = new System.Drawing.Size(979, 260);
             this.lstDisplayMenuReport.TabIndex = 6;
             // 
             // btnConfirmMenu
             // 
-            this.btnConfirmMenu.Location = new System.Drawing.Point(40, 278);
-            this.btnConfirmMenu.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirmMenu.Location = new System.Drawing.Point(652, 249);
+            this.btnConfirmMenu.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmMenu.Name = "btnConfirmMenu";
             this.btnConfirmMenu.Size = new System.Drawing.Size(147, 52);
             this.btnConfirmMenu.TabIndex = 5;
-            this.btnConfirmMenu.Text = "Confirrm";
+            this.btnConfirmMenu.Text = "Display Report";
             this.btnConfirmMenu.UseVisualStyleBackColor = true;
+            this.btnConfirmMenu.Click += new System.EventHandler(this.btnConfirmMenu_Click);
             // 
             // btnPrintMenuItem
             // 
-            this.btnPrintMenuItem.Location = new System.Drawing.Point(802, 278);
-            this.btnPrintMenuItem.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintMenuItem.Location = new System.Drawing.Point(659, 334);
+            this.btnPrintMenuItem.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintMenuItem.Name = "btnPrintMenuItem";
             this.btnPrintMenuItem.Size = new System.Drawing.Size(140, 52);
             this.btnPrintMenuItem.TabIndex = 4;
@@ -133,7 +139,7 @@ namespace Group29_BlitzCafe
             // label4
             // 
             this.label4.AutoSize = true;
-            this.label4.Location = new System.Drawing.Point(520, 219);
+            this.label4.Location = new System.Drawing.Point(25, 334);
             this.label4.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(93, 17);
@@ -142,14 +148,14 @@ namespace Group29_BlitzCafe
             // 
             // groupBox2
             // 
+            this.groupBox2.Controls.Add(this.dtpEndDateMenu);
+            this.groupBox2.Controls.Add(this.dtpBeginDateMenu);
             this.groupBox2.Controls.Add(this.label3);
             this.groupBox2.Controls.Add(this.label2);
-            this.groupBox2.Controls.Add(this.textBox2);
-            this.groupBox2.Controls.Add(this.textBox1);
-            this.groupBox2.Location = new System.Drawing.Point(524, 32);
-            this.groupBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Location = new System.Drawing.Point(398, 73);
+            this.groupBox2.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox2.Name = "groupBox2";
-            this.groupBox2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox2.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox2.Size = new System.Drawing.Size(401, 151);
             this.groupBox2.TabIndex = 2;
             this.groupBox2.TabStop = false;
@@ -175,22 +181,6 @@ namespace Group29_BlitzCafe
             this.label2.TabIndex = 2;
             this.label2.Text = "Beginning Date:";
             // 
-            // textBox2
-            // 
-            this.textBox2.Location = new System.Drawing.Point(241, 101);
-            this.textBox2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox2.Name = "textBox2";
-            this.textBox2.Size = new System.Drawing.Size(132, 22);
-            this.textBox2.TabIndex = 1;
-            // 
-            // textBox1
-            // 
-            this.textBox1.Location = new System.Drawing.Point(241, 41);
-            this.textBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(132, 22);
-            this.textBox1.TabIndex = 0;
-            // 
             // label1
             // 
             this.label1.AutoSize = true;
@@ -202,69 +192,70 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
-            this.groupBox1.Controls.Add(this.radioButton4);
-            this.groupBox1.Controls.Add(this.radioButton3);
-            this.groupBox1.Controls.Add(this.radioButton2);
-            this.groupBox1.Controls.Add(this.radioButton1);
-            this.groupBox1.Location = new System.Drawing.Point(28, 32);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Controls.Add(this.rdoDateDesc);
+            this.groupBox1.Controls.Add(this.rdoDateMenuAsc);
+            this.groupBox1.Controls.Add(this.rdoItemDesc);
+            this.groupBox1.Controls.Add(this.rdoMenuAsc);
+            this.groupBox1.Location = new System.Drawing.Point(28, 73);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox1.Size = new System.Drawing.Size(352, 228);
             this.groupBox1.TabIndex = 0;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Sort By";
             // 
-            // radioButton4
+            // rdoDateDesc
             // 
-            this.radioButton4.AutoSize = true;
-            this.radioButton4.Location = new System.Drawing.Point(23, 182);
-            this.radioButton4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton4.Name = "radioButton4";
-            this.radioButton4.Size = new System.Drawing.Size(145, 21);
-            this.radioButton4.TabIndex = 3;
-            this.radioButton4.TabStop = true;
-            this.radioButton4.Text = "Dates Descending";
-            this.radioButton4.UseVisualStyleBackColor = true;
+            this.rdoDateDesc.AutoSize = true;
+            this.rdoDateDesc.Location = new System.Drawing.Point(23, 182);
+            this.rdoDateDesc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoDateDesc.Name = "rdoDateDesc";
+            this.rdoDateDesc.Size = new System.Drawing.Size(145, 21);
+            this.rdoDateDesc.TabIndex = 3;
+            this.rdoDateDesc.TabStop = true;
+            this.rdoDateDesc.Text = "Dates Descending";
+            this.rdoDateDesc.UseVisualStyleBackColor = true;
             // 
-            // radioButton3
+            // rdoDateMenuAsc
             // 
-            this.radioButton3.AutoSize = true;
-            this.radioButton3.Location = new System.Drawing.Point(23, 134);
-            this.radioButton3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton3.Name = "radioButton3";
-            this.radioButton3.Size = new System.Drawing.Size(136, 21);
-            this.radioButton3.TabIndex = 2;
-            this.radioButton3.TabStop = true;
-            this.radioButton3.Text = "Dates Ascending";
-            this.radioButton3.UseVisualStyleBackColor = true;
+            this.rdoDateMenuAsc.AutoSize = true;
+            this.rdoDateMenuAsc.Location = new System.Drawing.Point(23, 134);
+            this.rdoDateMenuAsc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoDateMenuAsc.Name = "rdoDateMenuAsc";
+            this.rdoDateMenuAsc.Size = new System.Drawing.Size(136, 21);
+            this.rdoDateMenuAsc.TabIndex = 2;
+            this.rdoDateMenuAsc.TabStop = true;
+            this.rdoDateMenuAsc.Text = "Dates Ascending";
+            this.rdoDateMenuAsc.UseVisualStyleBackColor = true;
             // 
-            // radioButton2
+            // rdoItemDesc
             // 
-            this.radioButton2.AutoSize = true;
-            this.radioButton2.Location = new System.Drawing.Point(23, 89);
-            this.radioButton2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton2.Name = "radioButton2";
-            this.radioButton2.Size = new System.Drawing.Size(213, 21);
-            this.radioButton2.TabIndex = 1;
-            this.radioButton2.TabStop = true;
-            this.radioButton2.Text = "Menu Items Descending(Z-A)";
-            this.radioButton2.UseVisualStyleBackColor = true;
+            this.rdoItemDesc.AutoSize = true;
+            this.rdoItemDesc.Location = new System.Drawing.Point(23, 89);
+            this.rdoItemDesc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoItemDesc.Name = "rdoItemDesc";
+            this.rdoItemDesc.Size = new System.Drawing.Size(213, 21);
+            this.rdoItemDesc.TabIndex = 1;
+            this.rdoItemDesc.TabStop = true;
+            this.rdoItemDesc.Text = "Menu Items Descending(Z-A)";
+            this.rdoItemDesc.UseVisualStyleBackColor = true;
             // 
-            // radioButton1
+            // rdoMenuAsc
             // 
-            this.radioButton1.AutoSize = true;
-            this.radioButton1.Location = new System.Drawing.Point(23, 41);
-            this.radioButton1.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton1.Name = "radioButton1";
-            this.radioButton1.Size = new System.Drawing.Size(204, 21);
-            this.radioButton1.TabIndex = 0;
-            this.radioButton1.TabStop = true;
-            this.radioButton1.Text = "Menu Items Ascending(A-Z)";
-            this.radioButton1.UseVisualStyleBackColor = true;
+            this.rdoMenuAsc.AutoSize = true;
+            this.rdoMenuAsc.Location = new System.Drawing.Point(23, 41);
+            this.rdoMenuAsc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoMenuAsc.Name = "rdoMenuAsc";
+            this.rdoMenuAsc.Size = new System.Drawing.Size(204, 21);
+            this.rdoMenuAsc.TabIndex = 0;
+            this.rdoMenuAsc.TabStop = true;
+            this.rdoMenuAsc.Text = "Menu Items Ascending(A-Z)";
+            this.rdoMenuAsc.UseVisualStyleBackColor = true;
             // 
             // tabPage2
             // 
+            this.tabPage2.Controls.Add(this.lblIncomeReport);
             this.tabPage2.Controls.Add(this.lstDisplayIncomeReport);
             this.tabPage2.Controls.Add(this.btnConfirmIncome);
             this.tabPage2.Controls.Add(this.btnPrintIncome);
@@ -273,10 +264,10 @@ namespace Group29_BlitzCafe
             this.tabPage2.Controls.Add(this.label8);
             this.tabPage2.Controls.Add(this.groupBox4);
             this.tabPage2.Location = new System.Drawing.Point(4, 25);
-            this.tabPage2.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.tabPage2.Margin = new System.Windows.Forms.Padding(4);
             this.tabPage2.Name = "tabPage2";
-            this.tabPage2.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.tabPage2.Size = new System.Drawing.Size(1039, 638);
+            this.tabPage2.Padding = new System.Windows.Forms.Padding(4);
+            this.tabPage2.Size = new System.Drawing.Size(1039, 662);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Income Per Time Period";
             this.tabPage2.UseVisualStyleBackColor = true;
@@ -285,26 +276,27 @@ namespace Group29_BlitzCafe
             // 
             this.lstDisplayIncomeReport.FormattingEnabled = true;
             this.lstDisplayIncomeReport.ItemHeight = 16;
-            this.lstDisplayIncomeReport.Location = new System.Drawing.Point(28, 319);
-            this.lstDisplayIncomeReport.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.lstDisplayIncomeReport.Location = new System.Drawing.Point(27, 362);
+            this.lstDisplayIncomeReport.Margin = new System.Windows.Forms.Padding(4);
             this.lstDisplayIncomeReport.Name = "lstDisplayIncomeReport";
             this.lstDisplayIncomeReport.Size = new System.Drawing.Size(979, 292);
             this.lstDisplayIncomeReport.TabIndex = 13;
             // 
             // btnConfirmIncome
             // 
-            this.btnConfirmIncome.Location = new System.Drawing.Point(27, 248);
-            this.btnConfirmIncome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnConfirmIncome.Location = new System.Drawing.Point(671, 214);
+            this.btnConfirmIncome.Margin = new System.Windows.Forms.Padding(4);
             this.btnConfirmIncome.Name = "btnConfirmIncome";
             this.btnConfirmIncome.Size = new System.Drawing.Size(147, 52);
             this.btnConfirmIncome.TabIndex = 12;
             this.btnConfirmIncome.Text = "Confirrm";
             this.btnConfirmIncome.UseVisualStyleBackColor = true;
+            this.btnConfirmIncome.Click += new System.EventHandler(this.btnConfirmIncome_Click);
             // 
             // btnPrintIncome
             // 
-            this.btnPrintIncome.Location = new System.Drawing.Point(868, 248);
-            this.btnPrintIncome.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.btnPrintIncome.Location = new System.Drawing.Point(680, 302);
+            this.btnPrintIncome.Margin = new System.Windows.Forms.Padding(4);
             this.btnPrintIncome.Name = "btnPrintIncome";
             this.btnPrintIncome.Size = new System.Drawing.Size(140, 52);
             this.btnPrintIncome.TabIndex = 11;
@@ -315,7 +307,7 @@ namespace Group29_BlitzCafe
             // label5
             // 
             this.label5.AutoSize = true;
-            this.label5.Location = new System.Drawing.Point(24, 210);
+            this.label5.Location = new System.Drawing.Point(24, 302);
             this.label5.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label5.Name = "label5";
             this.label5.Size = new System.Drawing.Size(93, 17);
@@ -324,14 +316,14 @@ namespace Group29_BlitzCafe
             // 
             // groupBox3
             // 
+            this.groupBox3.Controls.Add(this.dtpEndDateIncome);
+            this.groupBox3.Controls.Add(this.dtpBeginDateIncome);
             this.groupBox3.Controls.Add(this.label6);
             this.groupBox3.Controls.Add(this.label7);
-            this.groupBox3.Controls.Add(this.textBox3);
-            this.groupBox3.Controls.Add(this.textBox4);
-            this.groupBox3.Location = new System.Drawing.Point(607, 23);
-            this.groupBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Location = new System.Drawing.Point(417, 55);
+            this.groupBox3.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox3.Name = "groupBox3";
-            this.groupBox3.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox3.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox3.Size = new System.Drawing.Size(401, 151);
             this.groupBox3.TabIndex = 9;
             this.groupBox3.TabStop = false;
@@ -357,67 +349,108 @@ namespace Group29_BlitzCafe
             this.label7.TabIndex = 2;
             this.label7.Text = "Beginning Date:";
             // 
-            // textBox3
-            // 
-            this.textBox3.Location = new System.Drawing.Point(241, 101);
-            this.textBox3.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox3.Name = "textBox3";
-            this.textBox3.Size = new System.Drawing.Size(132, 22);
-            this.textBox3.TabIndex = 1;
-            // 
-            // textBox4
-            // 
-            this.textBox4.Location = new System.Drawing.Point(241, 41);
-            this.textBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.textBox4.Name = "textBox4";
-            this.textBox4.Size = new System.Drawing.Size(132, 22);
-            this.textBox4.TabIndex = 0;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
-            this.label8.Location = new System.Drawing.Point(420, 23);
+            this.label8.Location = new System.Drawing.Point(395, 20);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(0, 17);
+            this.label8.Size = new System.Drawing.Size(221, 17);
             this.label8.TabIndex = 8;
+            this.label8.Text = "Report of Income per Time Period";
             // 
             // groupBox4
             // 
-            this.groupBox4.Controls.Add(this.radioButton5);
-            this.groupBox4.Controls.Add(this.radioButton6);
-            this.groupBox4.Location = new System.Drawing.Point(28, 23);
-            this.groupBox4.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Controls.Add(this.rdoDateIncomeDesc);
+            this.groupBox4.Controls.Add(this.rdoDateIncomeAsc);
+            this.groupBox4.Location = new System.Drawing.Point(26, 55);
+            this.groupBox4.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox4.Name = "groupBox4";
-            this.groupBox4.Padding = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.groupBox4.Padding = new System.Windows.Forms.Padding(4);
             this.groupBox4.Size = new System.Drawing.Size(352, 151);
             this.groupBox4.TabIndex = 7;
             this.groupBox4.TabStop = false;
             this.groupBox4.Text = "Sort By";
             // 
-            // radioButton5
+            // rdoDateIncomeDesc
             // 
-            this.radioButton5.AutoSize = true;
-            this.radioButton5.Location = new System.Drawing.Point(23, 100);
-            this.radioButton5.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton5.Name = "radioButton5";
-            this.radioButton5.Size = new System.Drawing.Size(145, 21);
-            this.radioButton5.TabIndex = 3;
-            this.radioButton5.TabStop = true;
-            this.radioButton5.Text = "Dates Descending";
-            this.radioButton5.UseVisualStyleBackColor = true;
+            this.rdoDateIncomeDesc.AutoSize = true;
+            this.rdoDateIncomeDesc.Location = new System.Drawing.Point(23, 100);
+            this.rdoDateIncomeDesc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoDateIncomeDesc.Name = "rdoDateIncomeDesc";
+            this.rdoDateIncomeDesc.Size = new System.Drawing.Size(145, 21);
+            this.rdoDateIncomeDesc.TabIndex = 3;
+            this.rdoDateIncomeDesc.TabStop = true;
+            this.rdoDateIncomeDesc.Text = "Dates Descending";
+            this.rdoDateIncomeDesc.UseVisualStyleBackColor = true;
             // 
-            // radioButton6
+            // rdoDateIncomeAsc
             // 
-            this.radioButton6.AutoSize = true;
-            this.radioButton6.Location = new System.Drawing.Point(23, 46);
-            this.radioButton6.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
-            this.radioButton6.Name = "radioButton6";
-            this.radioButton6.Size = new System.Drawing.Size(136, 21);
-            this.radioButton6.TabIndex = 2;
-            this.radioButton6.TabStop = true;
-            this.radioButton6.Text = "Dates Ascending";
-            this.radioButton6.UseVisualStyleBackColor = true;
+            this.rdoDateIncomeAsc.AutoSize = true;
+            this.rdoDateIncomeAsc.Location = new System.Drawing.Point(23, 46);
+            this.rdoDateIncomeAsc.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoDateIncomeAsc.Name = "rdoDateIncomeAsc";
+            this.rdoDateIncomeAsc.Size = new System.Drawing.Size(136, 21);
+            this.rdoDateIncomeAsc.TabIndex = 2;
+            this.rdoDateIncomeAsc.TabStop = true;
+            this.rdoDateIncomeAsc.Text = "Dates Ascending";
+            this.rdoDateIncomeAsc.UseVisualStyleBackColor = true;
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.Location = new System.Drawing.Point(362, 32);
+            this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(289, 17);
+            this.label9.TabIndex = 7;
+            this.label9.Text = "Report of Top 5 Menu Items per Time Period";
+            // 
+            // lblIncomeReport
+            // 
+            this.lblIncomeReport.AutoSize = true;
+            this.lblIncomeReport.Location = new System.Drawing.Point(24, 332);
+            this.lblIncomeReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblIncomeReport.Name = "lblIncomeReport";
+            this.lblIncomeReport.Size = new System.Drawing.Size(0, 17);
+            this.lblIncomeReport.TabIndex = 14;
+            // 
+            // lblTopMenuReport
+            // 
+            this.lblTopMenuReport.AutoSize = true;
+            this.lblTopMenuReport.Location = new System.Drawing.Point(25, 362);
+            this.lblTopMenuReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
+            this.lblTopMenuReport.Name = "lblTopMenuReport";
+            this.lblTopMenuReport.Size = new System.Drawing.Size(0, 17);
+            this.lblTopMenuReport.TabIndex = 8;
+            // 
+            // dtpBeginDateMenu
+            // 
+            this.dtpBeginDateMenu.Location = new System.Drawing.Point(173, 48);
+            this.dtpBeginDateMenu.Name = "dtpBeginDateMenu";
+            this.dtpBeginDateMenu.Size = new System.Drawing.Size(200, 22);
+            this.dtpBeginDateMenu.TabIndex = 4;
+            // 
+            // dtpEndDateMenu
+            // 
+            this.dtpEndDateMenu.Location = new System.Drawing.Point(173, 100);
+            this.dtpEndDateMenu.Name = "dtpEndDateMenu";
+            this.dtpEndDateMenu.Size = new System.Drawing.Size(200, 22);
+            this.dtpEndDateMenu.TabIndex = 5;
+            // 
+            // dtpBeginDateIncome
+            // 
+            this.dtpBeginDateIncome.Location = new System.Drawing.Point(194, 45);
+            this.dtpBeginDateIncome.Name = "dtpBeginDateIncome";
+            this.dtpBeginDateIncome.Size = new System.Drawing.Size(200, 22);
+            this.dtpBeginDateIncome.TabIndex = 4;
+            // 
+            // dtpEndDateIncome
+            // 
+            this.dtpEndDateIncome.Location = new System.Drawing.Point(194, 105);
+            this.dtpEndDateIncome.Name = "dtpEndDateIncome";
+            this.dtpEndDateIncome.Size = new System.Drawing.Size(200, 22);
+            this.dtpEndDateIncome.TabIndex = 5;
             // 
             // Reports
             // 
@@ -425,7 +458,7 @@ namespace Group29_BlitzCafe
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1067, 719);
             this.Controls.Add(this.tabControl1);
-            this.Margin = new System.Windows.Forms.Padding(4, 4, 4, 4);
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "Reports";
             this.Text = "Reports";
             this.tabControl1.ResumeLayout(false);
@@ -457,14 +490,12 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.GroupBox groupBox2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label2;
-        private System.Windows.Forms.TextBox textBox2;
-        private System.Windows.Forms.TextBox textBox1;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.GroupBox groupBox1;
-        private System.Windows.Forms.RadioButton radioButton4;
-        private System.Windows.Forms.RadioButton radioButton3;
-        private System.Windows.Forms.RadioButton radioButton2;
-        private System.Windows.Forms.RadioButton radioButton1;
+        private System.Windows.Forms.RadioButton rdoDateDesc;
+        private System.Windows.Forms.RadioButton rdoDateMenuAsc;
+        private System.Windows.Forms.RadioButton rdoItemDesc;
+        private System.Windows.Forms.RadioButton rdoMenuAsc;
         private System.Windows.Forms.ListBox lstDisplayIncomeReport;
         private System.Windows.Forms.Button btnConfirmIncome;
         private System.Windows.Forms.Button btnPrintIncome;
@@ -472,12 +503,17 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.GroupBox groupBox3;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox textBox3;
-        private System.Windows.Forms.TextBox textBox4;
         private System.Windows.Forms.Label label8;
         private System.Windows.Forms.GroupBox groupBox4;
-        private System.Windows.Forms.RadioButton radioButton5;
-        private System.Windows.Forms.RadioButton radioButton6;
+        private System.Windows.Forms.RadioButton rdoDateIncomeDesc;
+        private System.Windows.Forms.RadioButton rdoDateIncomeAsc;
         private System.Windows.Forms.SaveFileDialog sfdSave;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.Label lblTopMenuReport;
+        private System.Windows.Forms.Label lblIncomeReport;
+        private System.Windows.Forms.DateTimePicker dtpEndDateMenu;
+        private System.Windows.Forms.DateTimePicker dtpBeginDateMenu;
+        private System.Windows.Forms.DateTimePicker dtpEndDateIncome;
+        private System.Windows.Forms.DateTimePicker dtpBeginDateIncome;
     }
 }
