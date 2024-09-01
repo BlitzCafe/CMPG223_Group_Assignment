@@ -19,7 +19,7 @@ namespace Group29_BlitzCafe
         SqlDataAdapter adap;
         SqlDataReader reader;
         DataSet ds;
-        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
+        String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
         public Reports()
         {
             InitializeComponent();
@@ -137,54 +137,78 @@ namespace Group29_BlitzCafe
         {
             DateTime beginDate = dtpBeginDateIncome.Value;
             DateTime endDate = dtpEndDateIncome.Value;
+            string query;
 
+            // Determine "Sort By" criteria
+
+            if (rdoIncome.Checked)
+            {
+                // Determine "Sort Order"
+                string sortOrder = "";
+                if (rdoAsc.Checked)
+                {
+                    sortOrder = "ASC";
+                }
+                else if (rdoDesc.Checked)
+                {
+                    sortOrder = "DESC";
+                }
+
+                query = $@"
+                SELECT YEAR(O.Order_Date) AS Year , 
+                       DATENAME(MONTH,O.Order_Date) AS Month, 
+                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome 
+                FROM Order_Details OD
+                JOIN [Order] O ON OD.OrderID = O.OrderID 
+                JOIN Items I ON OD.ItemID = I.ItemID 
+                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date) ORDER BY TotalIncome {sortOrder}";
+            }
+            else if (rdoMonth.Checked)
+            {
+
+                // Determine "Sort Order"
+                string sortOrder = "";
+                if (rdoAsc.Checked)
+                {
+                    sortOrder = "ASC";
+                }
+                else if (rdoDesc.Checked)
+                {
+                    sortOrder = "DESC";
+                }
+
+                query = $@"
+                SELECT YEAR(O.Order_Date) AS Year , 
+                       DATENAME(MONTH,O.Order_Date) AS Month, 
+                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
+                FROM Order_Details OD
+                JOIN [Order] O ON OD.OrderID = O.OrderID 
+                JOIN Items I ON OD.ItemID = I.ItemID 
+                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date) 
+                ORDER BY Month(O.Order_Date) {sortOrder}";
+            }
+            else 
+            {
+                query = $@"
+                SELECT YEAR(O.Order_Date) AS Year , 
+                       DATENAME(MONTH,O.Order_Date) AS Month, 
+                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
+                FROM Order_Details OD 
+                JOIN [Order] O ON OD.OrderID = O.OrderID 
+                JOIN Items I ON OD.ItemID = I.ItemID 
+                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date)";
+            }
             using (SqlConnection conn = new SqlConnection(connString))
+          
             {
                 try
                 {
                     conn.Open();
                     adap = new SqlDataAdapter();
                     ds = new DataSet();
-
-                    // Determine the sorting criteria and order based on RadioButton selections
-                    string orderByClause = "";
-
-                    // Determine "Sort By" criteria
-                    string sortBy = "";
-                    if (rdoIncome.Checked)
-                    {
-                        sortBy = "SUM(I.Price * OD.Quantity_Sold)";
-                    }
-                    else if (rdoMonth.Checked)
-                    {
-                        sortBy = "YEAR(O.Order_Date), MONTH(O.Order_Date)";
-                    }
-
-                    // Determine "Sort Order"
-                    string sortOrder = "";
-                    if (rdoAsc.Checked)
-                    {
-                        sortOrder = "ASC";
-                    }
-                    else if (rdoDesc.Checked)
-                    {
-                        sortOrder = "DESC";
-                    }
-
-                    // Combine the sorting criteria and order
-                    orderByClause = $"ORDER BY {sortBy} {sortOrder}";
-
-                    string query = $@"
-                SELECT YEAR(O.Order_Date) AS Year, 
-                       DATENAME(MONTH,O.Order_Date) AS Month, 
-                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome 
-                FROM Order_Details OD 
-                JOIN [Order] O ON OD.OrderID = O.OrderID 
-                JOIN Items I ON OD.ItemID = I.ItemID 
-                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
-                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date) 
-                {orderByClause}";
-
                     cmd = new SqlCommand(query, conn);
 
                     // Add parameters for the date range
