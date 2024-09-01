@@ -101,51 +101,7 @@ namespace Group29_BlitzCafe
             }
 
         }
-        //method to populate text boxes as soon as the user selects a record
-        private void dbgMenuItems_CellContentClick(object sender, DataGridViewCellEventArgs e)
-        {
-            //determine if a valid record is selected
-            if (e.RowIndex > 0)
-            {
-                //extract info of the selectedrow
-                int selectedID;
-                DataGridViewRow currentRow = dbgMenuItems.Rows[e.RowIndex];
-                //determine selected items ID
-                selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
-
-                //initialize the index variable
-                selectedItemIndex = 0;
-                bool itemFound = false;
-
-                //use a while loop to find the item with the matching ItemID
-                while (selectedItemIndex < menuItemList.Count)
-                {
-                    if (menuItemList[selectedItemIndex].getItemID() == selectedID)
-                    {
-                        itemFound = true;
-                        break; //exit the loop once the item is found
-                    }
-                    selectedItemIndex++;
-                }
-
-                //if the item is found, populate the textboxes using the index
-                if (itemFound)
-                {
-                    txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
-                    txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
-                }
-                else  //if the record is not found in the menuItemList, set index to -1 and return error message
-                {
-                    MessageBox.Show("Selected item not found in the list.");
-                    selectedItemIndex = -1;
-                }
-            }
-            else  //error message if row selected is out of bounds
-            {
-                MessageBox.Show("Error: Please select a valid item from the list.");
-            }
-        }
+        
         //edit current items after selecting them fro the dbgrid
         private void btnEditItem_Click(object sender, EventArgs e)
         {
@@ -470,6 +426,52 @@ namespace Group29_BlitzCafe
         private void txtItemID_TextChanged(object sender, EventArgs e)
         {
 
+        }
+
+        //method to populate text boxes as soon as the user selects a record
+        private void dbgMenuItems_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            //determine if a valid record is selected
+            if (e.RowIndex > -1)
+            {
+                //extract info of the selectedrow
+                int selectedID;
+                DataGridViewRow currentRow = dbgMenuItems.Rows[e.RowIndex];
+                //determine selected items ID
+                selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
+
+                //initialize the index variable
+                selectedItemIndex = 0;
+                bool itemFound = false;
+
+                //use a while loop to find the item with the matching ItemID
+                while (selectedItemIndex < menuItemList.Count)
+                {
+                    if (menuItemList[selectedItemIndex].getItemID() == selectedID)
+                    {
+                        itemFound = true;
+                        break; //exit the loop once the item is found
+                    }
+                    selectedItemIndex++;
+                }
+
+                //if the item is found, populate the textboxes using the index
+                if (itemFound)
+                {
+                    txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
+                    txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
+                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                }
+                else  //if the record is not found in the menuItemList, set index to -1 and return error message
+                {
+                    MessageBox.Show("Selected item not found in the list.");
+                    selectedItemIndex = -1;
+                }
+            }
+            else  //error message if row selected is out of bounds
+            {
+                MessageBox.Show("Error: Please select a valid item from the list.");
+            }
         }
     }
 }

@@ -112,6 +112,13 @@ namespace Group29_BlitzCafe
             this.dtpDate.Size = new System.Drawing.Size(179, 29);
             this.dtpDate.TabIndex = 13;
             // 
+            // dtpDate
+            // 
+            this.dtpDate.Location = new System.Drawing.Point(178, 219);
+            this.dtpDate.Name = "dtpDate";
+            this.dtpDate.Size = new System.Drawing.Size(166, 22);
+            this.dtpDate.TabIndex = 13;
+            // 
             // btnCancel
             // 
             this.btnCancel.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
@@ -152,6 +159,7 @@ namespace Group29_BlitzCafe
             this.txtCellNo.Name = "txtCellNo";
             this.txtCellNo.Size = new System.Drawing.Size(179, 29);
             this.txtCellNo.TabIndex = 7;
+            this.txtCellNo.TextChanged += new System.EventHandler(this.txtCellNo_TextChanged);
             // 
             // txtLName
             // 

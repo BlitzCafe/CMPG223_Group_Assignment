@@ -146,12 +146,10 @@ namespace Group29_BlitzCafe
         {
             if (selectedItemIndex != -1)
             {
+                DialogResult result = MessageBox.Show("Are you sure you want to delete this customer?", "Deleting Customer", MessageBoxButtons.YesNo);
 
-               // DialogResult result = MessageBox.Show("Are you sure you want to delete this item?", "Confirm Delete",
-                                     // MessageBoxButtons.YesNo, MessageBoxIcon.Warning);
-
-               // if (result == DialogResult.Yes)
-                //{
+                if (result == DialogResult.Yes)
+                {
                     string query = @"DELETE FROM Customer WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     using (SqlCommand cmd = new SqlCommand(query, conn))
@@ -164,7 +162,7 @@ namespace Group29_BlitzCafe
                             //Execute the command
                             int rowsAffected = cmd.ExecuteNonQuery();
 
-                            // Check if the delete was successful
+                            // Check if the insert was successful
                             if (rowsAffected > 0)
                             {
                                 MessageBox.Show("Item Deleted successfully.");
@@ -186,12 +184,9 @@ namespace Group29_BlitzCafe
                             MessageBox.Show("Error: Item could not be deleted from database. " + ex.Message);
                         }
                     }
-                //}
+                }               
             }
-
         }
-
-
         private void confirm_Update()
         {
             string newFName = txtFName.Text;
@@ -379,12 +374,23 @@ namespace Group29_BlitzCafe
             }
         }
 
+        private void txtCellNo_TextChanged(object sender, EventArgs e)
+        {
+            //Dylan and Sino Please Add SQL for searching and displaying only people starting with the searchCell
+            string searchCell = txtCellNo.Text;
+
+        }
+
         private void btnCancel_Click(object sender, EventArgs e)
         {
             btnConfirm.Visible = false;
             btnCancel.Visible = false;
 
             choice = 0;
+
+            txtFName.ReadOnly = false;
+            txtLName.ReadOnly = false;
+            txtCellNo.ReadOnly = false;
 
             btnUpdate.Visible = true;
             btnDelete.Visible = true;
