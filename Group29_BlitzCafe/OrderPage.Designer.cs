@@ -119,11 +119,13 @@ namespace Group29_BlitzCafe
             // 
             // txtPhoneNum
             // 
-            this.txtPhoneNum.Location = new System.Drawing.Point(1167, 31);
-            this.txtPhoneNum.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+
+            this.txtPhoneNum.Location = new System.Drawing.Point(1037, 25);
             this.txtPhoneNum.Name = "txtPhoneNum";
-            this.txtPhoneNum.Size = new System.Drawing.Size(112, 29);
+            this.txtPhoneNum.Size = new System.Drawing.Size(100, 26);
             this.txtPhoneNum.TabIndex = 29;
+            this.txtPhoneNum.TextChanged += new System.EventHandler(this.txtPhoneNum_TextChanged);
+
             // 
             // label9
             // 
@@ -150,6 +152,7 @@ namespace Group29_BlitzCafe
             this.txtSearchDescr.Name = "txtSearchDescr";
             this.txtSearchDescr.Size = new System.Drawing.Size(159, 29);
             this.txtSearchDescr.TabIndex = 26;
+            this.txtSearchDescr.TextChanged += new System.EventHandler(this.txtSearchDescr_TextChanged);
             // 
             // btnAddItem
             // 
@@ -164,6 +167,7 @@ namespace Group29_BlitzCafe
             this.btnAddItem.TabIndex = 25;
             this.btnAddItem.Text = "Add item to order";
             this.btnAddItem.UseVisualStyleBackColor = false;
+            this.btnAddItem.Click += new System.EventHandler(this.btnAddItem_Click);
             // 
             // label4
             // 
@@ -200,6 +204,7 @@ namespace Group29_BlitzCafe
             this.lbxItemSelection.Name = "lbxItemSelection";
             this.lbxItemSelection.Size = new System.Drawing.Size(424, 92);
             this.lbxItemSelection.TabIndex = 21;
+            this.lbxItemSelection.SelectedIndexChanged += new System.EventHandler(this.lbxItemSelection_SelectedIndexChanged);
             // 
             // txtSearchItemID
             // 
@@ -208,6 +213,7 @@ namespace Group29_BlitzCafe
             this.txtSearchItemID.Name = "txtSearchItemID";
             this.txtSearchItemID.Size = new System.Drawing.Size(159, 29);
             this.txtSearchItemID.TabIndex = 20;
+            this.txtSearchItemID.TextChanged += new System.EventHandler(this.txtSearchItemID_TextChanged);
             // 
             // lbxReceipt
             // 
