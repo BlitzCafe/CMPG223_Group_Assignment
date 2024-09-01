@@ -76,6 +76,7 @@ namespace Group29_BlitzCafe
             DateTime endDate = dtpEndDateIncome.Value;
 
             lblTopMenuReport.Text = "Report of Revenue generate between " + beginDate.ToString("dd MMMM yyyy") + " and " + endDate.ToString("dd MMMM yyyy");
+            incomeReport();
         }
 
         //Query to get the top 5 menu items sold
