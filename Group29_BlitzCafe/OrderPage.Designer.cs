@@ -303,7 +303,7 @@ namespace Group29_BlitzCafe
             this.label8.Size = new System.Drawing.Size(39, 18);
             this.label8.TabIndex = 15;
             this.label8.Text = "Total";
-            this.label8.Click += new System.EventHandler(this.label8_Click);
+         
             // 
             // txtTotalAmount
             // 
