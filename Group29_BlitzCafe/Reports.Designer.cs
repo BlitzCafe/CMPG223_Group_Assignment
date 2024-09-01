@@ -106,10 +106,11 @@ namespace Group29_BlitzCafe
             // label9
             // 
             this.label9.AutoSize = true;
+            this.label9.Font = new System.Drawing.Font("Bauhaus 93", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label9.Location = new System.Drawing.Point(28, 17);
             this.label9.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label9.Name = "label9";
-            this.label9.Size = new System.Drawing.Size(369, 22);
+            this.label9.Size = new System.Drawing.Size(601, 32);
             this.label9.TabIndex = 7;
             this.label9.Text = "Report of Top 5 Menu Items per Time Period";
             this.label9.Click += new System.EventHandler(this.label9_Click);
@@ -345,10 +346,11 @@ namespace Group29_BlitzCafe
             // label8
             // 
             this.label8.AutoSize = true;
+            this.label8.Font = new System.Drawing.Font("Bauhaus 93", 14F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label8.Location = new System.Drawing.Point(25, 22);
             this.label8.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(286, 22);
+            this.label8.Size = new System.Drawing.Size(467, 32);
             this.label8.TabIndex = 8;
             this.label8.Text = "Report of Income per Time Period";
             // 
