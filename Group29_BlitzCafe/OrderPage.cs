@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Group29_BlitzCafe
 {
@@ -32,6 +33,10 @@ namespace Group29_BlitzCafe
             customerPageFrm.load_Customer_Info();
             itemPageFrm.loadMenuItems();
 
+            lblPhoneNumError.Text = "";
+            lblDescriptionErrorMessage.Text = "";
+            lblQtyErrorMessage.Text = "";
+            lblItemIdErrorMessage.Text = "";
 
         }
 
@@ -90,37 +95,81 @@ namespace Group29_BlitzCafe
             
         }
 
+        private bool validateControls()
+        {
+            lblPhoneNumError.Text = "";
+            lblDescriptionErrorMessage.Text = "";
+            lblQtyErrorMessage.Text = "";
+            lblItemIdErrorMessage.Text = "";
 
+            bool canAdd = true;
+
+            if (txtSearchItemID.Text == "")
+            {
+                txtSearchItemID.Focus();
+                lblItemIdErrorMessage.ForeColor = Color.Red;
+                lblItemIdErrorMessage.Text = "**";
+                canAdd = false;
+
+            }
+            else if (txtSearchDescr.Text == "")
+            {
+                txtSearchDescr.Focus();
+                lblDescriptionErrorMessage.ForeColor = Color.Red;
+                lblDescriptionErrorMessage.Text = "**";
+                canAdd = false;
+            }
+            else if (numQtyOrdered.Value <= 0)
+            {
+                numQtyOrdered.Focus();
+                lblQtyErrorMessage.ForeColor = Color.Red;
+                lblQtyErrorMessage.Text = "**";
+                canAdd = false;
+
+            }
+           
+            
+
+            return canAdd;
+        }
 
         private void btnAddItem_Click(object sender, EventArgs e)
         {
-            decimal itemAmount = 0.0m;
-
-            string itemId = txtSearchItemID.Text;
-            int quantity = int.Parse(txtQtyIItemOrdered.Text);
-            foreach (MenuItem item in itemPageFrm.menuItemList)
+            if (validateControls())
             {
-                string itemID = item.getItemID().ToString();
-                if (itemID.Contains(itemId))
+                decimal itemAmount = 0.0m;
+
+                string itemId = txtSearchItemID.Text;
+                int quantity = (int)numQtyOrdered.Value;
+                foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    item.setQtySold(quantity);
-                    receipt.Add(item);
-                    itemAmount = item.getPrice() * quantity;
+                    string itemID = item.getItemID().ToString();
+                    if (itemID.Contains(itemId))
+                    {
+                        item.setQtySold(quantity);
+                        receipt.Add(item);
+                        itemAmount = item.getPrice() * quantity;
 
-                    lbxReceipt.Items.Add(item.getDescr() + " " + item.getPrice() + "Order Amount: " + itemAmount.ToString());
+                        string formattedItem = string.Format("{0,-20} {1,-10:C} {2,-10} {3,-10:C}",
+                                                       item.getDescr(), item.getPrice().ToString("C", new CultureInfo("en-ZA")), quantity, itemAmount.ToString("C", new CultureInfo("en-ZA")));
+
+                        lbxReceipt.Items.Add(formattedItem);
+
+                        // Add a line separator between items
+                        lbxReceipt.Items.Add(new string('-', 50));
 
 
-                    totalAmount += itemAmount;
-                    break;
+                        totalAmount += itemAmount;
+                        break;
+                    }
                 }
+
+                txtTotalAmount.Text = totalAmount.ToString("C", new CultureInfo("en-ZA"));
+                txtSearchItemID.Clear();
+                txtSearchDescr.Clear();
+                numQtyOrdered.ResetText();
+                lbxItemSelection.Items.Clear();
             }
-
-            txtTotalAmount.Text = totalAmount.ToString();
-            txtSearchItemID.Clear();
-            txtSearchDescr.Clear();
-            txtQtyIItemOrdered.Clear();
-            lbxItemSelection.Items.Clear();
-
         }
 
         private void lbxItemSelection_SelectedIndexChanged(object sender, EventArgs e)
@@ -128,25 +177,27 @@ namespace Group29_BlitzCafe
 
             if (lbxItemSelection.SelectedItem != null)
             {
+                
+                string selectedItem = lbxItemSelection.SelectedItem.ToString();
 
-                string selectedItemInfo = lbxItemSelection.SelectedItem.ToString();
+                
+                string selectedItemID = selectedItem.Split(' ')[0]; // Assumes itemID is the first part
 
-
-                // Loop through the menuItemList to find the matching item
+                
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    // Check for matching criteria (here we assume the `ToString` method returns a unique representation)
-                    if (item.toString() == selectedItemInfo)
+                    if (item.getItemID().ToString() == selectedItemID)
                     {
-                        // Set the description and item ID in the text boxes
+                        // Populate the text boxes with the details of the selected item
                         txtSearchDescr.Text = item.getDescr();
                         txtSearchItemID.Text = item.getItemID().ToString();
-                        break; // Exit the loop once a match is found
-
+                        break;
                     }
                 }
             }
-        
+
+
+
 
         }
 
@@ -172,7 +223,9 @@ namespace Group29_BlitzCafe
             }
             else
             {
-                MessageBox.Show("Phone number does not exist. Please try again.");
+                txtPhoneNum.Focus();
+                lblPhoneNumError.ForeColor = Color.Red;
+                lblPhoneNumError.Text = "**";
             }
             
         }
@@ -205,21 +258,31 @@ namespace Group29_BlitzCafe
         {
             string searchID = txtSearchItemID.Text;
             lbxItemSelection.Items.Clear();
-            if (searchID != "")
+
+            if (!string.IsNullOrWhiteSpace(searchID))
             {
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
                     string itemID = item.getItemID().ToString();
                     if (itemID.Contains(searchID))
                     {
-                        lbxItemSelection.Items.Add(item.toString());
-                        break;
+                        // Display itemID, description, and price
+                        string displayText = string.Format("{0,-10} {1,-20} {2,-10:C}",item.getItemID(),item.getDescr(),item.getPrice().ToString("C", new CultureInfo("en-ZA")));
 
+                        lbxItemSelection.Items.Add(displayText);
                     }
-
                 }
             }
-            else lbxItemSelection.Items.Clear();
+        }
+
+        private void label8_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void lbxReceipt_SelectedIndexChanged(object sender, EventArgs e)
+        {
+
         }
     }
 }
