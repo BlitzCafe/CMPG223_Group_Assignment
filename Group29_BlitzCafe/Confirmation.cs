@@ -153,7 +153,6 @@ namespace Group29_BlitzCafe
 
         private void PrintReceipt()
         {
-
             string directoryPath = Path.Combine(AppDomain.CurrentDomain.BaseDirectory, @"..\..\Receipts");
 
             if (!Directory.Exists(directoryPath))
