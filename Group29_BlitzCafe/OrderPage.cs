@@ -9,6 +9,7 @@ using System.Threading.Tasks;
 using System.Windows.Forms;
 using MySql.Data.MySqlClient;
 using System.Data.SqlClient;
+using System.Globalization;
 
 namespace Group29_BlitzCafe
 {
@@ -146,7 +147,13 @@ namespace Group29_BlitzCafe
                         receipt.Add(item);
                         itemAmount = item.getPrice() * quantity;
 
-                        lbxReceipt.Items.Add(item.getDescr() + " " + item.getPrice() + "Order Amount: " + itemAmount.ToString());
+                        string formattedItem = string.Format("{0,-20} {1,-10:C} {2,-10} {3,-10:C}",
+                                                       item.getDescr(), item.getPrice().ToString("C", new CultureInfo("en-ZA")), quantity, itemAmount.ToString("C", new CultureInfo("en-ZA")));
+
+                        lbxReceipt.Items.Add(formattedItem);
+
+                        // Add a line separator between items
+                        lbxReceipt.Items.Add(new string('-', 50));
 
 
                         totalAmount += itemAmount;
@@ -154,7 +161,7 @@ namespace Group29_BlitzCafe
                     }
                 }
 
-                txtTotalAmount.Text = totalAmount.ToString();
+                txtTotalAmount.Text = totalAmount.ToString("C", new CultureInfo("en-ZA"));
                 txtSearchItemID.Clear();
                 txtSearchDescr.Clear();
                 numQtyOrdered.ResetText();
@@ -167,24 +174,27 @@ namespace Group29_BlitzCafe
 
             if (lbxItemSelection.SelectedItem != null)
             {
+                
+                string selectedItem = lbxItemSelection.SelectedItem.ToString();
 
-                string selectedItemInfo = lbxItemSelection.SelectedItem.ToString();
+                
+                string selectedItemID = selectedItem.Split(' ')[0]; // Assumes itemID is the first part
 
-
-                // Loop through the menuItemList to find the matching item
+                
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
-                    // Check for matching criteria (here we assume the `ToString` method returns a unique representation)
-                    if (item.toString() == selectedItemInfo)
+                    if (item.getItemID().ToString() == selectedItemID)
                     {
-                        // Set the description and item ID in the text boxes
+                        // Populate the text boxes with the details of the selected item
                         txtSearchDescr.Text = item.getDescr();
                         txtSearchItemID.Text = item.getItemID().ToString();
-                        break; // Exit the loop once a match is found
-
+                        break;
                     }
                 }
             }
+
+
+
 
         }
 
@@ -244,21 +254,21 @@ namespace Group29_BlitzCafe
         {
             string searchID = txtSearchItemID.Text;
             lbxItemSelection.Items.Clear();
-            if (searchID != "")
+
+            if (!string.IsNullOrWhiteSpace(searchID))
             {
                 foreach (MenuItem item in itemPageFrm.menuItemList)
                 {
                     string itemID = item.getItemID().ToString();
                     if (itemID.Contains(searchID))
                     {
-                        lbxItemSelection.Items.Add(item.toString());
-                        break;
+                        // Display itemID, description, and price
+                        string displayText = string.Format("{0,-10} {1,-20} {2,-10:C}",item.getItemID(),item.getDescr(),item.getPrice().ToString("C", new CultureInfo("en-ZA")));
 
+                        lbxItemSelection.Items.Add(displayText);
                     }
-
                 }
             }
-            else lbxItemSelection.Items.Clear();
         }
     }
 }
