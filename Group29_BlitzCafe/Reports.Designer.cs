@@ -44,6 +44,9 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.tabPage2 = new System.Windows.Forms.TabPage();
+            this.cmbSortBy = new System.Windows.Forms.GroupBox();
+            this.rdoMonth = new System.Windows.Forms.RadioButton();
+            this.rdoIncome = new System.Windows.Forms.RadioButton();
             this.cmbSortOrder = new System.Windows.Forms.GroupBox();
             this.rdoAsc = new System.Windows.Forms.RadioButton();
             this.rdoDesc = new System.Windows.Forms.RadioButton();
@@ -59,16 +62,13 @@ namespace Group29_BlitzCafe
             this.label7 = new System.Windows.Forms.Label();
             this.label8 = new System.Windows.Forms.Label();
             this.sfdSave = new System.Windows.Forms.SaveFileDialog();
-            this.cmbSortBy = new System.Windows.Forms.GroupBox();
-            this.rdoMonth = new System.Windows.Forms.RadioButton();
-            this.rdoIncome = new System.Windows.Forms.RadioButton();
             this.tabControl1.SuspendLayout();
             this.tabPage1.SuspendLayout();
             this.groupBox2.SuspendLayout();
             this.tabPage2.SuspendLayout();
+            this.cmbSortBy.SuspendLayout();
             this.cmbSortOrder.SuspendLayout();
             this.groupBox3.SuspendLayout();
-            this.cmbSortBy.SuspendLayout();
             this.SuspendLayout();
             // 
             // tabControl1
@@ -105,11 +105,12 @@ namespace Group29_BlitzCafe
             // lblTopMenuReport
             // 
             this.lblTopMenuReport.AutoSize = true;
-            this.lblTopMenuReport.Location = new System.Drawing.Point(25, 362);
+            this.lblTopMenuReport.Location = new System.Drawing.Point(268, 278);
             this.lblTopMenuReport.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.lblTopMenuReport.Name = "lblTopMenuReport";
-            this.lblTopMenuReport.Size = new System.Drawing.Size(0, 22);
+            this.lblTopMenuReport.Size = new System.Drawing.Size(42, 22);
             this.lblTopMenuReport.TabIndex = 8;
+            this.lblTopMenuReport.Text = "____";
             // 
             // label9
             // 
@@ -186,14 +187,14 @@ namespace Group29_BlitzCafe
             // 
             this.dtpEndDateMenu.Location = new System.Drawing.Point(240, 111);
             this.dtpEndDateMenu.Name = "dtpEndDateMenu";
-            this.dtpEndDateMenu.Size = new System.Drawing.Size(200, 29);
+            this.dtpEndDateMenu.Size = new System.Drawing.Size(292, 29);
             this.dtpEndDateMenu.TabIndex = 5;
             // 
             // dtpBeginDateMenu
             // 
             this.dtpBeginDateMenu.Location = new System.Drawing.Point(240, 49);
             this.dtpBeginDateMenu.Name = "dtpBeginDateMenu";
-            this.dtpBeginDateMenu.Size = new System.Drawing.Size(200, 29);
+            this.dtpBeginDateMenu.Size = new System.Drawing.Size(292, 29);
             this.dtpBeginDateMenu.TabIndex = 4;
             // 
             // label3
@@ -245,6 +246,43 @@ namespace Group29_BlitzCafe
             this.tabPage2.Size = new System.Drawing.Size(1173, 644);
             this.tabPage2.TabIndex = 1;
             this.tabPage2.Text = "Income Per Time Period";
+            // 
+            // cmbSortBy
+            // 
+            this.cmbSortBy.Controls.Add(this.rdoMonth);
+            this.cmbSortBy.Controls.Add(this.rdoIncome);
+            this.cmbSortBy.Location = new System.Drawing.Point(509, 69);
+            this.cmbSortBy.Margin = new System.Windows.Forms.Padding(4);
+            this.cmbSortBy.Name = "cmbSortBy";
+            this.cmbSortBy.Padding = new System.Windows.Forms.Padding(4);
+            this.cmbSortBy.Size = new System.Drawing.Size(178, 189);
+            this.cmbSortBy.TabIndex = 16;
+            this.cmbSortBy.TabStop = false;
+            this.cmbSortBy.Text = "Sort By";
+            // 
+            // rdoMonth
+            // 
+            this.rdoMonth.AutoSize = true;
+            this.rdoMonth.Location = new System.Drawing.Point(42, 108);
+            this.rdoMonth.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoMonth.Name = "rdoMonth";
+            this.rdoMonth.Size = new System.Drawing.Size(85, 26);
+            this.rdoMonth.TabIndex = 3;
+            this.rdoMonth.TabStop = true;
+            this.rdoMonth.Text = "Month";
+            this.rdoMonth.UseVisualStyleBackColor = true;
+            // 
+            // rdoIncome
+            // 
+            this.rdoIncome.AutoSize = true;
+            this.rdoIncome.Location = new System.Drawing.Point(42, 47);
+            this.rdoIncome.Margin = new System.Windows.Forms.Padding(4);
+            this.rdoIncome.Name = "rdoIncome";
+            this.rdoIncome.Size = new System.Drawing.Size(94, 26);
+            this.rdoIncome.TabIndex = 2;
+            this.rdoIncome.TabStop = true;
+            this.rdoIncome.Text = "Income";
+            this.rdoIncome.UseVisualStyleBackColor = true;
             // 
             // cmbSortOrder
             // 
@@ -395,43 +433,6 @@ namespace Group29_BlitzCafe
             this.label8.TabIndex = 8;
             this.label8.Text = "Report of Income per Time Period";
             // 
-            // cmbSortBy
-            // 
-            this.cmbSortBy.Controls.Add(this.rdoMonth);
-            this.cmbSortBy.Controls.Add(this.rdoIncome);
-            this.cmbSortBy.Location = new System.Drawing.Point(509, 69);
-            this.cmbSortBy.Margin = new System.Windows.Forms.Padding(4);
-            this.cmbSortBy.Name = "cmbSortBy";
-            this.cmbSortBy.Padding = new System.Windows.Forms.Padding(4);
-            this.cmbSortBy.Size = new System.Drawing.Size(178, 189);
-            this.cmbSortBy.TabIndex = 16;
-            this.cmbSortBy.TabStop = false;
-            this.cmbSortBy.Text = "Sort By";
-            // 
-            // rdoMonth
-            // 
-            this.rdoMonth.AutoSize = true;
-            this.rdoMonth.Location = new System.Drawing.Point(42, 108);
-            this.rdoMonth.Margin = new System.Windows.Forms.Padding(4);
-            this.rdoMonth.Name = "rdoMonth";
-            this.rdoMonth.Size = new System.Drawing.Size(85, 26);
-            this.rdoMonth.TabIndex = 3;
-            this.rdoMonth.TabStop = true;
-            this.rdoMonth.Text = "Month";
-            this.rdoMonth.UseVisualStyleBackColor = true;
-            // 
-            // rdoIncome
-            // 
-            this.rdoIncome.AutoSize = true;
-            this.rdoIncome.Location = new System.Drawing.Point(42, 47);
-            this.rdoIncome.Margin = new System.Windows.Forms.Padding(4);
-            this.rdoIncome.Name = "rdoIncome";
-            this.rdoIncome.Size = new System.Drawing.Size(94, 26);
-            this.rdoIncome.TabIndex = 2;
-            this.rdoIncome.TabStop = true;
-            this.rdoIncome.Text = "Income";
-            this.rdoIncome.UseVisualStyleBackColor = true;
-            // 
             // Reports
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
@@ -442,6 +443,7 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(4, 5, 4, 5);
             this.Name = "Reports";
             this.Text = "Reports";
+            this.Load += new System.EventHandler(this.Reports_Load);
             this.tabControl1.ResumeLayout(false);
             this.tabPage1.ResumeLayout(false);
             this.tabPage1.PerformLayout();
@@ -449,12 +451,12 @@ namespace Group29_BlitzCafe
             this.groupBox2.PerformLayout();
             this.tabPage2.ResumeLayout(false);
             this.tabPage2.PerformLayout();
+            this.cmbSortBy.ResumeLayout(false);
+            this.cmbSortBy.PerformLayout();
             this.cmbSortOrder.ResumeLayout(false);
             this.cmbSortOrder.PerformLayout();
             this.groupBox3.ResumeLayout(false);
             this.groupBox3.PerformLayout();
-            this.cmbSortBy.ResumeLayout(false);
-            this.cmbSortBy.PerformLayout();
             this.ResumeLayout(false);
 
         }
