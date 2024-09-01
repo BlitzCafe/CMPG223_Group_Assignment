@@ -64,7 +64,7 @@ namespace Group29_BlitzCafe
             this.btnDeleteOrder = new System.Windows.Forms.Button();
             this.dbgOrderHistory = new System.Windows.Forms.DataGridView();
             this.label2 = new System.Windows.Forms.Label();
-            this.mySqlCommand1 = new MySql.Data.MySqlClient.MySqlCommand();
+            
             this.backgroundWorker1 = new System.ComponentModel.BackgroundWorker();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.tabControl1.SuspendLayout();
@@ -455,10 +455,6 @@ namespace Group29_BlitzCafe
             // 
             // mySqlCommand1
             // 
-            this.mySqlCommand1.CacheAge = 0;
-            this.mySqlCommand1.Connection = null;
-            this.mySqlCommand1.EnableCaching = false;
-            this.mySqlCommand1.Transaction = null;
             // 
             // contextMenuStrip1
             // 
