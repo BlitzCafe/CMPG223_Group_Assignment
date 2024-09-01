@@ -264,5 +264,10 @@ namespace Group29_BlitzCafe
         {
 
         }
+
+        private void Reports_Load(object sender, EventArgs e)
+        {
+
+        }
     }
 }
