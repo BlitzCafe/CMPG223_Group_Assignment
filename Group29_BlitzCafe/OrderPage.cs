@@ -218,8 +218,8 @@ namespace Group29_BlitzCafe
             }
             if (currentCustomer != null)
             {
-                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
-                confirmationForm.ShowDialog();
+                //Confirmation confirmationForm = new Confirmation(receipt, currentCustomer, currentOrder);
+                //confirmationForm.ShowDialog();
             }
             else
             {
@@ -289,6 +289,7 @@ namespace Group29_BlitzCafe
             }
         }
 
+
         //ORDER HISTORY
         private void dtOrderDate_ValueChanged(object sender, EventArgs e)
         {
@@ -303,6 +304,7 @@ namespace Group29_BlitzCafe
 
         //ORDER HISTORY
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+
         {
 
         }

@@ -34,6 +34,53 @@ namespace Group29_BlitzCafe
         private string fName, lName, sqlQuery, cellNo;
         private DateTime dateJoined = new DateTime();
 
+        //Method for validating input
+        private bool validateInput()
+        {
+            if(txtCellNo.Text.Length != 10)
+            {
+                lblValidCellNo.Text = "**";
+                return false;
+            }
+            else if (string.IsNullOrWhiteSpace(txtFName.Text))
+            {
+                lblValidFName.Text = "**";
+                return false;
+            }
+            else if(string.IsNullOrWhiteSpace(txtLName.Text))
+            {
+                lblValidLName.Text = "**";
+                return false;
+            }
+            else
+            {
+                lblValidCellNo.Text = "";
+                lblValidFName.Text = "";
+                lblValidLName.Text = "";
+                return true;
+            }
+        }
+
+        public void clearAndEnable()
+        {
+            btnConfirm.Visible = false;
+            btnCancel.Visible = false;
+
+            choice = 0;
+
+            btnUpdate.Visible = true;
+            btnDelete.Visible = true;
+            btnAddNew.Visible = true;
+
+            txtCellNo.Clear();
+            txtCustID.Clear();
+            txtFName.Clear();
+            txtLName.Clear();
+
+            dtpDate.Value = DateTime.Today;
+        }
+
+
         //Load from info from database
         public void load_Customer_Info()
         {
@@ -75,7 +122,7 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void confirm_Add()
+        private bool confirm_Add()
         {
             //Add new customer to database
 
@@ -84,7 +131,7 @@ namespace Group29_BlitzCafe
             cellNo = txtCellNo.Text;
             dateJoined = dtpDate.Value;
 
-            if (cellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
+            if (validateInput())
             { 
                 // Define the SQL query with parameters
                 string query = @"INSERT INTO Customer (First_Name, Last_Name, CellNo, Date_Joined) 
@@ -120,16 +167,21 @@ namespace Group29_BlitzCafe
                             MessageBox.Show("Insert failed. No rows affected.");
                         }
                         conn.Close();
+
+                        load_Customer_Info();
+                        return true;
                     }
                     catch (SqlException sqlEx)
                     {
                         // Handle SQL-specific exceptions
                         MessageBox.Show("Database error: " + sqlEx.Message);
+                        return false;
                     }
                     catch (Exception ex)
                     {
                         // Handle all other exceptions
                         MessageBox.Show("An error occurred: " + ex.Message);
+                        return false;
                     }
                 }
             }
@@ -137,9 +189,8 @@ namespace Group29_BlitzCafe
             {
                 MessageBox.Show("Please ensure all fields are filled correctly. " +
                                 "First Name and Last Name cannot be empty, and Cell No must be 10 digits.");
-            }
-            load_Customer_Info();
-            
+                return false;
+            }            
         }
 
         private void confirm_Delete()
@@ -187,65 +238,69 @@ namespace Group29_BlitzCafe
                 }               
             }
         }
-        private void confirm_Update()
+        private bool confirm_Update()
         {
             string newFName = txtFName.Text;
             string newLName = txtLName.Text;
             string newCellNo = txtCellNo.Text;
 
-           
-                if (newCellNo.Length == 10 && !string.IsNullOrWhiteSpace(txtFName.Text) && !string.IsNullOrWhiteSpace(txtLName.Text))
 
+            if (validateInput())
+            {
+                // Define the SQL query with parameters
+                string query = @"UPDATE Customer SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+
+                // Use 'using' statements to ensure proper disposal of resources
+                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    // Define the SQL query with parameters
-                    string query = @"UPDATE Customer SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
-
-                    // Use 'using' statements to ensure proper disposal of resources
-                    using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
-                    using (SqlCommand cmd = new SqlCommand(query, conn))
+                    try
                     {
-                        try
-                        {
-                            // Define parameters and their values
-                            cmd.Parameters.AddWithValue("@newFName", newFName);
-                            cmd.Parameters.AddWithValue("@newLName", newLName);
-                            cmd.Parameters.AddWithValue("@newCellNo", newCellNo);
+                        // Define parameters and their values
+                        cmd.Parameters.AddWithValue("@newFName", newFName);
+                        cmd.Parameters.AddWithValue("@newLName", newLName);
+                        cmd.Parameters.AddWithValue("@newCellNo", newCellNo);
 
-                            // Open the connection
-                            conn.Open();
+                        // Open the connection
+                        conn.Open();
 
-                            // Execute the command
-                            int rowsAffected = cmd.ExecuteNonQuery();
+                        // Execute the command
+                        int rowsAffected = cmd.ExecuteNonQuery();
 
-                            // Check if the insert was successful
-                            if (rowsAffected > 0)
-                            {
-                                MessageBox.Show("Customer edited successfully.");
-                                load_Customer_Info(); // Refresh or reload customer info as needed
-                                
-                            }
-                            else
-                            {
-                                MessageBox.Show("Insert failed. No rows affected.");
-                            }
-                            conn.Close();
-                        }
-                        catch (SqlException sqlEx)
+                        // Check if the insert was successful
+                        if (rowsAffected > 0)
                         {
-                            // Handle SQL-specific exceptions
-                            MessageBox.Show("Database error: " + sqlEx.Message);
+                            MessageBox.Show("Customer edited successfully.");
+                            load_Customer_Info(); // Refresh or reload customer info as needed
+
                         }
-                        catch (Exception ex)
+                        else
                         {
-                            // Handle all other exceptions
-                            MessageBox.Show("An error occurred: " + ex.Message);
+                            MessageBox.Show("Insert failed. No rows affected.");
                         }
+                        conn.Close();
+
+                        return true;
+                    }
+                    catch (SqlException sqlEx)
+                    {
+                        // Handle SQL-specific exceptions
+                        MessageBox.Show("Database error: " + sqlEx.Message);
+                        return false;
+                    }
+                    catch (Exception ex)
+                    {
+                        // Handle all other exceptions
+                        MessageBox.Show("An error occurred: " + ex.Message);
+                        return false;
                     }
                 }
-                else
-                {
-                    MessageBox.Show("Please make sure all info is entered and correct.");
-                }
+            }
+            else
+            {
+                MessageBox.Show("Please make sure all info is entered and correct.");
+                return false;
+            }
         }
 
         private void CustomerPage_Load(object sender, EventArgs e)
@@ -329,30 +384,17 @@ namespace Group29_BlitzCafe
             {
                 case 1:
                     {
-                        confirm_Add();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
-
-
-                        choice = 0;
-
-
-                        btnUpdate.Visible = true;
-                        btnDelete.Visible = true;
-                        btnAddNew.Visible = true;
+                        if(confirm_Add())
+                        {
+                            clearAndEnable();
+                        }
                         break;
                     }
                 case 2:
                     {
                         confirm_Delete();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
 
-                        choice = 0;
-
-                        btnUpdate.Visible = true;
-                        btnDelete.Visible = true;
-                        btnAddNew.Visible = true;
+                        clearAndEnable();
 
                         txtFName.ReadOnly = false;
                         txtLName.ReadOnly = false;
@@ -363,15 +405,10 @@ namespace Group29_BlitzCafe
                     }
                 case 3:
                     {
-                        confirm_Update();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
-
-                        choice = 0;
-
-                        btnUpdate.Visible = true;
-                        btnDelete.Visible = true;
-                        btnAddNew.Visible = true;
+                        if (confirm_Update())
+                        {
+                            clearAndEnable();
+                        }
                         break;
                     }
                 default:
@@ -379,13 +416,6 @@ namespace Group29_BlitzCafe
                         break;
                     }
             }
-        }
-
-        private void txtCellNo_TextChanged(object sender, EventArgs e)
-        {
-            //Dylan and Sino Please Add SQL for searching and displaying only people starting with the searchCell
-            string searchCell = txtCellNo.Text;
-
         }
 
         private void btnCancel_Click(object sender, EventArgs e)
