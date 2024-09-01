@@ -38,10 +38,11 @@ namespace Group29_BlitzCafe
             // cbxUseLoyaltyPoints
             // 
             this.cbxUseLoyaltyPoints.AutoSize = true;
-            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(266, 94);
+            this.cbxUseLoyaltyPoints.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(339, 33);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
-            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(139, 21);
+            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(176, 26);
             this.cbxUseLoyaltyPoints.TabIndex = 0;
             this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
@@ -49,42 +50,49 @@ namespace Group29_BlitzCafe
             // 
             // btnConfirmPayment
             // 
-            this.btnConfirmPayment.Location = new System.Drawing.Point(266, 164);
+            this.btnConfirmPayment.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
+            this.btnConfirmPayment.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnConfirmPayment.Location = new System.Drawing.Point(315, 186);
             this.btnConfirmPayment.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfirmPayment.Name = "btnConfirmPayment";
-            this.btnConfirmPayment.Size = new System.Drawing.Size(178, 52);
+            this.btnConfirmPayment.Size = new System.Drawing.Size(200, 62);
             this.btnConfirmPayment.TabIndex = 1;
             this.btnConfirmPayment.Text = "Confirm Payment";
-            this.btnConfirmPayment.UseVisualStyleBackColor = true;
+            this.btnConfirmPayment.UseVisualStyleBackColor = false;
             // 
             // btnPrintReceipt
             // 
-            this.btnPrintReceipt.Location = new System.Drawing.Point(266, 235);
+            this.btnPrintReceipt.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(244)))), ((int)(((byte)(230)))), ((int)(((byte)(100)))));
+            this.btnPrintReceipt.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btnPrintReceipt.Location = new System.Drawing.Point(315, 261);
             this.btnPrintReceipt.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnPrintReceipt.Name = "btnPrintReceipt";
-            this.btnPrintReceipt.Size = new System.Drawing.Size(178, 52);
+            this.btnPrintReceipt.Size = new System.Drawing.Size(200, 62);
             this.btnPrintReceipt.TabIndex = 2;
             this.btnPrintReceipt.Text = "Print Receipt";
-            this.btnPrintReceipt.UseVisualStyleBackColor = true;
+            this.btnPrintReceipt.UseVisualStyleBackColor = false;
             // 
             // lbxReceipt
             // 
+            this.lbxReceipt.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxReceipt.FormattingEnabled = true;
-            this.lbxReceipt.ItemHeight = 16;
-            this.lbxReceipt.Location = new System.Drawing.Point(14, 27);
+            this.lbxReceipt.ItemHeight = 22;
+            this.lbxReceipt.Location = new System.Drawing.Point(30, 33);
+            this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbxReceipt.Name = "lbxReceipt";
-            this.lbxReceipt.Size = new System.Drawing.Size(233, 260);
+            this.lbxReceipt.Size = new System.Drawing.Size(262, 290);
             this.lbxReceipt.TabIndex = 3;
             // 
             // Confirmation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(498, 310);
+            this.ClientSize = new System.Drawing.Size(560, 369);
             this.Controls.Add(this.lbxReceipt);
             this.Controls.Add(this.btnPrintReceipt);
             this.Controls.Add(this.btnConfirmPayment);
             this.Controls.Add(this.cbxUseLoyaltyPoints);
+            this.Font = new System.Drawing.Font("Bahnschrift SemiBold", 8F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
