@@ -218,8 +218,8 @@ namespace Group29_BlitzCafe
             }
             if (currentCustomer != null)
             {
-                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
-                confirmationForm.ShowDialog();
+                //Confirmation confirmationForm = new Confirmation(receipt, currentCustomer, currentOrder);
+                //confirmationForm.ShowDialog();
             }
             else
             {

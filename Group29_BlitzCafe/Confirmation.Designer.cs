@@ -41,7 +41,7 @@ namespace Group29_BlitzCafe
             this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(388, 247);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
-            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(140, 21);
+            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(159, 23);
             this.cbxUseLoyaltyPoints.TabIndex = 0;
             this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
@@ -56,6 +56,7 @@ namespace Group29_BlitzCafe
             this.btnConfirmPayment.TabIndex = 1;
             this.btnConfirmPayment.Text = "Confirm Payment";
             this.btnConfirmPayment.UseVisualStyleBackColor = false;
+            this.btnConfirmPayment.Click += new System.EventHandler(this.btnConfirmPayment_Click_1);
             // 
             // btnPrintReceipt
             // 
@@ -72,16 +73,16 @@ namespace Group29_BlitzCafe
             // 
             this.lbxReceipt.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxReceipt.FormattingEnabled = true;
-            this.lbxReceipt.ItemHeight = 18;
+            this.lbxReceipt.ItemHeight = 22;
             this.lbxReceipt.Location = new System.Drawing.Point(16, 34);
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbxReceipt.Name = "lbxReceipt";
-            this.lbxReceipt.Size = new System.Drawing.Size(316, 310);
+            this.lbxReceipt.Size = new System.Drawing.Size(316, 290);
             this.lbxReceipt.TabIndex = 3;
             // 
             // Confirmation
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 16F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(729, 388);
             this.Controls.Add(this.lbxReceipt);
@@ -92,7 +93,6 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
-            this.Load += new System.EventHandler(this.Confirmation_Load_1);
             this.ResumeLayout(false);
             this.PerformLayout();
 
