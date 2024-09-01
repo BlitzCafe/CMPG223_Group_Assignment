@@ -49,10 +49,10 @@ namespace Group29_BlitzCafe
             // 
             // btnAddItem
             // 
-            this.btnAddItem.Location = new System.Drawing.Point(814, 41);
+            this.btnAddItem.Location = new System.Drawing.Point(724, 33);
             this.btnAddItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnAddItem.Name = "btnAddItem";
-            this.btnAddItem.Size = new System.Drawing.Size(144, 38);
+            this.btnAddItem.Size = new System.Drawing.Size(128, 30);
             this.btnAddItem.TabIndex = 3;
             this.btnAddItem.Text = "Add new Item";
             this.btnAddItem.UseVisualStyleBackColor = true;
@@ -61,21 +61,21 @@ namespace Group29_BlitzCafe
             // dbgMenuItems
             // 
             this.dbgMenuItems.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dbgMenuItems.Location = new System.Drawing.Point(47, 41);
+            this.dbgMenuItems.Location = new System.Drawing.Point(42, 33);
             this.dbgMenuItems.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.dbgMenuItems.Name = "dbgMenuItems";
             this.dbgMenuItems.RowHeadersWidth = 62;
             this.dbgMenuItems.RowTemplate.Height = 28;
-            this.dbgMenuItems.Size = new System.Drawing.Size(493, 506);
+            this.dbgMenuItems.Size = new System.Drawing.Size(438, 405);
             this.dbgMenuItems.TabIndex = 4;
-            this.dbgMenuItems.CellContentClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgMenuItems_CellContentClick);
+            this.dbgMenuItems.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dbgMenuItems_CellClick);
             // 
             // btnEditItem
             // 
-            this.btnEditItem.Location = new System.Drawing.Point(546, 41);
+            this.btnEditItem.Location = new System.Drawing.Point(485, 33);
             this.btnEditItem.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnEditItem.Name = "btnEditItem";
-            this.btnEditItem.Size = new System.Drawing.Size(128, 38);
+            this.btnEditItem.Size = new System.Drawing.Size(114, 30);
             this.btnEditItem.TabIndex = 0;
             this.btnEditItem.Text = "Edit Menu Item";
             this.btnEditItem.UseVisualStyleBackColor = true;
@@ -83,46 +83,44 @@ namespace Group29_BlitzCafe
             // 
             // txtItemID
             // 
-            this.txtItemID.Location = new System.Drawing.Point(183, 60);
-            this.txtItemID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtItemID.Location = new System.Drawing.Point(163, 48);
             this.txtItemID.Name = "txtItemID";
             this.txtItemID.ReadOnly = true;
-            this.txtItemID.Size = new System.Drawing.Size(154, 26);
+            this.txtItemID.Size = new System.Drawing.Size(137, 22);
             this.txtItemID.TabIndex = 0;
             this.txtItemID.TextChanged += new System.EventHandler(this.txtItemID_TextChanged);
             // 
             // txtDesc
             // 
-            this.txtDesc.Location = new System.Drawing.Point(183, 148);
-            this.txtDesc.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.txtDesc.Location = new System.Drawing.Point(163, 118);
             this.txtDesc.Name = "txtDesc";
-            this.txtDesc.Size = new System.Drawing.Size(154, 26);
+            this.txtDesc.Size = new System.Drawing.Size(137, 22);
             this.txtDesc.TabIndex = 1;
-            //
+            // 
             // label1
             // 
             this.label1.AutoSize = true;
-            this.label1.Location = new System.Drawing.Point(21, 72);
+            this.label1.Location = new System.Drawing.Point(19, 58);
             this.label1.Name = "label1";
-            this.label1.Size = new System.Drawing.Size(66, 20);
+            this.label1.Size = new System.Drawing.Size(55, 17);
             this.label1.TabIndex = 3;
             this.label1.Text = "Item ID:";
             // 
             // label2
             // 
             this.label2.AutoSize = true;
-            this.label2.Location = new System.Drawing.Point(21, 148);
+            this.label2.Location = new System.Drawing.Point(19, 118);
             this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(89, 20);
+            this.label2.Size = new System.Drawing.Size(79, 17);
             this.label2.TabIndex = 4;
             this.label2.Text = "Description";
             // 
             // label3
             // 
             this.label3.AutoSize = true;
-            this.label3.Location = new System.Drawing.Point(21, 246);
+            this.label3.Location = new System.Drawing.Point(19, 197);
             this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(44, 20);
+            this.label3.Size = new System.Drawing.Size(40, 17);
             this.label3.TabIndex = 5;
             this.label3.Text = "Price";
             // 
@@ -134,11 +132,9 @@ namespace Group29_BlitzCafe
             this.groupBox1.Controls.Add(this.label1);
             this.groupBox1.Controls.Add(this.txtDesc);
             this.groupBox1.Controls.Add(this.txtItemID);
-            this.groupBox1.Location = new System.Drawing.Point(570, 115);
-            this.groupBox1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
+            this.groupBox1.Location = new System.Drawing.Point(507, 92);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Padding = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.groupBox1.Size = new System.Drawing.Size(366, 332);
+            this.groupBox1.Size = new System.Drawing.Size(325, 266);
             this.groupBox1.TabIndex = 5;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "Item Details";
@@ -146,17 +142,18 @@ namespace Group29_BlitzCafe
             // numPrice
             // 
             this.numPrice.DecimalPlaces = 2;
-            this.numPrice.Location = new System.Drawing.Point(163, 192);
+            this.numPrice.Location = new System.Drawing.Point(145, 154);
+            this.numPrice.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.numPrice.Name = "numPrice";
-            this.numPrice.Size = new System.Drawing.Size(120, 22);
+            this.numPrice.Size = new System.Drawing.Size(107, 22);
             this.numPrice.TabIndex = 6;
             // 
             // btnDelete
             // 
-            this.btnDelete.Location = new System.Drawing.Point(680, 41);
+            this.btnDelete.Location = new System.Drawing.Point(604, 33);
             this.btnDelete.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnDelete.Name = "btnDelete";
-            this.btnDelete.Size = new System.Drawing.Size(128, 38);
+            this.btnDelete.Size = new System.Drawing.Size(114, 30);
             this.btnDelete.TabIndex = 6;
             this.btnDelete.Text = "Delete Item";
             this.btnDelete.UseVisualStyleBackColor = true;
@@ -164,10 +161,10 @@ namespace Group29_BlitzCafe
             // 
             // btnConfirm
             // 
-            this.btnConfirm.Location = new System.Drawing.Point(586, 479);
+            this.btnConfirm.Location = new System.Drawing.Point(521, 383);
             this.btnConfirm.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnConfirm.Name = "btnConfirm";
-            this.btnConfirm.Size = new System.Drawing.Size(124, 34);
+            this.btnConfirm.Size = new System.Drawing.Size(110, 27);
             this.btnConfirm.TabIndex = 10;
             this.btnConfirm.Text = "Confirm";
             this.btnConfirm.UseVisualStyleBackColor = true;
@@ -176,10 +173,10 @@ namespace Group29_BlitzCafe
             // 
             // btnCancel
             // 
-            this.btnCancel.Location = new System.Drawing.Point(772, 479);
+            this.btnCancel.Location = new System.Drawing.Point(686, 383);
             this.btnCancel.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.btnCancel.Name = "btnCancel";
-            this.btnCancel.Size = new System.Drawing.Size(124, 34);
+            this.btnCancel.Size = new System.Drawing.Size(110, 27);
             this.btnCancel.TabIndex = 11;
             this.btnCancel.Text = "Cancel";
             this.btnCancel.UseVisualStyleBackColor = true;
@@ -188,9 +185,9 @@ namespace Group29_BlitzCafe
             // 
             // ItemPage
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1003, 595);
+            this.ClientSize = new System.Drawing.Size(892, 476);
             this.Controls.Add(this.btnCancel);
             this.Controls.Add(this.btnConfirm);
             this.Controls.Add(this.btnDelete);
