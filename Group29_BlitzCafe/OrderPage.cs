@@ -232,16 +232,51 @@ namespace Group29_BlitzCafe
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            int orderID = orderList.getOrderID(); // Implement this method to get the OrderID from the user interface
 
+            if (orderID <= 0)
+            {
+                MessageBox.Show("Please select a valid order to delete.");
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Delete the order from the Order_Details table first if there are foreign key constraints
+                    string deleteOrderDetailsQuery = "DELETE FROM Order_Details WHERE OrderID = @OrderID";
+                    using (SqlCommand deleteOrderDetailsCmd = new SqlCommand(deleteOrderDetailsQuery, conn))
+                    {
+                        deleteOrderDetailsCmd.Parameters.AddWithValue("@OrderID", orderID);
+                        deleteOrderDetailsCmd.ExecuteNonQuery();
+                    }
+
+                    // Delete the order from the Orders table
+                    string deleteOrderQuery = "DELETE FROM Orders WHERE OrderID = @OrderID";
+                    using (SqlCommand deleteOrderCmd = new SqlCommand(deleteOrderQuery, conn))
+                    {
+                        deleteOrderCmd.Parameters.AddWithValue("@OrderID", orderID);
+                        int rowsAffected = deleteOrderCmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Order deleted successfully.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Order not found or could not be deleted.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting the order: " + ex.Message);
+                }
+            }
         }
-
-
-        
-
-
-
-       
-
         private void txtSearchDescr_TextChanged(object sender, EventArgs e)
         {
             string searchDescr = txtSearchDescr.Text;
@@ -293,20 +328,86 @@ namespace Group29_BlitzCafe
         //ORDER HISTORY
         private void dtOrderDate_ValueChanged(object sender, EventArgs e)
         {
+            DateTime selectedDate = dtOrderDate.Value.Date;
 
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE Order_Date = @OrderDate";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@OrderDate", selectedDate);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
         }
 
         //ORDER HISTORY
         private void cbxLoyaltyPointsUsed_CheckedChanged(object sender, EventArgs e)
         {
+            bool loyaltyPointsUsed = cbxLoyaltyPointsUsed.Checked;
 
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE LoyaltyPoints_Used = @LoyaltyPointsUsed";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@LoyaltyPointsUsed", loyaltyPointsUsed);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
         }
 
         //ORDER HISTORY
         private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
 
         {
+            string orderIDSearch = txtOrderIDSearch.Text.Trim();
 
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE OrderID LIKE @OrderIDSearch";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@OrderIDSearch", "%" + orderIDSearch + "%");
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
         }
     }
 }
