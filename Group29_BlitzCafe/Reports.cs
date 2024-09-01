@@ -69,5 +69,20 @@ namespace Group29_BlitzCafe
 
             lblTopMenuReport.Text = "Report of Revenue generate between " + beginDate.ToString("dd MMMM yyyy") + " and " + endDate.ToString("dd MMMM yyyy");
         }
+
+        private void label9_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label2_Click(object sender, EventArgs e)
+        {
+
+        }
+
+        private void label5_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
