@@ -169,5 +169,15 @@ namespace Group29_BlitzCafe.Properties {
                 return ((System.Drawing.Bitmap)(obj));
             }
         }
+        
+        /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap WhatsApp_Image_2024_09_01_at_12_36_46_a21c2dcd {
+            get {
+                object obj = ResourceManager.GetObject("WhatsApp Image 2024-09-01 at 12.36.46_a21c2dcd", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
     }
 }
