@@ -133,6 +133,10 @@ namespace Group29_BlitzCafe
                         DataTable dataTable = new DataTable();
                         dataAdapter.Fill(dataTable);
 
+                        dbgOrderDetails.DataSource = null;
+                        dbgOrderDetails.Rows.Clear();
+                        dbgOrderDetails.Columns.Clear();
+
                         // Bind the DataGridView to the filtered order details
                         dbgOrderDetails.DataSource = dataTable;
                     }
@@ -142,7 +146,7 @@ namespace Group29_BlitzCafe
                     }
             }
             
-            }
+        }
 
         private void OrderPage_Load(object sender, EventArgs e)
         {
@@ -488,6 +492,18 @@ namespace Group29_BlitzCafe
                     MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
                 }
             }
+        }
+
+        private void btnReset_Click(object sender, EventArgs e)
+        {
+            dbgOrderDetails.DataSource = null;
+            dbgOrderDetails.Rows.Clear();
+            loadOrderHistory();
+            txtOrderIDSearch.Text = "";
+            dtOrderDate.Value = DateTime.Today;
+            cbxLoyaltyPointsUsed.Checked = false;
+
+            
         }
     }
 }
