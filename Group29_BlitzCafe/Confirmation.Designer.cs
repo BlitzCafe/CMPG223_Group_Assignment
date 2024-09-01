@@ -44,6 +44,7 @@ namespace Group29_BlitzCafe
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(176, 26);
+
             this.cbxUseLoyaltyPoints.TabIndex = 0;
             this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
@@ -81,6 +82,7 @@ namespace Group29_BlitzCafe
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 5, 3, 5);
             this.lbxReceipt.Name = "lbxReceipt";
             this.lbxReceipt.Size = new System.Drawing.Size(351, 356);
+
             this.lbxReceipt.TabIndex = 3;
             // 
             // pictureBox1
