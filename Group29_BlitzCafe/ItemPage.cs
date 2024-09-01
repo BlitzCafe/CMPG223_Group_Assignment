@@ -152,73 +152,96 @@ namespace Group29_BlitzCafe
 
         private void btnConfirm_Click(object sender, EventArgs e)
         {
-            switch (choice)
+            if (txtDesc.Text != "")
             {
-                case 1:
-                    {
-                        //confirm_Add();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
+                txtDesc.Focus();
+                lblDescriptionError.Text = "**";
+                lblDescriptionError.ForeColor = Color.Red;
 
-                        
-                        addItem();
+            }
+            else if (numPrice.Value <= 0)
+            {
+                numPrice.Focus();
+                lblPriceError.Text = "**";
+                lblPriceError.ForeColor = Color.Red;
 
-                        btnAddItem.Visible = true;
-                        btnDelete.Visible = true;
-                        btnEditItem.Visible = true;
-                        break;
-                    }
-                case 2:
-                    {
-                        //confirm_Delete();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
+            }
+            else
+            {
+                switch (choice)
+                {
+                    case 1:
+                        {
+                            //confirm_Add();
+                            btnConfirm.Visible = false;
+                            btnCancel.Visible = false;
 
 
-                        deleteItem();
+                            addItem();
+
+                            btnAddItem.Visible = true;
+                            btnDelete.Visible = true;
+                            btnEditItem.Visible = true;
+                            break;
+                        }
+                    case 2:
+                        {
+                            //confirm_Delete();
+                            btnConfirm.Visible = false;
+                            btnCancel.Visible = false;
 
 
-                        txtDesc.ReadOnly = false;
-                        txtItemID.ReadOnly = false;
-                        numPrice.ReadOnly = false;
+                            deleteItem();
 
-                        btnAddItem.Visible = true;
-                        btnDelete.Visible = true;
-                        btnEditItem.Visible = true;
-                        break;
-                    }
-                case 3:
-                    {
-                        //confirm_Update();
-                        btnConfirm.Visible = false;
-                        btnCancel.Visible = false;
 
-                        editItem();
+                            txtDesc.ReadOnly = false;
+                            txtItemID.ReadOnly = false;
+                            numPrice.ReadOnly = false;
 
-                        btnAddItem.Visible = true;
-                        btnDelete.Visible = true;
-                        btnEditItem.Visible = true;
+                            btnAddItem.Visible = true;
+                            btnDelete.Visible = true;
+                            btnEditItem.Visible = true;
+                            break;
+                        }
+                    case 3:
+                        {
+                            //confirm_Update();
+                            btnConfirm.Visible = false;
+                            btnCancel.Visible = false;
 
-                        //call load method to refresh dbgrid and reset objects to be the same as the database
-                        loadMenuItems();
-                        break;
-                    }
-                default:
-                    {
-                        break;
+                            editItem();
 
-                    }
-               
+                            btnAddItem.Visible = true;
+                            btnDelete.Visible = true;
+                            btnEditItem.Visible = true;
+
+                            //call load method to refresh dbgrid and reset objects to be the same as the database
+                            loadMenuItems();
+                            break;
+                        }
+                    default:
+                        {
+                            MessageBox.Show("Something went wrong :(");
+
+                            break;
+
+                        }
+
+                }
+
+                btnAddItem.Visible = true;
+                btnDelete.Visible = true;
+                btnEditItem.Visible = true;
+
+                btnCancel.Visible = false;
+                btnConfirm.Visible = false;
+
             }
 
-            btnAddItem.Visible = true;
-            btnDelete.Visible = true;
-            btnEditItem.Visible = true;
-
-            btnCancel.Visible = false;
-            btnConfirm.Visible = false;
-
         }
+
+
+           
 
         private void editItem()
         {
@@ -420,7 +443,15 @@ namespace Group29_BlitzCafe
 
         private void ItemPage_Load(object sender, EventArgs e)
         {
+            btnAddItem.Visible = true;
+            btnDelete.Visible = true;
+            btnEditItem.Visible = true;
 
+            btnCancel.Visible = false;
+            btnConfirm.Visible = false;
+
+            lblDescriptionError.Text = "";
+            lblPriceError.Text = "";
         }
 
         private void txtItemID_TextChanged(object sender, EventArgs e)
@@ -432,46 +463,57 @@ namespace Group29_BlitzCafe
         private void dbgMenuItems_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             //determine if a valid record is selected
-            if (e.RowIndex > -1)
+            if (e.RowIndex > -1 && e.RowIndex < dbgMenuItems.Rows.Count)
             {
-                //extract info of the selectedrow
-                int selectedID;
                 DataGridViewRow currentRow = dbgMenuItems.Rows[e.RowIndex];
-                //determine selected items ID
-                selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
 
-                //initialize the index variable
-                selectedItemIndex = 0;
-                bool itemFound = false;
+                if (currentRow.Cells["ItemID"].Value != DBNull.Value)
+                { 
+                    //extract info of the selectedrow
+                    int selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
 
-                //use a while loop to find the item with the matching ItemID
-                while (selectedItemIndex < menuItemList.Count)
-                {
-                    if (menuItemList[selectedItemIndex].getItemID() == selectedID)
+                    //determine selected items ID
+                    selectedID = Convert.ToInt32(currentRow.Cells["ItemID"].Value);
+
+                    //initialize the index variable
+                    selectedItemIndex = 0;
+                    bool itemFound = false;
+
+                    //use a while loop to find the item with the matching ItemID
+                    while (selectedItemIndex < menuItemList.Count)
                     {
-                        itemFound = true;
-                        break; //exit the loop once the item is found
+                        if (menuItemList[selectedItemIndex].getItemID() == selectedID)
+                        {
+                            itemFound = true;
+                            break; //exit the loop once the item is found
+                        }
+                        selectedItemIndex++;
                     }
-                    selectedItemIndex++;
-                }
 
-                //if the item is found, populate the textboxes using the index
-                if (itemFound)
-                {
-                    txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
-                    txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
-                    numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    //if the item is found, populate the textboxes using the index
+                    if (itemFound)
+                    {
+                        txtItemID.Text = menuItemList[selectedItemIndex].getItemID().ToString();
+                        txtDesc.Text = menuItemList[selectedItemIndex].getDescr();
+                        numPrice.Text = menuItemList[selectedItemIndex].getPrice().ToString();
+                    }
+                    else  //if the record is not found in the menuItemList, set index to -1 and return error message
+                    {
+                        MessageBox.Show("Selected item not found in the list.");
+                        selectedItemIndex = -1;
+                    }
                 }
-                else  //if the record is not found in the menuItemList, set index to -1 and return error message
+                else  //error message if row selected is out of bounds
                 {
-                    MessageBox.Show("Selected item not found in the list.");
-                    selectedItemIndex = -1;
+                    MessageBox.Show("Error: Please select a valid item from the list.");
                 }
             }
-            else  //error message if row selected is out of bounds
+            else
             {
+                // Error message if row selected is out of bounds
                 MessageBox.Show("Error: Please select a valid item from the list.");
             }
+
         }
 
         private void lblQtyErrorMessage_Click(object sender, EventArgs e)

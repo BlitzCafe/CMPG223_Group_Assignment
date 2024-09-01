@@ -38,17 +38,21 @@ namespace Group29_BlitzCafe
             this.label2 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+
             this.lblQtyErrorMessage = new System.Windows.Forms.Label();
             this.lblDescriptionErrorMessage = new System.Windows.Forms.Label();
             this.lblItemIdErrorMessage = new System.Windows.Forms.Label();
             this.lblPhoneNumError = new System.Windows.Forms.Label();
+
             this.numPrice = new System.Windows.Forms.NumericUpDown();
             this.btnDelete = new System.Windows.Forms.Button();
             this.btnConfirm = new System.Windows.Forms.Button();
             this.btnCancel = new System.Windows.Forms.Button();
+
             this.panel1 = new System.Windows.Forms.Panel();
             this.panel2 = new System.Windows.Forms.Panel();
             this.panel3 = new System.Windows.Forms.Panel();
+
             ((System.ComponentModel.ISupportInitialize)(this.dbgMenuItems)).BeginInit();
             this.groupBox1.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.numPrice)).BeginInit();
@@ -139,12 +143,14 @@ namespace Group29_BlitzCafe
             // 
             // groupBox1
             // 
+
             this.groupBox1.Controls.Add(this.btnCancel);
             this.groupBox1.Controls.Add(this.lblQtyErrorMessage);
             this.groupBox1.Controls.Add(this.btnConfirm);
             this.groupBox1.Controls.Add(this.lblDescriptionErrorMessage);
             this.groupBox1.Controls.Add(this.lblItemIdErrorMessage);
             this.groupBox1.Controls.Add(this.lblPhoneNumError);
+
             this.groupBox1.Controls.Add(this.numPrice);
             this.groupBox1.Controls.Add(this.label3);
             this.groupBox1.Controls.Add(this.label2);
@@ -247,6 +253,7 @@ namespace Group29_BlitzCafe
             this.btnCancel.Visible = false;
             this.btnCancel.Click += new System.EventHandler(this.btnCancel_Click);
             // 
+
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
@@ -273,13 +280,16 @@ namespace Group29_BlitzCafe
             this.panel3.Name = "panel3";
             this.panel3.Size = new System.Drawing.Size(1115, 10);
             this.panel3.TabIndex = 19;
+
             // 
             // ItemPage
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+
             this.BackColor = System.Drawing.Color.White;
             this.ClientSize = new System.Drawing.Size(1106, 594);
+
             this.Controls.Add(this.btnDelete);
             this.Controls.Add(this.groupBox1);
             this.Controls.Add(this.btnEditItem);
@@ -316,6 +326,7 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Button btnConfirm;
         private System.Windows.Forms.Button btnCancel;
         private System.Windows.Forms.NumericUpDown numPrice;
+
         private System.Windows.Forms.Label lblQtyErrorMessage;
         private System.Windows.Forms.Label lblDescriptionErrorMessage;
         private System.Windows.Forms.Label lblItemIdErrorMessage;
@@ -323,5 +334,6 @@ namespace Group29_BlitzCafe
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
+
     }
 }

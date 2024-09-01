@@ -16,14 +16,16 @@ namespace Group29_BlitzCafe
     public partial class OrderPage : Form
     {
         private Default defaultFrm = new Default();
-        private ItemPage itemPageFrm = new ItemPage();          //could use singleton
+        private ItemPage itemPageFrm = new ItemPage();          
         private CustomerPage customerPageFrm = new CustomerPage();
         
 
         private List<MenuItem> receipt = new List<MenuItem>();
         private List<Order> orderList = new List<Order>();
+        private Order currentOrder;
 
         private decimal totalAmount = 0.0m;
+        int currentOrderID = -1;
 
         public OrderPage()
         {
@@ -54,6 +56,58 @@ namespace Group29_BlitzCafe
                     dataAdapter.Fill(dataTable);
 
                     dbgOrderHistory.DataSource = dataTable; // Bind the DataGridView to the DataTable
+
+                    orderList.Clear();
+
+                    foreach (DataRow row in dataTable.Rows)
+                    {
+                        try
+                        {
+                            // Ensure the correct format for orderID
+                            int orderID;
+                            if (int.TryParse(row["OrderID"].ToString(), out orderID))
+                            {
+                                // Initialize orderDate
+                                DateTime orderDate = DateTime.MinValue;
+                                if (row["Order_Date"] != DBNull.Value)
+                                {
+                                    DateTime.TryParse(row["Order_Date"].ToString(), out orderDate);
+                                }
+
+                                // Handle isPayed and loyaltyPointsUsed with safe parsing
+                                int isPayed = 0;
+                                if (row["Is_Paid"] != DBNull.Value)
+                                {
+                                    int.TryParse(row["Is_Paid"].ToString(), out isPayed);
+                                }
+
+                                int loyaltyPointsUsed = 0;
+                                if (row["LoyaltyPoints_Used"] != DBNull.Value)
+                                {
+                                    int.TryParse(row["LoyaltyPoints_Used"].ToString(), out loyaltyPointsUsed);
+                                }
+
+                                // Create a new Order object using the parsed data
+                                Order order = new Order(orderID, orderDate, isPayed, loyaltyPointsUsed);
+
+                                // Add the Order object to the list
+                                orderList.Add(order);
+                            }
+                            else
+                            {
+                                // Log or handle cases where OrderID is invalid
+                                MessageBox.Show("Invalid OrderID found.");
+                            }
+                        }
+                        catch (Exception ex)
+                        {
+                            MessageBox.Show("Error processing data row: " + ex.Message);
+                        }
+                    }
+
+
+
+                    conn.Close();
                 }
                 catch (Exception ex)
                 {
@@ -64,35 +118,65 @@ namespace Group29_BlitzCafe
 
         private void LoadOrderDetails()
         {
-            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            if (currentOrderID != -1)
             {
-                try
-                {
-                    conn.Open();
-                    string query = "SELECT * FROM Order_Details"; // Ensure the table name is correct
-                    SqlCommand cmd = new SqlCommand(query, conn);
-                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
-                    DataTable dataTable = new DataTable();
-                    dataAdapter.Fill(dataTable);
+                using(SqlConnection conn = new SqlConnection(defaultFrm.connString))
+                    try
+                    {
+                        conn.Open();
+                        // Query to fetch details for the selected OrderID
+                        string query = "SELECT * FROM Order_Details WHERE OrderID = @OrderID";
+                        SqlCommand cmd = new SqlCommand(query, conn);
+                        cmd.Parameters.AddWithValue("@OrderID", currentOrderID);
 
-                    dbgOrderDetails.DataSource = dataTable; // Bind the DataGridView to the DataTable
-                }
-                catch (Exception ex)
-                {
-                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
-                }
+                        SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                        DataTable dataTable = new DataTable();
+                        dataAdapter.Fill(dataTable);
+
+                        // Bind the DataGridView to the filtered order details
+                        dbgOrderDetails.DataSource = dataTable;
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show("Error: Could not load order details. " + ex.Message);
+                    }
             }
-        }
+            
+            }
 
         private void OrderPage_Load(object sender, EventArgs e)
         {
             loadOrderHistory();
-            LoadOrderDetails();
+            
         }
 
         private void dbgOrderHistory_CellContentClick(object sender, DataGridViewCellEventArgs e)
         {
-            
+            if (e.RowIndex > -1 && e.RowIndex < dbgOrderHistory.Rows.Count)
+            {
+                // Get the selected row
+                DataGridViewRow currentRow = dbgOrderHistory.Rows[e.RowIndex];
+
+                // Check if the OrderID cell is not DBNull
+                if (currentRow.Cells["OrderID"].Value != DBNull.Value)
+                {
+                    // Retrieve the selected OrderID from the current row
+                    currentOrderID = Convert.ToInt32(currentRow.Cells["OrderID"].Value);
+
+                    // Load the order details for the selected OrderID
+                    LoadOrderDetails();
+                }
+                else
+                {
+                    // Show error if the selected cell does not have a valid OrderID
+                    MessageBox.Show("Error: Selected row has no valid OrderID.");
+                }
+            }
+            else
+            {
+                // Show error if the selected row is out of bounds
+                MessageBox.Show("Error: Please select a valid row from the list.");
+            }
         }
 
         private bool validateControls()
@@ -205,9 +289,9 @@ namespace Group29_BlitzCafe
         {
             string phoneNum = txtPhoneNum.Text;
             Customer currentCustomer = null;
-           
+            
 
-            foreach (Customer customer in customerPageFrm.customerList) 
+            foreach (Customer customer in customerPageFrm.customerList)
             {
                 if (customer.getCellNo() == phoneNum)
                 {
@@ -218,35 +302,110 @@ namespace Group29_BlitzCafe
             }
             if (currentCustomer != null)
             {
-                Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
-                confirmationForm.ShowDialog();
+                if (currentOrderID > 0)
+                {
+                    bool orderFound = false;
+
+                    // Iterate through the orderList to find the matching order by currentOrderID
+                    foreach (Order order in orderList)
+                    {
+                        if (order.getOrderID() == currentOrderID)
+                        {
+                            // If the matching order is found, assign it to currentOrder
+                            currentOrder = order;
+                            orderFound = true;
+                            break; // Exit the loop as soon as the matching order is found
+                        }
+                    }
+
+                    if (orderFound)
+                    {
+                        // Order is found, show confirmation form
+                        Confirmation confirmationForm = new Confirmation(receipt, currentCustomer, currentOrder);
+                        confirmationForm.ShowDialog();
+                    }
+                    else
+                    {
+                        // No matching order found in the list
+                        MessageBox.Show($"No order found with OrderID: {currentOrderID}. Please ensure you've selected a valid order.", "Order Not Found", MessageBoxButtons.OK, MessageBoxIcon.Warning);
+                    }
+                }
+                else
+                {
+                    txtPhoneNum.Focus();
+                    lblPhoneNumError.ForeColor = Color.Red;
+                    lblPhoneNumError.Text = "**";
+                }
+
             }
-            else
-            {
-                txtPhoneNum.Focus();
-                lblPhoneNumError.ForeColor = Color.Red;
-                lblPhoneNumError.Text = "**";
-            }
-            
         }
 
         private void btnDeleteOrder_Click(object sender, EventArgs e)
         {
+            int orderID = currentOrderID; // Implement this method to get the OrderID from the user interface
 
+            if (orderID <= 0)
+            {
+                MessageBox.Show("Please select a valid order to delete.");
+                return;
+            }
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+
+                    // Delete the order from the Order_Details table first if there are foreign key constraints
+                    string deleteOrderDetailsQuery = "DELETE FROM Order_Details WHERE OrderID = @OrderID";
+                    using (SqlCommand deleteOrderDetailsCmd = new SqlCommand(deleteOrderDetailsQuery, conn))
+                    {
+                        deleteOrderDetailsCmd.Parameters.AddWithValue("@OrderID", orderID);
+                        deleteOrderDetailsCmd.ExecuteNonQuery();
+                    }
+
+                    // Delete the order from the Orders table
+                    string deleteOrderQuery = "DELETE FROM Orders WHERE OrderID = @OrderID";
+                    using (SqlCommand deleteOrderCmd = new SqlCommand(deleteOrderQuery, conn))
+                    {
+                        deleteOrderCmd.Parameters.AddWithValue("@OrderID", orderID);
+                        int rowsAffected = deleteOrderCmd.ExecuteNonQuery();
+
+                        if (rowsAffected > 0)
+                        {
+                            MessageBox.Show("Order deleted successfully.");
+                        }
+                        else
+                        {
+                            MessageBox.Show("Order not found or could not be deleted.");
+                        }
+                    }
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error deleting the order: " + ex.Message);
+                }
+            }
         }
-
-        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
-        {
-            
-        }
-
-
-
-       
-
         private void txtSearchDescr_TextChanged(object sender, EventArgs e)
         {
-            
+            string searchDescr = txtSearchDescr.Text;
+            lbxItemSelection.Items.Clear();
+
+            if (!string.IsNullOrWhiteSpace(searchDescr))
+            {
+                foreach (MenuItem item in itemPageFrm.menuItemList)
+                {
+                    string itemDescr = item.getDescr();
+                    if (itemDescr.Contains(searchDescr)) // Search description case-insensitive
+                    {
+                        // Display itemID, description, and price
+                        string displayText = string.Format("{0,-10} {1,-20} {2,-10:C}", item.getItemID(), item.getDescr(), item.getPrice().ToString("C", new CultureInfo("en-ZA")));
+
+                        lbxItemSelection.Items.Add(displayText);
+                    }
+                }
+            }
         }
 
         private void txtPhoneNum_TextChanged(object sender, EventArgs e)
@@ -275,14 +434,90 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private void label8_Click(object sender, EventArgs e)
-        {
 
+        //ORDER HISTORY
+        private void dtOrderDate_ValueChanged(object sender, EventArgs e)
+        {
+            DateTime selectedDate = dtOrderDate.Value.Date;
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE Order_Date = @OrderDate";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@OrderDate", selectedDate);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
         }
 
-        private void lbxReceipt_SelectedIndexChanged(object sender, EventArgs e)
+        //ORDER HISTORY
+        private void cbxLoyaltyPointsUsed_CheckedChanged(object sender, EventArgs e)
         {
+            bool loyaltyPointsUsed = cbxLoyaltyPointsUsed.Checked;
 
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE LoyaltyPoints_Used = @LoyaltyPointsUsed";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@LoyaltyPointsUsed", loyaltyPointsUsed);
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
+        }
+
+        //ORDER HISTORY
+        private void txtOrderIDSearch_TextChanged(object sender, EventArgs e)
+
+        {
+            string orderIDSearch = txtOrderIDSearch.Text.Trim();
+
+            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+            {
+                try
+                {
+                    conn.Open();
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
+                                   "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
+                                   "FROM [Order] WHERE OrderID LIKE @OrderIDSearch";
+                    SqlCommand cmd = new SqlCommand(query, conn);
+                    cmd.Parameters.AddWithValue("@OrderIDSearch", "%" + orderIDSearch + "%");
+                    SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
+                    DataTable dataTable = new DataTable();
+                    dataAdapter.Fill(dataTable);
+
+                    dbgOrderHistory.DataSource = dataTable;
+                }
+                catch (Exception ex)
+                {
+                    MessageBox.Show("Error: DATABASE COULD NOT BE RETRIEVED. " + ex.Message);
+                }
+            }
         }
     }
 }
