@@ -309,6 +309,9 @@ namespace Group29_BlitzCafe
             {
                         // Order is found, show confirmation form
                 Confirmation confirmationForm = new Confirmation(receipt, currentCustomer);
+                lbxReceipt.Items.Clear();
+                txtPhoneNum.Clear();
+                txtTotalAmount.Clear();
                 confirmationForm.ShowDialog();
 
             }

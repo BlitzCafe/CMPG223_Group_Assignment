@@ -225,6 +225,7 @@ namespace Group29_BlitzCafe
             {
                 ConfirmPayment();
                 InsertLoyaltyTransaction(GetLoyaltyPoints());
+                
             }
 
         }
