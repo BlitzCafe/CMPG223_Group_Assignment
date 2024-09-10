@@ -11,8 +11,7 @@ namespace Group29_BlitzCafe
         private Default defaultFrm = new Default();
         private List<MenuItem> receipt = new List<MenuItem>();
         private decimal totalAmount = 0m;
-        private Customer currentCustomer;
-        private int OrderID;
+        private Customer currentCustomer;        
 
         public Confirmation(List<MenuItem> receipt, Customer currentCustomer)
         {
@@ -96,19 +95,19 @@ namespace Group29_BlitzCafe
 
         private void InsertLoyaltyTransaction(decimal newBalance)
         {
-            using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
+          /**  using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
             {
                 conn.Open();
-                string query = "INSERT INTO LoyaltyTransactions (OrderID, CustomerID, Running_Point_Balance) VALUES (@OrderID, @CustomerID, @NewBalance)";
+                string query = "INSERT INTO LoyaltyTransactions (LoyaltyTransactionID, OrderID, CustomerID, Running_Point_Balance) VALUES (@LoyaltyTransactionID, @OrderID, @CustomerID, @NewBalance)";
                 using (SqlCommand cmd = new SqlCommand(query, conn))
                 {
-                    cmd.Parameters.AddWithValue("@OrderID", OrderID); // Replace with your OrderID logic
+                    cmd.Parameters.AddWithValue("@OrderID", currentOrder.getOrderID()); // Replace with your OrderID logic
                     cmd.Parameters.AddWithValue("@CustomerID", currentCustomer.getCustomerID());
                     cmd.Parameters.AddWithValue("@NewBalance", newBalance);
                     cmd.ExecuteNonQuery();
                 }
             }
-          
+          **/
         }
 
         private void btnConfirmPayment_Click(object sender, EventArgs e)
@@ -136,56 +135,12 @@ namespace Group29_BlitzCafe
             }
         }
 
-        private int getCheckedBoxValue(CheckBox checkBox)
-        {
-            return checkBox.Checked ? 1 : 0;
-        }
-
-        public int InsertOrder()
-        {
-            int orderID = 0;
-
-            try
-            {
-                // Define the SQL query for inserting a new order
-                string insertQuery = @"
-            INSERT INTO [Order] (Order_Date, Is_Paid, LoyaltyPoints_Used)
-            OUTPUT INSERTED.OrderID
-            VALUES (@OrderDate, @IsPaid, @LoyaltyPointsUsed)";
-
-                using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
-                {
-                    conn.Open(); // Open the connection
-
-                    using (SqlCommand cmd = new SqlCommand(insertQuery, conn))
-                    {
-                        // Set parameters
-                        cmd.Parameters.AddWithValue("@OrderDate", DateTime.Today);
-                        cmd.Parameters.AddWithValue("@IsPaid", 1); // Assuming the order is paid, change if necessary
-                        cmd.Parameters.AddWithValue("@LoyaltyPointsUsed", getCheckedBoxValue(cbxUseLoyaltyPoints));
-
-                        // Execute the query and retrieve the generated OrderID
-                        orderID = (int)cmd.ExecuteScalar();
-                    }
-                }
-            }
-            catch (Exception ex)
-            {
-                MessageBox.Show("Error inserting order: " + ex.Message);
-            }
-
-            return orderID; // Return the generated OrderID
-        }
-
-
-
         private void InsertOrderDetails(SqlConnection conn, MenuItem item)
         {
-            string query = "INSERT INTO Order_Details (OrderID, ItemID, Quantity_Sold) VALUES (@OrderID, @ItemID, @Quantity)";
+            string query = "INSERT INTO Order_Details (ProductID, Quantity_Sold) VALUES (@ProductID, @Quantity)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
-                cmd.Parameters.AddWithValue("@OrderID",OrderID);
-                cmd.Parameters.AddWithValue("@ItemID", item.getItemID());
+                cmd.Parameters.AddWithValue("@ProductID", item.getItemID());
                 cmd.Parameters.AddWithValue("@Quantity", item.getQtySold());
                 cmd.ExecuteNonQuery();
             }
@@ -220,12 +175,7 @@ namespace Group29_BlitzCafe
 
         private void btnConfirmPayment_Click_1(object sender, EventArgs e)
         {
-            OrderID = InsertOrder(); // Store the generated OrderID
-            if (OrderID > 0)
-            {
-                ConfirmPayment();
-                InsertLoyaltyTransaction(GetLoyaltyPoints());
-            }
+            ConfirmPayment();
         }
     }
 
