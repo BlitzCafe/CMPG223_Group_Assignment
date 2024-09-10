@@ -11,8 +11,7 @@ namespace Group29_BlitzCafe
         private Default defaultFrm = new Default();
         private List<MenuItem> receipt = new List<MenuItem>();
         private decimal totalAmount = 0m;
-        private Customer currentCustomer;
-        
+        private Customer currentCustomer;        
 
         public Confirmation(List<MenuItem> receipt, Customer currentCustomer)
         {
