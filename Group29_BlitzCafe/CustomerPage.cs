@@ -23,7 +23,7 @@ namespace Group29_BlitzCafe
 
 
         private SqlConnection conn;
-        private String connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
+        private String connString = "Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
 
 
         public List<Customer> customerList = new List<Customer>();
@@ -134,7 +134,7 @@ namespace Group29_BlitzCafe
             if (validateInput())
             { 
                 // Define the SQL query with parameters
-                string query = @"INSERT INTO Customer (First_Name, Last_Name, CellNo, Date_Joined) 
+                string query = @"INSERT INTO Customer (Last_Name, First_Name, CellNo, Date_Joined) 
                          VALUES (@fName, @lName, @cellNo, @dateJoined)";
 
                 // Use 'using' statements to ensure proper disposal of resources
