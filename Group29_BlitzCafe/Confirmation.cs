@@ -175,7 +175,13 @@ namespace Group29_BlitzCafe
 
         private void btnConfirmPayment_Click_1(object sender, EventArgs e)
         {
-            ConfirmPayment();
+            OrderID = InsertOrder(); // Store the generated OrderID
+            if (OrderID > 0)
+            {
+                ConfirmPayment();
+                InsertLoyaltyTransaction(GetLoyaltyPoints());
+            }
+
         }
     }
 
