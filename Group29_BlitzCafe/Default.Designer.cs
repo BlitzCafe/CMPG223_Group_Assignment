@@ -195,7 +195,6 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "Default";
             this.Text = "Home";
-            this.WindowState = System.Windows.Forms.FormWindowState.Minimized;
             this.Load += new System.EventHandler(this.Form1_Load);
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();

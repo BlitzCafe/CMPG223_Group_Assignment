@@ -1,4 +1,16 @@
-﻿using System;
+﻿/** Group 29 Project
+ * Mmbers:
+ * Schalk van Wyk 44749082
+ * Dylan Rafferty 45044368
+ * Katelyn Joynt 45248494
+ * Sinovuyo Waqu 45495467
+ * Kearabetswe Thekiso 45296170
+ * Juane Schoeman 41040139
+ */
+
+
+
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -25,6 +37,7 @@ namespace Group29_BlitzCafe
        
         private void Form1_Load(object sender, EventArgs e)
         {
+            this.Size = new System.Drawing.Size(810, 530);
             // Initialize the Timer
             Timer timer = new Timer();
             timer.Interval = 50; // Set the interval for the timer (milliseconds)

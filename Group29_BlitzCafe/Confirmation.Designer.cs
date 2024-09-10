@@ -43,9 +43,7 @@ namespace Group29_BlitzCafe
             this.cbxUseLoyaltyPoints.Location = new System.Drawing.Point(416, 369);
             this.cbxUseLoyaltyPoints.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.cbxUseLoyaltyPoints.Name = "cbxUseLoyaltyPoints";
-
-            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(159, 23);
-
+            this.cbxUseLoyaltyPoints.Size = new System.Drawing.Size(176, 26);
             this.cbxUseLoyaltyPoints.TabIndex = 0;
             this.cbxUseLoyaltyPoints.Text = "UseLoyaltyPoints";
             this.cbxUseLoyaltyPoints.UseVisualStyleBackColor = true;
@@ -80,12 +78,10 @@ namespace Group29_BlitzCafe
             this.lbxReceipt.Font = new System.Drawing.Font("Bahnschrift SemiBold", 9F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.lbxReceipt.FormattingEnabled = true;
             this.lbxReceipt.ItemHeight = 22;
-
             this.lbxReceipt.Location = new System.Drawing.Point(16, 34);
             this.lbxReceipt.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.lbxReceipt.Name = "lbxReceipt";
             this.lbxReceipt.Size = new System.Drawing.Size(316, 290);
-
             this.lbxReceipt.TabIndex = 3;
             // 
             // pictureBox1
@@ -99,9 +95,7 @@ namespace Group29_BlitzCafe
             // 
             // Confirmation
             // 
-
-            this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 19F);
-
+            this.AutoScaleDimensions = new System.Drawing.SizeF(10F, 22F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(254)))), ((int)(((byte)(253)))), ((int)(((byte)(229)))));
             this.ClientSize = new System.Drawing.Size(681, 449);
@@ -114,7 +108,8 @@ namespace Group29_BlitzCafe
             this.Margin = new System.Windows.Forms.Padding(3, 2, 3, 2);
             this.Name = "Confirmation";
             this.Text = "Confirmation";
-
+            
+            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

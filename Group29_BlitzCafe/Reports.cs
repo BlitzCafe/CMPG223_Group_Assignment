@@ -92,8 +92,8 @@ namespace Group29_BlitzCafe
                     conn.Open();
                     adap = new SqlDataAdapter();
                     ds = new DataSet();
-                    string query = @"SELECT TOP 5 I.Description, SUM(OD.Quantity_Sold) AS TotalQuantity 
-                    FROM Order_Details OD 
+                    string query = @"SELECT TOP 5 OD.ItemID, I.Description, SUM(OD.Quantity_Sold) AS TotalQuantity 
+                    FROM Order_Details OD
                     JOIN [Order] O ON OD.OrderID = O.OrderID 
                     JOIN Items I ON OD.ItemID = I.ItemID 
                     WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
@@ -102,8 +102,8 @@ namespace Group29_BlitzCafe
                     cmd = new SqlCommand(query, conn);
 
                     // Add parameters for the date range
-                    cmd.Parameters.AddWithValue("@beginDate", beginDate);
-                    cmd.Parameters.AddWithValue("@endDate", endDate);
+                    cmd.Parameters.Add("@beginDate", SqlDbType.Date).Value = beginDate.Date;
+                    cmd.Parameters.Add("@endDate", SqlDbType.Date).Value = endDate.Date.AddDays(1).AddTicks(-1);
 
                     // Execute the command and read the data
                     reader = cmd.ExecuteReader();
@@ -146,69 +146,49 @@ namespace Group29_BlitzCafe
             string query;
 
             // Determine "Sort By" criteria
+            string sortOrder = rdoAsc.Checked ? "ASC" : "DESC";
 
             if (rdoIncome.Checked)
             {
-                // Determine "Sort Order"
-                string sortOrder = "";
-                if (rdoAsc.Checked)
-                {
-                    sortOrder = "ASC";
-                }
-                else if (rdoDesc.Checked)
-                {
-                    sortOrder = "DESC";
-                }
-
-                query = $@"
-                SELECT YEAR(O.Order_Date) AS Year , 
-                       DATENAME(MONTH,O.Order_Date) AS Month, 
-                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome 
-                FROM Order_Details OD
-                JOIN [Order] O ON OD.OrderID = O.OrderID 
-                JOIN Items I ON OD.ItemID = I.ItemID 
-                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
-                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date) ORDER BY TotalIncome {sortOrder}";
+                query = @"
+            SELECT YEAR(O.Order_Date) AS Year, 
+                   DATENAME(MONTH,O.Order_Date) AS Month, 
+                   SUM(I.Price * OD.Quantity_Sold) AS TotalIncome 
+            FROM Order_Details OD
+            JOIN [Order] O ON OD.OrderID = O.OrderID 
+            JOIN Items I ON OD.ItemID = I.ItemID 
+            WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+            GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date)
+            ORDER BY TotalIncome " + sortOrder;
             }
             else if (rdoMonth.Checked)
             {
-
-                // Determine "Sort Order"
-                string sortOrder = "";
-                if (rdoAsc.Checked)
-                {
-                    sortOrder = "ASC";
-                }
-                else if (rdoDesc.Checked)
-                {
-                    sortOrder = "DESC";
-                }
-
-                query = $@"
-                SELECT YEAR(O.Order_Date) AS Year , 
-                       DATENAME(MONTH,O.Order_Date) AS Month, 
-                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
-                FROM Order_Details OD
-                JOIN [Order] O ON OD.OrderID = O.OrderID 
-                JOIN Items I ON OD.ItemID = I.ItemID 
-                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
-                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date) 
-                ORDER BY Month(O.Order_Date) {sortOrder}";
+                query = @"
+            SELECT YEAR(O.Order_Date) AS Year , 
+                   DATENAME(MONTH,O.Order_Date) AS Month, 
+                   SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
+            FROM Order_Details OD
+            JOIN [Order] O ON OD.OrderID = O.OrderID 
+            JOIN Items I ON OD.ItemID = I.ItemID 
+            WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+            GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date)
+            ORDER BY YEAR(O.Order_Date) " + sortOrder + ", MONTH(O.Order_Date) " + sortOrder;
             }
-            else 
+            else
             {
-                query = $@"
-                SELECT YEAR(O.Order_Date) AS Year , 
-                       DATENAME(MONTH,O.Order_Date) AS Month, 
-                       SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
-                FROM Order_Details OD 
-                JOIN [Order] O ON OD.OrderID = O.OrderID 
-                JOIN Items I ON OD.ItemID = I.ItemID 
-                WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
-                GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date)";
+                query = @"
+            SELECT YEAR(O.Order_Date) AS Year , 
+                   DATENAME(MONTH,O.Order_Date) AS Month, 
+                   SUM(I.Price * OD.Quantity_Sold) AS TotalIncome
+            FROM Order_Details OD 
+            JOIN [Order] O ON OD.OrderID = O.OrderID 
+            JOIN Items I ON OD.ItemID = I.ItemID 
+            WHERE O.Order_Date BETWEEN @beginDate AND @endDate 
+            GROUP BY YEAR(O.Order_Date), MONTH(O.Order_Date), DATENAME(MONTH, O.Order_Date)
+            ORDER BY YEAR(O.Order_Date), MONTH(O.Order_Date)";
             }
+
             using (SqlConnection conn = new SqlConnection(connString))
-          
             {
                 try
                 {
@@ -233,7 +213,6 @@ namespace Group29_BlitzCafe
 
                     // Variable to store the sum of all income
                     decimal sumTotalIncome = 0;
-
 
                     // Loop through the results and add them to the ListBox
                     while (reader.Read())
@@ -261,7 +240,6 @@ namespace Group29_BlitzCafe
                 {
                     MessageBox.Show("Could not load menu items: " + e);
                 }
-
             }
         }
 
