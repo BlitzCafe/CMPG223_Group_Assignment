@@ -49,7 +49,7 @@ namespace Group29_BlitzCafe
                 try
                 {
                     conn.Open();
-                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used FROM [Order]"; // Ensure the table name is correct
+                    string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used FROM [Orders]"; // Ensure the table name is correct
                     SqlCommand cmd = new SqlCommand(query, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -421,7 +421,7 @@ namespace Group29_BlitzCafe
                     conn.Open();
                     string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
                                    "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
-                                   "FROM [Order] WHERE Order_Date = @OrderDate";
+                                   "FROM [Orders] WHERE Order_Date = @OrderDate";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@OrderDate", selectedDate);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
@@ -449,7 +449,7 @@ namespace Group29_BlitzCafe
                     conn.Open();
                     string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
                                    "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
-                                   "FROM [Order] WHERE LoyaltyPoints_Used = @LoyaltyPointsUsed";
+                                   "FROM [Orders] WHERE LoyaltyPoints_Used = @LoyaltyPointsUsed";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@LoyaltyPointsUsed", loyaltyPointsUsed);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
@@ -478,7 +478,7 @@ namespace Group29_BlitzCafe
                     conn.Open();
                     string query = "SELECT OrderID, Order_Date, CASE WHEN Is_Paid = 1 THEN 'True' ELSE 'False' END AS Is_Paid, " +
                                    "CASE WHEN LoyaltyPoints_Used = 1 THEN 'True' ELSE 'False' END AS LoyaltyPoints_Used " +
-                                   "FROM [Order] WHERE OrderID LIKE @OrderIDSearch";
+                                   "FROM [Orders] WHERE OrderID LIKE @OrderIDSearch";
                     SqlCommand cmd = new SqlCommand(query, conn);
                     cmd.Parameters.AddWithValue("@OrderIDSearch", "%" + orderIDSearch + "%");
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);

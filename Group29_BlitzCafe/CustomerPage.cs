@@ -135,7 +135,7 @@ namespace Group29_BlitzCafe
             { 
                 // Define the SQL query with parameters
                 string query = @"INSERT INTO Customers (Last_Name, First_Name, CellNo, Date_Joined) 
-                         VALUES (@fName, @lName, @cellNo, @dateJoined)";
+                         VALUES (@lName, @fName, @cellNo, @dateJoined)";
 
                 // Use 'using' statements to ensure proper disposal of resources
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
@@ -144,8 +144,8 @@ namespace Group29_BlitzCafe
                     try
                     {
                         // Define parameters and their values
-                        cmd.Parameters.AddWithValue("@fName", fName);
                         cmd.Parameters.AddWithValue("@lName", lName);
+                        cmd.Parameters.AddWithValue("@fName", fName);
                         cmd.Parameters.AddWithValue("@cellNo", cellNo);
                         cmd.Parameters.AddWithValue("@dateJoined", dateJoined);
 

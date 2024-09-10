@@ -270,6 +270,9 @@ namespace Group29_BlitzCafe
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Item edited successfully.");
+                             txtDesc.Clear();
+                             txtItemID.Clear();
+                             numPrice.ResetText();
                             loadMenuItems(); // Refresh or reload menu items info as needed
                         }
                         else
@@ -332,6 +335,9 @@ namespace Group29_BlitzCafe
                         if (rowsAffected > 0)
                         {
                             MessageBox.Show("Item added successfully.");
+                             txtDesc.Clear();
+                             txtItemID.Clear();
+                             numPrice.ResetText();
                             loadMenuItems(); // Refresh or reload menu items info as needed
                         }
                         else

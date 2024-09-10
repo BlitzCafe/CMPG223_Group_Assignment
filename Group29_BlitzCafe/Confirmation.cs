@@ -149,7 +149,7 @@ namespace Group29_BlitzCafe
             {
                 // Define the SQL query for inserting a new order
                 string insertQuery = @"
-            INSERT INTO [Order] (Order_Date, Is_Paid, LoyaltyPoints_Used)
+            INSERT INTO [Orders] (Order_Date, Is_Paid, LoyaltyPoints_Used)
             OUTPUT INSERTED.OrderID
             VALUES (@OrderDate, @IsPaid, @LoyaltyPointsUsed)";
 
