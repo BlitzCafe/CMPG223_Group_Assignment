@@ -1,7 +1,12 @@
 		Blitz Cafe
 ************************************************************
-Receipt for: Jackson
+Receipt for: Sinovuyo
 ************************************************************
-Bacon and Cheese Toast Quantity: 1
+Chicken Mayo Toast Quantity: 2
+Mince and Cheese Toast Quantity: 1
+Chips Quantity: 3
 ************************************************************
-Total Amount: 38.9000
+Total Amount: 104.9000
+************************************************************
+Loyalty points used: -£0.00
+New total: £104.90

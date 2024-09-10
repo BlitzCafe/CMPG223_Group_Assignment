@@ -90,7 +90,7 @@ namespace Group29_BlitzCafe
                 {
                     conn.Open();
 
-                    sqlQuery = "SELECT * FROM Customer";//SQL Goes here
+                    sqlQuery = "SELECT * FROM Customers";//SQL Goes here
                     SqlCommand cmd = new SqlCommand(sqlQuery, conn);
                     SqlDataAdapter dataAdapter = new SqlDataAdapter(cmd);
                     DataTable dataTable = new DataTable();
@@ -134,7 +134,7 @@ namespace Group29_BlitzCafe
             if (validateInput())
             { 
                 // Define the SQL query with parameters
-                string query = @"INSERT INTO Customer (Last_Name, First_Name, CellNo, Date_Joined) 
+                string query = @"INSERT INTO Customers (Last_Name, First_Name, CellNo, Date_Joined) 
                          VALUES (@fName, @lName, @cellNo, @dateJoined)";
 
                 // Use 'using' statements to ensure proper disposal of resources
@@ -201,7 +201,7 @@ namespace Group29_BlitzCafe
 
                 if (result == DialogResult.Yes)
                 {
-                    string query = @"DELETE FROM Customer WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                    string query = @"DELETE FROM Customers WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
                     using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
                     using (SqlCommand cmd = new SqlCommand(query, conn))
                     {
@@ -248,7 +248,7 @@ namespace Group29_BlitzCafe
             if (validateInput())
             {
                 // Define the SQL query with parameters
-                string query = @"UPDATE Customer SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
+                string query = @"UPDATE Customers SET Last_Name = @newLName, First_Name = @newFName, CellNo = @newCellNo WHERE CustomerID = '" + Convert.ToInt32(txtCustID.Text) + "'";
 
                 // Use 'using' statements to ensure proper disposal of resources
                 using (SqlConnection conn = new SqlConnection(defaultFrm.connString))
