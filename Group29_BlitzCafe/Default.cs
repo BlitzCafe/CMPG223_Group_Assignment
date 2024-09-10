@@ -27,7 +27,7 @@ namespace Group29_BlitzCafe
     {
 
 
-        public string connString = "Data Source=blitzcafedatabase.c9uaw2k2s8lc.us-east-1.rds.amazonaws.com;Initial Catalog=BlitzDatabase;Persist Security Info=True;User ID=admin;Password=12345678";
+        public string connString = "Data Source=HIGHPOWER;Initial Catalog=BlitzDB;Integrated Security=True";
 
         public Default()
         {
