@@ -137,7 +137,7 @@ namespace Group29_BlitzCafe
 
         private void InsertOrderDetails(SqlConnection conn, MenuItem item)
         {
-            string query = "INSERT INTO Order_Details (ProductID, Quantity_Sold) VALUES (@ProductID, @Quantity)";
+            string query = "INSERT INTO Order_Details (ItemID, Quantity_Sold) VALUES (@ProductID, @Quantity)";
             using (SqlCommand cmd = new SqlCommand(query, conn))
             {
                 cmd.Parameters.AddWithValue("@ProductID", item.getItemID());
